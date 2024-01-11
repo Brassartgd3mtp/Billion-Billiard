@@ -28,6 +28,10 @@ public class LootAnimation : MonoBehaviour
     private float rotateSpeed = 30;
     private Vector3 rotateDirection = new Vector3(0,1,0);
 
+    public void Start()
+    {
+        player = PlayerCollisionBehavior.Instance.gameObject;
+    }
 
     public void StartAnimation()
     {
