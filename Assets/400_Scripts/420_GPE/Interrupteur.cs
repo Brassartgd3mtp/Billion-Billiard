@@ -6,13 +6,16 @@ using UnityEngine.InputSystem;
 public class Interrupteur : MonoBehaviour
 {
     [SerializeField] private LockedDoor lockedDoor;
-    public LayerMask Player;
 
-    private void OnCollisionEnter(Collision collision)
+    private bool contactPNJ = false;
+
+    public bool ContactPNJ
     {
-        if ((Player.value & 1 << collision.gameObject.layer) > 0)
+        get { return contactPNJ; }
+        set
         {
-            lockedDoor.Unlock = true;
+            contactPNJ = value;
+            lockedDoor.Unlock = value;
             Destroy(gameObject);
         }
     }
