@@ -88,21 +88,21 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Wall obstacle))
+        if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
         {
             float speed = lastVel.magnitude;
             Vector3 direction = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
 
             switch (obstacle.obstacleType)
             {
-                case Wall.ObstacleType.Concrete:
-                    rb.velocity = direction * Mathf.Max(speed * ConcreteBounce, 1f);
+                case Obstacle.ObstacleType.Concrete:
+                    rb.velocity = direction * Mathf.Max(speed * ConcreteBounce, 0f);
                     break;
-                case Wall.ObstacleType.Rubber:
-                    rb.velocity = direction * Mathf.Max(speed * RubberBounce, 1f);
+                case Obstacle.ObstacleType.Rubber:
+                    rb.velocity = direction * Mathf.Max(speed * RubberBounce, 0f);
                     break;
-                case Wall.ObstacleType.NPC:
-                    rb.velocity = direction * Mathf.Max(speed * NPCBounce, 1f);
+                case Obstacle.ObstacleType.NPC:
+                    rb.velocity = direction * Mathf.Max(speed * NPCBounce, 0f);
                     break;
             }
         }

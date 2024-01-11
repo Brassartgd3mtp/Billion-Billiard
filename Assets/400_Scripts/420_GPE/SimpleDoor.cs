@@ -9,7 +9,7 @@ public class SimpleDoor : MonoBehaviour
     public float DelayOpen = 0.5f;
     public LayerMask Player;
 
-    private Animator myAnimator; 
+    private Animator myAnimator;
 
     public bool Open
     {
@@ -35,7 +35,13 @@ public class SimpleDoor : MonoBehaviour
     {
         if ((Player.value & 1 << collision.gameObject.layer) > 0)
         {
-            Open = true;
+            StartCoroutine(OpenWithDelay());
         }
+    }
+
+    IEnumerator OpenWithDelay()
+    {
+        yield return new WaitForSeconds(DelayOpen);
+        Open = true;
     }
 }
