@@ -13,14 +13,16 @@ public class LootAnimation : MonoBehaviour
     private bool abovePlayer;
 
     [SerializeField] float timeToScale;
-    public float minSize = 0;
-    public float timerSize = 0;
+    private float minSize = 0;
+    private float timerSize = 0;
 
-    public float timerMove;
+    public float scaleValue;
+
+    private float timerMove;
     public float timerToMove;
 
-    public Vector3 playerPos;
-    public Vector3 startPos, endPos;
+    private Vector3 playerPos;
+    private Vector3 startPos, endPos;
 
 
     private float rotateSpeed = 30;
@@ -30,7 +32,7 @@ public class LootAnimation : MonoBehaviour
     public void StartAnimation()
     {
         collider.enabled = false;
-        transform.localScale = new Vector3(0.3f,0.3f,0.3f);
+        transform.localScale = new Vector3(scaleValue,scaleValue,scaleValue);
         StartCoroutine(MoveAbovePlayer());
         isLooted = true;
     }
