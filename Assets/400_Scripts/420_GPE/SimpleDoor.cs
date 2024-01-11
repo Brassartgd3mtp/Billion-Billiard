@@ -26,11 +26,6 @@ public class SimpleDoor : MonoBehaviour
         myAnimator = GetComponent<Animator>();
     }
 
-    public void OpenDoor()
-    {
-        Open = true;
-    }
-
     public void EndAnimation()
     {
         Destroy(gameObject);
@@ -40,7 +35,7 @@ public class SimpleDoor : MonoBehaviour
     {
         if ((Player.value & 1 << collision.gameObject.layer) > 0)
         {
-            OpenDoor();
+            Open = true;
         }
     }
 }
