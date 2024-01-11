@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8995588591882479197}
   - component: {fileID: 2422360067502909519}
   - component: {fileID: 7460039460178502718}
-  - component: {fileID: 8978199680659517062}
+  - component: {fileID: 8441742846845132006}
   - component: {fileID: 6698367044372519202}
   - component: {fileID: 7235643447057658164}
   m_Layer: 3
@@ -170,8 +170,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8978199680659517062
-BoxCollider:
+--- !u!135 &8441742846845132006
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -189,7 +189,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &6698367044372519202
 Rigidbody:
@@ -230,12 +230,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845db6517468cfb4ca2dfba908b7a66f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThrowStrenght: 0
   StrenghMultiplier: 40
+  ThrowStrenght: 0
   PivotValue: {x: 0, y: 0}
   ActionAsset: {fileID: -944628639613478452, guid: d724b6db49f2afb42ba56d94e4ad3811,
     type: 3}
   Pivot: {fileID: 8127061478828150953}
+  ConcreteBounce: 0.8
+  RubberBounce: 1
+  NPCBounce: 0.2
 --- !u!1 &8127061478828150953
 GameObject:
   m_ObjectHideFlags: 0
