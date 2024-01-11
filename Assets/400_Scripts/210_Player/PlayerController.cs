@@ -6,11 +6,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Strenght Value")]
+    public int StrenghMultiplier = 40;
+
+    [Header("Input Values")]
     public float ThrowStrenght;
     [Tooltip("Modifiez cette variable pour augmenter ou baisser la force de propulsion")]
-    public int StrenghMultiplier = 40;
     public Vector2 PivotValue;
-    [Space]
+
+    [Header("References")]
     public InputActionAsset ActionAsset;
     public GameObject Pivot;
 
@@ -23,6 +27,11 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 lastVel;
+
+    [Header("Bouce Multipliers")]
+    [Tooltip("La valeur de Bounce des murs en béton")] public float ConcreteBounce = 1;
+    [Tooltip("La valeur de Bounce des murs en caoutchouc")] public float RubberBounce = 1;
+    [Tooltip("La valeur de Bounce des ennemis")] public float NPCBounce = 1;
 
     private void Awake()
     {
@@ -79,11 +88,23 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == 7)
+        if (collision.gameObject.TryGetComponent(out Wall obstacle))
         {
             float speed = lastVel.magnitude;
             Vector3 direction = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
-            rb.velocity = direction * Mathf.Max(speed, 0f);
+
+            switch (obstacle.obstacleType)
+            {
+                case Wall.ObstacleType.Concrete:
+                    rb.velocity = direction * Mathf.Max(speed * ConcreteBounce, 1f);
+                    break;
+                case Wall.ObstacleType.Rubber:
+                    rb.velocity = direction * Mathf.Max(speed * RubberBounce, 1f);
+                    break;
+                case Wall.ObstacleType.NPC:
+                    rb.velocity = direction * Mathf.Max(speed * NPCBounce, 1f);
+                    break;
+            }
         }
     }
 }
