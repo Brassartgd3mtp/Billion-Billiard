@@ -6,6 +6,17 @@ public class PlayerCollisionBehavior : MonoBehaviour
 {
     public PlayerStats playerStats;
     public UI_Stats uI_Stats;
+
+    public static PlayerCollisionBehavior Instance;
+
+    public void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 8)
