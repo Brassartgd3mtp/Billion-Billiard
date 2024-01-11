@@ -97,14 +97,32 @@ public class PlayerController : MonoBehaviour
             {
                 case Obstacle.ObstacleType.Concrete:
                     rb.velocity = direction * Mathf.Max(speed * ConcreteBounce, 0f);
+                    StartCoroutine(Haptic(0f, .5f, .2f));
                     break;
                 case Obstacle.ObstacleType.Rubber:
+                    StartCoroutine(Haptic(0f, .5f, .2f));
                     rb.velocity = direction * Mathf.Max(speed * RubberBounce, 0f);
                     break;
                 case Obstacle.ObstacleType.NPC:
                     rb.velocity = direction * Mathf.Max(speed * NPCBounce, 0f);
+                    StartCoroutine(Haptic(0f, .5f, .2f));
                     break;
             }
         }
+    }
+
+    /// <summary>
+    /// Crée une vibration dans la manette.
+    /// </summary>
+    /// <param name="lowfreq_strenght"></param>
+    /// <param name="highfreq_strenght"></param>
+    /// <param name="timer"></param>
+    /// <returns>Coroutine</returns>
+    IEnumerator Haptic(float lowfreq_strenght, float highfreq_strenght, float timer)
+    {
+        Gamepad.current.SetMotorSpeeds(lowfreq_strenght, highfreq_strenght);
+        yield return new WaitForSeconds(timer);
+        InputSystem.ResetHaptics();
+        yield break;
     }
 }
