@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class LootAnimation : MonoBehaviour
 {
     public GameObject player;
-    public Collider collider;
+    public Collider col;
     
     private bool isLooted;
     private bool abovePlayer;
@@ -35,7 +35,7 @@ public class LootAnimation : MonoBehaviour
 
     public void StartAnimation()
     {
-        collider.enabled = false;
+        col.enabled = false;
         transform.localScale = new Vector3(scaleValue,scaleValue,scaleValue);
         StartCoroutine(MoveAbovePlayer());
         isLooted = true;
