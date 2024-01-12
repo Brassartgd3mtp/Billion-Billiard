@@ -9,7 +9,9 @@ public class SimpleDoor : MonoBehaviour
     public float DelayOpen = 0.5f;
     public LayerMask Player;
 
-    private Animator myAnimator; 
+    private Animator myAnimator;
+    [SerializeField] private ParticleSystem myParticleSystem;
+
 
     public bool Open
     {
@@ -24,6 +26,7 @@ public class SimpleDoor : MonoBehaviour
     private void Start()
     {
         myAnimator = GetComponent<Animator>();
+        myParticleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
     public void EndAnimation()
@@ -35,7 +38,14 @@ public class SimpleDoor : MonoBehaviour
     {
         if ((Player.value & 1 << collision.gameObject.layer) > 0)
         {
-            Open = true;
+            StartCoroutine(OpenWithDelay());
         }
+    }
+
+    IEnumerator OpenWithDelay()
+    {
+        myParticleSystem.Play();
+        yield return new WaitForSeconds(DelayOpen);
+        Open = true;
     }
 }
