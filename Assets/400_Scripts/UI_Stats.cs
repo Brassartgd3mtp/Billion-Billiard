@@ -9,9 +9,14 @@ public class UI_Stats : MonoBehaviour
     public PlayerStats playerStats;
     public TextMeshProUGUI TEXT_Money_Count;
 
+    public static UI_Stats Instance;
+
     public void Awake()
     {
-
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
 
     public void Start()
