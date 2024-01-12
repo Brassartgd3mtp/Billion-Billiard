@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     [Tooltip("La valeur de Bounce des murs en caoutchouc")] public float RubberBounce = 1;
     [Tooltip("La valeur de Bounce des ennemis")] public float NPCBounce = 1;
 
+    private Vector3 posBeforeHit;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     private void ThrowPlayer(InputAction.CallbackContext ctx)
     {
+        posBeforeHit = transform.position;
         Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
         Debug.Log(forceDirection);
         rb.AddForce(forceDirection * ThrowStrenght, ForceMode.Impulse);
