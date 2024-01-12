@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("La valeur de Bounce des murs en caoutchouc")] public float RubberBounce = 1;
     [Tooltip("La valeur de Bounce des ennemis")] public float NPCBounce = 1;
 
-    private Vector3 posBeforeHit;
+    public Vector3 posBeforeHit;
 
     private void Awake()
     {
