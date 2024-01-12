@@ -7,9 +7,14 @@ public class PlayerCollisionBehavior : MonoBehaviour
     public PlayerStats playerStats;
     public UI_Stats uI_Stats;
 
-    public Vector3 posBeforeStrike;
+    public PlayerController playerController;
 
     public static PlayerCollisionBehavior Instance;
+
+    private Rigidbody rb;
+    private MeshRenderer meshRenderer;
+
+    private int nbrOfFlashing = 3;
 
     public void Awake()
     {
@@ -18,7 +23,13 @@ public class PlayerCollisionBehavior : MonoBehaviour
             Instance = this;
         }
 
+        playerController = GetComponent<PlayerController>();
+        
         playerStats = GetComponent<PlayerStats>();
+
+        rb = GetComponent<Rigidbody>();
+
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -35,7 +46,9 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
             if (collision.gameObject.TryGetComponent(out HoleForPlayer holeForPlayer))
             {
-                transform.position = posBeforeStrike;
+                rb.velocity = Vector3.zero;
+                transform.position = playerController.posBeforeHit;
+                StartCoroutine(HoleFeedBack());
             }
         }
     }
@@ -45,4 +58,17 @@ public class PlayerCollisionBehavior : MonoBehaviour
         playerStats.moneyCount += money;
     }
 
+    IEnumerator HoleFeedBack()
+    {
+        while (nbrOfFlashing > 0) 
+        {
+            meshRenderer.material.color = Color.white;
+            yield return new WaitForSeconds(0.15f);
+            meshRenderer.material.color = Color.black;
+            yield return new WaitForSeconds(0.15f);
+            nbrOfFlashing--;
+        }
+
+        meshRenderer.material.color = Color.white;
+    }
 }
