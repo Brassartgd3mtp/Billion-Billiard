@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private float angle;
 
     private Rigidbody rb;
+    Vector3 lastVel;
 
     [Header("Bouce Multipliers")]
     [Tooltip("La valeur de Bounce des murs en béton")] public float ConcreteBounce = 1;
@@ -74,6 +75,8 @@ public class PlayerController : MonoBehaviour
 
         strenghtToScale.z = ThrowStrenght / (StrenghMultiplier / 5);
         Pivot.transform.localScale = strenghtToScale;
+
+        lastVel = rb.velocity;
     }
 
     private void OnEnable()
@@ -90,8 +93,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
         {
-            float speed = rb.velocity.magnitude;
-            Vector3 reflect = Vector3.Reflect(rb.velocity.normalized, collision.contacts[0].normal);
+            float speed = lastVel.magnitude;
+            Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
 
             switch (obstacle.obstacleType)
             {
