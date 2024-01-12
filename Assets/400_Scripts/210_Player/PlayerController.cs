@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -26,7 +27,6 @@ public class PlayerController : MonoBehaviour
     private float angle;
 
     private Rigidbody rb;
-    private Vector3 lastVel;
 
     [Header("Bouce Multipliers")]
     [Tooltip("La valeur de Bounce des murs en béton")] public float ConcreteBounce = 1;
@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
     {
         posBeforeHit = transform.position;
         Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-        Debug.Log(forceDirection);
         rb.AddForce(forceDirection * ThrowStrenght, ForceMode.Impulse);
     }
 
@@ -75,8 +74,6 @@ public class PlayerController : MonoBehaviour
 
         strenghtToScale.z = ThrowStrenght / (StrenghMultiplier / 5);
         Pivot.transform.localScale = strenghtToScale;
-
-        lastVel = rb.velocity;
     }
 
     private void OnEnable()
@@ -93,21 +90,20 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
         {
-            float speed = lastVel.magnitude;
-            Vector3 direction = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
+            float speed = rb.velocity.magnitude;
+            Vector3 reflect = Vector3.Reflect(rb.velocity.normalized, collision.contacts[0].normal);
 
             switch (obstacle.obstacleType)
             {
                 case Obstacle.ObstacleType.Concrete:
-                    rb.velocity = direction * Mathf.Max(speed * ConcreteBounce, 0f);
+                    rb.velocity = reflect * Mathf.Max(speed * ConcreteBounce, 0f);
                     StartCoroutine(Haptic(0f, .5f, .2f));
                     break;
                 case Obstacle.ObstacleType.Rubber:
                     StartCoroutine(Haptic(0f, .5f, .2f));
-                    rb.velocity = direction * Mathf.Max(speed * RubberBounce, 0f);
+                    rb.velocity = reflect * Mathf.Max(speed * RubberBounce, 0f);
                     break;
                 case Obstacle.ObstacleType.NPC:
-                    rb.velocity = direction * Mathf.Max(speed * NPCBounce, 0f);
                     StartCoroutine(Haptic(0f, .5f, .2f));
                     break;
             }
