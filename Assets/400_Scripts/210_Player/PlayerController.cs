@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("La valeur de Bounce des ennemis")] public float NPCBounce = 1;
 
     public Vector3 posBeforeHit;
+    [SerializeField] private ParticleSystem myParticleSystem;
 
     private void Awake()
     {
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private void ThrowPlayer(InputAction.CallbackContext ctx)
     {
+        myParticleSystem.Play();
         posBeforeHit = transform.position;
         Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
         rb.AddForce(forceDirection * ThrowStrenght, ForceMode.Impulse);
@@ -61,6 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         pivotToRotation = Pivot.transform.rotation;
         strenghtToScale = Pivot.transform.localScale;
+        myParticleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
