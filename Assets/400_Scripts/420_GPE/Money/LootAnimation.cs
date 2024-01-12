@@ -31,6 +31,7 @@ public class LootAnimation : MonoBehaviour
     public void Start()
     {
         player = PlayerCollisionBehavior.Instance.gameObject;
+        col = GetComponent<Collider>();
     }
 
     public void StartAnimation()
