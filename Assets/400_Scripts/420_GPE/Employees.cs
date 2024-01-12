@@ -12,6 +12,11 @@ public class Employees : MonoBehaviour
             {
                 interrupteur.ContactPNJ = true;
             }
+
+            if (collision.gameObject.TryGetComponent(out HoleForPNJ holeForPNJ))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
