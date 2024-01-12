@@ -7,6 +7,8 @@ public class PlayerCollisionBehavior : MonoBehaviour
     public PlayerStats playerStats;
     public UI_Stats uI_Stats;
 
+    public Vector3 posBeforeStrike;
+
     public static PlayerCollisionBehavior Instance;
 
     public void Awake()
@@ -15,6 +17,8 @@ public class PlayerCollisionBehavior : MonoBehaviour
         {
             Instance = this;
         }
+
+        playerStats = GetComponent<PlayerStats>();
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -28,6 +32,11 @@ public class PlayerCollisionBehavior : MonoBehaviour
                 collision.gameObject.TryGetComponent(out LootAnimation lootAnimation);
                 lootAnimation.StartAnimation();
             }
+
+            if (collision.gameObject.TryGetComponent(out HoleForPlayer holeForPlayer))
+            {
+                transform.position = posBeforeStrike;
+            }
         }
     }
 
@@ -35,4 +44,5 @@ public class PlayerCollisionBehavior : MonoBehaviour
     {
         playerStats.moneyCount += money;
     }
+
 }
