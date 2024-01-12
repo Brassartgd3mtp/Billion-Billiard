@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCollisionBehavior : MonoBehaviour
 {
     public PlayerStats playerStats;
+    
     public UI_Stats uI_Stats;
 
     public PlayerController playerController;
@@ -30,6 +31,8 @@ public class PlayerCollisionBehavior : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         meshRenderer = GetComponent<MeshRenderer>();
+
+        uI_Stats = UI_Stats.Instance;
     }
 
     public void OnCollisionEnter(Collision collision)
