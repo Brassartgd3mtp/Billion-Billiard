@@ -32,20 +32,18 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
         meshRenderer = GetComponent<MeshRenderer>();
 
+    }
+
+    private void Start()
+    {
         uI_Stats = UI_Stats.Instance;
+        
     }
 
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 8)
         {
-            if (collision.gameObject.TryGetComponent(out MoneyStats moneyStats))
-            {
-                AddMoney(moneyStats.value);
-                uI_Stats.UpdateStats();
-                collision.gameObject.TryGetComponent(out LootAnimation lootAnimation);
-                lootAnimation.StartAnimation();
-            }
 
             if (collision.gameObject.TryGetComponent(out HoleForPlayer holeForPlayer))
             {
@@ -56,6 +54,17 @@ public class PlayerCollisionBehavior : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+            if (other.gameObject.TryGetComponent(out MoneyStats moneyStats))
+            {
+                AddMoney(moneyStats.value);
+                uI_Stats.UpdateStats();
+                other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
+                lootAnimation.StartAnimation();
+            }
+        
+    }
     public void AddMoney(int money)
     {
         playerStats.moneyCount += money;
