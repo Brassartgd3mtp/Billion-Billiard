@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private InputAction ArrowDirection;
     private InputAction ArrowStrenght;
+    private InputAction noClip;
 
     private Vector3 strenghtToScale;
     private Quaternion pivotToRotation;
@@ -41,13 +42,13 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        InputActionMap ActionMap = ActionAsset.FindActionMap("Gamepad");
+        InputActionMap Gamepad = ActionAsset.FindActionMap("Gamepad");
 
-        ArrowDirection = ActionMap.FindAction("Arrow Direction");
+        ArrowDirection = Gamepad.FindAction("Arrow Direction");
 
-        ArrowStrenght = ActionMap.FindAction("Strenght Modifier");
+        ArrowStrenght = Gamepad.FindAction("Strenght Modifier");
 
-        ActionMap.FindAction("Throw Player").performed += ThrowPlayer;
+        Gamepad.FindAction("Throw Player").performed += ThrowPlayer;
     }
 
     private void ThrowPlayer(InputAction.CallbackContext ctx)
