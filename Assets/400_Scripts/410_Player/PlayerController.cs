@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour
     private Quaternion pivotToRotation;
     private float angle;
 
+    private TurnBasedPlayer turnBasedPlayer;
     private Rigidbody rb;
+    public bool isShooted;
     Vector3 lastVel;
 
     [Header("Bouce Multipliers")]
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        turnBasedPlayer = GetComponent<TurnBasedPlayer>();
 
         InputActionMap ActionMap = ActionAsset.FindActionMap("Gamepad");
 
@@ -52,6 +55,8 @@ public class PlayerController : MonoBehaviour
 
     private void ThrowPlayer(InputAction.CallbackContext ctx)
     {
+        turnBasedPlayer.isShooted = true;
+        TurnBasedSystem.Instance.Check();
         myParticleSystem.Play();
         posBeforeHit = transform.position;
         Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
