@@ -123,17 +123,57 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "No-Clip",
+                    "type": "Button",
+                    "id": "9ed9e3d5-dbb1-4d59-9ba5-9b55a1220681",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "No-Clip Control",
+                    "type": "PassThrough",
+                    "id": "e6a7a912-7270-407f-9efe-076ddbf7be8f",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "dc736d58-ed1b-4f32-b4bb-06a8a9ff11fd",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Reload Scene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f418a2b6-7ac7-4d18-9692-0a4782b15491",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "No-Clip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "02ac39ac-505b-4e67-a967-304219bdc89c",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "No-Clip Control",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
