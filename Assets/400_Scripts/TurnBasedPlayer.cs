@@ -8,34 +8,54 @@ public class TurnBasedPlayer : MonoBehaviour
     public Vector3 vel;
     public float speed;
 
-    private bool isShooted;
     public bool isMoving;
+    public bool isPlayed;
+    
+
+    public PlayerController playerController;
 
     public void Start()
     {
+        TurnBasedSystem.players.Add(this.gameObject);
+
+        playerController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody>();
+        isPlayed = false;
         isMoving = false;
-        isShooted = false;
     }
 
     public void Update()
     {
         vel = rb.velocity;
         speed = vel.magnitude;
+ 
+        if (isMoving == true && playerController.isShooted && isPlayed == false && speed == 0) 
+        {
+            isPlayed = true;
+        }
+
+        if (isPlayed)
+        {
+            TurnBasedSystem.CheckPlayerTurn();
+            Debug.Log("Je check");
+            ResetForNextTurn();
+        }
+
 
         if (speed > 0)
         {
             isMoving = true;
-        } else isMoving = false;
+        }
+
+
+        
     }
 
-    public bool IsShooted
+    public void ResetForNextTurn()
     {
-        get { return isShooted; }
-        set
-        {
-            isShooted = value;
-            Debug.Log("oui");
-        }
+        playerController.isShooted = false;
+        isMoving = false;
+        isPlayed = false;
     }
+
 }

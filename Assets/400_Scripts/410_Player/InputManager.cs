@@ -19,6 +19,9 @@ public class InputManager : MonoBehaviour
 
         if (pc != null)
         {
+            TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.Enable;
+            TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.Disable;
+
             actions.Gamepad.ThrowPlayer.performed += pc.ThrowPlayer;
             actions.Gamepad.ArrowDirection.performed += pc.SetArrowDirection;
             actions.Gamepad.StrenghtModifier.performed += pc.ModifyStrenght;
