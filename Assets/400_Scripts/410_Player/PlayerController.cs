@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -21,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private InputAction ArrowDirection;
     private InputAction ArrowStrenght;
-    private InputAction noClip;
+    private InputActionMap ActionGamepad;
 
     private Vector3 strenghtToScale;
     private Quaternion pivotToRotation;
@@ -33,7 +30,6 @@ public class PlayerController : MonoBehaviour
     [Header("Bouce Multipliers")]
     [Tooltip("La valeur de Bounce des murs en béton")] public float ConcreteBounce = 1;
     [Tooltip("La valeur de Bounce des murs en caoutchouc")] public float RubberBounce = 1;
-    [Tooltip("La valeur de Bounce des ennemis")] public float NPCBounce = 1;
 
     public Vector3 posBeforeHit;
     [SerializeField] private ParticleSystem myParticleSystem;
@@ -42,13 +38,13 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        InputActionMap Gamepad = ActionAsset.FindActionMap("Gamepad");
+        ActionGamepad = ActionAsset.FindActionMap("Gamepad");
 
-        ArrowDirection = Gamepad.FindAction("Arrow Direction");
+        ArrowDirection = ActionGamepad.FindAction("Arrow Direction");
 
-        ArrowStrenght = Gamepad.FindAction("Strenght Modifier");
+        ArrowStrenght = ActionGamepad.FindAction("Strenght Modifier");
 
-        Gamepad.FindAction("Throw Player").performed += ThrowPlayer;
+        ActionGamepad.FindAction("Throw Player").performed += ThrowPlayer;
     }
 
     private void ThrowPlayer(InputAction.CallbackContext ctx)
@@ -57,6 +53,8 @@ public class PlayerController : MonoBehaviour
         posBeforeHit = transform.position;
         Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
         rb.AddForce(forceDirection * ThrowStrenght, ForceMode.Impulse);
+
+        ActionGamepad.FindAction("Throw Player").canceled -= ThrowPlayer;
     }
 
     // Start is called before the first frame update
