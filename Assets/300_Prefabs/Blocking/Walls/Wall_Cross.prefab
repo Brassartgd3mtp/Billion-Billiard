@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1008210882029777944}
   - component: {fileID: 5832601386152013003}
   - component: {fileID: 614211095043115264}
+  - component: {fileID: 2920453968864209520}
+  - component: {fileID: 721877283149054937}
   m_Layer: 0
   m_Name: Wall_Corners
   m_TagString: Untagged
@@ -12270,6 +12272,41 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5571885880427021487}
   m_Mesh: {fileID: 0}
+--- !u!64 &2920453968864209520
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571885880427021487}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!114 &721877283149054937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571885880427021487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 0
 --- !u!1 &6563313113737956525
 GameObject:
   m_ObjectHideFlags: 0
@@ -12613,7 +12650,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &8920500229077749558
