@@ -311,10 +311,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 8995588591882479197, guid: e29c926224c4a5641a2b2f079d0273fa,
-    type: 3}
-  m_Follow: {fileID: 8995588591882479197, guid: e29c926224c4a5641a2b2f079d0273fa,
-    type: 3}
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60.000004
     OrthographicSize: 5
@@ -343,6 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7824765151457854088}
+  - component: {fileID: 7415382852142858307}
   m_Layer: 0
   m_Name: CameraPrefab
   m_TagString: Untagged
@@ -367,3 +366,15 @@ Transform:
   - {fileID: 446361636336302635}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7415382852142858307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6975304712669968987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03224f62c6a616840a06cbce60466643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
