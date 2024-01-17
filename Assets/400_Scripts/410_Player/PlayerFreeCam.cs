@@ -1,24 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerFreeCam : MonoBehaviour
 {
-    PlayerController pc;
+    [Tooltip("Distance à laquelle la caméra peut aller.\nValeur recommandée : 2")]
+    public float ClampToPlayer;
 
-    InputAction FreeCam;
-    // Start is called before the first frame update
-    void Start()
+    CinemachineFramingTransposer camFT;
+    void Awake()
     {
-        pc = GetComponent<PlayerController>();
-
-        FreeCam = pc.ActionAsset.FindActionMap("Gamepad").FindAction("FreeCam");
+        camFT = GetComponentInChildren<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FreeCam(InputAction.CallbackContext context)
     {
-        
+        camFT.m_ScreenX = -context.ReadValue<Vector2>().x / ClampToPlayer + 0.5f;
+        camFT.m_ScreenY = context.ReadValue<Vector2>().y / ClampToPlayer + 0.5f;
     }
 }

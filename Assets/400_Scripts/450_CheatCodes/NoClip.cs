@@ -7,47 +7,33 @@ using UnityEngine.InputSystem;
 
 public class NoClip : MonoBehaviour
 {
-    public InputActionAsset ActionAsset;
     public int Speed;
 
     public bool ModeOn;
 
-    PlayerController playerController;
+    PlayerController pc;
     Rigidbody playerRb;
-    SphereCollider playerCollider;
+    public SphereCollider PlayerCollider;
 
-    InputAction movePlayer;
+    Vector3 direction;
 
     // Start is called before the first frame update
     void Start()
     {
         ModeOn = false;
 
-        InputActionMap ActionMap = ActionAsset.FindActionMap("Cheat");
+        pc = FindAnyObjectByType<PlayerController>();
 
-        ActionMap.FindAction("No-Clip").performed += NoClipMode;
+        playerRb = pc.GetComponent<Rigidbody>();
 
-        playerController = FindAnyObjectByType<PlayerController>();
-
-        playerRb = playerController.GetComponent<Rigidbody>();
-        movePlayer = ActionMap.FindAction("No-Clip Control");
-
-        playerCollider = playerController.GetComponent<SphereCollider>();
+        PlayerCollider = pc.GetComponent<SphereCollider>();
     }
 
-    private void NoClipMode(InputAction.CallbackContext context)
+    public void MovePlayer(InputAction.CallbackContext context)
     {
-        if (!ModeOn)
+        if (ModeOn)
         {
-            ModeOn = true;
-            ActionAsset.FindActionMap("Gamepad").Disable();
-            playerCollider.enabled = false;
-        }
-        else
-        {
-            ModeOn = false;
-            ActionAsset.FindActionMap("Gamepad").Enable();
-            playerCollider.enabled = true;
+            direction = new Vector3(context.ReadValue<Vector2>().x, 0, context.ReadValue<Vector2>().y);
         }
     }
 
@@ -55,7 +41,6 @@ public class NoClip : MonoBehaviour
     {
         if (ModeOn)
         {
-            Vector3 direction = new Vector3(movePlayer.ReadValue<Vector2>().x, 0, movePlayer.ReadValue<Vector2>().y);
             playerRb.velocity = direction * Speed;
         }
     }
