@@ -1,91 +1,111 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public enum TurnState { START, PLAYERTURN, ENEMYTURN }
 
-public class TurnBasedSystem : MonoBehaviour
+public static class TurnBasedSystem
 {
-    public static TurnBasedSystem Instance;
+    //public static TurnBasedSystem Instance;
 
-    public List<GameObject> Players = new List<GameObject>();
-    public List<GameObject> Enemies = new List<GameObject>();
+    //public List<GameObject> Players = new List<GameObject>();
+    private static TurnBasedPlayer player;
 
-    public TurnState state;
+    private static List<GameObject> Enemies = new List<GameObject>();
 
+    public static TurnState state;
 
-
-    public void Awake()
+    public static void OnPlayerTurnStart()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
+        state = TurnState.PLAYERTURN;
+        OnStateValueChanged(state);
     }
 
-    public void Start()
+    private static void OnStateValueChanged(TurnState _state)
     {
-        OnStateValueChanged(TurnState.START);
-    }
-
-    public void OnStateValueChanged(TurnState state)
-    {
-        switch (state)
+        state = _state;
+        switch (_state)
         {
             case TurnState.START:
+                OnStateValueChanged(TurnState.PLAYERTURN);
                 break;
-
+    
             case TurnState.PLAYERTURN:
-                AllowPlayerTurn();
+                OnEnablePlayerInput?.Invoke();
                 Debug.Log("Player Turn");
                 break;
-
+    
             case TurnState.ENEMYTURN:
                 Debug.Log("Enemies Turn");
                 break;
         }
     }
-    
-    public void AllowPlayerTurn()
-    {
-        // Player can use his controls
-        // Check when player use his actions
-        // Check when the player's velocity is null
-        // If all players in list has played, turn state for Enemies
-    }
 
-    public void Check()
-    {
-        StartCoroutine(CheckPlayerMovement());
-    }
-    public IEnumerator CheckPlayerMovement()
-    {
-        Debug.Log("Play");
-        foreach (GameObject players in Players)
-        {
-            players.TryGetComponent(out TurnBasedPlayer turnBasedPlayer);
-            yield return new WaitUntil(() => turnBasedPlayer.isMoving == false);
-        }
+    public static event Action OnEnablePlayerInput;
 
-        yield return new WaitForSeconds(1f);
-        Debug.Log("Fin tour joueur");
-        state = TurnState.ENEMYTURN;
-
-        yield break ;
-    }
-
-    public void AllowEnemyTurn()
-    {
-        //Check all enemies who need to play
-        //Play there actions
-        //Check there movement 
-        //If all enemies in list has played, turn state for Player 
-    }
-
-    public void EndPlayerTurn()
-    {
-        state = TurnState.ENEMYTURN;
-    }
+    //public void AllowPlayerTurn()
+    //{
+    //    // Player can use his controls
+    //    // Check when player use his actions
+    //    // Check when the player's velocity is null
+    //    // If all players in list has played, turn state for Enemies
+    //}
+    //
+    //public void Check()
+    //{
+    //    StartCoroutine(CheckPlayerMovement());
+    //}
+    //public IEnumerator CheckPlayerMovement()
+    //{
+    //
+    //    foreach (GameObject _enemy in Enemies)
+    //    {
+    //        _enemy.TryGetComponent(out TurnBasedPlayer turnBasedPlayer);
+    //        if (_enemy.speed > 0)
+    //        {
+    //            break;
+    //        } else
+    //        {
+    //            yield return new WaitForSeconds(1f);
+    //            Debug.Log("Fin tour joueur");
+    //            state = TurnState.ENEMYTURN;
+    //        }
+    //    }
+    //
+    //
+    //
+    //
+    //
+    //    yield return new WaitForSeconds(0.1f);
+    //    player.TryGetComponent(out TurnBasedPlayer turnBasedPlayer);
+    //    if (turnBasedPlayer.isMoving)
+    //    {
+    //        Debug.Log("là");
+    //        StartCoroutine(CheckPlayerMovement());
+    //    } else
+    //    {
+    //
+    //        yield return new WaitForSeconds(1f);
+    //        Debug.Log("Fin tour joueur");
+    //        state = TurnState.ENEMYTURN;
+    //
+    //        yield break;
+    //    }
+    //
+    //}
+    //
+    //public void AllowEnemyTurn()
+    //{
+    //    //Check all enemies who need to play
+    //    //Play there actions
+    //    //Check there movement 
+    //    //If all enemies in list has played, turn state for Player 
+    //}
+    //
+    //public void EndPlayerTurn()
+    //{
+    //    state = TurnState.ENEMYTURN;
+    //}
 }

@@ -8,7 +8,7 @@ public class TurnBasedPlayer : MonoBehaviour
     public Vector3 vel;
     public float speed;
 
-    public bool isShooted;
+    private bool isShooted;
     public bool isMoving;
 
     public void Start()
@@ -34,8 +34,7 @@ public class TurnBasedPlayer : MonoBehaviour
         get { return isShooted; }
         set
         {
-            isShooted = true;
-            TurnBasedSystem.Instance.Check();
+            isShooted = value;
             Debug.Log("oui");
         }
     }
