@@ -14,7 +14,6 @@ public class ReloadScene : MonoBehaviour
         ActionMap.FindAction("Reload Scene").performed += Reload;
 
         activeScene = SceneManager.GetActiveScene();
-        Debug.Log(activeScene.name);
     }
 
     private void Reload(InputAction.CallbackContext context)
