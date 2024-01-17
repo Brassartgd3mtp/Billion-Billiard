@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "FreeCam",
+                    "type": "PassThrough",
+                    "id": "6e498595-ef1d-4369-8e0e-cca9abb5876c",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -106,6 +115,85 @@
                     "processors": "",
                     "groups": "",
                     "action": "Throw Player",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12ce6811-e713-4062-ab39-a32b5b33878b",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FreeCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Cheat",
+            "id": "0ccd1fb2-2384-4316-aa70-6f133026c6e2",
+            "actions": [
+                {
+                    "name": "Reload Scene",
+                    "type": "Button",
+                    "id": "6e714593-840a-467e-91f6-ecbefae76fdd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "No-Clip",
+                    "type": "Button",
+                    "id": "9ed9e3d5-dbb1-4d59-9ba5-9b55a1220681",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "No-Clip Control",
+                    "type": "PassThrough",
+                    "id": "e6a7a912-7270-407f-9efe-076ddbf7be8f",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "dc736d58-ed1b-4f32-b4bb-06a8a9ff11fd",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload Scene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f418a2b6-7ac7-4d18-9692-0a4782b15491",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "No-Clip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "02ac39ac-505b-4e67-a967-304219bdc89c",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "No-Clip Control",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
