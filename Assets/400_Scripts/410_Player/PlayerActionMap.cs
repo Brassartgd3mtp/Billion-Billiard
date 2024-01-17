@@ -38,12 +38,12 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Arrow Direction"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""f96633d4-39bb-47a5-9995-ba42fe8c2439"",
-                    ""expectedControlType"": ""Stick"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Throw Player"",
@@ -65,12 +65,12 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""FreeCam"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""6e498595-ef1d-4369-8e0e-cca9abb5876c"",
-                    ""expectedControlType"": ""Stick"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -177,12 +177,12 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""No-Clip Control"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""e6a7a912-7270-407f-9efe-076ddbf7be8f"",
-                    ""expectedControlType"": ""Stick"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
