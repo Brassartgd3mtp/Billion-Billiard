@@ -34,6 +34,9 @@ public class NoClip : MonoBehaviour
         if (ModeOn)
         {
             direction = new Vector3(context.ReadValue<Vector2>().x, 0, context.ReadValue<Vector2>().y);
+
+            if (context.canceled)
+                playerRb.velocity = Vector3.zero;
         }
     }
 

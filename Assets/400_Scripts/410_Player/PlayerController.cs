@@ -106,6 +106,9 @@ public class PlayerController : MonoBehaviour
     public void SetArrowDirection(InputAction.CallbackContext context)
     {
         PivotValue = context.ReadValue<Vector2>();
+
+        if (context.canceled)
+            PivotValue = new Vector2(0, 0);
     }
 
     public void ModifyStrenght(InputAction.CallbackContext context)
