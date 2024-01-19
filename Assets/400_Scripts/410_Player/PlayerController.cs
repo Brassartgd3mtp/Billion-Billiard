@@ -31,9 +31,13 @@ public class PlayerController : MonoBehaviour
     public Vector3 posBeforeHit;
     [SerializeField] private ParticleSystem myParticleSystem;
 
+    private TurnBasedPlayer turnBasedPlayer;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        turnBasedPlayer = GetComponent<TurnBasedPlayer>();
     }
 
     public void ThrowPlayer(InputAction.CallbackContext ctx)
@@ -45,7 +49,7 @@ public class PlayerController : MonoBehaviour
         Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
         rb.AddForce(forceDirection * ThrowStrenght, ForceMode.Impulse);
 
-        TurnBasedSystem.OnPlayerPlayed();
+        turnBasedPlayer.ShotCount();
     }
 
     // Start is called before the first frame update
