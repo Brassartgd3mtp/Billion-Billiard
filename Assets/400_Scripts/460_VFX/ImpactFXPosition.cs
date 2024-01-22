@@ -26,18 +26,22 @@ public class ImpactFXPosition : MonoBehaviour
         Quaternion rotationFromNormal = Quaternion.LookRotation(collisionNormal);
 
         float impactVelocity = collision.relativeVelocity.magnitude;
+        Debug.Log(impactVelocity);
 
+        GameObject particlePrefab;
+        if (collision.transform.TryGetComponent(out Obstacle _obstacle))
+        {
+            Obstacle.ObstacleType obstacleType = _obstacle.obstacleType;
 
-
-        Obstacle.ObstacleType obstacleType = collision.transform.GetComponent<Obstacle>().obstacleType;
-
-        GameObject particlePrefab = vFXScriptableObject.GetObstacleType(obstacleType);
+            particlePrefab = vFXScriptableObject.GetObstacleType(obstacleType);
+        }
+        else particlePrefab = vFXScriptableObject.prefabParticleDefault; 
         
         Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
 
         if (impactVelocity > velocityThreshold)
         {
-
+            //particlePrefab.
         }
 
         // Détruit la particule après un certain temps
