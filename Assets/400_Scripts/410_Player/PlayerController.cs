@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     Vector3 lastVel;
+    public bool isShooted;
 
     [Header("Bouce Multipliers")]
     [Tooltip("La valeur de Bounce des murs en béton")] public float ConcreteBounce = 1;
@@ -30,17 +31,25 @@ public class PlayerController : MonoBehaviour
     public Vector3 posBeforeHit;
     [SerializeField] private ParticleSystem myParticleSystem;
 
+    private TurnBasedPlayer turnBasedPlayer;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        turnBasedPlayer = GetComponent<TurnBasedPlayer>();
     }
 
     public void ThrowPlayer(InputAction.CallbackContext ctx)
     {
+        isShooted = true;
+
         myParticleSystem.Play();
         posBeforeHit = transform.position;
         Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
         rb.AddForce(forceDirection * ThrowStrenght, ForceMode.Impulse);
+
+        turnBasedPlayer.ShotCount();
     }
 
     // Start is called before the first frame update
