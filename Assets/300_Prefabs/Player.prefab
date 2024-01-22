@@ -14578,6 +14578,7 @@ GameObject:
   - component: {fileID: 1266396365229697169}
   - component: {fileID: 624548755872704414}
   - component: {fileID: 4295191754941553035}
+  - component: {fileID: -6389856217533770102}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -14716,6 +14717,7 @@ MonoBehaviour:
   ThrowStrenght: 0
   PivotValue: {x: 0, y: 0}
   Pivot: {fileID: 8127061478828150953}
+  isShooted: 0
   ConcreteBounce: 0.8
   RubberBounce: 0.98
   posBeforeHit: {x: 0, y: 0, z: 0}
@@ -14892,6 +14894,21 @@ MonoBehaviour:
   vFXScriptableObject: {fileID: 11400000, guid: e079bf4940d2ce44686f1a0496fb6718,
     type: 2}
   velocityThreshold: 1
+--- !u!114 &-6389856217533770102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391655251862830221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59782b71be0770544a8f36b1e5b2e382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotRemaining: 3
+  nbrOfShots: 3
+  playerController: {fileID: 0}
 --- !u!1 &8127061478828150953
 GameObject:
   m_ObjectHideFlags: 0
