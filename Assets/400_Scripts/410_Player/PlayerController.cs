@@ -43,6 +43,9 @@ public class PlayerController : MonoBehaviour
     public void ThrowPlayer(InputAction.CallbackContext ctx)
     {
         isShooted = true;
+        turnBasedPlayer.dragChecker = false;
+
+        if (turnBasedPlayer.speed < 0.3) turnBasedPlayer.reShooted = true;
 
         myParticleSystem.Play();
         posBeforeHit = transform.position;
