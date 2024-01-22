@@ -43,6 +43,9 @@ public class PlayerController : MonoBehaviour
     public void ThrowPlayer(InputAction.CallbackContext ctx)
     {
         isShooted = true;
+        turnBasedPlayer.dragChecker = false;
+
+        if (turnBasedPlayer.speed < 0.3) turnBasedPlayer.reShooted = true;
 
         myParticleSystem.Play();
         posBeforeHit = transform.position;
@@ -115,6 +118,9 @@ public class PlayerController : MonoBehaviour
     public void SetArrowDirection(InputAction.CallbackContext context)
     {
         PivotValue = context.ReadValue<Vector2>();
+
+        if (context.canceled)
+            PivotValue = new Vector2(0, 0);
     }
 
     public void ModifyStrenght(InputAction.CallbackContext context)

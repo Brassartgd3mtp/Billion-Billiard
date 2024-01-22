@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.XR.Oculus.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +21,7 @@ public class InputManager : MonoBehaviour
 
             actions.Gamepad.ThrowPlayer.performed += pc.ThrowPlayer;
             actions.Gamepad.ArrowDirection.performed += pc.SetArrowDirection;
+            actions.Gamepad.ArrowDirection.canceled += pc.SetArrowDirection;
             actions.Gamepad.StrenghtModifier.performed += pc.ModifyStrenght;
             actions.Gamepad.StrenghtModifier.canceled += pc.ModifyStrenght;
         }
@@ -43,6 +41,7 @@ public class InputManager : MonoBehaviour
         {
             actions.Cheat.NoClip.performed += NoClipMode;
             actions.Cheat.NoClipControl.performed += nc.MovePlayer;
+            actions.Cheat.NoClipControl.canceled += nc.MovePlayer;
         }
 
         actions.Gamepad.Enable();
@@ -71,6 +70,7 @@ public class InputManager : MonoBehaviour
         {
             actions.Gamepad.ThrowPlayer.performed -= pc.ThrowPlayer;
             actions.Gamepad.ArrowDirection.performed -= pc.SetArrowDirection;
+            actions.Gamepad.ArrowDirection.canceled -= pc.SetArrowDirection;
             actions.Gamepad.StrenghtModifier.performed -= pc.ModifyStrenght;
             actions.Gamepad.StrenghtModifier.canceled -= pc.ModifyStrenght;
         }
@@ -90,6 +90,7 @@ public class InputManager : MonoBehaviour
         {
             actions.Cheat.NoClip.performed -= NoClipMode;
             actions.Cheat.NoClipControl.performed -= nc.MovePlayer;
+            actions.Cheat.NoClipControl.canceled -= nc.MovePlayer;
         }
     }
 }
