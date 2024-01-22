@@ -82,5 +82,6 @@ public class PlayerCollisionBehavior : MonoBehaviour
         }
 
         meshRenderer.material.color = Color.white;
+        nbrOfFlashing = 3;
     }
 }

@@ -6,17 +6,20 @@ public class TurnBasedPlayer : MonoBehaviour
 {
     private Rigidbody rb;
     private Vector3 vel;
-    private float speed;
+    public float speed;
 
     public bool hasStopped { get; private set; }
     private bool isMoving;
-    private bool dragChecker;
+    public bool reShooted;
+
+    public bool dragChecker;
 
     public int shotRemaining;
     public int nbrOfShots;
     
 
     public PlayerController playerController;
+    public UI_ShotRemaining uI_ShotRemaining;
 
     public void Start()
     {
@@ -39,12 +42,14 @@ public class TurnBasedPlayer : MonoBehaviour
         if (speed > 0.3f)
         {
             dragChecker = true;
+            reShooted = false;
         }
 
-        if (speed < 0.3f && dragChecker)
+        if (speed < 0.3f && dragChecker && !reShooted)
         {
             rb.drag = 10;
         }
+        else rb.drag = 1;
 
         if (speed == 0)
         {
@@ -65,6 +70,7 @@ public class TurnBasedPlayer : MonoBehaviour
     {
         hasStopped = false;
         shotRemaining--;
+        uI_ShotRemaining.UpdateUI();
         
         if (shotRemaining <= 0)
         {
@@ -86,6 +92,7 @@ public class TurnBasedPlayer : MonoBehaviour
         TurnBasedSystem.PlayerTurnEnd();
         playerController.isShooted = false;
         shotRemaining = nbrOfShots;
+            uI_ShotRemaining.UpdateUI();
         }
     }
 }
