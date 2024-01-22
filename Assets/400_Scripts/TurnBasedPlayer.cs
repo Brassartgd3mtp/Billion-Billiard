@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class TurnBasedPlayer : MonoBehaviour
 {
-    public Rigidbody rb;
-    public Vector3 vel;
-    public float speed;
+    private Rigidbody rb;
+    private Vector3 vel;
+    private float speed;
 
-    public bool isShooted;
-    public bool isMoving;
+    public bool hasStopped { get; private set; }
+    private bool isMoving;
+    private bool dragChecker;
+
+    public int shotRemaining;
+    public int nbrOfShots;
+    
+
+    public PlayerController playerController;
 
     public void Start()
     {
+        TurnBasedSystem.players.Add(this.gameObject);
+
+        playerController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody>();
-        isMoving = false;
-        isShooted = false;
     }
 
     public void Update()
@@ -23,20 +31,61 @@ public class TurnBasedPlayer : MonoBehaviour
         vel = rb.velocity;
         speed = vel.magnitude;
 
-        if (speed > 0)
+        if (speed > 0) 
         {
             isMoving = true;
-        } else isMoving = false;
+        }
+
+        if (speed > 0.3f)
+        {
+            dragChecker = true;
+        }
+
+        if (speed < 0.3f && dragChecker)
+        {
+            rb.drag = 10;
+        }
+
+        if (speed == 0)
+        {
+            isMoving = false;
+            rb.drag = 1;
+        }
+
+        if (playerController.isShooted && !hasStopped && speed == 0) 
+        {
+            dragChecker = false;
+            hasStopped = true;
+
+            Invoke("CheckShotRemaining", 0.1f);
+        }
+    }
+    
+    public void ShotCount()
+    {
+        hasStopped = false;
+        shotRemaining--;
+        
+        if (shotRemaining <= 0)
+        {
+            TurnBasedSystem.OnPlayerPlayed();
+        }
     }
 
-    public bool IsShooted
+    public void CheckShotRemaining()
     {
-        get { return isShooted; }
-        set
+        Debug.Log("CheckShotRemaining");
+
+        if (isMoving)
         {
-            isShooted = true;
-            TurnBasedSystem.Instance.Check();
-            Debug.Log("oui");
+            hasStopped = false;
+        }
+
+        if (hasStopped && shotRemaining <= 0)
+        {
+        TurnBasedSystem.PlayerTurnEnd();
+        playerController.isShooted = false;
+        shotRemaining = nbrOfShots;
         }
     }
 }

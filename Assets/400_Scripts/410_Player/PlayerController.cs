@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,12 +14,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 PivotValue;
 
     [Header("References")]
-    public InputActionAsset ActionAsset;
     public GameObject Pivot;
-
-    private InputAction ArrowDirection;
-    private InputAction ArrowStrenght;
-    private InputActionMap ActionGamepad;
 
     private Vector3 strenghtToScale;
     private Quaternion pivotToRotation;
@@ -26,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     Vector3 lastVel;
+    public bool isShooted;
 
     [Header("Bouce Multipliers")]
     [Tooltip("La valeur de Bounce des murs en béton")] public float ConcreteBounce = 1;
@@ -34,27 +31,25 @@ public class PlayerController : MonoBehaviour
     public Vector3 posBeforeHit;
     [SerializeField] private ParticleSystem myParticleSystem;
 
+    private TurnBasedPlayer turnBasedPlayer;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
 
-        ActionGamepad = ActionAsset.FindActionMap("Gamepad");
-
-        ArrowDirection = ActionGamepad.FindAction("Arrow Direction");
-
-        ArrowStrenght = ActionGamepad.FindAction("Strenght Modifier");
-
-        ActionGamepad.FindAction("Throw Player").performed += ThrowPlayer;
+        turnBasedPlayer = GetComponent<TurnBasedPlayer>();
     }
 
-    private void ThrowPlayer(InputAction.CallbackContext ctx)
+    public void ThrowPlayer(InputAction.CallbackContext ctx)
     {
+        isShooted = true;
+
         myParticleSystem.Play();
         posBeforeHit = transform.position;
         Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
         rb.AddForce(forceDirection * ThrowStrenght, ForceMode.Impulse);
 
-        ActionGamepad.FindAction("Throw Player").canceled -= ThrowPlayer;
+        turnBasedPlayer.ShotCount();
     }
 
     // Start is called before the first frame update
@@ -68,9 +63,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ThrowStrenght = ArrowStrenght.ReadValue<float>() * StrenghMultiplier;
-        PivotValue = ArrowDirection.ReadValue<Vector2>();
-
         angle = Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg;
         Pivot.transform.rotation = pivotToRotation;
         Pivot.transform.rotation = Quaternion.Euler(0, angle, 0);
@@ -79,16 +71,6 @@ public class PlayerController : MonoBehaviour
         Pivot.transform.localScale = strenghtToScale;
 
         lastVel = rb.velocity;
-    }
-
-    private void OnEnable()
-    {
-        ActionAsset.FindActionMap("Gamepad").Enable();
-    }
-
-    private void OnDisable()
-    {
-        ActionAsset.FindActionMap("Gamepad").Disable();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -128,5 +110,23 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(timer);
         InputSystem.ResetHaptics();
         yield break;
+    }
+
+    public void SetArrowDirection(InputAction.CallbackContext context)
+    {
+        PivotValue = context.ReadValue<Vector2>();
+
+        if (context.canceled)
+            PivotValue = new Vector2(0, 0);
+    }
+
+    public void ModifyStrenght(InputAction.CallbackContext context)
+    {
+        ThrowStrenght = context.ReadValue<float>() * StrenghMultiplier;
+
+        if (context.canceled)
+        {
+            ThrowStrenght = 0.1f;
+        }
     }
 }
