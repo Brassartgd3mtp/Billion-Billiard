@@ -14,6 +14,5 @@ public class CameraFocus : MonoBehaviour
         player = FindAnyObjectByType<PlayerController>().gameObject;
 
         virtualCamera.Follow = player.transform;
-        virtualCamera.LookAt = player.transform;
     }
 }

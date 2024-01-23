@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6700930268839768550}
   - component: {fileID: 5264660968320248158}
   - component: {fileID: 8116133985072924520}
+  - component: {fileID: 884175173461190300}
   m_Layer: 0
   m_Name: CheatManager
   m_TagString: EditorOnly
@@ -45,8 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fbc68c930ecda84b80b71e14074a4cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionAsset: {fileID: -944628639613478452, guid: d724b6db49f2afb42ba56d94e4ad3811,
-    type: 3}
 --- !u!114 &8116133985072924520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +58,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb635cb6b81ec4185f61280d99c6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionAsset: {fileID: -944628639613478452, guid: d724b6db49f2afb42ba56d94e4ad3811,
-    type: 3}
-  Speed: 5
+  Speed: 20
   ModeOn: 0
+  PlayerCollider: {fileID: 0}
+--- !u!114 &884175173461190300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5981081320423441365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80fa5ccb34a3fc43947339f88c376a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pc: {fileID: 0}
+  pfc: {fileID: 0}
+  rs: {fileID: 5264660968320248158}
+  nc: {fileID: 8116133985072924520}

@@ -11,5 +11,5 @@ public class Obstacle : MonoBehaviour
         NPC
     }
 
-    public ObstacleType obstacleType = ObstacleType.Rubber;
+    public ObstacleType obstacleType = ObstacleType.Rubber;        
 }
