@@ -24,59 +24,11 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     ""name"": ""PlayerActionMap"",
     ""maps"": [
         {
-            ""name"": ""Global"",
-            ""id"": ""1c74b4ed-ff98-4192-804b-f1a276941865"",
-            ""actions"": [
-                {
-                    ""name"": ""FreeCam"",
-                    ""type"": ""Value"",
-                    ""id"": ""04f834a3-f4d7-47b1-8cf3-7286f140a0aa"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""3555d111-2dbb-4ea9-96df-9ef9e8f0f9d9"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""FreeCam"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c785c111-0b3e-41a1-98a7-81988a30e006"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""FreeCam"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""Gamepad"",
             ""id"": ""c866f438-9a08-4a10-b9f9-8d7cf7931380"",
             ""actions"": [
                 {
-                    ""name"": ""Strenght Modifier"",
-                    ""type"": ""Value"",
-                    ""id"": ""8d08072b-487d-40f7-a5ed-b6b0bf5aad5a"",
-                    ""expectedControlType"": ""Analog"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Arrow Direction"",
+                    ""name"": ""GamepadStrenght"",
                     ""type"": ""Value"",
                     ""id"": ""f96633d4-39bb-47a5-9995-ba42fe8c2439"",
                     ""expectedControlType"": ""Vector2"",
@@ -94,6 +46,15 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""FreeCam"",
+                    ""type"": ""Value"",
+                    ""id"": ""4989151e-72b5-48fe-bbb5-eea2d8a909f1"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""CancelFreeCam"",
                     ""type"": ""Button"",
                     ""id"": ""19078495-9fbb-45dd-a5bf-730f08f41eb7"",
@@ -106,23 +67,12 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""37bd6269-11db-4271-ae72-51eed6d92008"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Strenght Modifier"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""4f87ae14-2ef3-448a-b499-ad1e9610afd6"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Arrow Direction"",
+                    ""action"": ""GamepadStrenght"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -145,6 +95,17 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""CancelFreeCam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""73cceba9-c0f4-4b4a-bf45-bf3389db2508"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FreeCam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -180,6 +141,24 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Throw Player"",
+                    ""type"": ""Button"",
+                    ""id"": ""b6fedc0f-8e3f-4790-a0ed-66c9ab48b553"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FreeCam"",
+                    ""type"": ""Value"",
+                    ""id"": ""fc2e745f-8798-44b8-a305-4352426b295d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -213,6 +192,28 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""StartFreeCam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a6cb2a4-6fc6-4f71-8751-0ff9827c193e"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw Player"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a54f9ed7-e6d4-4870-8ea2-3011bddff833"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FreeCam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -255,7 +256,18 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""dc736d58-ed1b-4f32-b4bb-06a8a9ff11fd"",
                     ""path"": ""<Gamepad>/select"",
-                    ""interactions"": """",
+                    ""interactions"": ""MultiTap(tapCount=3)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload Scene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5dc43dd1-5049-463b-9d00-df1220334d7c"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": ""MultiTap(tapCount=3)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Reload Scene"",
@@ -266,7 +278,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""f418a2b6-7ac7-4d18-9692-0a4782b15491"",
                     ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
+                    ""interactions"": ""MultiTap(tapCount=3)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""No-Clip"",
@@ -276,8 +288,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""46b72e63-06b2-4264-920b-354c3e160e83"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
+                    ""path"": ""<Keyboard>/backslash"",
+                    ""interactions"": ""MultiTap(tapCount=3)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""No-Clip"",
@@ -355,20 +367,19 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // Global
-        m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
-        m_Global_FreeCam = m_Global.FindAction("FreeCam", throwIfNotFound: true);
         // Gamepad
         m_Gamepad = asset.FindActionMap("Gamepad", throwIfNotFound: true);
-        m_Gamepad_StrenghtModifier = m_Gamepad.FindAction("Strenght Modifier", throwIfNotFound: true);
-        m_Gamepad_ArrowDirection = m_Gamepad.FindAction("Arrow Direction", throwIfNotFound: true);
+        m_Gamepad_GamepadStrenght = m_Gamepad.FindAction("GamepadStrenght", throwIfNotFound: true);
         m_Gamepad_ThrowPlayer = m_Gamepad.FindAction("Throw Player", throwIfNotFound: true);
+        m_Gamepad_FreeCam = m_Gamepad.FindAction("FreeCam", throwIfNotFound: true);
         m_Gamepad_CancelFreeCam = m_Gamepad.FindAction("CancelFreeCam", throwIfNotFound: true);
         // Mouse/Keyboard
         m_MouseKeyboard = asset.FindActionMap("Mouse/Keyboard", throwIfNotFound: true);
         m_MouseKeyboard_MouseStartDrag = m_MouseKeyboard.FindAction("MouseStartDrag", throwIfNotFound: true);
         m_MouseKeyboard_MouseStrenght = m_MouseKeyboard.FindAction("MouseStrenght", throwIfNotFound: true);
         m_MouseKeyboard_StartFreeCam = m_MouseKeyboard.FindAction("StartFreeCam", throwIfNotFound: true);
+        m_MouseKeyboard_ThrowPlayer = m_MouseKeyboard.FindAction("Throw Player", throwIfNotFound: true);
+        m_MouseKeyboard_FreeCam = m_MouseKeyboard.FindAction("FreeCam", throwIfNotFound: true);
         // Cheat
         m_Cheat = asset.FindActionMap("Cheat", throwIfNotFound: true);
         m_Cheat_ReloadScene = m_Cheat.FindAction("Reload Scene", throwIfNotFound: true);
@@ -432,66 +443,20 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Global
-    private readonly InputActionMap m_Global;
-    private List<IGlobalActions> m_GlobalActionsCallbackInterfaces = new List<IGlobalActions>();
-    private readonly InputAction m_Global_FreeCam;
-    public struct GlobalActions
-    {
-        private @PlayerActionMap m_Wrapper;
-        public GlobalActions(@PlayerActionMap wrapper) { m_Wrapper = wrapper; }
-        public InputAction @FreeCam => m_Wrapper.m_Global_FreeCam;
-        public InputActionMap Get() { return m_Wrapper.m_Global; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GlobalActions set) { return set.Get(); }
-        public void AddCallbacks(IGlobalActions instance)
-        {
-            if (instance == null || m_Wrapper.m_GlobalActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_GlobalActionsCallbackInterfaces.Add(instance);
-            @FreeCam.started += instance.OnFreeCam;
-            @FreeCam.performed += instance.OnFreeCam;
-            @FreeCam.canceled += instance.OnFreeCam;
-        }
-
-        private void UnregisterCallbacks(IGlobalActions instance)
-        {
-            @FreeCam.started -= instance.OnFreeCam;
-            @FreeCam.performed -= instance.OnFreeCam;
-            @FreeCam.canceled -= instance.OnFreeCam;
-        }
-
-        public void RemoveCallbacks(IGlobalActions instance)
-        {
-            if (m_Wrapper.m_GlobalActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IGlobalActions instance)
-        {
-            foreach (var item in m_Wrapper.m_GlobalActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_GlobalActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public GlobalActions @Global => new GlobalActions(this);
-
     // Gamepad
     private readonly InputActionMap m_Gamepad;
     private List<IGamepadActions> m_GamepadActionsCallbackInterfaces = new List<IGamepadActions>();
-    private readonly InputAction m_Gamepad_StrenghtModifier;
-    private readonly InputAction m_Gamepad_ArrowDirection;
+    private readonly InputAction m_Gamepad_GamepadStrenght;
     private readonly InputAction m_Gamepad_ThrowPlayer;
+    private readonly InputAction m_Gamepad_FreeCam;
     private readonly InputAction m_Gamepad_CancelFreeCam;
     public struct GamepadActions
     {
         private @PlayerActionMap m_Wrapper;
         public GamepadActions(@PlayerActionMap wrapper) { m_Wrapper = wrapper; }
-        public InputAction @StrenghtModifier => m_Wrapper.m_Gamepad_StrenghtModifier;
-        public InputAction @ArrowDirection => m_Wrapper.m_Gamepad_ArrowDirection;
+        public InputAction @GamepadStrenght => m_Wrapper.m_Gamepad_GamepadStrenght;
         public InputAction @ThrowPlayer => m_Wrapper.m_Gamepad_ThrowPlayer;
+        public InputAction @FreeCam => m_Wrapper.m_Gamepad_FreeCam;
         public InputAction @CancelFreeCam => m_Wrapper.m_Gamepad_CancelFreeCam;
         public InputActionMap Get() { return m_Wrapper.m_Gamepad; }
         public void Enable() { Get().Enable(); }
@@ -502,15 +467,15 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GamepadActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GamepadActionsCallbackInterfaces.Add(instance);
-            @StrenghtModifier.started += instance.OnStrenghtModifier;
-            @StrenghtModifier.performed += instance.OnStrenghtModifier;
-            @StrenghtModifier.canceled += instance.OnStrenghtModifier;
-            @ArrowDirection.started += instance.OnArrowDirection;
-            @ArrowDirection.performed += instance.OnArrowDirection;
-            @ArrowDirection.canceled += instance.OnArrowDirection;
+            @GamepadStrenght.started += instance.OnGamepadStrenght;
+            @GamepadStrenght.performed += instance.OnGamepadStrenght;
+            @GamepadStrenght.canceled += instance.OnGamepadStrenght;
             @ThrowPlayer.started += instance.OnThrowPlayer;
             @ThrowPlayer.performed += instance.OnThrowPlayer;
             @ThrowPlayer.canceled += instance.OnThrowPlayer;
+            @FreeCam.started += instance.OnFreeCam;
+            @FreeCam.performed += instance.OnFreeCam;
+            @FreeCam.canceled += instance.OnFreeCam;
             @CancelFreeCam.started += instance.OnCancelFreeCam;
             @CancelFreeCam.performed += instance.OnCancelFreeCam;
             @CancelFreeCam.canceled += instance.OnCancelFreeCam;
@@ -518,15 +483,15 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IGamepadActions instance)
         {
-            @StrenghtModifier.started -= instance.OnStrenghtModifier;
-            @StrenghtModifier.performed -= instance.OnStrenghtModifier;
-            @StrenghtModifier.canceled -= instance.OnStrenghtModifier;
-            @ArrowDirection.started -= instance.OnArrowDirection;
-            @ArrowDirection.performed -= instance.OnArrowDirection;
-            @ArrowDirection.canceled -= instance.OnArrowDirection;
+            @GamepadStrenght.started -= instance.OnGamepadStrenght;
+            @GamepadStrenght.performed -= instance.OnGamepadStrenght;
+            @GamepadStrenght.canceled -= instance.OnGamepadStrenght;
             @ThrowPlayer.started -= instance.OnThrowPlayer;
             @ThrowPlayer.performed -= instance.OnThrowPlayer;
             @ThrowPlayer.canceled -= instance.OnThrowPlayer;
+            @FreeCam.started -= instance.OnFreeCam;
+            @FreeCam.performed -= instance.OnFreeCam;
+            @FreeCam.canceled -= instance.OnFreeCam;
             @CancelFreeCam.started -= instance.OnCancelFreeCam;
             @CancelFreeCam.performed -= instance.OnCancelFreeCam;
             @CancelFreeCam.canceled -= instance.OnCancelFreeCam;
@@ -554,6 +519,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_MouseKeyboard_MouseStartDrag;
     private readonly InputAction m_MouseKeyboard_MouseStrenght;
     private readonly InputAction m_MouseKeyboard_StartFreeCam;
+    private readonly InputAction m_MouseKeyboard_ThrowPlayer;
+    private readonly InputAction m_MouseKeyboard_FreeCam;
     public struct MouseKeyboardActions
     {
         private @PlayerActionMap m_Wrapper;
@@ -561,6 +528,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         public InputAction @MouseStartDrag => m_Wrapper.m_MouseKeyboard_MouseStartDrag;
         public InputAction @MouseStrenght => m_Wrapper.m_MouseKeyboard_MouseStrenght;
         public InputAction @StartFreeCam => m_Wrapper.m_MouseKeyboard_StartFreeCam;
+        public InputAction @ThrowPlayer => m_Wrapper.m_MouseKeyboard_ThrowPlayer;
+        public InputAction @FreeCam => m_Wrapper.m_MouseKeyboard_FreeCam;
         public InputActionMap Get() { return m_Wrapper.m_MouseKeyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -579,6 +548,12 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @StartFreeCam.started += instance.OnStartFreeCam;
             @StartFreeCam.performed += instance.OnStartFreeCam;
             @StartFreeCam.canceled += instance.OnStartFreeCam;
+            @ThrowPlayer.started += instance.OnThrowPlayer;
+            @ThrowPlayer.performed += instance.OnThrowPlayer;
+            @ThrowPlayer.canceled += instance.OnThrowPlayer;
+            @FreeCam.started += instance.OnFreeCam;
+            @FreeCam.performed += instance.OnFreeCam;
+            @FreeCam.canceled += instance.OnFreeCam;
         }
 
         private void UnregisterCallbacks(IMouseKeyboardActions instance)
@@ -592,6 +567,12 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @StartFreeCam.started -= instance.OnStartFreeCam;
             @StartFreeCam.performed -= instance.OnStartFreeCam;
             @StartFreeCam.canceled -= instance.OnStartFreeCam;
+            @ThrowPlayer.started -= instance.OnThrowPlayer;
+            @ThrowPlayer.performed -= instance.OnThrowPlayer;
+            @ThrowPlayer.canceled -= instance.OnThrowPlayer;
+            @FreeCam.started -= instance.OnFreeCam;
+            @FreeCam.performed -= instance.OnFreeCam;
+            @FreeCam.canceled -= instance.OnFreeCam;
         }
 
         public void RemoveCallbacks(IMouseKeyboardActions instance)
@@ -671,15 +652,11 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         }
     }
     public CheatActions @Cheat => new CheatActions(this);
-    public interface IGlobalActions
-    {
-        void OnFreeCam(InputAction.CallbackContext context);
-    }
     public interface IGamepadActions
     {
-        void OnStrenghtModifier(InputAction.CallbackContext context);
-        void OnArrowDirection(InputAction.CallbackContext context);
+        void OnGamepadStrenght(InputAction.CallbackContext context);
         void OnThrowPlayer(InputAction.CallbackContext context);
+        void OnFreeCam(InputAction.CallbackContext context);
         void OnCancelFreeCam(InputAction.CallbackContext context);
     }
     public interface IMouseKeyboardActions
@@ -687,6 +664,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         void OnMouseStartDrag(InputAction.CallbackContext context);
         void OnMouseStrenght(InputAction.CallbackContext context);
         void OnStartFreeCam(InputAction.CallbackContext context);
+        void OnThrowPlayer(InputAction.CallbackContext context);
+        void OnFreeCam(InputAction.CallbackContext context);
     }
     public interface ICheatActions
     {

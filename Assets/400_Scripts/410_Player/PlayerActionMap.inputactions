@@ -2,59 +2,11 @@
     "name": "PlayerActionMap",
     "maps": [
         {
-            "name": "Global",
-            "id": "1c74b4ed-ff98-4192-804b-f1a276941865",
-            "actions": [
-                {
-                    "name": "FreeCam",
-                    "type": "Value",
-                    "id": "04f834a3-f4d7-47b1-8cf3-7286f140a0aa",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "3555d111-2dbb-4ea9-96df-9ef9e8f0f9d9",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "FreeCam",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c785c111-0b3e-41a1-98a7-81988a30e006",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "FreeCam",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
             "name": "Gamepad",
             "id": "c866f438-9a08-4a10-b9f9-8d7cf7931380",
             "actions": [
                 {
-                    "name": "Strenght Modifier",
-                    "type": "Value",
-                    "id": "8d08072b-487d-40f7-a5ed-b6b0bf5aad5a",
-                    "expectedControlType": "Analog",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Arrow Direction",
+                    "name": "GamepadStrenght",
                     "type": "Value",
                     "id": "f96633d4-39bb-47a5-9995-ba42fe8c2439",
                     "expectedControlType": "Vector2",
@@ -72,6 +24,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "FreeCam",
+                    "type": "Value",
+                    "id": "4989151e-72b5-48fe-bbb5-eea2d8a909f1",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "CancelFreeCam",
                     "type": "Button",
                     "id": "19078495-9fbb-45dd-a5bf-730f08f41eb7",
@@ -84,23 +45,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "37bd6269-11db-4271-ae72-51eed6d92008",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Strenght Modifier",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4f87ae14-2ef3-448a-b499-ad1e9610afd6",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrow Direction",
+                    "action": "GamepadStrenght",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -123,6 +73,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "CancelFreeCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "73cceba9-c0f4-4b4a-bf45-bf3389db2508",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FreeCam",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -158,6 +119,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Throw Player",
+                    "type": "Button",
+                    "id": "b6fedc0f-8e3f-4790-a0ed-66c9ab48b553",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FreeCam",
+                    "type": "Value",
+                    "id": "fc2e745f-8798-44b8-a305-4352426b295d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -191,6 +170,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "StartFreeCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a6cb2a4-6fc6-4f71-8751-0ff9827c193e",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throw Player",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a54f9ed7-e6d4-4870-8ea2-3011bddff833",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FreeCam",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -233,7 +234,18 @@
                     "name": "",
                     "id": "dc736d58-ed1b-4f32-b4bb-06a8a9ff11fd",
                     "path": "<Gamepad>/select",
-                    "interactions": "",
+                    "interactions": "MultiTap(tapCount=3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload Scene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5dc43dd1-5049-463b-9d00-df1220334d7c",
+                    "path": "<Keyboard>/rightBracket",
+                    "interactions": "MultiTap(tapCount=3)",
                     "processors": "",
                     "groups": "",
                     "action": "Reload Scene",
@@ -244,7 +256,7 @@
                     "name": "",
                     "id": "f418a2b6-7ac7-4d18-9692-0a4782b15491",
                     "path": "<Gamepad>/start",
-                    "interactions": "",
+                    "interactions": "MultiTap(tapCount=3)",
                     "processors": "",
                     "groups": "",
                     "action": "No-Clip",
@@ -254,8 +266,8 @@
                 {
                     "name": "",
                     "id": "46b72e63-06b2-4264-920b-354c3e160e83",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
+                    "path": "<Keyboard>/backslash",
+                    "interactions": "MultiTap(tapCount=3)",
                     "processors": "",
                     "groups": "",
                     "action": "No-Clip",
