@@ -1,91 +1,108 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public enum TurnState { START, PLAYERTURN, ENEMYTURN }
 
-public class TurnBasedSystem : MonoBehaviour
+public static class TurnBasedSystem
 {
-    public static TurnBasedSystem Instance;
 
-    public List<GameObject> Players = new List<GameObject>();
-    public List<GameObject> Enemies = new List<GameObject>();
+    //public static TurnBasedSystem Instance;
 
-    public TurnState state;
+    //public List<GameObject> Players = new List<GameObject>();
+    public static List<GameObject> players = new List<GameObject>();
 
+    public static List<GameObject> enemies = new List<GameObject>();
 
+    public static TurnState state;
 
-    public void Awake()
+    public static event Action OnEnablePlayerInput;
+    public static event Action OnDisablePlayerInput;
+
+    private static void OnStateValueChanged(TurnState _state)
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
-
-    public void Start()
-    {
-        OnStateValueChanged(TurnState.START);
-    }
-
-    public void OnStateValueChanged(TurnState state)
-    {
-        switch (state)
+        state = _state;
+        switch (_state)
         {
             case TurnState.START:
+                OnStateValueChanged(TurnState.PLAYERTURN);
                 break;
-
+    
             case TurnState.PLAYERTURN:
-                AllowPlayerTurn();
+                OnEnablePlayerInput?.Invoke();
                 Debug.Log("Player Turn");
                 break;
-
+    
             case TurnState.ENEMYTURN:
+                CheckEnemyList();
                 Debug.Log("Enemies Turn");
                 break;
         }
     }
-    
-    public void AllowPlayerTurn()
+
+
+    #region PlayerTurnManager
+    public static void OnPlayerTurnStart()
     {
-        // Player can use his controls
-        // Check when player use his actions
-        // Check when the player's velocity is null
-        // If all players in list has played, turn state for Enemies
+        Debug.Log("PlayerTurn");
+        state = TurnState.PLAYERTURN;
+        OnStateValueChanged(state);
     }
 
-    public void Check()
+    public static void OnPlayerPlayed() 
     {
-        StartCoroutine(CheckPlayerMovement());
+        OnDisablePlayerInput?.Invoke();
     }
-    public IEnumerator CheckPlayerMovement()
+
+        // Check si l'ensemble des personnage dans la list de player ont joué et que leur speed est à 0
+        // Si tout est ok, joue : PlayerTurnEnd
+
+
+    public static void PlayerTurnEnd() 
     {
-        Debug.Log("Play");
-        foreach (GameObject players in Players)
+
+        //ResetPlayerTurn();
+        state = TurnState.ENEMYTURN;
+        OnStateValueChanged(state);
+    }
+
+    //public static void ResetPlayerTurn() 
+    //{
+    //    // Reset le isShooted du PlayerController pour le prochain tour
+    //}
+    #endregion
+
+
+    #region EnemyTurnManager
+    private static void CheckEnemyList()
+    {
+        if (enemies.Count <=  0) 
         {
-            players.TryGetComponent(out TurnBasedPlayer turnBasedPlayer);
-            yield return new WaitUntil(() => turnBasedPlayer.isMoving == false);
+            EndEnemyTurn();
         }
-
-        yield return new WaitForSeconds(1f);
-        Debug.Log("Fin tour joueur");
-        state = TurnState.ENEMYTURN;
-
-        yield break ;
+        // Vérifie s'il y a des ennemies dans la list d'ennemis devant jour
+        // Si, List = null : fin du tour
+        // Si, List != null : Faire jouer l'ennemi
     }
 
-    public void AllowEnemyTurn()
+    private static void OnPlayEnemyTurn()
     {
-        //Check all enemies who need to play
-        //Play there actions
-        //Check there movement 
-        //If all enemies in list has played, turn state for Player 
+        //Fais jouer les ennemis de la list
     }
 
-    public void EndPlayerTurn()
+    private static void CheckEnemyTurn()
     {
-        state = TurnState.ENEMYTURN;
+        // Se joue quand l'enemi a fini son action (se joue lorsque la vélocité de l'ensemble des ennemis de la liste est à 0 et qu'ils ont joués)
     }
+
+    private static void EndEnemyTurn()
+    {
+        state = TurnState.PLAYERTURN;
+        OnStateValueChanged(state);
+    }
+    #endregion
+
+
 }

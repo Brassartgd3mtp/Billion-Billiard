@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 lastVel;
 
     [Header("Bouce Multipliers")]
-    [Tooltip("La valeur de Bounce des murs en béton")] public float ConcreteBounce = 1;
+    [Tooltip("La valeur de Bounce des murs en bï¿½ton")] public float ConcreteBounce = 1;
     [Tooltip("La valeur de Bounce des murs en caoutchouc")] public float RubberBounce = 1;
 
     [Space(20)]
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Crée une vibration dans la manette.
+    /// Crï¿½e une vibration dans la manette.
     /// </summary>
     /// <param name="lowfreq_strenght"></param>
     /// <param name="highfreq_strenght"></param>

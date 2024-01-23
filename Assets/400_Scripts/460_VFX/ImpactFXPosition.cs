@@ -26,6 +26,7 @@ public class ImpactFXPosition : MonoBehaviour
         Quaternion rotationFromNormal = Quaternion.LookRotation(collisionNormal);
 
         float impactVelocity = collision.relativeVelocity.magnitude;
+        Debug.Log(impactVelocity);
 
         GameObject particlePrefab;
         if (collision.transform.TryGetComponent(out Obstacle _obstacle))
