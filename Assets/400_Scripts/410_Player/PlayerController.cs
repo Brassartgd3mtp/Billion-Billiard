@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private Quaternion pivotToRotation;
     private float angle;
 
-    private Rigidbody rb;
+    public static Rigidbody rb;
     Vector3 lastVel;
     public bool isShooted;
 
@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem myParticleSystem;
 
     private TurnBasedPlayer turnBasedPlayer;
+
+    [SerializeField] private float speed;
 
     private void Awake()
     {
@@ -66,6 +68,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        speed = rb.velocity.magnitude;
+
         angle = Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg;
         Pivot.transform.rotation = pivotToRotation;
         Pivot.transform.rotation = Quaternion.Euler(0, angle, 0);
