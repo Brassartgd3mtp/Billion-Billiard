@@ -14,7 +14,7 @@ public class PlayerFreeCam : MonoBehaviour
     CinemachineFramingTransposer camFT;
     CinemachineTransposer camT;
 
-    InputAction.CallbackContext ctx;
+    InputAction.CallbackContext freeCam;
     bool isActive = false;
 
     private void Awake()
@@ -27,11 +27,19 @@ public class PlayerFreeCam : MonoBehaviour
     {
         if (Gamepad.current != null || isActive)
         {
-            ctx = context;
+            freeCam = context;
 
             camTranslate.gameObject.SetActive(true);
             camFollow.gameObject.SetActive(false);
         }
+        //else if (isActive)
+        //{
+        //    camT.m_FollowOffset.x = context.ReadValue<Vector2>().x;
+        //    camT.m_FollowOffset.z = -6.8f + context.ReadValue<Vector2>().y;
+        //
+        //    camTranslate.gameObject.SetActive(true);
+        //    camFollow.gameObject.SetActive(false);
+        //}
     }
 
     public void CancelFreeCam(InputAction.CallbackContext context)
@@ -48,6 +56,9 @@ public class PlayerFreeCam : MonoBehaviour
 
             if (context.canceled)
             {
+                camT.m_FollowOffset.x = 0;
+                camT.m_FollowOffset.z = -6.8f;
+
                 isActive = false;
                 camTranslate.gameObject.SetActive(false);
                 camFollow.gameObject.SetActive(true);
@@ -57,10 +68,10 @@ public class PlayerFreeCam : MonoBehaviour
 
     private void Update()
     {
-        camT.m_FollowOffset.x = Mathf.MoveTowards(camT.m_FollowOffset.x, ctx.ReadValue<Vector2>().x * 9.5f, Time.deltaTime * CameraSpeed);
-        camT.m_FollowOffset.x = Mathf.Clamp(camT.m_FollowOffset.x, -6, 6);
+        camT.m_FollowOffset.x = Mathf.MoveTowards(camT.m_FollowOffset.x, freeCam.ReadValue<Vector2>().x * 9.5f, Time.deltaTime * CameraSpeed);
+        camT.m_FollowOffset.x = Mathf.Clamp(camT.m_FollowOffset.x, -16, 16);
 
-        camT.m_FollowOffset.z = Mathf.MoveTowards(camT.m_FollowOffset.z, -7 + ctx.ReadValue<Vector2>().y * 5.2f, Time.deltaTime * CameraSpeed);
-        camT.m_FollowOffset.z = Mathf.Clamp(camT.m_FollowOffset.z, -12, -2);
+        camT.m_FollowOffset.z = Mathf.MoveTowards(camT.m_FollowOffset.z, -6.8f + freeCam.ReadValue<Vector2>().y * 5.2f, Time.deltaTime * CameraSpeed);
+        camT.m_FollowOffset.z = Mathf.Clamp(camT.m_FollowOffset.z, -18, 2.5f);
     }
 }
