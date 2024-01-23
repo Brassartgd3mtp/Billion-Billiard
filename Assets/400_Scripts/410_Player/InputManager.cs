@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour
 
         if (pc != null)
         {
+            #region Gamepad
             TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.Enable;
             TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.Disable;
 
@@ -24,12 +25,23 @@ public class InputManager : MonoBehaviour
             actions.Gamepad.ArrowDirection.canceled += pc.SetArrowDirection;
             actions.Gamepad.StrenghtModifier.performed += pc.ModifyStrenght;
             actions.Gamepad.StrenghtModifier.canceled += pc.ModifyStrenght;
+            #endregion
+            #region Mouse/Keyboard
+            TurnBasedSystem.OnEnablePlayerInput += actions.MouseKeyboard.Enable;
+            TurnBasedSystem.OnDisablePlayerInput += actions.MouseKeyboard.Disable;
+
+            actions.MouseKeyboard.MouseStrenght.performed += pc.MouseStrenght;
+            actions.MouseKeyboard.MouseStartDrag.performed += pc.MouseStartDrag;
+            actions.MouseKeyboard.MouseStartDrag.canceled += pc.MouseStartDrag;
+            #endregion
         }
-        
+
         if (pfc != null)
         {
-            actions.Gamepad.FreeCam.performed += pfc.FreeCam;
-            actions.Gamepad.FreeCam.canceled += pfc.FreeCam;
+            actions.Global.FreeCam.performed += pfc.FreeCam;
+            actions.Gamepad.CancelFreeCam.canceled += pfc.CancelFreeCam;
+            actions.MouseKeyboard.StartFreeCam.performed += pfc.StartFreeCam;
+            actions.MouseKeyboard.StartFreeCam.canceled += pfc.StartFreeCam;
         }
 
         if (rs != null)
@@ -45,7 +57,9 @@ public class InputManager : MonoBehaviour
         }
 
         actions.Gamepad.Enable();
+        actions.MouseKeyboard.Enable();
         actions.Cheat.Enable();
+        actions.Global.Enable();
     }
 
     private void NoClipMode(InputAction.CallbackContext context)
@@ -53,13 +67,17 @@ public class InputManager : MonoBehaviour
         if (!nc.ModeOn)
         {
             nc.ModeOn = true;
+            actions.Global.Disable();
             actions.Gamepad.Disable();
+            actions.MouseKeyboard.Disable();
             nc.PlayerCollider.enabled = false;
         }
         else
         {
             nc.ModeOn = false;
+            actions.Global.Enable();
             actions.Gamepad.Enable();
+            actions.MouseKeyboard.Enable();
             nc.PlayerCollider.enabled = true;
         }
     }
@@ -68,17 +86,26 @@ public class InputManager : MonoBehaviour
     {
         if (pc != null)
         {
+            #region Gamepad
             actions.Gamepad.ThrowPlayer.performed -= pc.ThrowPlayer;
             actions.Gamepad.ArrowDirection.performed -= pc.SetArrowDirection;
             actions.Gamepad.ArrowDirection.canceled -= pc.SetArrowDirection;
             actions.Gamepad.StrenghtModifier.performed -= pc.ModifyStrenght;
             actions.Gamepad.StrenghtModifier.canceled -= pc.ModifyStrenght;
+            #endregion
+            #region Mouse/Keyboard
+            actions.MouseKeyboard.MouseStrenght.performed -= pc.MouseStrenght;
+            actions.MouseKeyboard.MouseStartDrag.performed -= pc.MouseStartDrag;
+            actions.MouseKeyboard.MouseStartDrag.canceled -= pc.MouseStartDrag;
+            #endregion
         }
 
         if (pfc != null)
         {
-            actions.Gamepad.FreeCam.performed -= pfc.FreeCam;
-            actions.Gamepad.FreeCam.canceled -= pfc.FreeCam;
+            actions.Global.FreeCam.performed -= pfc.FreeCam;
+            actions.Gamepad.CancelFreeCam.canceled -= pfc.CancelFreeCam;
+            actions.MouseKeyboard.StartFreeCam.performed -= pfc.StartFreeCam;
+            actions.MouseKeyboard.StartFreeCam.canceled -= pfc.StartFreeCam;
         }
 
         if (rs != null)

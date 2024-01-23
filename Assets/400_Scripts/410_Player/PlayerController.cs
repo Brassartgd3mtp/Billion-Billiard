@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -8,10 +9,15 @@ public class PlayerController : MonoBehaviour
     [Header("Strenght Value")]
     public int StrenghMultiplier = 40;
 
-    [Header("Input Values")]
-    public float ThrowStrenght;
-    [Tooltip("Modifiez cette variable pour augmenter ou baisser la force de propulsion")]
+    [Header("Gamepad Values")]
+    public float GamepadThrowStrenght;
     public Vector2 PivotValue;
+
+    [Header("Mouse Values")]
+    public float MouseThrowStrenght;
+    public Vector2 MouseStart;
+    public Vector2 MouseEnd;
+    Camera cam;
 
     [Header("References")]
     public GameObject Pivot;
@@ -21,12 +27,14 @@ public class PlayerController : MonoBehaviour
     private float angle;
 
     private Rigidbody rb;
-    Vector3 lastVel;
-    public bool isShooted;
+    private Vector3 lastVel;
 
     [Header("Bouce Multipliers")]
-    [Tooltip("La valeur de Bounce des murs en béton")] public float ConcreteBounce = 1;
+    [Tooltip("La valeur de Bounce des murs en bï¿½ton")] public float ConcreteBounce = 1;
     [Tooltip("La valeur de Bounce des murs en caoutchouc")] public float RubberBounce = 1;
+
+    [Space(20)]
+    public bool isShooted;
 
     public Vector3 posBeforeHit;
     [SerializeField] private ParticleSystem myParticleSystem;
@@ -40,34 +48,43 @@ public class PlayerController : MonoBehaviour
         turnBasedPlayer = GetComponent<TurnBasedPlayer>();
     }
 
-    public void ThrowPlayer(InputAction.CallbackContext ctx)
-    {
-        isShooted = true;
-
-        myParticleSystem.Play();
-        posBeforeHit = transform.position;
-        Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-        rb.AddForce(forceDirection * ThrowStrenght, ForceMode.Impulse);
-
-        turnBasedPlayer.ShotCount();
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         pivotToRotation = Pivot.transform.rotation;
         strenghtToScale = Pivot.transform.localScale;
         myParticleSystem = GetComponentInChildren<ParticleSystem>();
+        cam = Camera.main;
+    }
+
+    public void ThrowPlayer(InputAction.CallbackContext context)
+    {
+        isShooted = true;
+
+        myParticleSystem.Play();
+        posBeforeHit = transform.position;
+        Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+        rb.AddForce(-forceDirection * GamepadThrowStrenght, ForceMode.Impulse);
+
+        turnBasedPlayer.ShotCount();
     }
 
     // Update is called once per frame
     void Update()
     {
-        angle = Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg;
+        if (Gamepad.current != null)
+            angle = Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg;
+        else
+            angle = Mathf.Atan2(MouseEnd.x - MouseStart.x, MouseEnd.y - MouseStart.y) * Mathf.Rad2Deg;
+
         Pivot.transform.rotation = pivotToRotation;
         Pivot.transform.rotation = Quaternion.Euler(0, angle, 0);
 
-        strenghtToScale.z = ThrowStrenght / (StrenghMultiplier / 5);
+        if (Gamepad.current != null)
+            strenghtToScale.z = GamepadThrowStrenght / (StrenghMultiplier / 5);
+        else
+            strenghtToScale.z = MouseThrowStrenght / (StrenghMultiplier / 5);
+
         Pivot.transform.localScale = strenghtToScale;
 
         lastVel = rb.velocity;
@@ -98,7 +115,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Crée une vibration dans la manette.
+    /// Crï¿½e une vibration dans la manette.
     /// </summary>
     /// <param name="lowfreq_strenght"></param>
     /// <param name="highfreq_strenght"></param>
@@ -106,10 +123,13 @@ public class PlayerController : MonoBehaviour
     /// <returns>Coroutine</returns>
     IEnumerator Haptic(float lowfreq_strenght, float highfreq_strenght, float timer)
     {
-        Gamepad.current.SetMotorSpeeds(lowfreq_strenght, highfreq_strenght);
-        yield return new WaitForSeconds(timer);
-        InputSystem.ResetHaptics();
-        yield break;
+        if (Gamepad.current != null)
+        {
+            Gamepad.current.SetMotorSpeeds(lowfreq_strenght, highfreq_strenght);
+            yield return new WaitForSeconds(timer);
+            InputSystem.ResetHaptics();
+            yield break;
+        }
     }
 
     public void SetArrowDirection(InputAction.CallbackContext context)
@@ -122,11 +142,43 @@ public class PlayerController : MonoBehaviour
 
     public void ModifyStrenght(InputAction.CallbackContext context)
     {
-        ThrowStrenght = context.ReadValue<float>() * StrenghMultiplier;
+        GamepadThrowStrenght = context.ReadValue<float>() * StrenghMultiplier;
 
         if (context.canceled)
+            GamepadThrowStrenght = 0;
+    }
+
+    bool dragEnabled = false;
+    public void MouseStrenght(InputAction.CallbackContext context)
+    {
+        if (dragEnabled)
         {
-            ThrowStrenght = 0.1f;
+            MouseEnd = context.ReadValue<Vector2>();
+            MouseThrowStrenght = Vector2.Distance(MouseStart, MouseEnd) / 5;
+            MouseThrowStrenght = Mathf.Clamp(MouseThrowStrenght, 0, StrenghMultiplier);
+        }
+        else
+            MouseStart = context.ReadValue<Vector2>();
+    }
+
+    public void MouseStartDrag(InputAction.CallbackContext context)
+    {
+        dragEnabled = true;
+
+        if (context.canceled && MouseEnd != Vector2.zero)
+        {
+            isShooted = true;
+            
+            myParticleSystem.Play();
+            posBeforeHit = transform.position;
+            Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+            rb.AddForce(-forceDirection * MouseThrowStrenght, ForceMode.Impulse);
+            
+            turnBasedPlayer.ShotCount();
+
+            dragEnabled = false;
+            MouseThrowStrenght = 0;
+            MouseEnd = Vector2.zero;
         }
     }
 }
