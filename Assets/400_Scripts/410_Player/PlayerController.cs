@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     private Quaternion pivotToRotation;
     private float angle;
 
-    private Rigidbody rb;
+    public static Rigidbody rb;
     private Vector3 lastVel;
 
     [Header("Bouce Multipliers")]
@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem myParticleSystem;
 
     private TurnBasedPlayer turnBasedPlayer;
+
+    [SerializeField] private float speed;
 
     private void Awake()
     {
@@ -74,6 +76,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    	speed = rb.velocity.magnitude;
         if (Gamepad.current != null)
             angle = Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg;
         else
