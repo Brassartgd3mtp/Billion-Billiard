@@ -17,12 +17,16 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     private int nbrOfFlashing = 3;
 
+    private TrailRenderer trailRenderer;
+
     public void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+
+        trailRenderer = GetComponent<TrailRenderer>();
 
         playerController = GetComponent<PlayerController>();
         
@@ -48,8 +52,8 @@ public class PlayerCollisionBehavior : MonoBehaviour
             if (collision.gameObject.TryGetComponent(out HoleForPlayer holeForPlayer))
             {
                 rb.velocity = Vector3.zero;
-                transform.position = playerController.posBeforeHit;
-                StartCoroutine(HoleFeedBack());
+                trailRenderer.enabled = false;
+                StartCoroutine(HolePlayerScale());
             }
         }
     }
@@ -70,8 +74,33 @@ public class PlayerCollisionBehavior : MonoBehaviour
         playerStats.moneyCount += money;
     }
 
+    IEnumerator HolePlayerScale()
+    {
+        Vector3 startSize = transform.localScale;
+        Vector3 endSize = new Vector3(0, 0, 0);
+
+        float timerSize = 0f;
+        float timeToScale = 0.5f;
+
+        do
+        {
+            transform.localScale = Vector3.Lerp(startSize, endSize, timerSize / timeToScale);
+            timerSize += Time.deltaTime;
+            yield return null;
+        }
+        while (timerSize < timeToScale);
+
+        transform.position = playerController.posBeforeHit;
+        trailRenderer.enabled = true;
+        trailRenderer.Clear();
+        transform.localScale = new Vector3(1, 1, 1);
+        StartCoroutine(HoleFeedBack());
+    }
+
     IEnumerator HoleFeedBack()
     {
+
+
         while (nbrOfFlashing > 0) 
         {
             meshRenderer.material.color = Color.white;

@@ -16,20 +16,31 @@ public class InputManager : MonoBehaviour
 
         if (pc != null)
         {
+            #region Gamepad
             TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.Enable;
             TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.Disable;
 
-            actions.Gamepad.ThrowPlayer.performed += pc.ThrowPlayer;
-            actions.Gamepad.ArrowDirection.performed += pc.SetArrowDirection;
-            actions.Gamepad.ArrowDirection.canceled += pc.SetArrowDirection;
-            actions.Gamepad.StrenghtModifier.performed += pc.ModifyStrenght;
-            actions.Gamepad.StrenghtModifier.canceled += pc.ModifyStrenght;
+            actions.Gamepad.ThrowPlayer.performed += pc.GamepadThrow;
+            actions.Gamepad.GamepadStrenght.performed += pc.SetArrowDirection;
+            actions.Gamepad.GamepadStrenght.canceled += pc.SetArrowDirection;
+            #endregion
+            #region Mouse/Keyboard
+            TurnBasedSystem.OnEnablePlayerInput += actions.MouseKeyboard.Enable;
+            TurnBasedSystem.OnDisablePlayerInput += actions.MouseKeyboard.Disable;
+
+            actions.MouseKeyboard.MouseStrenght.performed += pc.MouseStrenght;
+            actions.MouseKeyboard.MouseStartDrag.performed += pc.MouseStartDrag;
+            actions.MouseKeyboard.ThrowPlayer.performed += pc.MouseThrow;
+            #endregion
         }
-        
+
         if (pfc != null)
         {
             actions.Gamepad.FreeCam.performed += pfc.FreeCam;
-            actions.Gamepad.FreeCam.canceled += pfc.FreeCam;
+            actions.Gamepad.CancelFreeCam.canceled += pfc.CancelFreeCam;
+            actions.MouseKeyboard.FreeCam.performed += pfc.FreeCam;
+            actions.MouseKeyboard.StartFreeCam.performed += pfc.StartFreeCam;
+            actions.MouseKeyboard.StartFreeCam.canceled += pfc.StartFreeCam;
         }
 
         if (rs != null)
@@ -45,6 +56,7 @@ public class InputManager : MonoBehaviour
         }
 
         actions.Gamepad.Enable();
+        if (Gamepad.current == null) actions.MouseKeyboard.Enable();
         actions.Cheat.Enable();
     }
 
@@ -54,12 +66,14 @@ public class InputManager : MonoBehaviour
         {
             nc.ModeOn = true;
             actions.Gamepad.Disable();
+            actions.MouseKeyboard.Disable();
             nc.PlayerCollider.enabled = false;
         }
         else
         {
             nc.ModeOn = false;
             actions.Gamepad.Enable();
+            actions.MouseKeyboard.Enable();
             nc.PlayerCollider.enabled = true;
         }
     }
@@ -68,17 +82,25 @@ public class InputManager : MonoBehaviour
     {
         if (pc != null)
         {
-            actions.Gamepad.ThrowPlayer.performed -= pc.ThrowPlayer;
-            actions.Gamepad.ArrowDirection.performed -= pc.SetArrowDirection;
-            actions.Gamepad.ArrowDirection.canceled -= pc.SetArrowDirection;
-            actions.Gamepad.StrenghtModifier.performed -= pc.ModifyStrenght;
-            actions.Gamepad.StrenghtModifier.canceled -= pc.ModifyStrenght;
+            #region Gamepad
+            actions.Gamepad.ThrowPlayer.performed -= pc.GamepadThrow;
+            actions.Gamepad.GamepadStrenght.performed -= pc.SetArrowDirection;
+            actions.Gamepad.GamepadStrenght.canceled -= pc.SetArrowDirection;
+            #endregion
+            #region Mouse/Keyboard
+            actions.MouseKeyboard.MouseStrenght.performed -= pc.MouseStrenght;
+            actions.MouseKeyboard.MouseStartDrag.performed -= pc.MouseStartDrag;
+            actions.MouseKeyboard.ThrowPlayer.performed -= pc.MouseThrow;
+            #endregion
         }
 
         if (pfc != null)
         {
             actions.Gamepad.FreeCam.performed -= pfc.FreeCam;
-            actions.Gamepad.FreeCam.canceled -= pfc.FreeCam;
+            actions.Gamepad.CancelFreeCam.canceled -= pfc.CancelFreeCam;
+            actions.MouseKeyboard.FreeCam.performed -= pfc.FreeCam;
+            actions.MouseKeyboard.StartFreeCam.performed -= pfc.StartFreeCam;
+            actions.MouseKeyboard.StartFreeCam.canceled -= pfc.StartFreeCam;
         }
 
         if (rs != null)
