@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 posBeforeHit;
     [SerializeField] private ParticleSystem myParticleSystem;
+    [SerializeField] private VisualEffect myEffectAsset;
 
     private TurnBasedPlayer turnBasedPlayer;
 
@@ -44,7 +46,8 @@ public class PlayerController : MonoBehaviour
     {
         isShooted = true;
 
-        myParticleSystem.Play();
+        //myParticleSystem.Play();
+        myEffectAsset.Play();
         posBeforeHit = transform.position;
         Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
         rb.AddForce(forceDirection * ThrowStrenght, ForceMode.Impulse);
