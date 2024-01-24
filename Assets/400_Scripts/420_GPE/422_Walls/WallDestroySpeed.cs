@@ -5,15 +5,26 @@ using UnityEngine;
 public class WallDestroySpeed : MonoBehaviour
 {
     [SerializeField] float destroyValue;
+    [SerializeField] new BoxCollider collider;
 
-    private void OnCollisionEnter(Collision collision)
+    public void Awake()
     {
-        if (collision.gameObject.TryGetComponent(out PlayerController playerController))
+        collider = GetComponent<BoxCollider>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (PlayerController.rb.velocity.magnitude > destroyValue)
         {
-            if (PlayerController.rb.velocity.magnitude > destroyValue)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
+    }
+
+    public void Update()
+    {
+        if (PlayerController.rb.velocity.magnitude < destroyValue)
+        {
+            collider.isTrigger = false;
+        } else collider.isTrigger = true;
     }
 }
