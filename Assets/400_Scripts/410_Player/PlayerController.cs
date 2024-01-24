@@ -55,9 +55,11 @@ public class PlayerController : MonoBehaviour
         strenghtToScale = Pivot.transform.localScale;
         myParticleSystem = GetComponentInChildren<ParticleSystem>();
         cam = Camera.main;
+
+        MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
     }
 
-    public void ThrowPlayer(InputAction.CallbackContext context)
+    public void GamepadThrow(InputAction.CallbackContext context)
     {
         isShooted = true;
 
@@ -136,16 +138,16 @@ public class PlayerController : MonoBehaviour
     {
         PivotValue = context.ReadValue<Vector2>();
 
+        //if (context.ReadValue<Vector2>().y >= 0)
+            GamepadThrowStrenght = context.ReadValue<Vector2>().magnitude * StrenghMultiplier;
+        //else
+        //    GamepadThrowStrenght = context.ReadValue<Vector2>().y * StrenghMultiplier * -1;
+
         if (context.canceled)
+        {
             PivotValue = new Vector2(0, 0);
-    }
-
-    public void ModifyStrenght(InputAction.CallbackContext context)
-    {
-        GamepadThrowStrenght = context.ReadValue<float>() * StrenghMultiplier;
-
-        if (context.canceled)
             GamepadThrowStrenght = 0;
+        }
     }
 
     bool dragEnabled = false;
@@ -153,30 +155,46 @@ public class PlayerController : MonoBehaviour
     {
         if (dragEnabled)
         {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
             MouseEnd = context.ReadValue<Vector2>();
             MouseThrowStrenght = Vector2.Distance(MouseStart, MouseEnd) / 5;
             MouseThrowStrenght = Mathf.Clamp(MouseThrowStrenght, 0, StrenghMultiplier);
         }
-        else
-            MouseStart = context.ReadValue<Vector2>();
     }
 
     public void MouseStartDrag(InputAction.CallbackContext context)
     {
-        dragEnabled = true;
-
-        if (context.canceled && MouseEnd != Vector2.zero)
+        if (!dragEnabled)
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            dragEnabled = true;
+        }
+        else if (MouseEnd != Vector2.zero)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            dragEnabled = false;
+            MouseThrowStrenght = 0;
+            MouseEnd = Vector2.zero;
+        }
+    }
+
+    public void MouseThrow(InputAction.CallbackContext context)
+    {
+        if (dragEnabled)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            dragEnabled = false;
+
             isShooted = true;
-            
+
             myParticleSystem.Play();
             posBeforeHit = transform.position;
             Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             rb.AddForce(-forceDirection * MouseThrowStrenght, ForceMode.Impulse);
-            
+
             turnBasedPlayer.ShotCount();
 
-            dragEnabled = false;
             MouseThrowStrenght = 0;
             MouseEnd = Vector2.zero;
         }

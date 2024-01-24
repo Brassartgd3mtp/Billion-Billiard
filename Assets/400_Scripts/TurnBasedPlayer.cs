@@ -89,9 +89,9 @@ public class TurnBasedPlayer : MonoBehaviour
 
         if (hasStopped && shotRemaining <= 0)
         {
-        TurnBasedSystem.PlayerTurnEnd();
-        playerController.isShooted = false;
-        shotRemaining = nbrOfShots;
+            TurnBasedSystem.PlayerTurnEnd();
+            playerController.isShooted = false;
+            shotRemaining = nbrOfShots;
             uI_ShotRemaining.UpdateUI();
         }
     }
