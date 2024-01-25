@@ -27,6 +27,7 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         LevelIntro.gameObject.SetActive(true);
+
     }
 
     public void QuitGame()
