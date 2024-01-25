@@ -82,11 +82,10 @@ public class PlayerController : MonoBehaviour
         var emissionSpeedEffect = speedEffect.emission;
         emissionSpeedEffect.rateOverTime = GamepadThrowStrenght / StrenghMultiplier * 200f;
 
-        speedEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
+        speedEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         var durationSpeedEffect = speedEffect.main;
         durationSpeedEffect.duration = GamepadThrowStrenght / StrenghMultiplier;
-
 
         speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
         speedEffect.Play();
