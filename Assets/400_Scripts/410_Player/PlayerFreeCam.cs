@@ -1,12 +1,13 @@
 using Cinemachine;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerFreeCam : MonoBehaviour
 {
-    [Tooltip("Distance à laquelle la caméra peut aller.\nValeur recommandée : 2")]
-    public float CameraSpeed;
+    [Tooltip("Distance à laquelle la caméra peut aller.\nValeur par défaut : 10")]
+    public float CameraSpeed = 50;
 
     [SerializeField] CinemachineVirtualCamera camFollow;
     [SerializeField] CinemachineVirtualCamera camTranslate;
@@ -15,7 +16,7 @@ public class PlayerFreeCam : MonoBehaviour
     CinemachineTransposer camT;
 
     InputAction.CallbackContext freeCam;
-    bool isActive = false;
+    bool mouseFreeCamEnabled = false;
 
     private void Awake()
     {
@@ -25,53 +26,66 @@ public class PlayerFreeCam : MonoBehaviour
 
     public void FreeCam(InputAction.CallbackContext context)
     {
-        if (Gamepad.current != null || isActive)
-        {
-            freeCam = context;
+        freeCam = context;
 
+        if (mouseFreeCamEnabled || Gamepad.current != null)
+        {
             camTranslate.gameObject.SetActive(true);
             camFollow.gameObject.SetActive(false);
         }
-        //else if (isActive)
-        //{
-        //    camT.m_FollowOffset.x = context.ReadValue<Vector2>().x;
-        //    camT.m_FollowOffset.z = -6.8f + context.ReadValue<Vector2>().y;
-        //
-        //    camTranslate.gameObject.SetActive(true);
-        //    camFollow.gameObject.SetActive(false);
-        //}
-    }
-
-    public void CancelFreeCam(InputAction.CallbackContext context)
-    {
-        camTranslate.gameObject.SetActive(false);
-        camFollow.gameObject.SetActive(true);
+        
+        if (context.canceled)
+        {
+            StartCoroutine(CameraReturn());
+        }
     }
 
     public void StartFreeCam(InputAction.CallbackContext context)
     {
         if (Gamepad.current == null)
         {
-            isActive = true;
+            mouseFreeCamEnabled = true;
 
             if (context.canceled)
             {
-                camT.m_FollowOffset.x = 0;
-                camT.m_FollowOffset.z = -6.8f;
+                mouseFreeCamEnabled = false;
 
-                isActive = false;
-                camTranslate.gameObject.SetActive(false);
-                camFollow.gameObject.SetActive(true);
+                StartCoroutine(CameraReturn());
             }
         }
     }
 
+    private IEnumerator CameraReturn()
+    {
+        while (camT.m_FollowOffset != new Vector3(0, 18.8f, -6.8f))
+        {
+            camT.m_FollowOffset.x = Mathf.MoveTowards(camT.m_FollowOffset.x, 0, Time.deltaTime * 300);
+            camT.m_FollowOffset.z = Mathf.MoveTowards(camT.m_FollowOffset.z, -6.8f, Time.deltaTime * 300);
+
+            yield return new WaitForSeconds(.01f);
+        }
+
+        camTranslate.gameObject.SetActive(false);
+        camFollow.gameObject.SetActive(true);
+
+        yield break;
+    }
+
     private void Update()
     {
-        camT.m_FollowOffset.x = Mathf.MoveTowards(camT.m_FollowOffset.x, freeCam.ReadValue<Vector2>().x * 9.5f, Time.deltaTime * CameraSpeed);
-        camT.m_FollowOffset.x = Mathf.Clamp(camT.m_FollowOffset.x, -16, 16);
+        if (Gamepad.current != null)
+        {
+            camT.m_FollowOffset.x += freeCam.ReadValue<Vector2>().x * CameraSpeed * Time.deltaTime * 5;
+            camT.m_FollowOffset.z += freeCam.ReadValue<Vector2>().y * CameraSpeed * Time.deltaTime * 5;
+        }
+        
+        else if (mouseFreeCamEnabled)
+        {
+            camT.m_FollowOffset.x += freeCam.ReadValue<Vector2>().x * CameraSpeed * Time.deltaTime;
+            camT.m_FollowOffset.z += freeCam.ReadValue<Vector2>().y * CameraSpeed * Time.deltaTime;
+        }
 
-        camT.m_FollowOffset.z = Mathf.MoveTowards(camT.m_FollowOffset.z, -6.8f + freeCam.ReadValue<Vector2>().y * 5.2f, Time.deltaTime * CameraSpeed);
+        camT.m_FollowOffset.x = Mathf.Clamp(camT.m_FollowOffset.x, -16, 16);
         camT.m_FollowOffset.z = Mathf.Clamp(camT.m_FollowOffset.z, -18, 2.5f);
     }
 }

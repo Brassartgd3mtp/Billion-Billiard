@@ -28,7 +28,7 @@ public class UI_Stats : MonoBehaviour
 
     public void UpdateStats()
     {
-        TEXT_Money_Count.text = $"Money {UIMoneyCount}";
         UIMoneyCount = playerStats.moneyCount;
+        TEXT_Money_Count.text = $"Money {UIMoneyCount}";
     }
 }

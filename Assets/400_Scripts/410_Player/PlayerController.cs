@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private Quaternion pivotToRotation;
     private float angle;
 
-    private Rigidbody rb;
+    public static Rigidbody rb;
     private Vector3 lastVel;
 
     [Header("Bouce Multipliers")]
@@ -37,9 +38,15 @@ public class PlayerController : MonoBehaviour
     public bool isShooted;
 
     public Vector3 posBeforeHit;
-    [SerializeField] private ParticleSystem myParticleSystem;
 
     private TurnBasedPlayer turnBasedPlayer;
+
+    [Header("VFX Parameter")]
+    [SerializeField] private ParticleSystem speedEffect;
+    [SerializeField] private GameObject speedEffectDirection;
+    [SerializeField] private VisualEffect smokePoof;
+
+    [SerializeField] private float speed;
 
     private void Awake()
     {
@@ -53,7 +60,10 @@ public class PlayerController : MonoBehaviour
     {
         pivotToRotation = Pivot.transform.rotation;
         strenghtToScale = Pivot.transform.localScale;
-        myParticleSystem = GetComponentInChildren<ParticleSystem>();
+
+        smokePoof = GetComponentInChildren<VisualEffect>();
+        speedEffect = GetComponentInChildren<ParticleSystem>();
+
         cam = Camera.main;
 
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -63,10 +73,24 @@ public class PlayerController : MonoBehaviour
     {
         isShooted = true;
 
-        myParticleSystem.Play();
         posBeforeHit = transform.position;
         Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
         rb.AddForce(-forceDirection * GamepadThrowStrenght, ForceMode.Impulse);
+
+        smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        smokePoof.SetFloat("SmokeSize", GamepadThrowStrenght / StrenghMultiplier);
+        smokePoof.Play();
+
+
+        var emissionSpeedEffect = speedEffect.emission;
+        emissionSpeedEffect.rateOverTime = GamepadThrowStrenght / StrenghMultiplier * 200f;
+
+        var durationSpeedEffect = speedEffect.main;
+        durationSpeedEffect.duration = GamepadThrowStrenght / StrenghMultiplier;
+
+
+        speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        speedEffect.Play();
 
         turnBasedPlayer.ShotCount();
     }
@@ -74,6 +98,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    	speed = rb.velocity.magnitude;
         if (Gamepad.current != null)
             angle = Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg;
         else
@@ -103,14 +128,14 @@ public class PlayerController : MonoBehaviour
             {
                 case Obstacle.ObstacleType.Concrete:
                     rb.velocity = reflect * Mathf.Max(speed * ConcreteBounce, 0f);
-                    StartCoroutine(Haptic(0f, .5f, .2f));
+                    StartCoroutine(Haptic(0f, 1f, .2f));
                     break;
                 case Obstacle.ObstacleType.Rubber:
-                    StartCoroutine(Haptic(0f, .5f, .2f));
+                    StartCoroutine(Haptic(0f, 1f, .2f));
                     rb.velocity = reflect * Mathf.Max(speed * RubberBounce, 0f);
                     break;
                 case Obstacle.ObstacleType.NPC:
-                    StartCoroutine(Haptic(0f, .5f, .2f));
+                    StartCoroutine(Haptic(0f, 1f, .2f));
                     break;
             }
         }
@@ -134,14 +159,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetArrowDirection(InputAction.CallbackContext context)
+    public void GamepadStrenght(InputAction.CallbackContext context)
     {
         PivotValue = context.ReadValue<Vector2>();
 
-        //if (context.ReadValue<Vector2>().y >= 0)
-            GamepadThrowStrenght = context.ReadValue<Vector2>().magnitude * StrenghMultiplier;
-        //else
-        //    GamepadThrowStrenght = context.ReadValue<Vector2>().y * StrenghMultiplier * -1;
+        GamepadThrowStrenght = context.ReadValue<Vector2>().magnitude * StrenghMultiplier;
 
         if (context.canceled)
         {
@@ -150,7 +172,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    bool dragEnabled = false;
+    public bool dragEnabled = false;
     public void MouseStrenght(InputAction.CallbackContext context)
     {
         if (dragEnabled)
@@ -165,15 +187,51 @@ public class PlayerController : MonoBehaviour
 
     public void MouseStartDrag(InputAction.CallbackContext context)
     {
-        if (!dragEnabled)
+        if (context.performed)
         {
             Cursor.lockState = CursorLockMode.Locked;
             dragEnabled = true;
         }
-        else if (MouseEnd != Vector2.zero)
+
+        if (context.canceled && MouseEnd != Vector2.zero)
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             dragEnabled = false;
+
+            isShooted = true;
+
+            posBeforeHit = transform.position;
+            Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+            rb.AddForce(-forceDirection * MouseThrowStrenght, ForceMode.Impulse);
+
+            smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            smokePoof.SetFloat("SmokeSize", MouseThrowStrenght / StrenghMultiplier);
+
+            smokePoof.Play();
+
+            var emissionSpeedEffect = speedEffect.emission;
+            emissionSpeedEffect.rateOverTime = GamepadThrowStrenght / StrenghMultiplier * 200f;
+
+            var durationSpeedEffect = speedEffect.main;
+            durationSpeedEffect.duration = GamepadThrowStrenght / StrenghMultiplier;
+
+
+            speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            speedEffect.Play();
+
+            turnBasedPlayer.ShotCount();
+
+            MouseThrowStrenght = 0;
+            MouseEnd = Vector2.zero;
+        }
+    }
+
+    public void MouseCancelThrow(InputAction.CallbackContext context)
+    {
+        if (dragEnabled)
+        {
+            dragEnabled = false;
+
             MouseThrowStrenght = 0;
             MouseEnd = Vector2.zero;
         }
@@ -188,7 +246,7 @@ public class PlayerController : MonoBehaviour
 
             isShooted = true;
 
-            myParticleSystem.Play();
+            
             posBeforeHit = transform.position;
             Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             rb.AddForce(-forceDirection * MouseThrowStrenght, ForceMode.Impulse);

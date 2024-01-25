@@ -17,6 +17,7 @@ public class VFXScriptableObject : ScriptableObject
         switch (_type)
         {
             case ObstacleType.Concrete:
+                //if(blablabla)
                 return prefabParticleConcrete;
             case ObstacleType.Rubber:
                 return prefabParticleRubber;

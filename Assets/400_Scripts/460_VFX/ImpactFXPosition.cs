@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ImpactFXPosition : MonoBehaviour
-{    
+{
     public VFXScriptableObject vFXScriptableObject;
     public float velocityThreshold = 5f;
 
@@ -35,12 +35,12 @@ public class ImpactFXPosition : MonoBehaviour
 
             particlePrefab = vFXScriptableObject.GetObstacleType(obstacleType);
         }
-        else particlePrefab = vFXScriptableObject.prefabParticleDefault; 
-        
-        Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
+        else particlePrefab = vFXScriptableObject.prefabParticleDefault;
+
 
         if (impactVelocity > velocityThreshold)
         {
+            Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
             //particlePrefab.
         }
 
