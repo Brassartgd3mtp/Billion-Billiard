@@ -79,9 +79,10 @@ public class PlayerController : MonoBehaviour
         smokePoof.SetFloat("SmokeSize", GamepadThrowStrenght / StrenghMultiplier);
         smokePoof.Play();
 
-
         var emissionSpeedEffect = speedEffect.emission;
         emissionSpeedEffect.rateOverTime = GamepadThrowStrenght / StrenghMultiplier * 200f;
+
+        speedEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
         var durationSpeedEffect = speedEffect.main;
         durationSpeedEffect.duration = GamepadThrowStrenght / StrenghMultiplier;
