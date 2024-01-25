@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem speedEffect;
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
+
     [SerializeField] private float speed;
 
     private void Awake()
@@ -245,7 +246,7 @@ public class PlayerController : MonoBehaviour
 
             isShooted = true;
 
-            myParticleSystem.Play();
+            
             posBeforeHit = transform.position;
             Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             rb.AddForce(-forceDirection * MouseThrowStrenght, ForceMode.Impulse);
