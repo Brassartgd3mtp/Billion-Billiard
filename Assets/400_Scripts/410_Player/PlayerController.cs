@@ -38,10 +38,13 @@ public class PlayerController : MonoBehaviour
     public bool isShooted;
 
     public Vector3 posBeforeHit;
-    [SerializeField] private ParticleSystem myParticleSystem;
-    [SerializeField] private VisualEffect smokePoof;
 
     private TurnBasedPlayer turnBasedPlayer;
+
+    [Header("VFX Parameter")]
+    [SerializeField] private ParticleSystem speedEffect;
+    [SerializeField] private GameObject speedEffectDirection;
+    [SerializeField] private VisualEffect smokePoof;
 
     private void Awake()
     {
@@ -55,7 +58,10 @@ public class PlayerController : MonoBehaviour
     {
         pivotToRotation = Pivot.transform.rotation;
         strenghtToScale = Pivot.transform.localScale;
-        myParticleSystem = GetComponentInChildren<ParticleSystem>();
+
+        smokePoof = GetComponentInChildren<VisualEffect>();
+        speedEffect = GetComponentInChildren<ParticleSystem>();
+
         cam = Camera.main;
 
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -65,7 +71,6 @@ public class PlayerController : MonoBehaviour
     {
         isShooted = true;
 
-        //myParticleSystem.Play();
         posBeforeHit = transform.position;
         Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
         rb.AddForce(-forceDirection * GamepadThrowStrenght, ForceMode.Impulse);
@@ -73,6 +78,17 @@ public class PlayerController : MonoBehaviour
         smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
         smokePoof.SetFloat("SmokeSize", GamepadThrowStrenght / StrenghMultiplier);
         smokePoof.Play();
+
+
+        var emissionSpeedEffect = speedEffect.emission;
+        emissionSpeedEffect.rateOverTime = GamepadThrowStrenght / StrenghMultiplier * 200f;
+
+        var durationSpeedEffect = speedEffect.main;
+        durationSpeedEffect.duration = GamepadThrowStrenght / StrenghMultiplier;
+
+
+        speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        speedEffect.Play();
 
         turnBasedPlayer.ShotCount();
     }
@@ -181,7 +197,6 @@ public class PlayerController : MonoBehaviour
 
             isShooted = true;
 
-            myParticleSystem.Play();
             posBeforeHit = transform.position;
             Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             rb.AddForce(-forceDirection * MouseThrowStrenght, ForceMode.Impulse);
@@ -190,6 +205,16 @@ public class PlayerController : MonoBehaviour
             smokePoof.SetFloat("SmokeSize", MouseThrowStrenght / StrenghMultiplier);
 
             smokePoof.Play();
+
+            var emissionSpeedEffect = speedEffect.emission;
+            emissionSpeedEffect.rateOverTime = GamepadThrowStrenght / StrenghMultiplier * 200f;
+
+            var durationSpeedEffect = speedEffect.main;
+            durationSpeedEffect.duration = GamepadThrowStrenght / StrenghMultiplier;
+
+
+            speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            speedEffect.Play();
 
             turnBasedPlayer.ShotCount();
 
