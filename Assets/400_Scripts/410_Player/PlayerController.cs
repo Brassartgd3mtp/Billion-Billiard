@@ -103,14 +103,14 @@ public class PlayerController : MonoBehaviour
             {
                 case Obstacle.ObstacleType.Concrete:
                     rb.velocity = reflect * Mathf.Max(speed * ConcreteBounce, 0f);
-                    StartCoroutine(Haptic(0f, .5f, .2f));
+                    StartCoroutine(Haptic(0f, 1f, .2f));
                     break;
                 case Obstacle.ObstacleType.Rubber:
-                    StartCoroutine(Haptic(0f, .5f, .2f));
+                    StartCoroutine(Haptic(0f, 1f, .2f));
                     rb.velocity = reflect * Mathf.Max(speed * RubberBounce, 0f);
                     break;
                 case Obstacle.ObstacleType.NPC:
-                    StartCoroutine(Haptic(0f, .5f, .2f));
+                    StartCoroutine(Haptic(0f, 1f, .2f));
                     break;
             }
         }
@@ -134,14 +134,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetArrowDirection(InputAction.CallbackContext context)
+    public void GamepadStrenght(InputAction.CallbackContext context)
     {
         PivotValue = context.ReadValue<Vector2>();
 
-        //if (context.ReadValue<Vector2>().y >= 0)
-            GamepadThrowStrenght = context.ReadValue<Vector2>().magnitude * StrenghMultiplier;
-        //else
-        //    GamepadThrowStrenght = context.ReadValue<Vector2>().y * StrenghMultiplier * -1;
+        GamepadThrowStrenght = context.ReadValue<Vector2>().magnitude * StrenghMultiplier;
 
         if (context.canceled)
         {
@@ -150,7 +147,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    bool dragEnabled = false;
+    public bool dragEnabled = false;
     public void MouseStrenght(InputAction.CallbackContext context)
     {
         if (dragEnabled)
@@ -165,25 +162,15 @@ public class PlayerController : MonoBehaviour
 
     public void MouseStartDrag(InputAction.CallbackContext context)
     {
-        if (!dragEnabled)
+        if (context.performed)
         {
             Cursor.lockState = CursorLockMode.Locked;
             dragEnabled = true;
         }
-        else if (MouseEnd != Vector2.zero)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            dragEnabled = false;
-            MouseThrowStrenght = 0;
-            MouseEnd = Vector2.zero;
-        }
-    }
 
-    public void MouseThrow(InputAction.CallbackContext context)
-    {
-        if (dragEnabled)
+        if (context.canceled && MouseEnd != Vector2.zero)
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             dragEnabled = false;
 
             isShooted = true;
@@ -195,6 +182,17 @@ public class PlayerController : MonoBehaviour
 
             turnBasedPlayer.ShotCount();
 
+            MouseThrowStrenght = 0;
+            MouseEnd = Vector2.zero;
+        }
+    }
+
+    public void MouseCancelThrow(InputAction.CallbackContext context)
+    {
+        if (dragEnabled)
+        {
+            dragEnabled = false;
+            
             MouseThrowStrenght = 0;
             MouseEnd = Vector2.zero;
         }

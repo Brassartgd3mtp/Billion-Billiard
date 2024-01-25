@@ -31,15 +31,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "CancelFreeCam",
-                    "type": "Button",
-                    "id": "19078495-9fbb-45dd-a5bf-730f08f41eb7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -62,17 +53,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Throw Player",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5997eb34-1b34-4762-9a7f-b0486ae2b7e4",
-                    "path": "<Gamepad>/rightStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CancelFreeCam",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -121,7 +101,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Throw Player",
+                    "name": "MouseCancelThrow",
                     "type": "Button",
                     "id": "b6fedc0f-8e3f-4790-a0ed-66c9ab48b553",
                     "expectedControlType": "Button",
@@ -180,7 +160,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Throw Player",
+                    "action": "MouseCancelThrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -43,8 +43,6 @@ public class NoClip : MonoBehaviour
     private void Update()
     {
         if (ModeOn)
-        {
             playerRb.velocity = direction * Speed;
-        }
     }
 }
