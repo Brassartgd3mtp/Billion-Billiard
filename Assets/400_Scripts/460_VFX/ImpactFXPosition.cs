@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ImpactFXPosition : MonoBehaviour
-{    
+{
     public VFXScriptableObject vFXScriptableObject;
     public float velocityThreshold = 5f;
-
+    public int countBurst = 50;
     private Rigidbody rb;
 
     private void Start()
@@ -26,22 +27,50 @@ public class ImpactFXPosition : MonoBehaviour
         Quaternion rotationFromNormal = Quaternion.LookRotation(collisionNormal);
 
         float impactVelocity = collision.relativeVelocity.magnitude;
-        Debug.Log(impactVelocity);
 
         GameObject particlePrefab;
+
         if (collision.transform.TryGetComponent(out Obstacle _obstacle))
         {
             Obstacle.ObstacleType obstacleType = _obstacle.obstacleType;
 
             particlePrefab = vFXScriptableObject.GetObstacleType(obstacleType);
         }
-        else particlePrefab = vFXScriptableObject.prefabParticleDefault; 
-        
-        Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
+        else particlePrefab = vFXScriptableObject.prefabParticleDefault;
+
 
         if (impactVelocity > velocityThreshold)
         {
-            //particlePrefab.
+
+            ParticleSystem impactVFX = particlePrefab.GetComponent<ParticleSystem>();
+
+            var burstVFX = impactVFX.emission;
+
+            burstVFX.SetBursts(
+                new ParticleSystem.Burst[]
+                {
+                new ParticleSystem.Burst(0.0f, countBurst, 1, 0.025f)
+                });
+            
+            Debug.Log(countBurst);
+
+            Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
+        }
+        else if(impactVelocity < velocityThreshold)
+        {
+            ParticleSystem impactVFX = particlePrefab.GetComponent<ParticleSystem>();
+
+            var burstVFX = impactVFX.emission;
+
+            burstVFX.SetBursts(
+                new ParticleSystem.Burst[]
+                {
+                    new ParticleSystem.Burst(0.0f, countBurst/5, 1, 0.025f)
+                });
+            
+            Debug.Log(countBurst/5);
+
+            Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
         }
 
         // Détruit la particule après un certain temps
