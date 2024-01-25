@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class PlayerController : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 posBeforeHit;
     [SerializeField] private ParticleSystem myParticleSystem;
+    [SerializeField] private VisualEffect smokePoof;
 
     private TurnBasedPlayer turnBasedPlayer;
 
@@ -63,10 +65,14 @@ public class PlayerController : MonoBehaviour
     {
         isShooted = true;
 
-        myParticleSystem.Play();
+        //myParticleSystem.Play();
         posBeforeHit = transform.position;
         Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
         rb.AddForce(-forceDirection * GamepadThrowStrenght, ForceMode.Impulse);
+
+        smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        smokePoof.SetFloat("SmokeSize", GamepadThrowStrenght / StrenghMultiplier);
+        smokePoof.Play();
 
         turnBasedPlayer.ShotCount();
     }
@@ -180,6 +186,11 @@ public class PlayerController : MonoBehaviour
             Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             rb.AddForce(-forceDirection * MouseThrowStrenght, ForceMode.Impulse);
 
+            smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            smokePoof.SetFloat("SmokeSize", MouseThrowStrenght / StrenghMultiplier);
+
+            smokePoof.Play();
+
             turnBasedPlayer.ShotCount();
 
             MouseThrowStrenght = 0;
@@ -192,7 +203,7 @@ public class PlayerController : MonoBehaviour
         if (dragEnabled)
         {
             dragEnabled = false;
-            
+
             MouseThrowStrenght = 0;
             MouseEnd = Vector2.zero;
         }
