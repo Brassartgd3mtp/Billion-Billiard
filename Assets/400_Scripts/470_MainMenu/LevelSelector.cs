@@ -10,7 +10,7 @@ public class GestionNiveaux : MonoBehaviour
 
     public void ChargerNiveau1()
     {
-        SceneManager.LoadScene(niveau1);
+         SceneManager.LoadScene(niveau1);
     }
 
     public void ChargerNiveau2()
