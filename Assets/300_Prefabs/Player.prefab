@@ -14595,7 +14595,7 @@ Transform:
   m_GameObject: {fileID: 7391655251862830221}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.44, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14714,14 +14714,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StrenghMultiplier: 40
-  ThrowStrenght: 0
+  GamepadThrowStrenght: 0
   PivotValue: {x: 0, y: 0}
+  MouseThrowStrenght: 0
+  MouseStart: {x: 0, y: 0}
+  MouseEnd: {x: 0, y: 0}
   Pivot: {fileID: 8127061478828150953}
-  isShooted: 0
   ConcreteBounce: 0.8
   RubberBounce: 0.98
+  isShooted: 0
   posBeforeHit: {x: 0, y: 0, z: 0}
   myParticleSystem: {fileID: 0}
+  dragEnabled: 0
 --- !u!114 &1242172720202642044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14906,9 +14910,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59782b71be0770544a8f36b1e5b2e382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  reShooted: 0
+  dragChecker: 0
   shotRemaining: 3
   nbrOfShots: 3
   playerController: {fileID: 0}
+  uI_ShotRemaining: {fileID: 0}
 --- !u!1 &8127061478828150953
 GameObject:
   m_ObjectHideFlags: 0

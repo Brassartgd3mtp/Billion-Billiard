@@ -36,11 +36,7 @@ public class PlayerFreeCam : MonoBehaviour
         
         if (context.canceled)
         {
-            camT.m_FollowOffset.x = 0;
-            camT.m_FollowOffset.z = -6.8f;
-
-            camTranslate.gameObject.SetActive(false);
-            camFollow.gameObject.SetActive(true);
+            StartCoroutine(CameraReturn());
         }
     }
 
@@ -52,7 +48,6 @@ public class PlayerFreeCam : MonoBehaviour
 
             if (context.canceled)
             {
-                //MoveTowards de retour avec départ la pos actuelle et arrivée la pos du centre
                 mouseFreeCamEnabled = false;
 
                 StartCoroutine(CameraReturn());
