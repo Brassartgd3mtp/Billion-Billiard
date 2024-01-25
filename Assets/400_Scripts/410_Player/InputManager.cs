@@ -21,8 +21,8 @@ public class InputManager : MonoBehaviour
             TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.Disable;
 
             actions.Gamepad.ThrowPlayer.performed += pc.GamepadThrow;
-            actions.Gamepad.GamepadStrenght.performed += pc.SetArrowDirection;
-            actions.Gamepad.GamepadStrenght.canceled += pc.SetArrowDirection;
+            actions.Gamepad.GamepadStrenght.performed += pc.GamepadStrenght;
+            actions.Gamepad.GamepadStrenght.canceled += pc.GamepadStrenght;
             #endregion
             #region Mouse/Keyboard
             TurnBasedSystem.OnEnablePlayerInput += actions.MouseKeyboard.Enable;
@@ -30,14 +30,15 @@ public class InputManager : MonoBehaviour
 
             actions.MouseKeyboard.MouseStrenght.performed += pc.MouseStrenght;
             actions.MouseKeyboard.MouseStartDrag.performed += pc.MouseStartDrag;
-            actions.MouseKeyboard.ThrowPlayer.performed += pc.MouseThrow;
+            actions.MouseKeyboard.MouseStartDrag.canceled += pc.MouseStartDrag;
+            actions.MouseKeyboard.MouseCancelThrow.performed += pc.MouseCancelThrow;
             #endregion
         }
 
         if (pfc != null)
         {
             actions.Gamepad.FreeCam.performed += pfc.FreeCam;
-            actions.Gamepad.CancelFreeCam.canceled += pfc.CancelFreeCam;
+            actions.Gamepad.FreeCam.canceled += pfc.FreeCam;
             actions.MouseKeyboard.FreeCam.performed += pfc.FreeCam;
             actions.MouseKeyboard.StartFreeCam.performed += pfc.StartFreeCam;
             actions.MouseKeyboard.StartFreeCam.canceled += pfc.StartFreeCam;
@@ -84,20 +85,21 @@ public class InputManager : MonoBehaviour
         {
             #region Gamepad
             actions.Gamepad.ThrowPlayer.performed -= pc.GamepadThrow;
-            actions.Gamepad.GamepadStrenght.performed -= pc.SetArrowDirection;
-            actions.Gamepad.GamepadStrenght.canceled -= pc.SetArrowDirection;
+            actions.Gamepad.GamepadStrenght.performed -= pc.GamepadStrenght;
+            actions.Gamepad.GamepadStrenght.canceled -= pc.GamepadStrenght;
             #endregion
             #region Mouse/Keyboard
             actions.MouseKeyboard.MouseStrenght.performed -= pc.MouseStrenght;
             actions.MouseKeyboard.MouseStartDrag.performed -= pc.MouseStartDrag;
-            actions.MouseKeyboard.ThrowPlayer.performed -= pc.MouseThrow;
+            actions.MouseKeyboard.MouseStartDrag.canceled -= pc.MouseStartDrag;
+            actions.MouseKeyboard.MouseCancelThrow.performed -= pc.MouseCancelThrow;
             #endregion
         }
 
         if (pfc != null)
         {
             actions.Gamepad.FreeCam.performed -= pfc.FreeCam;
-            actions.Gamepad.CancelFreeCam.canceled -= pfc.CancelFreeCam;
+            actions.Gamepad.FreeCam.canceled -= pfc.FreeCam;
             actions.MouseKeyboard.FreeCam.performed -= pfc.FreeCam;
             actions.MouseKeyboard.StartFreeCam.performed -= pfc.StartFreeCam;
             actions.MouseKeyboard.StartFreeCam.canceled -= pfc.StartFreeCam;
