@@ -90,6 +90,17 @@ public class PlayerController : MonoBehaviour
         Pivot.transform.localScale = strenghtToScale;
 
         lastVel = rb.velocity;
+
+        if (lastVel.magnitude > 0f)
+        {
+            Vector3 direction = rb.velocity.normalized;
+        
+            Quaternion newRot = Quaternion.LookRotation(direction);
+        
+            rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+        }
+        else
+            rb.rotation = Quaternion.Euler(0f, -angle, 0f);
     }
 
     private void OnCollisionEnter(Collision collision)
