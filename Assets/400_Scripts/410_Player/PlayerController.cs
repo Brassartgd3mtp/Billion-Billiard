@@ -2,8 +2,10 @@ using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -255,6 +257,35 @@ public class PlayerController : MonoBehaviour
 
             MouseThrowStrenght = 0;
             MouseEnd = Vector2.zero;
+        }
+    }
+
+    public GameObject panel;
+    private bool panelActive = false;
+    public GameObject PauseFirstbutton; 
+    public void PauseMenu(InputAction.CallbackContext context)
+    {
+
+        // Inverse l'état d'activation du panneau
+        panelActive = !panelActive;
+
+        //Deselectionne tout 
+        EventSystem.current.SetSelectedGameObject(null);
+        //Selectionne le first button
+        EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
+
+
+        // Active ou désactive le panneau selon l'état
+        panel.SetActive(panelActive);
+        Debug.Log("PauseMenu");
+
+        if (panelActive)
+        {
+            Time.timeScale = 0f; // Met le temps à zéro pour mettre le jeu en pause
+        }
+        else
+        {
+            Time.timeScale = 1f; // Rétablit le temps à sa valeur normale pour reprendre le jeu
         }
     }
 }

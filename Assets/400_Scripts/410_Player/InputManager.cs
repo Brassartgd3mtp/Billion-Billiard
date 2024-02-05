@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
             actions.Gamepad.ThrowPlayer.performed += pc.GamepadThrow;
             actions.Gamepad.GamepadStrenght.performed += pc.GamepadStrenght;
             actions.Gamepad.GamepadStrenght.canceled += pc.GamepadStrenght;
+            actions.Gamepad.PauseMenu.performed += pc.PauseMenu;
             #endregion
             #region Mouse/Keyboard
             TurnBasedSystem.OnEnablePlayerInput += actions.MouseKeyboard.Enable;
@@ -87,6 +88,7 @@ public class InputManager : MonoBehaviour
             actions.Gamepad.ThrowPlayer.performed -= pc.GamepadThrow;
             actions.Gamepad.GamepadStrenght.performed -= pc.GamepadStrenght;
             actions.Gamepad.GamepadStrenght.canceled -= pc.GamepadStrenght;
+            actions.Gamepad.PauseMenu.performed -= pc.PauseMenu;
             #endregion
             #region Mouse/Keyboard
             actions.MouseKeyboard.MouseStrenght.performed -= pc.MouseStrenght;
