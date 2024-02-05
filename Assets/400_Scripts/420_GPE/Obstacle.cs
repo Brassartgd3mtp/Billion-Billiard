@@ -8,7 +8,8 @@ public class Obstacle : MonoBehaviour
     {
         Concrete,
         Rubber,
-        NPC
+        NPC,
+        Props
     }
 
     public ObstacleType obstacleType = ObstacleType.Rubber;        
