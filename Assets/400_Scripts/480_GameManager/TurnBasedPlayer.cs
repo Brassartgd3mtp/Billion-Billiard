@@ -47,7 +47,7 @@ public class TurnBasedPlayer : MonoBehaviour
 
         if (speed < 0.3f && dragChecker && !reShooted)
         {
-            rb.drag = 10;
+            rb.velocity = new Vector3(0, 0, 0);
         }
         else rb.drag = 1;
 
