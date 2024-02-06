@@ -343,6 +343,34 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""MainMenu"",
+            ""id"": ""4e3b26f7-b632-45cd-be3e-0f0ff854419b"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""70762f9f-2db8-40ae-8467-3ea717f788b3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""38eb72fd-132e-4122-aa42-ef8a88d701db"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -364,6 +392,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         m_Cheat_ReloadScene = m_Cheat.FindAction("Reload Scene", throwIfNotFound: true);
         m_Cheat_NoClip = m_Cheat.FindAction("No-Clip", throwIfNotFound: true);
         m_Cheat_NoClipControl = m_Cheat.FindAction("No-Clip Control", throwIfNotFound: true);
+        // MainMenu
+        m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
+        m_MainMenu_Newaction = m_MainMenu.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -623,6 +654,52 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         }
     }
     public CheatActions @Cheat => new CheatActions(this);
+
+    // MainMenu
+    private readonly InputActionMap m_MainMenu;
+    private List<IMainMenuActions> m_MainMenuActionsCallbackInterfaces = new List<IMainMenuActions>();
+    private readonly InputAction m_MainMenu_Newaction;
+    public struct MainMenuActions
+    {
+        private @PlayerActionMap m_Wrapper;
+        public MainMenuActions(@PlayerActionMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_MainMenu_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MainMenuActions set) { return set.Get(); }
+        public void AddCallbacks(IMainMenuActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MainMenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MainMenuActionsCallbackInterfaces.Add(instance);
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+        }
+
+        private void UnregisterCallbacks(IMainMenuActions instance)
+        {
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+        }
+
+        public void RemoveCallbacks(IMainMenuActions instance)
+        {
+            if (m_Wrapper.m_MainMenuActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMainMenuActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MainMenuActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MainMenuActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MainMenuActions @MainMenu => new MainMenuActions(this);
     public interface IGamepadActions
     {
         void OnGamepadStrenght(InputAction.CallbackContext context);
@@ -642,5 +719,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         void OnReloadScene(InputAction.CallbackContext context);
         void OnNoClip(InputAction.CallbackContext context);
         void OnNoClipControl(InputAction.CallbackContext context);
+    }
+    public interface IMainMenuActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }
