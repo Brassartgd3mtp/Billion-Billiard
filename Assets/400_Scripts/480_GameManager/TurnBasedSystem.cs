@@ -55,7 +55,11 @@ public static class TurnBasedSystem
     {
         OnDisablePlayerInput?.Invoke();
     }
-
+    
+    public static void ReloadForPlayer()
+    {
+        OnEnablePlayerInput?.Invoke();
+    }
         // Check si l'ensemble des personnage dans la list de player ont joué et que leur speed est à 0
         // Si tout est ok, joue : PlayerTurnEnd
 
