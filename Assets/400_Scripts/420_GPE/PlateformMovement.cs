@@ -64,18 +64,15 @@ public class PlateformMovement : MonoBehaviour
                 else
                 {
                     int index = pointsToReach.IndexOf(NextPointToReach);
-                    if (pointsToReach[index + 1] != null)
+                    if ((index + 1) < pointsToReach.Count)
                     {
-
                         NextPointToReach = pointsToReach[index + 1];
                     }
 
                     else 
                     {
-                        Debug.Log("Avant");
                         nextPointOrder = NextPointOrder.Decroissant;
                         DefineNewPointToReach();
-                        Debug.Log("Après");
                     }
                 }
                 break;
@@ -89,7 +86,7 @@ public class PlateformMovement : MonoBehaviour
                 {
                     
                     int index = pointsToReach.IndexOf(NextPointToReach);
-                    if (pointsToReach[index - 1] != null)
+                    if ((index - 1) >= 0) 
                     {
                     NextPointToReach = pointsToReach[index - 1];
                     }
@@ -100,26 +97,7 @@ public class PlateformMovement : MonoBehaviour
                     }
                 }
                 break;
-            
-            case NextPointOrder.Aleatoire:
-                if (NextPointToReach == null)
-                {
-                    NextPointToReach = pointsToReach[Random.Range(0, pointsToReach.Count)];
-                }
-                else
-                {
-                    int index = pointsToReach.IndexOf(NextPointToReach);
-                    NextPointToReach = pointsToReach[Random.Range(0, pointsToReach.Count)];
-                    while (pointsToReach[index] == NextPointToReach)
-                    {
-                        NextPointToReach = pointsToReach[Random.Range(0, pointsToReach.Count)];
-                    }
-                }
-                break;
         }
-
-
-        // Si Dernier point atteint, meme chose dans l'autre sens
     }
 
     public void CreatePointForPlateform()
