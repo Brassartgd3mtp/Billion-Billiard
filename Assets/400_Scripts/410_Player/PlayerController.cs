@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Strenght Value")]
-    public int StrenghMultiplier = 40;
+    public int StrenghtMultiplier = 40;
 
     [Header("Gamepad Values")]
     public float GamepadThrowStrenght;
@@ -30,8 +30,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 lastVel;
 
     [Header("Bouce Multipliers")]
-    [Tooltip("La valeur de Bounce des murs en b�ton")] public float ConcreteBounce = 1;
+    [Tooltip("La valeur de Bounce des murs en beton")] public float ConcreteBounce = 1;
     [Tooltip("La valeur de Bounce des murs en caoutchouc")] public float RubberBounce = 1;
+    [Tooltip("La valeur de Bounce des murs en feutre")] public float FeltBounce = 1;
 
     [Space(20)]
     public bool isShooted;
@@ -83,9 +84,9 @@ public class PlayerController : MonoBehaviour
         Pivot.transform.rotation = Quaternion.Euler(0, angle, 0);
 
         if (Gamepad.current != null)
-            strenghtToScale.z = GamepadThrowStrenght / (StrenghMultiplier / 5);
+            strenghtToScale.z = GamepadThrowStrenght / (StrenghtMultiplier / 5);
         else
-            strenghtToScale.z = MouseThrowStrenght / (StrenghMultiplier / 5);
+            strenghtToScale.z = MouseThrowStrenght / (StrenghtMultiplier / 5);
 
         Pivot.transform.localScale = strenghtToScale;
 
@@ -116,10 +117,23 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = reflect * Mathf.Max(speed * ConcreteBounce, 0f);
                     StartCoroutine(Haptic(0f, 1f, .2f));
                     break;
+
                 case Obstacle.ObstacleType.Rubber:
                     StartCoroutine(Haptic(0f, 1f, .2f));
                     rb.velocity = reflect * Mathf.Max(speed * RubberBounce, 0f);
                     break;
+
+                case Obstacle.ObstacleType.Felt:
+                    StartCoroutine(Haptic(0f, 1f, .2f));
+                    rb.velocity = reflect * Mathf.Max(speed * FeltBounce, 0f);
+                    break;
+
+                case Obstacle.ObstacleType.Ice:
+                    StartCoroutine(Haptic(0f, 1f, .2f));
+                    StartCoroutine(IceSlide());
+                    rb.drag = 1;
+                    break;
+
                 case Obstacle.ObstacleType.NPC:
                     StartCoroutine(Haptic(0f, 1f, .2f));
                     break;
@@ -128,7 +142,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Cr�e une vibration dans la manette.
+    /// Effectue une vibration dans la manette.
     /// </summary>
     /// <param name="lowfreq_strenght"></param>
     /// <param name="highfreq_strenght"></param>
@@ -145,11 +159,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    IEnumerator IceSlide()
+    {
+        rb.drag = 0;
+
+        Vector3 posA = rb.position;
+        
+        yield return new WaitForSeconds(.1f);
+        Vector3 posB = rb.position;
+        
+        Debug.Log($"Direction = {posB - posA}");
+
+        //rb.AddForce((posB - posA).normalized * 500);
+        rb.velocity *= 2;
+    }
+
     public void GamepadStrenght(InputAction.CallbackContext context)
     {
         PivotValue = context.ReadValue<Vector2>();
 
-        GamepadThrowStrenght = context.ReadValue<Vector2>().magnitude * StrenghMultiplier;
+        GamepadThrowStrenght = context.ReadValue<Vector2>().magnitude * StrenghtMultiplier;
 
         if (context.canceled)
         {
@@ -167,7 +196,7 @@ public class PlayerController : MonoBehaviour
             Cursor.visible = false;
             MouseEnd = context.ReadValue<Vector2>();
             MouseThrowStrenght = Vector2.Distance(MouseStart, MouseEnd) / 5;
-            MouseThrowStrenght = Mathf.Clamp(MouseThrowStrenght, 0, StrenghMultiplier);
+            MouseThrowStrenght = Mathf.Clamp(MouseThrowStrenght, 0, StrenghtMultiplier);
         }
     }
 

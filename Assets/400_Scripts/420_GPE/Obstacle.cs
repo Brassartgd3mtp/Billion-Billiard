@@ -8,6 +8,8 @@ public class Obstacle : MonoBehaviour
     {
         Concrete,
         Rubber,
+        Felt, 
+        Ice,
         NPC
     }
 

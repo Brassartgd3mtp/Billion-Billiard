@@ -49,12 +49,12 @@ public class TurnBasedPlayer : MonoBehaviour
         {
             rb.velocity = new Vector3(0, 0, 0);
         }
-        else rb.drag = 1;
+        //else rb.drag = 1;
 
         if (speed == 0)
         {
             isMoving = false;
-            rb.drag = 1;
+            //rb.drag = 1;
         }
 
         if (playerController.isShooted && !hasStopped && speed == 0) 
