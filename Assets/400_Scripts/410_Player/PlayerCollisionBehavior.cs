@@ -60,13 +60,20 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-            if (other.gameObject.TryGetComponent(out MoneyStats moneyStats))
+        if (other.gameObject.TryGetComponent(out MoneyStats moneyStats))
             {
                 AddMoney(moneyStats.value);
                 uI_Stats.UpdateStats();
                 other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
                 lootAnimation.StartAnimation();
             }
+
+        if (other.gameObject.TryGetComponent(out CollectibleReloadBoost collectibleReloadBoost)) 
+        {
+            TurnBasedPlayer.Instance.RecupBoostReload();
+            other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
+            lootAnimation.StartAnimation();
+        }
         
     }
     public void AddMoney(int money)

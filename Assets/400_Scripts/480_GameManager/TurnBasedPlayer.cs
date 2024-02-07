@@ -21,8 +21,15 @@ public class TurnBasedPlayer : MonoBehaviour
     public PlayerController playerController;
     public UI_ShotRemaining uI_ShotRemaining;
 
+    public static TurnBasedPlayer Instance;
+
     public void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
         TurnBasedSystem.players.Add(this.gameObject);
 
         playerController = GetComponent<PlayerController>();
@@ -47,7 +54,7 @@ public class TurnBasedPlayer : MonoBehaviour
 
         if (speed < 0.3f && dragChecker && !reShooted)
         {
-            rb.drag = 10;
+            rb.velocity = new Vector3(0, 0, 0);
         }
         else rb.drag = 1;
 
@@ -66,6 +73,13 @@ public class TurnBasedPlayer : MonoBehaviour
         }
     }
     
+    public void RecupBoostReload()
+    {
+        shotRemaining += 1;
+        uI_ShotRemaining.UpdateUI();
+        TurnBasedSystem.ReloadForPlayer();
+    }
+
     public void ShotCount()
     {
         hasStopped = false;
@@ -80,8 +94,6 @@ public class TurnBasedPlayer : MonoBehaviour
 
     public void CheckShotRemaining()
     {
-        Debug.Log("CheckShotRemaining");
-
         if (isMoving)
         {
             hasStopped = false;
