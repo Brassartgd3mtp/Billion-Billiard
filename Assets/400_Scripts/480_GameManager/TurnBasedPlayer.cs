@@ -80,7 +80,7 @@ public class TurnBasedPlayer : MonoBehaviour
 
     public void CheckShotRemaining()
     {
-        Debug.Log("CheckShotRemaining");
+        //Debug.Log("CheckShotRemaining");
 
         if (isMoving)
         {
