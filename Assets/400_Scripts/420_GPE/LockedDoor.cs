@@ -16,7 +16,8 @@ public class LockedDoor : MonoBehaviour
         set
         {
             unlock = value;
-            myAnimator.SetBool("Unlock", unlock);
+            //myAnimator.SetBool("Unlock", unlock);
+            Destroy(gameObject);
         }
     }
 

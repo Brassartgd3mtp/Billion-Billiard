@@ -76,16 +76,13 @@ public class MeshDestroy : MonoBehaviour
         }
 
         gameObject.transform.localScale = new Vector3(0, 0, 0);
-        Collider myCollider = GetComponent<Collider>();
-        myCollider.enabled = false;
+        gameObject.layer = 9;
     }
 
     IEnumerator DetruireApresDelai(GameObject objetADetruire)
     {
-        // Attendre le délai spécifié
         yield return new WaitForSeconds(dureeDeVieDesDebris);
 
-        // Détruire l'objet
         Destroy(objetADetruire);
     }
 
