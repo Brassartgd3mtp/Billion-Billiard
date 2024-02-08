@@ -1,6 +1,8 @@
 using Cinemachine;
 using System;
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
@@ -47,6 +49,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private VisualEffect smokePoof;
 
     [SerializeField] private float speed;
+
+    public GameObject Arrow;
 
     private void Awake()
     {
@@ -98,7 +102,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    	speed = rb.velocity.magnitude;
+        speed = rb.velocity.magnitude;
         if (Gamepad.current != null)
             angle = Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg;
         else
@@ -114,14 +118,19 @@ public class PlayerController : MonoBehaviour
 
         Pivot.transform.localScale = strenghtToScale;
 
+        Renderer renderer = Arrow.GetComponent<Renderer>();
+        Material material = renderer.material;
+        material.SetFloat("_PowerPlayer", strenghtToScale.z / 5);
+
+
         lastVel = rb.velocity;
 
         if (lastVel.magnitude > 0f)
         {
             Vector3 direction = rb.velocity.normalized;
-        
+
             Quaternion newRot = Quaternion.LookRotation(direction);
-        
+
             rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
         }
         else
@@ -257,7 +266,7 @@ public class PlayerController : MonoBehaviour
 
             isShooted = true;
 
-            
+
             posBeforeHit = transform.position;
             Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             rb.AddForce(-forceDirection * MouseThrowStrenght, ForceMode.Impulse);
