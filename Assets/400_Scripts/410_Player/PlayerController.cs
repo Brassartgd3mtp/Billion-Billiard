@@ -49,13 +49,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
 
-    [SerializeField] private float speed;
+    SplineAnimate spa = null;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
 
         turnBasedPlayer = GetComponent<TurnBasedPlayer>();
+
+        spa = gameObject.GetComponent<SplineAnimate>();
     }
 
     // Start is called before the first frame update
@@ -99,7 +101,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    	speed = rb.velocity.magnitude;
         if (Gamepad.current != null)
             angle = Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg;
         else
@@ -190,35 +191,62 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    SplineAnimate spa = null;
+    float _iceSlideSpeed = 0;
     IEnumerator IceSlide(IceWall _spline)
     {
-        float _speed = float.MaxValue;
-        if (spa == null)
+        if (spa.Container == null)
         {
-            spa = gameObject.GetComponent<SplineAnimate>();
             spa.Container = _spline.Container;
 
             spa.MaxSpeed = lastVel.magnitude;
-            _speed = spa.MaxSpeed;
+            _iceSlideSpeed = spa.MaxSpeed;
 
-            spa.Play();
+            if (_spline.IsStartPoint) 
+              spa.Restart(true);
+            else
+            {
+                spa.Restart(true);
+                spa.NormalizedTime = 1f;
+            }
         }
 
-        if (spa.ElapsedTime / spa.Duration >= 1)
+        if (_spline.IsStartPoint)
         {
-            spa = null;
-            rb.AddForce(transform.rotation.eulerAngles * _speed);
-
-            Debug.Log("Out");
-            yield break;
+            if (spa.ElapsedTime / spa.Duration >= 1)
+            {
+                Vector3 rot = rb.rotation.eulerAngles;
+                spa.Container = null;
+                rb.AddForce(rot.normalized * Mathf.Pow(_iceSlideSpeed, 2), ForceMode.Force);
+                
+                Debug.Log("Out");
+                yield break;
+            }
+            else
+            {
+                Debug.Log($"{spa.ElapsedTime / spa.Duration}");
+                yield return null;
+                StartCoroutine(IceSlide(_spline));
+                yield break;
+            }
         }
         else
         {
-            Debug.Log($"{spa.ElapsedTime / spa.Duration}");
-            yield return null;
-            StartCoroutine(IceSlide(_spline));
-            yield break;
+            if ((-spa.ElapsedTime / spa.Duration) + 2 <= .05f)
+            {
+                Vector3 rot = rb.rotation.eulerAngles;
+                spa.Container = null;
+                rb.AddForce(rot.normalized * Mathf.Pow(_iceSlideSpeed, 2), ForceMode.Force);
+        
+                Debug.Log("Out");
+                yield break;
+            }
+            else
+            {
+                Debug.Log($"{(-spa.ElapsedTime / spa.Duration) + 2}");
+                yield return null;
+                StartCoroutine(IceSlide(_spline));
+                yield break;
+            }
         }
     }
 

@@ -5,5 +5,6 @@ using UnityEngine.Splines;
 
 public class IceWall : MonoBehaviour
 {
+    public bool IsStartPoint = false;
     public SplineContainer Container;
 }
