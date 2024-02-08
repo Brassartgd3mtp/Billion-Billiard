@@ -49,13 +49,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
 
-    [SerializeField] private float speed;
+    SplineAnimate spa = null;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
 
         turnBasedPlayer = GetComponent<TurnBasedPlayer>();
+
+        spa = gameObject.GetComponent<SplineAnimate>();
     }
 
     // Start is called before the first frame update
@@ -99,7 +101,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    	speed = rb.velocity.magnitude;
         if (Gamepad.current != null)
             angle = Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg;
         else
@@ -190,35 +191,57 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    SplineAnimate spa = null;
+    float _iceSlideSpeed = 0;
     IEnumerator IceSlide(IceWall _spline)
     {
-        float _speed = float.MaxValue;
-        if (spa == null)
+        if (!spa.IsPlaying)
         {
-            spa = gameObject.GetComponent<SplineAnimate>();
-            spa.Container = _spline.Container;
+            if (spa.Container == null)
+            {
+                spa.Container = _spline.Container;
 
-            spa.MaxSpeed = lastVel.magnitude;
-            _speed = spa.MaxSpeed;
+                spa.MaxSpeed = lastVel.magnitude;
+                _iceSlideSpeed = spa.MaxSpeed;
 
-            spa.Play();
-        }
+                spa.Restart(true);
+            }
 
-        if (spa.ElapsedTime / spa.Duration >= 1)
-        {
-            spa = null;
-            rb.AddForce(transform.rotation.eulerAngles * _speed);
+            if (_spline.isStartPoint)
+            {
+                if (spa.ElapsedTime / spa.Duration >= 1)
+                {
+                    spa.Container = null;
+                    rb.AddForce(Vector3.forward * Mathf.Pow(_iceSlideSpeed, 2), ForceMode.Force);
 
-            Debug.Log("Out");
-            yield break;
-        }
-        else
-        {
-            Debug.Log($"{spa.ElapsedTime / spa.Duration}");
-            yield return null;
-            StartCoroutine(IceSlide(_spline));
-            yield break;
+                    Debug.Log("Out");
+                    yield break;
+                }
+                else
+                {
+                    Debug.Log($"{spa.ElapsedTime / spa.Duration}");
+                    yield return null;
+                    StartCoroutine(IceSlide(_spline));
+                    yield break;
+                }
+            }
+            else
+            {
+                if (spa.ElapsedTime / spa.Duration <= 0)
+                {
+                    spa.Container = null;
+                    rb.AddForce(Vector3.forward * Mathf.Pow(_iceSlideSpeed, 2), ForceMode.Force);
+
+                    Debug.Log("Out");
+                    yield break;
+                }
+                else
+                {
+                    Debug.Log($"{spa.ElapsedTime / spa.Duration}");
+                    yield return null;
+                    StartCoroutine(IceSlide(_spline));
+                    yield break;
+                }
+            }
         }
     }
 
