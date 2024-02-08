@@ -1,0 +1,91 @@
+digraph G {
+node0 [shape="box" color="cyan" style="filled" label="VFXValue`1 Boolean (True)
+_vfx_enabled_a"]
+node1 [shape="box" color="cyan" style="filled" label="VFXExpressionMax Float
+Rate_a"]
+node2 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (16)"]
+node3 [shape="box" color="lightslategray" style="filled" label="VFXValue`1 Float (0)"]
+node4 [shape="box" color="cyan" style="filled" label="VFXExpressionCombine Float3
+bounds_center"]
+node5 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (-0,008661509)"]
+node6 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (1,401422)"]
+node7 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (-0,01848245)"]
+node8 [shape="box" color="cyan" style="filled" label="VFXExpressionCombine Float3
+bounds_size"]
+node9 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (3,004998)"]
+node10 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (3,960069)"]
+node11 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (3,060745)"]
+node12 [shape="box" color="cyan" style="filled" label="VFXExpressionMin Float3
+boundsPadding"]
+node13 [shape="box" color="lightgray" style="filled" label="VFXExpressionMax Float3"]
+node14 [shape="box" color="lightgray" style="filled" label="VFXExpressionCombine Float3"]
+node15 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (0,5)"]
+node16 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (0,5)"]
+node17 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (0,5)"]
+node18 [shape="box" color="lightslategray" style="filled" label="VFXValue`1 Float3 ((-170141200000000000000000000000000000000.00, -170141200000000000000000000000000000000.00, -170141200000000000000000000000000000000.00))"]
+node19 [shape="box" color="lightslategray" style="filled" label="VFXValue`1 Float3 ((170141200000000000000000000000000000000.00, 170141200000000000000000000000000000000.00, 170141200000000000000000000000000000000.00))"]
+node20 [shape="box" color="cyan" style="filled" label="VFXValue`1 Boolean (True)
+_vfx_enabled_a"]
+node21 [shape="box" color="cyan" style="filled" label="VFXExpressionCombine Float3
+A_a"]
+node22 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (-0,3333333)"]
+node23 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (0,2)"]
+node24 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (-0,3333333)"]
+node25 [shape="box" color="cyan" style="filled" label="VFXExpressionCombine Float3
+B_a"]
+node26 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (0,3333333)"]
+node27 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (1)"]
+node28 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Float (0,3333333)"]
+node29 [shape="box" color="cyan" style="filled" label="VFXValue`1 Boolean (True)
+_vfx_enabled_b"]
+node30 [shape="box" color="cyan" style="filled" label="VFXValue`1 Float (1)
+A_b"]
+node31 [shape="box" color="cyan" style="filled" label="VFXValue`1 Float (3)
+B_b"]
+node32 [shape="box" color="cyan" style="filled" label="VFXValue`1 Boolean (True)
+_vfx_enabled_a"]
+node33 [shape="box" color="cyan" style="filled" label="VFXBuiltInExpression Float (DeltaTime)
+deltaTime_a
+deltaTime_b"]
+node34 [shape="box" color="cyan" style="filled" label="VFXValue`1 Boolean (True)
+_vfx_enabled_b"]
+node35 [shape="box" color="cyan" style="filled" label="VFXValue`1 Boolean (True)
+_vfx_enabled_c"]
+node36 [shape="box" color="cyan" style="filled" label="VFXValue`1 Boolean (True)
+_vfx_enabled_a"]
+node37 [shape="box" color="cyan" style="filled" label="VFXValue`1 Boolean (True)
+_vfx_enabled_b"]
+node38 [shape="box" color="cyan" style="filled" label="VFXExpressionBakeCurve Float4
+Size_b"]
+node39 [shape="box" color="lightgray" style="filled" label="VFXValue`1 Curve (UnityEngine.AnimationCurve)"]
+node40 [shape="box" color="cyan" style="filled" label="VFXValue`1 Boolean (True)
+_vfx_enabled_c"]
+node41 [shape="box" color="cyan" style="filled" label="VFXExpressionBakeGradient Float3
+Color_c"]
+node42 [shape="box" color="lightgray" style="filled" label="VFXValue`1 ColorGradient (UnityEngine.Gradient)"]
+node43 [shape="box" color="cyan" style="filled" label="VFXTexture2DValue Texture2D (79984)
+mainTexture"]
+node2 -> node1 [headlabel="0"]
+node3 -> node1 [headlabel="1"]
+node5 -> node4 [headlabel="0"]
+node6 -> node4 [headlabel="1"]
+node7 -> node4 [headlabel="2"]
+node9 -> node8 [headlabel="0"]
+node10 -> node8 [headlabel="1"]
+node11 -> node8 [headlabel="2"]
+node13 -> node12 [headlabel="0"]
+node19 -> node12 [headlabel="1"]
+node14 -> node13 [headlabel="0"]
+node18 -> node13 [headlabel="1"]
+node15 -> node14 [headlabel="0"]
+node16 -> node14 [headlabel="1"]
+node17 -> node14 [headlabel="2"]
+node22 -> node21 [headlabel="0"]
+node23 -> node21 [headlabel="1"]
+node24 -> node21 [headlabel="2"]
+node26 -> node25 [headlabel="0"]
+node27 -> node25 [headlabel="1"]
+node28 -> node25 [headlabel="2"]
+node39 -> node38 
+node42 -> node41 
+}

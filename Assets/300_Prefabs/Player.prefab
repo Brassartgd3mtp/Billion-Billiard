@@ -285,6 +285,7 @@ MonoBehaviour:
   speedEffect: {fileID: 0}
   speedEffectDirection: {fileID: 144483280763269323}
   smokePoof: {fileID: 0}
+  speed: 0
   dragEnabled: 0
 --- !u!114 &1242172720202642044
 MonoBehaviour:
@@ -457,7 +458,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vFXScriptableObject: {fileID: 11400000, guid: e079bf4940d2ce44686f1a0496fb6718,
     type: 2}
-  velocityThreshold: 1
+  velocityThreshold: 30
+  countBurst: 50
 --- !u!114 &-6389856217533770102
 MonoBehaviour:
   m_ObjectHideFlags: 0

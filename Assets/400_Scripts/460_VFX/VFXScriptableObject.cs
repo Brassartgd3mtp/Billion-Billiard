@@ -10,6 +10,7 @@ public class VFXScriptableObject : ScriptableObject
     public GameObject prefabParticleConcrete;
     public GameObject prefabParticleRubber;
     public GameObject prefabParticleNPC;
+    public GameObject prefabParticleProps;
     public GameObject prefabParticleDefault;
 
     public GameObject GetObstacleType(ObstacleType _type)
@@ -23,6 +24,8 @@ public class VFXScriptableObject : ScriptableObject
                 return prefabParticleRubber;
             case ObstacleType.NPC:
                 return prefabParticleNPC;
+            case ObstacleType.Props:
+                return prefabParticleProps;
             default:
                 return prefabParticleDefault;
         }

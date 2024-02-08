@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2869624167156281961}
   - component: {fileID: 2645067650739039392}
   - component: {fileID: 1247512798055304382}
+  - component: {fileID: 6923813411149088663}
   m_Layer: 0
   m_Name: Locked_Door
   m_TagString: Untagged
@@ -251,7 +252,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1052
+  m_VersionIndex: 1055
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -417,3 +418,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DelayOpen: 0.5
+--- !u!114 &6923813411149088663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4931497357612795491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 0
