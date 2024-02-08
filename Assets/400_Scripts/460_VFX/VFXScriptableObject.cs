@@ -9,6 +9,8 @@ public class VFXScriptableObject : ScriptableObject
 {
     public GameObject prefabParticleConcrete;
     public GameObject prefabParticleRubber;
+    public GameObject prefabParticleFelt;
+    public GameObject prefabParticleIce;
     public GameObject prefabParticleNPC;
     public GameObject prefabParticleProps;
     public GameObject prefabParticleDefault;
@@ -18,10 +20,13 @@ public class VFXScriptableObject : ScriptableObject
         switch (_type)
         {
             case ObstacleType.Concrete:
-                //if(blablabla)
                 return prefabParticleConcrete;
             case ObstacleType.Rubber:
                 return prefabParticleRubber;
+            case ObstacleType.Felt:
+                return prefabParticleFelt;
+            case ObstacleType.Ice:
+                return prefabParticleIce;
             case ObstacleType.NPC:
                 return prefabParticleNPC;
             case ObstacleType.Props:

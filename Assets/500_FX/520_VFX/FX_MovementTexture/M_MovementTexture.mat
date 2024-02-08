@@ -29,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MeshTexture:
-        m_Texture: {fileID: 2800000, guid: 4967dfcee94bddd4ba1430cb6fa1f304, type: 3}
+        m_Texture: {fileID: 2800000, guid: dd29f35641da38647a1eeb1028211f1a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpeedTexture:
@@ -70,6 +70,7 @@ Material:
     - _Power: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Rotate: 0
     - _Smoothness: 0.5
     - _SrcBlend: 1
     - _Surface: 0
@@ -81,12 +82,14 @@ Material:
     - _BackColorSpeed: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 0.27695143, g: 0.7490195, b: 0.23671842, a: 1}
     - _BaseColorSpeed: {r: 1, g: 1, b: 1, a: 0}
-    - _FrontColor: {r: 3.9999998, g: 3.9999998, b: 3.9999998, a: 0}
+    - _FrontColor: {r: 4, g: 4, b: 4, a: 0}
     - _FrontColorSpeed: {r: 1, g: 1, b: 1, a: 0}
-    - _MeshColor: {r: 1, g: 1, b: 1, a: 0}
+    - _MeshColor: {r: 1, g: 0, b: 0, a: 0}
     - _MeshTiling: {r: 20, g: 20, b: 0, a: 0}
     - _Speed: {r: 1, g: 0, b: 0, a: 0}
     - _Tiling: {r: 10, g: 10, b: 0, a: 0}
+    - _Vector2: {r: 0, g: 81.52, b: 0, a: 0}
+    - _Vector3: {r: 447.13, g: 51.23, b: 1.76, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1996345027363548271
 MonoBehaviour:

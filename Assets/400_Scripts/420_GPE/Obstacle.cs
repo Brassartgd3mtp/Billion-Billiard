@@ -26,7 +26,10 @@ public class Obstacle : MonoBehaviour
         /// Rubber wall type, default Unity physics bouce.
         /// </summary>
         [InspectorName("PNJ")] NPC,
-        Props
+        /// <summary>
+        /// Props wall type, trigger object.
+        /// </summary>
+        [InspectorName("Props")] Props
     }
 
     public ObstacleType obstacleType = ObstacleType.Rubber;        

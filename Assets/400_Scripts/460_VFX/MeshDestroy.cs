@@ -16,7 +16,7 @@ public class MeshDestroy : MonoBehaviour
     public int CutCascades = 1;
     public float ExplodeForce = 0;
 
-    public float dureeDeVieDesDebris = 5f; // ajustez la durée en secondes selon vos besoins
+    public float dureeDeVieDesDebris = 5f;
 
     private void OnCollisionEnter(Collision collision)
     {
