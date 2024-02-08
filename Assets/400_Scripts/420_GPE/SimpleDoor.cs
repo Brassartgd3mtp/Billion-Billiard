@@ -19,7 +19,8 @@ public class SimpleDoor : MonoBehaviour
         set
         {
             open = value;
-            myAnimator.SetBool("CollisionPlayer", open);
+            //myAnimator.SetBool("CollisionPlayer", open);
+            EndAnimation();
         }
     }
 

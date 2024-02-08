@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class MeshDestroy : MonoBehaviour
 {
@@ -15,27 +16,18 @@ public class MeshDestroy : MonoBehaviour
     public int CutCascades = 1;
     public float ExplodeForce = 0;
 
+    public float dureeDeVieDesDebris = 5f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    if (Input.GetMouseButtonDown(0) && contact == false)
-    //    {
-    //        DestroyMesh();
-    //    }
-    //}
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 3)
             DestroyMesh();
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 3)
+            DestroyMesh();
+    }
     private void DestroyMesh()
     {
         var originalMesh = GetComponent<MeshFilter>().mesh;
@@ -79,9 +71,19 @@ public class MeshDestroy : MonoBehaviour
         {
             parts[i].MakeGameobject(this);
             parts[i].GameObject.GetComponent<Rigidbody>().AddForceAtPosition(parts[i].Bounds.center * ExplodeForce, transform.position);
+
+            StartCoroutine(DetruireApresDelai(parts[i].GameObject));
         }
 
-        Destroy(gameObject);
+        gameObject.transform.localScale = new Vector3(0, 0, 0);
+        gameObject.layer = 9;
+    }
+
+    IEnumerator DetruireApresDelai(GameObject objetADetruire)
+    {
+        yield return new WaitForSeconds(dureeDeVieDesDebris);
+
+        Destroy(objetADetruire);
     }
 
     private PartMesh GenerateMesh(PartMesh original, Plane plane, bool left)
@@ -299,13 +301,12 @@ public class MeshDestroy : MonoBehaviour
             var collider = GameObject.AddComponent<MeshCollider>();
             collider.convex = true;
 
-            var layer = GameObject.layer = 9;
+            GameObject.layer = 9;
 
-            var rigidbody = GameObject.AddComponent<Rigidbody>();
+            GameObject.AddComponent<Rigidbody>();
             //var meshDestroy = GameObject.AddComponent<MeshDestroy>();
             //meshDestroy.CutCascades = original.CutCascades;
             //meshDestroy.ExplodeForce = original.ExplodeForce;
-
         }
     }
 }

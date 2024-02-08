@@ -57,10 +57,10 @@ public class PlayerFreeCam : MonoBehaviour
 
     private IEnumerator CameraReturn()
     {
-        while (camT.m_FollowOffset != new Vector3(0, 18.8f, -6.8f))
+        while (camT.m_FollowOffset != new Vector3(0, 20, 0))
         {
             camT.m_FollowOffset.x = Mathf.MoveTowards(camT.m_FollowOffset.x, 0, Time.deltaTime * 300);
-            camT.m_FollowOffset.z = Mathf.MoveTowards(camT.m_FollowOffset.z, -6.8f, Time.deltaTime * 300);
+            camT.m_FollowOffset.z = Mathf.MoveTowards(camT.m_FollowOffset.z, 0, Time.deltaTime * 300);
 
             yield return new WaitForSeconds(.01f);
         }
@@ -85,7 +85,7 @@ public class PlayerFreeCam : MonoBehaviour
             camT.m_FollowOffset.z += freeCam.ReadValue<Vector2>().y * CameraSpeed * Time.deltaTime;
         }
 
-        camT.m_FollowOffset.x = Mathf.Clamp(camT.m_FollowOffset.x, -16, 16);
-        camT.m_FollowOffset.z = Mathf.Clamp(camT.m_FollowOffset.z, -18, 2.5f);
+        camT.m_FollowOffset.x = Mathf.Clamp(camT.m_FollowOffset.x, -20, 20);
+        camT.m_FollowOffset.z = Mathf.Clamp(camT.m_FollowOffset.z, -11, 11f);
     }
 }
