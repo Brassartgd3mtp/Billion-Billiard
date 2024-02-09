@@ -12,7 +12,7 @@ public class PlateformMovement : MonoBehaviour
 
     [SerializeField] private GameObject movePoint;
 
-    [SerializeField] private List<GameObject> pointsToReach = new List<GameObject>();
+    [SerializeField] private List<GameObject> pointsToReach;
     private Vector3 actualPosition;
     [SerializeField] private GameObject NextPointToReach;
 

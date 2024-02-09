@@ -8,7 +8,7 @@ public class PlateformMovementInspector : Editor
 {
     public override void OnInspectorGUI()
     {
-        DrawDefaultInspector();
+        base.OnInspectorGUI();
 
         PlateformMovement plateformMovement = (PlateformMovement)target;
         if (GUILayout.Button("Create A Point"))
