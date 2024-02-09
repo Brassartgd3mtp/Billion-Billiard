@@ -5,16 +5,13 @@ public class InputManager : MonoBehaviour
 {
     PlayerActionMap actions;
 
-    [SerializeField] private PlayerController playerController;
-    [SerializeField] private PlayerFreeCam playerFreeCam;
-    [SerializeField] private ReloadScene reloadScene;
-    [SerializeField] private NoClip noClip;
+    private NoClip noClip;
     // Start is called before the first frame update
     void Awake()
     {
         actions = new PlayerActionMap();
 
-        if (playerController != null)
+        if (gameObject.TryGetComponent(out PlayerController playerController))
         {
             #region Gamepad
             TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.Enable;
@@ -35,7 +32,7 @@ public class InputManager : MonoBehaviour
             #endregion
         }
 
-        if (playerFreeCam != null)
+        if (gameObject.TryGetComponent(out PlayerFreeCam playerFreeCam))
         {
             actions.Gamepad.FreeCam.performed += playerFreeCam.FreeCam;
             actions.Gamepad.FreeCam.canceled += playerFreeCam.FreeCam;
@@ -44,20 +41,22 @@ public class InputManager : MonoBehaviour
             actions.MouseKeyboard.StartFreeCam.canceled += playerFreeCam.StartFreeCam;
         }
 
-        if (reloadScene != null)
+        if (gameObject.TryGetComponent(out ReloadScene reloadScene))
         {
             actions.Cheat.ReloadScene.performed += reloadScene.Reload;
         }
 
-        if (noClip != null)
+        if (gameObject.TryGetComponent(out NoClip noClip))
         {
+            this.noClip = noClip;
             actions.Cheat.NoClip.performed += NoClipMode;
             actions.Cheat.NoClipControl.performed += noClip.MovePlayer;
             actions.Cheat.NoClipControl.canceled += noClip.MovePlayer;
         }
 
         actions.Gamepad.Enable();
-        if (Gamepad.current == null) actions.MouseKeyboard.Enable();
+        if (Gamepad.current == null)
+            actions.MouseKeyboard.Enable();
         actions.Cheat.Enable();
     }
 
@@ -81,7 +80,7 @@ public class InputManager : MonoBehaviour
 
     private void OnDisable()
     {
-        if (playerController != null)
+        if (gameObject.TryGetComponent(out PlayerController playerController))
         {
             #region Gamepad
             actions.Gamepad.ThrowPlayer.performed -= playerController.GamepadThrow;
@@ -96,7 +95,7 @@ public class InputManager : MonoBehaviour
             #endregion
         }
 
-        if (playerFreeCam != null)
+        if (gameObject.TryGetComponent(out PlayerFreeCam playerFreeCam))
         {
             actions.Gamepad.FreeCam.performed -= playerFreeCam.FreeCam;
             actions.Gamepad.FreeCam.canceled -= playerFreeCam.FreeCam;
@@ -105,12 +104,12 @@ public class InputManager : MonoBehaviour
             actions.MouseKeyboard.StartFreeCam.canceled -= playerFreeCam.StartFreeCam;
         }
 
-        if (reloadScene != null)
+        if (gameObject.TryGetComponent(out ReloadScene reloadScene))
         {
             actions.Cheat.ReloadScene.performed -= reloadScene.Reload;
         }
 
-        if (noClip != null)
+        if (gameObject.TryGetComponent(out NoClip noClip))
         {
             actions.Cheat.NoClip.performed -= NoClipMode;
             actions.Cheat.NoClipControl.performed -= noClip.MovePlayer;
