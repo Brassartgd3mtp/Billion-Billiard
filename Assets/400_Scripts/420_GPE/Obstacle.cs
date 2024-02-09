@@ -32,5 +32,5 @@ public class Obstacle : MonoBehaviour
         [InspectorName("Props")] Props
     }
 
-    public ObstacleType obstacleType = ObstacleType.Rubber;        
+    public ObstacleType obstacleType = ObstacleType.Rubber;
 }

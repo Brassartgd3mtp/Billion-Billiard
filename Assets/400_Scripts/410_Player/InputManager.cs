@@ -6,16 +6,16 @@ public class InputManager : MonoBehaviour
 {
     PlayerActionMap actions;
 
-    [SerializeField] private PlayerController pc;
-    [SerializeField] private PlayerFreeCam pfc;
-    [SerializeField] private ReloadScene rs;
-    [SerializeField] private NoClip nc;
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private PlayerFreeCam playerFreeCam;
+    [SerializeField] private ReloadScene reloadScene;
+    [SerializeField] private NoClip noClip;
     // Start is called before the first frame update
     void Awake()
     {
         actions = new PlayerActionMap();
 
-        if (pc != null)
+        if (playerController != null)
         {
             #region Gamepad
             TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.Enable;
@@ -30,32 +30,32 @@ public class InputManager : MonoBehaviour
             TurnBasedSystem.OnEnablePlayerInput += actions.MouseKeyboard.Enable;
             TurnBasedSystem.OnDisablePlayerInput += actions.MouseKeyboard.Disable;
 
-            actions.MouseKeyboard.MouseStrenght.performed += pc.MouseStrenght;
-            actions.MouseKeyboard.MouseStartDrag.performed += pc.MouseStartDrag;
-            actions.MouseKeyboard.MouseStartDrag.canceled += pc.MouseStartDrag;
-            actions.MouseKeyboard.MouseCancelThrow.performed += pc.MouseCancelThrow;
+            actions.MouseKeyboard.MouseStrenght.performed += playerController.MouseStrenght;
+            actions.MouseKeyboard.MouseStartDrag.performed += playerController.MouseStartDrag;
+            actions.MouseKeyboard.MouseStartDrag.canceled += playerController.MouseStartDrag;
+            actions.MouseKeyboard.MouseCancelThrow.performed += playerController.MouseCancelThrow;
             #endregion
         }
 
-        if (pfc != null)
+        if (playerFreeCam != null)
         {
-            actions.Gamepad.FreeCam.performed += pfc.FreeCam;
-            actions.Gamepad.FreeCam.canceled += pfc.FreeCam;
-            actions.MouseKeyboard.FreeCam.performed += pfc.FreeCam;
-            actions.MouseKeyboard.StartFreeCam.performed += pfc.StartFreeCam;
-            actions.MouseKeyboard.StartFreeCam.canceled += pfc.StartFreeCam;
+            actions.Gamepad.FreeCam.performed += playerFreeCam.FreeCam;
+            actions.Gamepad.FreeCam.canceled += playerFreeCam.FreeCam;
+            actions.MouseKeyboard.FreeCam.performed += playerFreeCam.FreeCam;
+            actions.MouseKeyboard.StartFreeCam.performed += playerFreeCam.StartFreeCam;
+            actions.MouseKeyboard.StartFreeCam.canceled += playerFreeCam.StartFreeCam;
         }
 
-        if (rs != null)
+        if (reloadScene != null)
         {
-            actions.Cheat.ReloadScene.performed += rs.Reload;
+            actions.Cheat.ReloadScene.performed += reloadScene.Reload;
         }
 
-        if (nc != null)
+        if (noClip != null)
         {
             actions.Cheat.NoClip.performed += NoClipMode;
-            actions.Cheat.NoClipControl.performed += nc.MovePlayer;
-            actions.Cheat.NoClipControl.canceled += nc.MovePlayer;
+            actions.Cheat.NoClipControl.performed += noClip.MovePlayer;
+            actions.Cheat.NoClipControl.canceled += noClip.MovePlayer;
         }
 
         actions.Gamepad.Enable();
@@ -65,19 +65,19 @@ public class InputManager : MonoBehaviour
 
     private void NoClipMode(InputAction.CallbackContext context)
     {
-        if (!nc.ModeOn)
+        if (!noClip.ModeOn)
         {
-            nc.ModeOn = true;
+            noClip.ModeOn = true;
             actions.Gamepad.Disable();
             actions.MouseKeyboard.Disable();
-            nc.PlayerCollider.enabled = false;
+            noClip.PlayerCollider.enabled = false;
         }
         else
         {
-            nc.ModeOn = false;
+            noClip.ModeOn = false;
             actions.Gamepad.Enable();
             actions.MouseKeyboard.Enable();
-            nc.PlayerCollider.enabled = true;
+            noClip.PlayerCollider.enabled = true;
         }
     }
 
@@ -86,10 +86,10 @@ public class InputManager : MonoBehaviour
     public GameObject PauseFirstbutton;
     public void PauseMenu(InputAction.CallbackContext context)
     {
-        // Inverse l'état d'activation du panneau
+        // Inverse l'ï¿½tat d'activation du panneau
         panelActive = !panelActive;
 
-        // Active ou désactive le panneau selon l'état
+        // Active ou dï¿½sactive le panneau selon l'ï¿½tat
         panel.SetActive(panelActive);
 
         if (panelActive)
@@ -102,20 +102,20 @@ public class InputManager : MonoBehaviour
         if (panelActive)
         {
             //actions.Gamepad.Disable();
-            Time.timeScale = 0f; // Met le temps à zéro pour mettre le jeu en pause
+            Time.timeScale = 0f; // Met le temps ï¿½ zï¿½ro pour mettre le jeu en pause
             Time.fixedDeltaTime = 0f;
         }
         else
         {
             //actions.Gamepad.Enable();
-            Time.timeScale = 1f; // Rétablit le temps à sa valeur normale pour reprendre le jeu
+            Time.timeScale = 1f; // Rï¿½tablit le temps ï¿½ sa valeur normale pour reprendre le jeu
             Time.fixedDeltaTime = 1f;
         }
     }
 
     private void OnDisable()
     {
-        if (pc != null)
+        if (playerController != null)
         {
             #region Gamepad
             actions.Gamepad.ThrowPlayer.performed -= pc.GamepadThrow;
@@ -124,32 +124,32 @@ public class InputManager : MonoBehaviour
             actions.Gamepad.PauseMenu.performed -= PauseMenu;
             #endregion
             #region Mouse/Keyboard
-            actions.MouseKeyboard.MouseStrenght.performed -= pc.MouseStrenght;
-            actions.MouseKeyboard.MouseStartDrag.performed -= pc.MouseStartDrag;
-            actions.MouseKeyboard.MouseStartDrag.canceled -= pc.MouseStartDrag;
-            actions.MouseKeyboard.MouseCancelThrow.performed -= pc.MouseCancelThrow;
+            actions.MouseKeyboard.MouseStrenght.performed -= playerController.MouseStrenght;
+            actions.MouseKeyboard.MouseStartDrag.performed -= playerController.MouseStartDrag;
+            actions.MouseKeyboard.MouseStartDrag.canceled -= playerController.MouseStartDrag;
+            actions.MouseKeyboard.MouseCancelThrow.performed -= playerController.MouseCancelThrow;
             #endregion
         }
 
-        if (pfc != null)
+        if (playerFreeCam != null)
         {
-            actions.Gamepad.FreeCam.performed -= pfc.FreeCam;
-            actions.Gamepad.FreeCam.canceled -= pfc.FreeCam;
-            actions.MouseKeyboard.FreeCam.performed -= pfc.FreeCam;
-            actions.MouseKeyboard.StartFreeCam.performed -= pfc.StartFreeCam;
-            actions.MouseKeyboard.StartFreeCam.canceled -= pfc.StartFreeCam;
+            actions.Gamepad.FreeCam.performed -= playerFreeCam.FreeCam;
+            actions.Gamepad.FreeCam.canceled -= playerFreeCam.FreeCam;
+            actions.MouseKeyboard.FreeCam.performed -= playerFreeCam.FreeCam;
+            actions.MouseKeyboard.StartFreeCam.performed -= playerFreeCam.StartFreeCam;
+            actions.MouseKeyboard.StartFreeCam.canceled -= playerFreeCam.StartFreeCam;
         }
 
-        if (rs != null)
+        if (reloadScene != null)
         {
-            actions.Cheat.ReloadScene.performed -= rs.Reload;
+            actions.Cheat.ReloadScene.performed -= reloadScene.Reload;
         }
 
-        if (nc != null)
+        if (noClip != null)
         {
             actions.Cheat.NoClip.performed -= NoClipMode;
-            actions.Cheat.NoClipControl.performed -= nc.MovePlayer;
-            actions.Cheat.NoClipControl.canceled -= nc.MovePlayer;
+            actions.Cheat.NoClipControl.performed -= noClip.MovePlayer;
+            actions.Cheat.NoClipControl.canceled -= noClip.MovePlayer;
         }
     }
 }
