@@ -9,8 +9,7 @@ public class PanelManager : MonoBehaviour
 {
     public SO_Level SO_Level;
 
-    [Header("UI In Scene")]
-    public Image imageUnlocked, imageLocked;
+    public Image imageUnlocked, imageLocked, padLock;
     public TMPro.TextMeshProUGUI description, title;
 
     public void Start()
@@ -23,12 +22,14 @@ public class PanelManager : MonoBehaviour
         {
             title.enabled = false;
             description.enabled = false;
+            padLock.enabled = true;
             imageUnlocked.enabled = false;
             imageLocked.enabled = true;
         } else
         {
             title.enabled = true;
             description.enabled = true;
+            padLock.enabled = false;
             imageUnlocked.enabled = true;
             imageLocked.enabled = false;
         }

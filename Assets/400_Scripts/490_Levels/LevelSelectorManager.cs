@@ -33,6 +33,7 @@ public class LevelSelectorManager : MonoBehaviour
     {
         PanelIndex = 0;
         ActualPanel = Panels[PanelIndex];
+        CheckIfNextPanelIsLocked();
     }
 
     public void NextPanel()
@@ -45,11 +46,14 @@ public class LevelSelectorManager : MonoBehaviour
     }
     public void PrevPanel() 
     {
+        if(PanelIndex > 0) 
+        {
         PanelIndex--;
         ActualPanel = Panels[PanelIndex];
         LeftArrow.enabled = false;
         RightArrow.enabled = false;
         StartCoroutine (MovePanel(1));
+        }
     }
     public IEnumerator MovePanel(int xValue)
     {
@@ -87,5 +91,6 @@ public class LevelSelectorManager : MonoBehaviour
             RightArrow.enabled = false;
         }
     }
+
 
 }
