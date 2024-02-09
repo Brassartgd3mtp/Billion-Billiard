@@ -28,5 +28,5 @@ public class Obstacle : MonoBehaviour
         [InspectorName("PNJ")] NPC
     }
 
-    public ObstacleType obstacleType = ObstacleType.Rubber;        
+    public ObstacleType obstacleType = ObstacleType.Rubber;
 }

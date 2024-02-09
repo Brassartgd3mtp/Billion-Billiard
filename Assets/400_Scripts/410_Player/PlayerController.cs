@@ -1,6 +1,7 @@
 using Cinemachine;
 using System;
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -161,18 +162,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.TryGetComponent(out Obstacle obstacle))
-        {
-            if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
-            {
-                StartCoroutine(Haptic(0f, 1f, .2f));
-                StartCoroutine(IceSlide(other.gameObject.GetComponent<IceWall>()));
-            }
-        }
-    }
-
     /// <summary>
     /// Effectue une vibration dans la manette.
     /// </summary>
@@ -187,66 +176,6 @@ public class PlayerController : MonoBehaviour
             Gamepad.current.SetMotorSpeeds(lowfreq_strenght, highfreq_strenght);
             yield return new WaitForSeconds(timer);
             InputSystem.ResetHaptics();
-            yield break;
-        }
-    }
-
-    float _iceSlideSpeed = 0;
-    IEnumerator IceSlide(IceWall _spline)
-    {
-        if (spa.Container == null)
-        {
-            spa.Container = _spline.Container;
-
-            spa.MaxSpeed = lastVel.magnitude;
-            _iceSlideSpeed = spa.MaxSpeed;
-
-            if (_spline.IsStartPoint) 
-              spa.Restart(true);
-            else
-            {
-                spa.Restart(true);
-                spa.NormalizedTime = 1f;
-            }
-        }
-
-        if (_spline.IsStartPoint)
-        {
-            if (spa.ElapsedTime / spa.Duration >= 1)
-            {
-                Vector3 rot = rb.rotation.eulerAngles;
-                spa.Container = null;
-                rb.AddForce(rot.normalized * Mathf.Pow(_iceSlideSpeed, 2), ForceMode.Force);
-                
-                Debug.Log("Out");
-                yield break;
-            }
-            else
-            {
-                Debug.Log($"{spa.ElapsedTime / spa.Duration}");
-                yield return null;
-                StartCoroutine(IceSlide(_spline));
-                yield break;
-            }
-        }
-        else
-        {
-            if ((-spa.ElapsedTime / spa.Duration) + 2 <= .05f)
-            {
-                Vector3 rot = rb.rotation.eulerAngles;
-                spa.Container = null;
-                rb.AddForce(rot.normalized * Mathf.Pow(_iceSlideSpeed, 2), ForceMode.Force);
-        
-                Debug.Log("Out");
-                yield break;
-            }
-            else
-            {
-                Debug.Log($"{(-spa.ElapsedTime / spa.Duration) + 2}");
-                yield return null;
-                StartCoroutine(IceSlide(_spline));
-                yield break;
-            }
         }
     }
 
