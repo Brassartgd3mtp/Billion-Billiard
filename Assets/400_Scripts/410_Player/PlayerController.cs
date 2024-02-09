@@ -5,7 +5,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Splines;
 using UnityEngine.U2D;
 using UnityEngine.VFX;
 
@@ -50,15 +49,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
 
-    SplineAnimate spa = null;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
 
         turnBasedPlayer = GetComponent<TurnBasedPlayer>();
-
-        spa = gameObject.GetComponent<SplineAnimate>();
     }
 
     // Start is called before the first frame update
