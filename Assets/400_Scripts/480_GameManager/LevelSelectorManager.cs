@@ -3,15 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelSelectorManager : MonoBehaviour
 {
     [SerializeField] private Button LeftArrow, RightArrow;
     [SerializeField] private Button BTN_Play;
-    [SerializeField] private List<GameObject> Panels;
 
+    [SerializeField] private List<GameObject> Panels;
     [SerializeField] private List<SO_Level> SO_Levels;
+    [SerializeField] private GameObject ActualPanel;
+    private int PanelIndex;
 
     [SerializeField] private CinemachineVirtualCamera VirtualCamera;
 
@@ -26,23 +29,32 @@ public class LevelSelectorManager : MonoBehaviour
         scrollRect = GetComponent<ScrollRect>();
     }
 
+    public void Start()
+    {
+        PanelIndex = 0;
+        ActualPanel = Panels[PanelIndex];
+    }
+
     public void NextPanel()
-    {    
+    {
+        PanelIndex++;
+        ActualPanel = Panels[PanelIndex];
         LeftArrow.enabled = false;
         RightArrow.enabled = false;
         StartCoroutine(MovePanel(-1));
-
-        //if(scrollRect !=  null) 
-        //{
-        //    if (scrollRect.horizontalNormalizedPosition >= 0)
-        //    {
-        //        scrollRect.horizontalNormalizedPosition += scrollingSpeed;
-        //    }
-        //}
     }
-
+    public void PrevPanel() 
+    {
+        PanelIndex--;
+        ActualPanel = Panels[PanelIndex];
+        LeftArrow.enabled = false;
+        RightArrow.enabled = false;
+        StartCoroutine (MovePanel(1));
+    }
     public IEnumerator MovePanel(int xValue)
     {
+        ScrollRect scrollRect = GetComponent<ScrollRect>();
+
         RectTransform rectTransform = Content.GetComponent<RectTransform>();
         Vector3 actualPos = rectTransform.transform.localPosition;
         Vector3 targetPos = actualPos + new Vector3((xValue * 800),0,0);
@@ -54,13 +66,26 @@ public class LevelSelectorManager : MonoBehaviour
         }
         LeftArrow.enabled = true;
         RightArrow.enabled = true;
+
+        CheckIfNextPanelIsLocked() ;
         yield break;
     }
 
-    public void PrevPanel() 
+    public void PlayButton()
     {
-        LeftArrow.enabled = false;
-        RightArrow.enabled = false;
-        StartCoroutine (MovePanel(1));
+        ActualPanel.TryGetComponent(out LevelLoader levelLoader);
+        SceneManager.LoadScene(levelLoader.levelID);
     }
+
+    public void CheckIfNextPanelIsLocked()
+    {
+        Panels[PanelIndex + 1].TryGetComponent(out PanelManager panelManager);
+
+        if (panelManager.SO_Level.LevelData.isLocked)
+        {
+            Debug.Log("Locked");
+            RightArrow.enabled = false;
+        }
+    }
+
 }

@@ -10,13 +10,27 @@ public class PanelManager : MonoBehaviour
     public SO_Level SO_Level;
 
     [Header("UI In Scene")]
-    public Image image;
-    public TMPro.TextMeshProUGUI description, name;
+    public Image imageUnlocked, imageLocked;
+    public TMPro.TextMeshProUGUI description, title;
 
     public void Start()
     {
-        image.sprite = SO_Level.Image;
+        imageUnlocked.sprite = SO_Level.Image;
         description.text = SO_Level.LevelDescription;
-        name.text = SO_Level.LevelName;
+        title.text = SO_Level.LevelName;
+
+        if (SO_Level.LevelData.isLocked)
+        {
+            title.enabled = false;
+            description.enabled = false;
+            imageUnlocked.enabled = false;
+            imageLocked.enabled = true;
+        } else
+        {
+            title.enabled = true;
+            description.enabled = true;
+            imageUnlocked.enabled = true;
+            imageLocked.enabled = false;
+        }
     }
 }
