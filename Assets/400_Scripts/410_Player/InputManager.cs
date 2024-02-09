@@ -20,7 +20,7 @@ public class InputManager : MonoBehaviour
             TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.Enable;
             TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.Disable;
 
-            actions.Gamepad.ThrowPlayer.performed += playerController.GamepadThrow;
+            actions.Gamepad.ThrowPlayer.performed += playerController.Throw;
             actions.Gamepad.GamepadStrenght.performed += playerController.GamepadStrenght;
             actions.Gamepad.GamepadStrenght.canceled += playerController.GamepadStrenght;
             #endregion
@@ -30,7 +30,7 @@ public class InputManager : MonoBehaviour
 
             actions.MouseKeyboard.MouseStrenght.performed += playerController.MouseStrenght;
             actions.MouseKeyboard.MouseStartDrag.performed += playerController.MouseStartDrag;
-            actions.MouseKeyboard.MouseStartDrag.canceled += playerController.MouseStartDrag;
+            actions.MouseKeyboard.MouseStartDrag.canceled += playerController.MouseThrow;
             actions.MouseKeyboard.MouseCancelThrow.performed += playerController.MouseCancelThrow;
             #endregion
         }
@@ -57,7 +57,8 @@ public class InputManager : MonoBehaviour
         }
 
         actions.Gamepad.Enable();
-        if (Gamepad.current == null) actions.MouseKeyboard.Enable();
+        if (Gamepad.current == null)
+            actions.MouseKeyboard.Enable();
         actions.Cheat.Enable();
     }
 
@@ -84,7 +85,7 @@ public class InputManager : MonoBehaviour
         if (playerController != null)
         {
             #region Gamepad
-            actions.Gamepad.ThrowPlayer.performed -= playerController.GamepadThrow;
+            actions.Gamepad.ThrowPlayer.performed -= playerController.Throw;
             actions.Gamepad.GamepadStrenght.performed -= playerController.GamepadStrenght;
             actions.Gamepad.GamepadStrenght.canceled -= playerController.GamepadStrenght;
             #endregion
