@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 [Serializable]
 public class LevelData
 {
-    public bool isLocked; 
+    public bool isLocked;
+    public bool achievement_1, achievement_2, achievement_3;
 
 }
