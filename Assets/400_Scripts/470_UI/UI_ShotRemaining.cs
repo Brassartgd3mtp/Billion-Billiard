@@ -5,18 +5,11 @@ using UnityEngine;
 
 public class UI_ShotRemaining : MonoBehaviour
 {
-    public int UIShotRemaining;
-    public TurnBasedPlayer turnBasedPlayer;
     public TextMeshProUGUI TEXT_ShotRemainingCount;
 
-    public void Start()
-    {
-        UpdateUI();
-    }
 
-    public void UpdateUI()
+    public void UpdateUI(int _shotsRemaining)
     {
-        UIShotRemaining = turnBasedPlayer.shotRemaining;
-        TEXT_ShotRemainingCount.text = $"Shot Remaining : {UIShotRemaining}";
+        TEXT_ShotRemainingCount.text = $"Shot Remaining : {_shotsRemaining}";
     }
 }
