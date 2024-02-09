@@ -9,7 +9,7 @@ public class Obstacle : MonoBehaviour
         /// <summary>
         /// Concrete wall type, default bounce value : .8
         /// </summary>
-        [InspectorName("Béton")] Concrete,
+        [InspectorName("Bï¿½ton")] Concrete,
         /// <summary>
         /// Rubber wall type, default bounce value : .98
         /// </summary>
@@ -25,7 +25,11 @@ public class Obstacle : MonoBehaviour
         /// <summary>
         /// Rubber wall type, default Unity physics bouce.
         /// </summary>
-        [InspectorName("PNJ")] NPC
+        [InspectorName("PNJ")] NPC,
+        /// <summary>
+        /// Props wall type, trigger object.
+        /// </summary>
+        [InspectorName("Props")] Props
     }
 
     public ObstacleType obstacleType = ObstacleType.Rubber;

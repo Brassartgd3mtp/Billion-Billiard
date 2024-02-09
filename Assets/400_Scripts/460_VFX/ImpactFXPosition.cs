@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class ImpactFXPosition : MonoBehaviour
 {
@@ -51,12 +52,12 @@ public class ImpactFXPosition : MonoBehaviour
                 {
                 new ParticleSystem.Burst(0.0f, countBurst, 1, 0.025f)
                 });
-            
-            //Debug.Log(countBurst);
+
+            Debug.Log(countBurst);
 
             Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
         }
-        else if(impactVelocity < velocityThreshold)
+        else if (impactVelocity < velocityThreshold)
         {
             ParticleSystem impactVFX = particlePrefab.GetComponent<ParticleSystem>();
 
@@ -67,13 +68,39 @@ public class ImpactFXPosition : MonoBehaviour
                 {
                     new ParticleSystem.Burst(0.0f, countBurst/5, 1, 0.025f)
                 });
-            
-            //Debug.Log(countBurst/5);
+
+            Debug.Log(countBurst / 5);
 
             Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
         }
 
         // Détruit la particule après un certain temps
         //Destroy(particleInstance, particleInstance.GetComponent<ParticleSystem>().main.duration);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        rb = other.attachedRigidbody;
+        if (rb == null)
+            return;
+
+        Vector3 colliderPosition = other.transform.position;
+
+        Vector3 colliderNormal = other.transform.up;
+
+        Quaternion rotationFromNormal = Quaternion.LookRotation(colliderNormal);
+
+        GameObject particlePrefab;
+
+        if (other.transform.TryGetComponent(out Obstacle _obstacle))
+        {
+            Obstacle.ObstacleType obstacleType = _obstacle.obstacleType;
+
+            particlePrefab = vFXScriptableObject.GetObstacleType(obstacleType);
+        }
+        else
+            particlePrefab = vFXScriptableObject.prefabParticleDefault;
+
+        Instantiate(particlePrefab, colliderPosition, rotationFromNormal);
     }
 }
