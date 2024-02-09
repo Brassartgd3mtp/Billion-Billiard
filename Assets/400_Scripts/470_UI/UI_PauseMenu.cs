@@ -24,18 +24,25 @@ public class ButtonActions : MonoBehaviour
         // Ferme le panneau
         if (panel != null)
             panel.SetActive(false);
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 1f;
     }
 
     public void OnOptionButtonClick()
     {
         // Ouvre le panneau d'options
         if (optionPanel != null)
-
+        {
             optionPanel.SetActive(true);
+            Debug.Log(optionPanel.activeSelf);
+        }
 
-        EventSystem.current.SetSelectedGameObject(null);
-        //Selectionne le first button
-        EventSystem.current.SetSelectedGameObject(OptionFirstbutton);
+        if (optionPanel.activeSelf)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            //Selectionne le first button
+            EventSystem.current.SetSelectedGameObject(OptionFirstbutton);
+        }
     }
 
     public void OnMainMenuButtonClick()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
@@ -23,7 +24,7 @@ public class InputManager : MonoBehaviour
             actions.Gamepad.ThrowPlayer.performed += pc.GamepadThrow;
             actions.Gamepad.GamepadStrenght.performed += pc.GamepadStrenght;
             actions.Gamepad.GamepadStrenght.canceled += pc.GamepadStrenght;
-            actions.Gamepad.PauseMenu.performed += pc.PauseMenu;
+            actions.Gamepad.PauseMenu.performed += PauseMenu;
             #endregion
             #region Mouse/Keyboard
             TurnBasedSystem.OnEnablePlayerInput += actions.MouseKeyboard.Enable;
@@ -80,6 +81,38 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public GameObject panel;
+    private bool panelActive = false;
+    public GameObject PauseFirstbutton;
+    public void PauseMenu(InputAction.CallbackContext context)
+    {
+        // Inverse l'état d'activation du panneau
+        panelActive = !panelActive;
+
+        // Active ou désactive le panneau selon l'état
+        panel.SetActive(panelActive);
+
+        if (panelActive)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            //Selectionne le first button
+            EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
+        }
+
+        if (panelActive)
+        {
+            //actions.Gamepad.Disable();
+            Time.timeScale = 0f; // Met le temps à zéro pour mettre le jeu en pause
+            Time.fixedDeltaTime = 0f;
+        }
+        else
+        {
+            //actions.Gamepad.Enable();
+            Time.timeScale = 1f; // Rétablit le temps à sa valeur normale pour reprendre le jeu
+            Time.fixedDeltaTime = 1f;
+        }
+    }
+
     private void OnDisable()
     {
         if (pc != null)
@@ -88,7 +121,7 @@ public class InputManager : MonoBehaviour
             actions.Gamepad.ThrowPlayer.performed -= pc.GamepadThrow;
             actions.Gamepad.GamepadStrenght.performed -= pc.GamepadStrenght;
             actions.Gamepad.GamepadStrenght.canceled -= pc.GamepadStrenght;
-            actions.Gamepad.PauseMenu.performed -= pc.PauseMenu;
+            actions.Gamepad.PauseMenu.performed -= PauseMenu;
             #endregion
             #region Mouse/Keyboard
             actions.MouseKeyboard.MouseStrenght.performed -= pc.MouseStrenght;
