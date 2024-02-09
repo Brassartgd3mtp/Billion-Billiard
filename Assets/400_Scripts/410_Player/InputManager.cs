@@ -21,9 +21,9 @@ public class InputManager : MonoBehaviour
             TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.Enable;
             TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.Disable;
 
-            actions.Gamepad.ThrowPlayer.performed += pc.GamepadThrow;
-            actions.Gamepad.GamepadStrenght.performed += pc.GamepadStrenght;
-            actions.Gamepad.GamepadStrenght.canceled += pc.GamepadStrenght;
+            actions.Gamepad.ThrowPlayer.performed += playerController.GamepadThrow;
+            actions.Gamepad.GamepadStrenght.performed += playerController.GamepadStrenght;
+            actions.Gamepad.GamepadStrenght.canceled += playerController.GamepadStrenght;
             actions.Gamepad.PauseMenu.performed += PauseMenu;
             #endregion
             #region Mouse/Keyboard
@@ -118,9 +118,9 @@ public class InputManager : MonoBehaviour
         if (playerController != null)
         {
             #region Gamepad
-            actions.Gamepad.ThrowPlayer.performed -= pc.GamepadThrow;
-            actions.Gamepad.GamepadStrenght.performed -= pc.GamepadStrenght;
-            actions.Gamepad.GamepadStrenght.canceled -= pc.GamepadStrenght;
+            actions.Gamepad.ThrowPlayer.performed -= playerController.GamepadThrow;
+            actions.Gamepad.GamepadStrenght.performed -= playerController.GamepadStrenght;
+            actions.Gamepad.GamepadStrenght.canceled -= playerController.GamepadStrenght;
             actions.Gamepad.PauseMenu.performed -= PauseMenu;
             #endregion
             #region Mouse/Keyboard
