@@ -23,39 +23,9 @@ public class ConvoyerBelt : MonoBehaviour
         //Intégrer l'animation du convoyer en prenant compte de la speed
     }
 
-    float vel;
-    Vector3 objectEnterPos;
-    Vector3 objectExitPos;
-    float timer = 0;
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.TryGetComponent(out Transform _coltrans))
-        {
-            objectEnterPos = _coltrans.position;
-        }
-    }
-
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out Transform _coltrans))
-        {
-            timer += Time.deltaTime;
-            _coltrans.position += direction * speed * Time.deltaTime;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
         if (other.gameObject.TryGetComponent(out Rigidbody _colrb))
-        {
-            objectExitPos = _colrb.position;
-
-            vel = Vector3.Distance(objectEnterPos, objectExitPos) / timer;
-            Debug.Log(vel);
-            
-            timer = 0;
-
-            _colrb.AddForce(direction * vel * speed * 2, ForceMode.Force);
-        }
+            _colrb.AddForce(direction * speed * 2);
     }
 }
