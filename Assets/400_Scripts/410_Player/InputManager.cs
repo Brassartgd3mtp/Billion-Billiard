@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
@@ -20,9 +21,10 @@ public class InputManager : MonoBehaviour
             TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.Enable;
             TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.Disable;
 
-            actions.Gamepad.ThrowPlayer.performed += playerController.Throw;
+            actions.Gamepad.ThrowPlayer.performed += playerController.GamepadThrow;
             actions.Gamepad.GamepadStrenght.performed += playerController.GamepadStrenght;
             actions.Gamepad.GamepadStrenght.canceled += playerController.GamepadStrenght;
+            actions.Gamepad.PauseMenu.performed += PauseMenu;
             #endregion
             #region Mouse/Keyboard
             TurnBasedSystem.OnEnablePlayerInput += actions.MouseKeyboard.Enable;
@@ -30,7 +32,7 @@ public class InputManager : MonoBehaviour
 
             actions.MouseKeyboard.MouseStrenght.performed += playerController.MouseStrenght;
             actions.MouseKeyboard.MouseStartDrag.performed += playerController.MouseStartDrag;
-            actions.MouseKeyboard.MouseStartDrag.canceled += playerController.MouseThrow;
+            actions.MouseKeyboard.MouseStartDrag.canceled += playerController.MouseStartDrag;
             actions.MouseKeyboard.MouseCancelThrow.performed += playerController.MouseCancelThrow;
             #endregion
         }
@@ -80,14 +82,47 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    public GameObject panel;
+    private bool panelActive = false;
+    public GameObject PauseFirstbutton;
+    public void PauseMenu(InputAction.CallbackContext context)
+    {
+        // Inverse l'�tat d'activation du panneau
+        panelActive = !panelActive;
+
+        // Active ou d�sactive le panneau selon l'�tat
+        panel.SetActive(panelActive);
+
+        if (panelActive)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            //Selectionne le first button
+            EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
+        }
+
+        if (panelActive)
+        {
+            //actions.Gamepad.Disable();
+            Time.timeScale = 0f; // Met le temps � z�ro pour mettre le jeu en pause
+            Time.fixedDeltaTime = 0f;
+        }
+        else
+        {
+            //actions.Gamepad.Enable();
+            Time.timeScale = 1f; // R�tablit le temps � sa valeur normale pour reprendre le jeu
+            Time.fixedDeltaTime = 1f;
+        }
+    }
+
     private void OnDisable()
     {
         if (playerController != null)
         {
             #region Gamepad
-            actions.Gamepad.ThrowPlayer.performed -= playerController.Throw;
+            actions.Gamepad.ThrowPlayer.performed -= playerController.GamepadThrow;
             actions.Gamepad.GamepadStrenght.performed -= playerController.GamepadStrenght;
             actions.Gamepad.GamepadStrenght.canceled -= playerController.GamepadStrenght;
+            actions.Gamepad.PauseMenu.performed -= PauseMenu;
             #endregion
             #region Mouse/Keyboard
             actions.MouseKeyboard.MouseStrenght.performed -= playerController.MouseStrenght;
