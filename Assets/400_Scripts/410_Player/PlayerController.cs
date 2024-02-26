@@ -1,40 +1,42 @@
 using Cinemachine;
 using System;
 using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.U2D;
 using UnityEngine.VFX;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Strenght Value")]
-    public int StrenghMultiplier = 40;
+    public int StrenghtMultiplier = 40;
 
     [Header("Gamepad Values")]
-    public float GamepadThrowStrenght;
-    public Vector2 PivotValue;
+    public float ThrowStrength;
+    public Vector2 LookingDirection;
 
     [Header("Mouse Values")]
-    public float MouseThrowStrenght;
+    //public float MouseThrowStrenght;
     public Vector2 MouseStart;
     public Vector2 MouseEnd;
-    Camera cam;
 
     [Header("References")]
-    public GameObject Pivot;
+    //public GameObject Pivot;
+    public LineRenderer PowerLineRenderer;
 
     private Vector3 strenghtToScale;
     private Quaternion pivotToRotation;
-    private float angle;
+    [SerializeField]private float angle;
 
     public static Rigidbody rb;
     private Vector3 lastVel;
 
     [Header("Bouce Multipliers")]
-    [Tooltip("La valeur de Bounce des murs en bï¿½ton")] public float ConcreteBounce = 1;
+    [Tooltip("La valeur de Bounce des murs en beton")] public float ConcreteBounce = 1;
     [Tooltip("La valeur de Bounce des murs en caoutchouc")] public float RubberBounce = 1;
+    [Tooltip("La valeur de Bounce des murs en feutre")] public float FeltBounce = 1;
 
     [Space(20)]
     public bool isShooted;
@@ -48,8 +50,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
 
-    [SerializeField] private float speed;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -60,36 +60,38 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pivotToRotation = Pivot.transform.rotation;
-        strenghtToScale = Pivot.transform.localScale;
+        //pivotToRotation = Pivot.transform.rotation;
+        //strenghtToScale = Pivot.transform.localScale;
 
         smokePoof = GetComponentInChildren<VisualEffect>();
         speedEffect = GetComponentInChildren<ParticleSystem>();
 
-        cam = Camera.main;
-
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
     }
 
-    public void GamepadThrow(InputAction.CallbackContext context)
+    /// <summary>
+    /// Applique une force à notre bille vers son forward ainsi que les VFX la concernant
+    /// </summary>
+    /// <param name="context"></param>
+    public void Throw(InputAction.CallbackContext context)
     {
         isShooted = true;
 
         posBeforeHit = transform.position;
-        Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-        rb.AddForce(-forceDirection * GamepadThrowStrenght, ForceMode.Impulse);
+        //Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+        rb.AddForce(transform.forward * ThrowStrength, ForceMode.Impulse);
 
         smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-        smokePoof.SetFloat("SmokeSize", GamepadThrowStrenght / StrenghMultiplier);
+        smokePoof.SetFloat("SmokeSize", ThrowStrength / StrenghtMultiplier);
         smokePoof.Play();
 
         var emissionSpeedEffect = speedEffect.emission;
-        emissionSpeedEffect.rateOverTime = GamepadThrowStrenght / StrenghMultiplier * 200f;
+        emissionSpeedEffect.rateOverTime = ThrowStrength / StrenghtMultiplier * 200f;
 
 
         speedEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         var durationSpeedEffect = speedEffect.main;
-        durationSpeedEffect.duration = GamepadThrowStrenght / StrenghMultiplier;
+        durationSpeedEffect.duration = ThrowStrength / StrenghtMultiplier;
 
         speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
         speedEffect.Play();
@@ -99,35 +101,8 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-    	speed = rb.velocity.magnitude;
-        if (Gamepad.current != null)
-            angle = Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg;
-        else
-            angle = Mathf.Atan2(MouseEnd.x - MouseStart.x, MouseEnd.y - MouseStart.y) * Mathf.Rad2Deg;
-
-        Pivot.transform.rotation = pivotToRotation;
-        Pivot.transform.rotation = Quaternion.Euler(0, angle, 0);
-
-        if (Gamepad.current != null)
-            strenghtToScale.z = GamepadThrowStrenght / (StrenghMultiplier / 5);
-        else
-            strenghtToScale.z = MouseThrowStrenght / (StrenghMultiplier / 5);
-
-        Pivot.transform.localScale = strenghtToScale;
-
-        lastVel = rb.velocity;
-
-        if (lastVel.magnitude > 0f)
-        {
-            Vector3 direction = rb.velocity.normalized;
-        
-            Quaternion newRot = Quaternion.LookRotation(direction);
-        
-            rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
-        }
-        else
-            rb.rotation = Quaternion.Euler(0f, -angle, 0f);
+    {      
+        lastVel = rb.velocity;      
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -136,17 +111,26 @@ public class PlayerController : MonoBehaviour
         {
             float speed = lastVel.magnitude;
             Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
+            Quaternion newRot = Quaternion.LookRotation(reflect);
 
+            rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
             switch (obstacle.obstacleType)
             {
                 case Obstacle.ObstacleType.Concrete:
                     rb.velocity = reflect * Mathf.Max(speed * ConcreteBounce, 0f);
                     StartCoroutine(Haptic(0f, 1f, .2f));
                     break;
+
                 case Obstacle.ObstacleType.Rubber:
                     StartCoroutine(Haptic(0f, 1f, .2f));
                     rb.velocity = reflect * Mathf.Max(speed * RubberBounce, 0f);
                     break;
+
+                case Obstacle.ObstacleType.Felt:
+                    StartCoroutine(Haptic(0f, 1f, .2f));
+                    rb.velocity = reflect * Mathf.Max(speed * FeltBounce, 0f);
+                    break;
+
                 case Obstacle.ObstacleType.NPC:
                     StartCoroutine(Haptic(0f, 1f, .2f));
                     break;
@@ -155,7 +139,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Crï¿½e une vibration dans la manette.
+    /// Effectue une vibration dans la manette.
     /// </summary>
     /// <param name="lowfreq_strenght"></param>
     /// <param name="highfreq_strenght"></param>
@@ -168,36 +152,66 @@ public class PlayerController : MonoBehaviour
             Gamepad.current.SetMotorSpeeds(lowfreq_strenght, highfreq_strenght);
             yield return new WaitForSeconds(timer);
             InputSystem.ResetHaptics();
-            yield break;
         }
     }
+    /// <summary>
+    /// Met en place un vecteur en fonction de là où le joueur regarde et oriente la bille dans la direction du vecteur
+    /// Affiche la jauge de puissance en fonction du vecteur, de la puissance de lancer et divisé par 10 pour un meilleur rendu 
+    /// </summary>
+    /// <param name="_lookDirection"></param>
+    private void SetLookDirection(Vector2 _lookDirection)
+    {
+        LookingDirection = _lookDirection;
+        ThrowStrength = _lookDirection.magnitude * StrenghtMultiplier;
+        if(ThrowStrength > 0f)
+        {
+            angle = Mathf.Atan2(LookingDirection.x, LookingDirection.y) * Mathf.Rad2Deg;
+            rb.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+        PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 10);
+    }
 
+    /// <summary>
+    /// Quand le joystick gauche est actif alors on appelle la méthode SetLookDirection avec son vecteur qui va dans la direction opposée
+    /// </summary>
+    /// <param name="context"></param>
     public void GamepadStrenght(InputAction.CallbackContext context)
     {
-        PivotValue = context.ReadValue<Vector2>();
 
-        GamepadThrowStrenght = context.ReadValue<Vector2>().magnitude * StrenghMultiplier;
+        if (context.performed)
+        {
+            SetLookDirection(-context.ReadValue<Vector2>());
+        }
 
         if (context.canceled)
         {
-            PivotValue = new Vector2(0, 0);
-            GamepadThrowStrenght = 0;
+            SetLookDirection(Vector2.zero);
         }
     }
 
     public bool dragEnabled = false;
+
+    /// <summary>
+    /// Quand la souris effectue un drag on rend le curseur invisible et il est restreint de se déplacé dans l'écran
+    /// On appelle la méthode SetLookDirection avec son vecteur qui va dans la direction opposée
+    /// <param name="context"></param>
     public void MouseStrenght(InputAction.CallbackContext context)
     {
         if (dragEnabled)
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
-            MouseEnd = context.ReadValue<Vector2>();
-            MouseThrowStrenght = Vector2.Distance(MouseStart, MouseEnd) / 5;
-            MouseThrowStrenght = Mathf.Clamp(MouseThrowStrenght, 0, StrenghMultiplier);
+
+            // Set a better magnitude for the direction here
+            SetLookDirection(-(context.ReadValue<Vector2>() - MouseStart).normalized); 
+            //LookingDirection = -(context.ReadValue<Vector2>() - MouseStart).normalized;
         }
     }
 
+    /// <summary>
+    /// Quand le clic gauche de la souris est enfoncé on met le curseur au centre l'écran et on active le fait de pouvoir drag sa souris
+    /// </summary>
+    /// <param name="context"></param>
     public void MouseStartDrag(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -205,98 +219,44 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             dragEnabled = true;
         }
-
-        if (context.canceled && MouseEnd != Vector2.zero)
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-            dragEnabled = false;
-
-            isShooted = true;
-
-            posBeforeHit = transform.position;
-            Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-            rb.AddForce(-forceDirection * MouseThrowStrenght, ForceMode.Impulse);
-
-            smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            smokePoof.SetFloat("SmokeSize", MouseThrowStrenght / StrenghMultiplier);
-
-            smokePoof.Play();
-
-            var emissionSpeedEffect = speedEffect.emission;
-            emissionSpeedEffect.rateOverTime = GamepadThrowStrenght / StrenghMultiplier * 200f;
-
-            var durationSpeedEffect = speedEffect.main;
-            durationSpeedEffect.duration = GamepadThrowStrenght / StrenghMultiplier;
-
-
-            speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            speedEffect.Play();
-
-            turnBasedPlayer.ShotCount();
-
-            MouseThrowStrenght = 0;
-            MouseEnd = Vector2.zero;
-        }
     }
 
+    /// <summary>
+    /// Quand le clic droit de la souris est activé alors que le clic gauche est enfoncé on reset le curseur (visible,position,drag non actif,pas de contrainte de déplacement)
+    /// On appelle la méthode SetLookDirection pour remettre le vecteur à zéro
+    /// </summary>
+    /// <param name="context"></param>
     public void MouseCancelThrow(InputAction.CallbackContext context)
     {
         if (dragEnabled)
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             dragEnabled = false;
 
-            MouseThrowStrenght = 0;
+            //MouseThrowStrenght = 0;
             MouseEnd = Vector2.zero;
+            SetLookDirection(Vector2.zero);
         }
     }
 
+    /// <summary>
+    /// Quand le clic gauche est laché on reset les contraintes du curseur, on appelle la méthode Throw et on reset le vecteur de la méthode SetLookDirection à zéro
+    /// </summary>
+    /// <param name="context"></param>
     public void MouseThrow(InputAction.CallbackContext context)
     {
         if (dragEnabled)
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             dragEnabled = false;
 
-            isShooted = true;
+            Throw(context);
 
-            
-            posBeforeHit = transform.position;
-            Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-            rb.AddForce(-forceDirection * MouseThrowStrenght, ForceMode.Impulse);
-
-            turnBasedPlayer.ShotCount();
-
-            MouseThrowStrenght = 0;
+            //MouseThrowStrenght = 0;
             MouseEnd = Vector2.zero;
-        }
-    }
-
-    public GameObject panel;
-    private bool panelActive = false;
-    public GameObject PauseFirstbutton; 
-    public void PauseMenu(InputAction.CallbackContext context)
-    {
-
-        // Inverse l'Ã©tat d'activation du panneau
-        panelActive = !panelActive;
-
-        //Deselectionne tout 
-        EventSystem.current.SetSelectedGameObject(null);
-        //Selectionne le first button
-        EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
-
-
-        // Active ou dÃ©sactive le panneau selon l'Ã©tat
-        panel.SetActive(panelActive);
-        Debug.Log("PauseMenu");
-
-        if (panelActive)
-        {
-            Time.timeScale = 0f; // Met le temps Ã  zÃ©ro pour mettre le jeu en pause
-        }
-        else
-        {
-            Time.timeScale = 1f; // RÃ©tablit le temps Ã  sa valeur normale pour reprendre le jeu
+            SetLookDirection(Vector2.zero);
         }
     }
 }

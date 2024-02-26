@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollisionBehavior : MonoBehaviour
 {
@@ -73,6 +74,11 @@ public class PlayerCollisionBehavior : MonoBehaviour
             TurnBasedPlayer.Instance.RecupBoostReload();
             other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
             lootAnimation.StartAnimation();
+        }
+
+        if (other.gameObject.TryGetComponent(out EndLevel endLevel))
+        {
+            SceneManager.LoadScene(endLevel.nextLevel);
         }
         
     }
