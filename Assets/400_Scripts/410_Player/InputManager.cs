@@ -85,10 +85,10 @@ public class InputManager : MonoBehaviour
     public GameObject PauseFirstbutton;
     public void PauseMenu(InputAction.CallbackContext context)
     {
-        // Inverse l'�tat d'activation du panneau
+        // Inverse l'état d'activation du panneau
         panelActive = !panelActive;
 
-        // Active ou d�sactive le panneau selon l'�tat
+        // Active ou désactive le panneau selon l'état
         panel.SetActive(panelActive);
 
         if (panelActive)
@@ -101,13 +101,13 @@ public class InputManager : MonoBehaviour
         if (panelActive)
         {
             //actions.Gamepad.Disable();
-            Time.timeScale = 0f; // Met le temps � z�ro pour mettre le jeu en pause
+            Time.timeScale = 0f; // Met le temps à zéro pour mettre le jeu en pause
             Time.fixedDeltaTime = 0f;
         }
         else
         {
             //actions.Gamepad.Enable();
-            Time.timeScale = 1f; // R�tablit le temps � sa valeur normale pour reprendre le jeu
+            Time.timeScale = 1f; // Rétablit le temps é sa valeur normale pour reprendre le jeu
             Time.fixedDeltaTime = 1f;
         }
     }
