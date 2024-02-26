@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Strenght Value")]
     public int StrenghtMultiplier = 40;
+    float maxVel = 100;
 
     [Header("Gamepad Values")]
     public float GamepadThrowStrenght;
@@ -54,6 +55,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         turnBasedPlayer = GetComponent<TurnBasedPlayer>();
+
+        maxVel = StrenghtMultiplier * 1.52f;
     }
 
     // Start is called before the first frame update
@@ -94,7 +97,6 @@ public class PlayerController : MonoBehaviour
         turnBasedPlayer.ShotCount();
     }
 
-    // Update is called once per frame
     void Update()
     {
         angle =
@@ -124,6 +126,13 @@ public class PlayerController : MonoBehaviour
         }
         else
             rb.rotation = Quaternion.Euler(0f, -angle, 0f);
+
+        Debug.Log(rb.velocity.magnitude);
+        //Clamp Speed
+        rb.velocity =
+            rb.velocity.magnitude < maxVel ?
+            rb.velocity :
+            rb.velocity.normalized * maxVel;
     }
 
     private void OnCollisionEnter(Collision collision)
