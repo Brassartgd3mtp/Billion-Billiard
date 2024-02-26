@@ -34,6 +34,8 @@ public class LevelSelectorManager : MonoBehaviour
         PanelIndex = 0;
         ActualPanel = Panels[PanelIndex];
         CheckIfNextPanelIsLocked();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void NextPanel()
