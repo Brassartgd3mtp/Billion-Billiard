@@ -9,7 +9,7 @@ public class Obstacle : MonoBehaviour
         /// <summary>
         /// Concrete wall type, default bounce value : .8
         /// </summary>
-        [InspectorName("B�ton")] Concrete,
+        [InspectorName("B\u00E9ton")] Concrete,
         /// <summary>
         /// Rubber wall type, default bounce value : .98
         /// </summary>
