@@ -127,7 +127,6 @@ public class PlayerController : MonoBehaviour
         else
             rb.rotation = Quaternion.Euler(0f, -angle, 0f);
 
-        Debug.Log(rb.velocity.magnitude);
         //Clamp Speed
         rb.velocity =
             rb.velocity.magnitude < maxVel ?
