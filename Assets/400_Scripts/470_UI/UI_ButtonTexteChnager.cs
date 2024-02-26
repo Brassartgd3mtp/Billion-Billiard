@@ -1,36 +1,20 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonTextAssigner : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ButtonSelectionDebug : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 {
-    public TextMeshProUGUI textMeshPro;
-    public string buttonText;
-
-    void Start()
+    public string highlightedText;
+    public TextMeshProUGUI buttonTextMeshPro;
+    public void OnSelect(BaseEventData eventData)
     {
-        // Assurez-vous que le texte Mesh Pro est défini
-        if (textMeshPro == null)
-        {
-            textMeshPro = GameObject.FindWithTag("ButtonText").GetComponent<TextMeshProUGUI>();
-        }
+       
+        buttonTextMeshPro.text = highlightedText;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // Change le texte du TextMeshPro lorsque le curseur est sur le bouton
-        if (textMeshPro != null && !string.IsNullOrEmpty(buttonText))
-        {
-            textMeshPro.text = buttonText;
-        }
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        // Rétablit le texte par défaut lorsque le curseur quitte le bouton
-        if (textMeshPro != null && !string.IsNullOrEmpty(buttonText))
-        {
-            textMeshPro.text = "";
-        }
+       
+        buttonTextMeshPro.text = highlightedText;
     }
 }
