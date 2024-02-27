@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Strenght Value")]
     public int StrenghtMultiplier = 40;
+    float maxVel = 100;
 
     [Header("Gamepad Values")]
     public float GamepadThrowStrenght;
@@ -54,6 +55,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         turnBasedPlayer = GetComponent<TurnBasedPlayer>();
+
+        maxVel = StrenghtMultiplier * 1.52f;
     }
 
     // Start is called before the first frame update
@@ -94,21 +97,20 @@ public class PlayerController : MonoBehaviour
         turnBasedPlayer.ShotCount();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Gamepad.current != null)
-            angle = Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg;
-        else
-            angle = Mathf.Atan2(MouseEnd.x - MouseStart.x, MouseEnd.y - MouseStart.y) * Mathf.Rad2Deg;
+        angle =
+            Gamepad.current != null ?
+            Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg :
+            Mathf.Atan2(MouseEnd.x - MouseStart.x, MouseEnd.y - MouseStart.y) * Mathf.Rad2Deg;
 
         Pivot.transform.rotation = pivotToRotation;
         Pivot.transform.rotation = Quaternion.Euler(0, angle, 0);
 
-        if (Gamepad.current != null)
-            strenghtToScale.z = GamepadThrowStrenght / (StrenghtMultiplier / 5);
-        else
-            strenghtToScale.z = MouseThrowStrenght / (StrenghtMultiplier / 5);
+        strenghtToScale.z =
+            Gamepad.current != null ?
+            GamepadThrowStrenght / (StrenghtMultiplier / 5) :
+            MouseThrowStrenght / (StrenghtMultiplier / 5);
 
         Pivot.transform.localScale = strenghtToScale;
 
@@ -124,6 +126,12 @@ public class PlayerController : MonoBehaviour
         }
         else
             rb.rotation = Quaternion.Euler(0f, -angle, 0f);
+
+        //Clamp Speed
+        rb.velocity =
+            rb.velocity.magnitude < maxVel ?
+            rb.velocity :
+            rb.velocity.normalized * maxVel;
     }
 
     private void OnCollisionEnter(Collision collision)
