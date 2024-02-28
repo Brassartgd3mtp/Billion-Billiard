@@ -10,6 +10,8 @@ public class LockedDoor : MonoBehaviour
 
     private Animator myAnimator;
 
+    public GameObject IconPadlock;
+
     public bool Unlock
     {
         get { return unlock; }
@@ -17,6 +19,7 @@ public class LockedDoor : MonoBehaviour
         {
             unlock = value;
             //myAnimator.SetBool("Unlock", unlock);
+            IconPadlock.SetActive(true);
             Destroy(gameObject);
         }
     }

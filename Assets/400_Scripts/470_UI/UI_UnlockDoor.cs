@@ -8,6 +8,7 @@ public class UI_UnlockDoor : MonoBehaviour
     public Transform Target;
 
     public Transform IconPadlockUnlock;
+
     void Update()
     {
         if (Origin == null || Target == null)
@@ -18,11 +19,11 @@ public class UI_UnlockDoor : MonoBehaviour
 
         // Calcul de la direction de la cible par rapport à l'origine
         Vector3 direction = (Target.position - Origin.position);
+        direction.y = 0;
 
-        IconPadlockUnlock.transform.position = new Vector3(direction.x/ Target.position.x*1920, direction.z/ Target.position.z*-1080, 0);
+        float clampedX = Mathf.Clamp(direction.x / Target.position.x * -Screen.width / 4, -Screen.width / 2 * .9f, Screen.width / 2 * .9f);
+        float clampedZ = Mathf.Clamp(direction.z / Target.position.z * -Screen.height / 2, -Screen.height / 2 * .9f, Screen.height / 2 * .9f);
 
-        Debug.Log("Direction de la cible par rapport à l'origine : " + direction);
-        //float angle = Vector3.Angle(Origin.forward, direction);
-        //Debug.Log("Angle entre l'axe avant de l'origine et la direction de la cible : " + angle);
+        IconPadlockUnlock.transform.localPosition = new Vector3(clampedX,clampedZ, 0);
     }
 }
