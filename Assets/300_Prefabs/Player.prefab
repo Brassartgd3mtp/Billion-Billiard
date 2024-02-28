@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 624548755872704414}
   - component: {fileID: 4295191754941553035}
   - component: {fileID: -6389856217533770102}
+  - component: {fileID: 1749279749150066523}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -271,21 +272,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845db6517468cfb4ca2dfba908b7a66f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StrenghMultiplier: 40
-  GamepadThrowStrenght: 0
-  PivotValue: {x: 0, y: 0}
-  MouseThrowStrenght: 0
-  MouseStart: {x: 0, y: 0}
-  MouseEnd: {x: 0, y: 0}
+  StrenghtMultiplier: 40
+  ThrowStrenght: 0
   Pivot: {fileID: 8127061478828150953}
-  ConcreteBounce: 0.8
-  RubberBounce: 0.98
+  BounceValues: {fileID: 11400000, guid: 40bc9499a22daca4c820f67cc3d5b4a8, type: 2}
   isShooted: 0
   posBeforeHit: {x: 0, y: 0, z: 0}
-  speedEffect: {fileID: 0}
+  speedEffect: {fileID: 3569593256469584753}
   speedEffectDirection: {fileID: 144483280763269323}
-  smokePoof: {fileID: 0}
-  speed: 0
+  smokePoof: {fileID: 9160850790323335691}
   dragEnabled: 0
 --- !u!114 &1242172720202642044
 MonoBehaviour:
@@ -301,7 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats: {fileID: -5471499357105316639}
   uI_Stats: {fileID: 0}
-  playerController: {fileID: 0}
+  playerController: {fileID: 7235643447057658164}
 --- !u!114 &-5471499357105316639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,10 +322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80fa5ccb34a3fc43947339f88c376a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pc: {fileID: 7235643447057658164}
-  pfc: {fileID: 0}
-  rs: {fileID: 0}
-  nc: {fileID: 0}
 --- !u!96 &624548755872704414
 TrailRenderer:
   serializedVersion: 3
@@ -477,8 +468,24 @@ MonoBehaviour:
   dragChecker: 0
   shotRemaining: 3
   nbrOfShots: 3
-  playerController: {fileID: 0}
+  playerController: {fileID: 7235643447057658164}
   uI_ShotRemaining: {fileID: 0}
+  ParticleShotRemaining: {fileID: 1749279749150066523}
+--- !u!114 &1749279749150066523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391655251862830221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40080fee37cd3d241ad6c160b42561cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shots: []
+  baseParticle: {fileID: 6634649106635253879, guid: 48128f0f4a2638a46815f5a81a1d006e,
+    type: 3}
 --- !u!1 &8127061478828150953
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,6 +614,12 @@ PrefabInstance:
 --- !u!4 &1511530324647776688 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 58114641700602122, guid: 621f1600f408f634982c69a0a8579ea0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1455927285735280826}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3569593256469584753 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2719540858137545675, guid: 621f1600f408f634982c69a0a8579ea0,
     type: 3}
   m_PrefabInstance: {fileID: 1455927285735280826}
   m_PrefabAsset: {fileID: 0}
@@ -870,6 +883,12 @@ PrefabInstance:
 --- !u!4 &5786059324136728424 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 710310073941333748, guid: d14cc922dfc74a04d8c65d5b49ad21ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 6455823698827293084}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &9160850790323335691 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 2789505198919386007, guid: d14cc922dfc74a04d8c65d5b49ad21ae,
     type: 3}
   m_PrefabInstance: {fileID: 6455823698827293084}
   m_PrefabAsset: {fileID: 0}

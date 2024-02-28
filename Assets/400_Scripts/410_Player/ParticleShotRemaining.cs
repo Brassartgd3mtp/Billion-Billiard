@@ -14,7 +14,7 @@ public class ParticleShotRemaining : MonoBehaviour
 
         for (int i = 0; i < _totalShots; i++)
         {
-            Shots.Add(Instantiate(baseParticle, new Vector3(Mathf.Cos(angle), 0.5f, Mathf.Sin(angle)), Quaternion.identity, transform));
+            Shots.Add(Instantiate(baseParticle, transform.position + new Vector3(Mathf.Cos(angle), 0.5f, Mathf.Sin(angle)), Quaternion.identity, transform));
 
             angle -= 45 * Mathf.Deg2Rad;
         }
