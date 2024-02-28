@@ -79,7 +79,7 @@ public class TurnBasedPlayer : MonoBehaviour
     public void RecupBoostReload()
     {
         shotRemaining += 1;
-        uI_ShotRemaining.UpdateUI();
+        uI_ShotRemaining.UpdateUI(shotRemaining);
         TurnBasedSystem.ReloadForPlayer();
     }
 
@@ -88,7 +88,7 @@ public class TurnBasedPlayer : MonoBehaviour
         hasStopped = false;
         shotRemaining--;
         ParticleShotRemaining.Death();
-        uI_ShotRemaining.UpdateUI();
+        uI_ShotRemaining.UpdateUI(shotRemaining);
         
         if (shotRemaining <= 0)
         {
@@ -109,7 +109,7 @@ public class TurnBasedPlayer : MonoBehaviour
             playerController.isShooted = false;
             shotRemaining = nbrOfShots;
             ParticleShotRemaining.Initialize(nbrOfShots);
-            uI_ShotRemaining.UpdateUI();
+            uI_ShotRemaining.UpdateUI(shotRemaining);
         }
     }
 }
