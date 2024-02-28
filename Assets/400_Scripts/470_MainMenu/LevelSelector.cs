@@ -7,10 +7,11 @@ public class GestionNiveaux : MonoBehaviour
     public string niveau1;
     public string niveau2;
     public string niveauSandbox;
+    public string Credit;
 
     public void ChargerNiveau1()
     {
-        SceneManager.LoadScene(niveau1);
+         SceneManager.LoadScene(niveau1);
     }
 
     public void ChargerNiveau2()
@@ -23,6 +24,11 @@ public class GestionNiveaux : MonoBehaviour
         SceneManager.LoadScene(niveauSandbox);
     }
 
-   
+
+    public void ChargerCredit()
+    {
+        SceneManager.LoadScene(Credit);
     }
+
+}
 

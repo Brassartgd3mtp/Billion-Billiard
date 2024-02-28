@@ -34,6 +34,8 @@ public class LevelSelectorManager : MonoBehaviour
         PanelIndex = 0;
         ActualPanel = Panels[PanelIndex];
         CheckIfNextPanelIsLocked();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void NextPanel()
@@ -43,6 +45,7 @@ public class LevelSelectorManager : MonoBehaviour
         LeftArrow.enabled = false;
         RightArrow.enabled = false;
         StartCoroutine(MovePanel(-1));
+
     }
     public void PrevPanel() 
     {
@@ -83,12 +86,26 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void CheckIfNextPanelIsLocked()
     {
-        Panels[PanelIndex + 1].TryGetComponent(out PanelManager panelManager);
-
-        if (panelManager.SO_Level.LevelData.isLocked)
+        Panels[PanelIndex + 1].TryGetComponent(out PanelManager panelManagerNext);
+        if (panelManagerNext.SO_Level.LevelData.isLocked)
         {
             Debug.Log("Locked");
+            RightArrow.gameObject.SetActive(false);
             RightArrow.enabled = false;
+        } 
+        else if (RightArrow.enabled && !RightArrow.gameObject.activeInHierarchy)
+        {
+            RightArrow.gameObject.SetActive(true);
+            RightArrow.enabled = true;
+        }
+        if (ActualPanel == Panels[0])
+        {
+            LeftArrow.gameObject.SetActive(false);
+            LeftArrow.enabled = false;
+        } else if (ActualPanel != Panels[0])
+        {
+            LeftArrow.gameObject.SetActive(true);
+            LeftArrow.enabled = true;
         }
     }
 
