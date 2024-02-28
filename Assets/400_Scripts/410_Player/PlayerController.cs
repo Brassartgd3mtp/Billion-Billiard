@@ -61,7 +61,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public void GamepadThrow(InputAction.CallbackContext context)
-    {
+    {   if (PivotValue != Vector2.zero)
+        {
         isShooted = true;
 
         posBeforeHit = transform.position;
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour
         speedEffect.Play();
 
         turnBasedPlayer.ShotCount();
+        }
     }
 
     void Update()
@@ -247,7 +249,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void MouseThrow(InputAction.CallbackContext context)
-    {
+    {   
         if (dragEnabled)
         {
             Cursor.lockState = CursorLockMode.None;
