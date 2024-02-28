@@ -20,6 +20,7 @@ public class TurnBasedPlayer : MonoBehaviour
 
     public PlayerController playerController;
     public UI_ShotRemaining uI_ShotRemaining;
+    public ParticleShotRemaining ParticleShotRemaining;
 
     public static TurnBasedPlayer Instance;
 
@@ -34,6 +35,8 @@ public class TurnBasedPlayer : MonoBehaviour
 
         playerController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody>();
+
+        ParticleShotRemaining.Initialize(nbrOfShots);
     }
 
     public void Update()
@@ -84,6 +87,7 @@ public class TurnBasedPlayer : MonoBehaviour
     {
         hasStopped = false;
         shotRemaining--;
+        ParticleShotRemaining.Death();
         uI_ShotRemaining.UpdateUI();
         
         if (shotRemaining <= 0)
@@ -104,6 +108,7 @@ public class TurnBasedPlayer : MonoBehaviour
             TurnBasedSystem.PlayerTurnEnd();
             playerController.isShooted = false;
             shotRemaining = nbrOfShots;
+            ParticleShotRemaining.Initialize(nbrOfShots);
             uI_ShotRemaining.UpdateUI();
         }
     }
