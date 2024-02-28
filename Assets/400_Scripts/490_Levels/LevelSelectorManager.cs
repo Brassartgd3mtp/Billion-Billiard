@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelSelectorManager : MonoBehaviour
 {
+    [SerializeField] private EventSystem _eventSystem;
+
     [SerializeField] private Button LeftArrow, RightArrow;
     [SerializeField] private Button BTN_Play;
 
@@ -90,6 +93,7 @@ public class LevelSelectorManager : MonoBehaviour
         if (panelManagerNext.SO_Level.LevelData.isLocked)
         {
             Debug.Log("Locked");
+            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
             RightArrow.gameObject.SetActive(false);
             RightArrow.enabled = false;
         } 
@@ -100,6 +104,7 @@ public class LevelSelectorManager : MonoBehaviour
         }
         if (ActualPanel == Panels[0])
         {
+            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
             LeftArrow.gameObject.SetActive(false);
             LeftArrow.enabled = false;
         } else if (ActualPanel != Panels[0])
