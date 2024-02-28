@@ -9,13 +9,13 @@ public class SettingsMenu : MonoBehaviour
     public AudioMixer AudioMixer;
     Resolution[] resolutions;
 
-    public Dropdown resolutionDropdown;
+    // public Dropdown resolutionDropdown;
 
     private void Start()
     {
         resolutions = Screen.resolutions;
 
-        resolutionDropdown.ClearOptions();
+        //resolutionDropdown.ClearOptions();
 
 
         List<string> options = new List<string>();
@@ -36,9 +36,9 @@ public class SettingsMenu : MonoBehaviour
         }
 
 
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+        //resolutionDropdown.AddOptions(options);
+        //resolutionDropdown.value = currentResolutionIndex;
+        //resolutionDropdown.RefreshShownValue();
     }
 
 
