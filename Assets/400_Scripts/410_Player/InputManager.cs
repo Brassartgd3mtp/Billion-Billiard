@@ -149,7 +149,7 @@ public class InputManager : MonoBehaviour
             actions.Cheat.ReloadScene.performed -= reloadScene.Reload;
         }
 
-        if (noClip != null)
+        if (gameObject.TryGetComponent(out NoClip noClip))
         {
             actions.Cheat.NoClip.performed -= NoClipMode;
             actions.Cheat.NoClipControl.performed -= noClip.MovePlayer;
