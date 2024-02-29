@@ -4,19 +4,32 @@ using UnityEngine;
 
 public class UI_UnlockDoor : MonoBehaviour
 {
-    private Vector3 targetPosition;
-    private RectTransform pointerRectTransform;
+    private Transform Origin;
+    public Transform LockedDoor;
 
-    private void Awake()
+    public Transform IconPadlockUnlock;
+
+    private void Start()
     {
-        targetPosition = new Vector3(200, 45);
-        pointerRectTransform = transform.Find("Pointer").GetComponent<RectTransform>();
+        Origin = Camera.main.transform;        
     }
-    private void Update()
+
+
+    void Update()
     {
-        Vector3 toPosition = targetPosition;
-        Vector3 formPosition = Camera.main.transform.position;
-        formPosition.z = 0f;
-        Vector3 dir = (toPosition - formPosition).normalized;
+        if (Origin == null || LockedDoor == null)
+        {
+            Debug.LogError("Veuillez assigner l'origine et la cible dans l'inspecteur.");
+            return;
+        }
+
+        // Calcul de la direction de la cible par rapport à l'origine
+        Vector3 direction = (LockedDoor.position - Origin.position);
+        direction.y = 0;
+
+        float clampedX = Mathf.Clamp(direction.x / LockedDoor.position.x * -Screen.width / 4, -Screen.width / 2 * .9f, Screen.width / 2 * .9f);
+        float clampedZ = Mathf.Clamp(direction.z / LockedDoor.position.z * -Screen.height / 2.5f, -Screen.height / 2 * .9f, Screen.height / 2 * .9f);
+
+        IconPadlockUnlock.transform.localPosition = new Vector3(clampedX,clampedZ, 0);
     }
 }
