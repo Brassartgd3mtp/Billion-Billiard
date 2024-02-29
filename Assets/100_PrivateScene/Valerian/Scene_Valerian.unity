@@ -1476,7 +1476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleType: 2
+  obstacleType: 4
 --- !u!135 &843082910
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1736,6 +1736,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6389856217533770102, guid: e29c926224c4a5641a2b2f079d0273fa,
+        type: 3}
+      propertyPath: nbrOfShots
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6389856217533770102, guid: e29c926224c4a5641a2b2f079d0273fa,
+        type: 3}
+      propertyPath: shotRemaining
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -6389856217533770102, guid: e29c926224c4a5641a2b2f079d0273fa,
         type: 3}
       propertyPath: uI_ShotRemaining
