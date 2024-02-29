@@ -188,14 +188,16 @@ public class PlayerController : MonoBehaviour
 
     public void MouseStartDrag(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
+        if (context.started)
             Cursor.lockState = CursorLockMode.Locked;
+
+        if (context.performed)
             dragEnabled = true;
-        }
 
         if (context.canceled && MouseEnd != Vector2.zero)
         {
+            Cursor.lockState = CursorLockMode.Locked;
+
             Cursor.lockState = CursorLockMode.Confined;
             dragEnabled = false;
 

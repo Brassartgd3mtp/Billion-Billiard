@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
             TurnBasedSystem.OnDisablePlayerInput += actions.MouseKeyboard.MouseStartDrag.Disable;
 
             actions.MouseKeyboard.MouseStrenght.performed += playerController.MouseStrenght;
+            actions.MouseKeyboard.MouseStartDrag.started += playerController.MouseStartDrag;
             actions.MouseKeyboard.MouseStartDrag.performed += playerController.MouseStartDrag;
             actions.MouseKeyboard.MouseStartDrag.canceled += playerController.MouseStartDrag;
             actions.MouseKeyboard.MouseCancelThrow.performed += playerController.MouseCancelThrow;
@@ -91,6 +92,7 @@ public class InputManager : MonoBehaviour
             #endregion
             #region Mouse/Keyboard
             actions.MouseKeyboard.MouseStrenght.performed -= playerController.MouseStrenght;
+            actions.MouseKeyboard.MouseStartDrag.started -= playerController.MouseStartDrag;
             actions.MouseKeyboard.MouseStartDrag.performed -= playerController.MouseStartDrag;
             actions.MouseKeyboard.MouseStartDrag.canceled -= playerController.MouseStartDrag;
             actions.MouseKeyboard.MouseCancelThrow.performed -= playerController.MouseCancelThrow;
