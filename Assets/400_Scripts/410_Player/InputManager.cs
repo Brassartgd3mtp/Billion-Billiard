@@ -15,8 +15,10 @@ public class InputManager : MonoBehaviour
         if (gameObject.TryGetComponent(out PlayerController playerController))
         {
             #region Gamepad
-            TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.Enable;
-            TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.Disable;
+            TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.GamepadStrenght.Enable;
+            TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.ThrowPlayer.Enable;
+            TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.GamepadStrenght.Disable;
+            TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.ThrowPlayer.Disable;
 
             actions.Gamepad.ThrowPlayer.performed += playerController.GamepadThrow;
             actions.Gamepad.GamepadStrenght.performed += playerController.GamepadStrenght;
@@ -24,8 +26,8 @@ public class InputManager : MonoBehaviour
             actions.Gamepad.PauseMenu.performed += PauseMenu;
             #endregion
             #region Mouse/Keyboard
-            TurnBasedSystem.OnEnablePlayerInput += actions.MouseKeyboard.Enable;
-            TurnBasedSystem.OnDisablePlayerInput += actions.MouseKeyboard.Disable;
+            TurnBasedSystem.OnEnablePlayerInput += actions.MouseKeyboard.MouseStartDrag.Enable;
+            TurnBasedSystem.OnDisablePlayerInput += actions.MouseKeyboard.MouseStartDrag.Disable;
 
             actions.MouseKeyboard.MouseStrenght.performed += playerController.MouseStrenght;
             actions.MouseKeyboard.MouseStartDrag.performed += playerController.MouseStartDrag;
@@ -94,6 +96,7 @@ public class InputManager : MonoBehaviour
         if (panelActive)
         {
             panel.SetActive(true);
+            Gamepad.current.ResetHaptics();
             EventSystem.current.SetSelectedGameObject(null);
             //Selectionne le first button
             EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
