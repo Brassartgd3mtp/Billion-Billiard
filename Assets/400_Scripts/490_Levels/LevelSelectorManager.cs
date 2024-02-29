@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelSelectorManager : MonoBehaviour
 {
+    [SerializeField] private EventSystem _eventSystem;
+
     [SerializeField] private Button LeftArrow, RightArrow;
     [SerializeField] private Button BTN_Play;
 
@@ -45,6 +48,7 @@ public class LevelSelectorManager : MonoBehaviour
         LeftArrow.enabled = false;
         RightArrow.enabled = false;
         StartCoroutine(MovePanel(-1));
+
     }
     public void PrevPanel() 
     {
@@ -85,12 +89,28 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void CheckIfNextPanelIsLocked()
     {
-        Panels[PanelIndex + 1].TryGetComponent(out PanelManager panelManager);
-
-        if (panelManager.SO_Level.LevelData.isLocked)
+        Panels[PanelIndex + 1].TryGetComponent(out PanelManager panelManagerNext);
+        if (panelManagerNext.SO_Level.LevelData.isLocked)
         {
             Debug.Log("Locked");
+            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+            RightArrow.gameObject.SetActive(false);
             RightArrow.enabled = false;
+        } 
+        else if (RightArrow.enabled && !RightArrow.gameObject.activeInHierarchy)
+        {
+            RightArrow.gameObject.SetActive(true);
+            RightArrow.enabled = true;
+        }
+        if (ActualPanel == Panels[0])
+        {
+            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+            LeftArrow.gameObject.SetActive(false);
+            LeftArrow.enabled = false;
+        } else if (ActualPanel != Panels[0])
+        {
+            LeftArrow.gameObject.SetActive(true);
+            LeftArrow.enabled = true;
         }
     }
 

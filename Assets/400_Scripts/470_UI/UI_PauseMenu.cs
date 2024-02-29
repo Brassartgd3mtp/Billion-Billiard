@@ -25,7 +25,6 @@ public class ButtonActions : MonoBehaviour
         if (panel != null)
             panel.SetActive(false);
         Time.timeScale = 1f;
-        Time.fixedDeltaTime = 1f;
     }
 
     public void OnOptionButtonClick()
@@ -48,7 +47,8 @@ public class ButtonActions : MonoBehaviour
     public void OnMainMenuButtonClick()
     {
         // Recharge la scène "Main Menu"
-        SceneManager.LoadScene("Main_Menu");
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
 
     public void OnRestartButtonClick()
