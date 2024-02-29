@@ -73,10 +73,7 @@ public class TurnBasedPlayer : MonoBehaviour
         if (ReloadCooldown > 0)
         {
             if (shotRemaining != nbrOfShots)
-            {
                 ReloadCooldown -= Time.deltaTime;
-                Debug.Log(ReloadCooldown);
-            }
         }
         else
         {
