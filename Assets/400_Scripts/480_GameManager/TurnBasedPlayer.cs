@@ -9,14 +9,16 @@ public class TurnBasedPlayer : MonoBehaviour
     public float speed;
 
     public bool hasStopped { get; private set; }
-    private bool isMoving;
     public bool reShooted;
 
     public bool dragChecker;
 
     public int shotRemaining;
     public int nbrOfShots;
-    
+
+    public float PassiveReloadCooldown = 3;
+
+    public float ReloadCooldown;
 
     public PlayerController playerController;
     public UI_ShotRemaining uI_ShotRemaining;
@@ -26,12 +28,14 @@ public class TurnBasedPlayer : MonoBehaviour
 
     public void Start()
     {
+        ReloadCooldown = PassiveReloadCooldown;
+
         if (Instance == null)
         {
             Instance = this;
         }
 
-        TurnBasedSystem.players.Add(this.gameObject);
+        TurnBasedSystem.players.Add(gameObject);
 
         playerController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody>();
@@ -44,11 +48,6 @@ public class TurnBasedPlayer : MonoBehaviour
         vel = rb.velocity;
         speed = vel.magnitude;
 
-        if (speed > 0) 
-        {
-            isMoving = true;
-        }
-
         if (speed > 0.3f)
         {
             dragChecker = true;
@@ -57,22 +56,31 @@ public class TurnBasedPlayer : MonoBehaviour
 
         if (speed < 0.3f && dragChecker && !reShooted)
         {
-            rb.velocity = new Vector3(0, 0, 0);
+            rb.velocity = Vector3.zero;
         }
         else rb.drag = 1;
 
         if (speed == 0)
-        {
-            isMoving = false;
             rb.drag = 1;
-        }
 
         if (playerController.isShooted && !hasStopped && speed == 0) 
         {
             dragChecker = false;
             hasStopped = true;
+        }
 
-            Invoke("CheckShotRemaining", 0.1f);
+        if (ReloadCooldown > 0)
+        {
+            if (shotRemaining != nbrOfShots)
+            {
+                ReloadCooldown -= Time.deltaTime;
+                Debug.Log(ReloadCooldown);
+            }
+        }
+        else
+        {
+            PassiveReload();
+            ReloadCooldown = PassiveReloadCooldown;
         }
     }
     
@@ -80,6 +88,14 @@ public class TurnBasedPlayer : MonoBehaviour
     {
         shotRemaining += 1;
         uI_ShotRemaining.UpdateUI();
+        TurnBasedSystem.ReloadForPlayer();
+    }
+
+    public void PassiveReload()
+    {
+        shotRemaining++;
+        uI_ShotRemaining.UpdateUI();
+        ParticleShotRemaining.PassiveUpdateShots();
         TurnBasedSystem.ReloadForPlayer();
     }
 
@@ -91,25 +107,6 @@ public class TurnBasedPlayer : MonoBehaviour
         uI_ShotRemaining.UpdateUI();
         
         if (shotRemaining <= 0)
-        {
             TurnBasedSystem.OnPlayerPlayed();
-        }
-    }
-
-    public void CheckShotRemaining()
-    {
-        if (isMoving)
-        {
-            hasStopped = false;
-        }
-
-        if (hasStopped && shotRemaining <= 0)
-        {
-            TurnBasedSystem.PlayerTurnEnd();
-            playerController.isShooted = false;
-            shotRemaining = nbrOfShots;
-            ParticleShotRemaining.Initialize(nbrOfShots);
-            uI_ShotRemaining.UpdateUI();
-        }
     }
 }
