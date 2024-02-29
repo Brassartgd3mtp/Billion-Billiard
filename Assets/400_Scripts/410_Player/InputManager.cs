@@ -102,7 +102,6 @@ public class InputManager : MonoBehaviour
         if (panelActive)
         {
             //actions.Gamepad.Disable();
-            Debug.Log("pause");
             Time.timeScale = 0f; // Met le temps à zéro pour mettre le jeu en pause
             
             //Time.fixedDeltaTime = 0f;
@@ -110,10 +109,8 @@ public class InputManager : MonoBehaviour
         else
         {
             //actions.Gamepad.Enable();
-            Debug.Log("Resume");
             panel.SetActive(false);
             Time.timeScale = 1f; // Rétablit le temps é sa valeur normale pour reprendre le jeu
-            //Time.fixedDeltaTime = 1f;
         }
     }
 
