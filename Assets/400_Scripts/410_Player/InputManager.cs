@@ -15,7 +15,7 @@ public class InputManager : MonoBehaviour
         {
             #region Gamepad
             TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.GamepadStrenght.Enable;
-            TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.GamepadStrenght.Enable;
+            TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.ThrowPlayer.Enable;
             TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.GamepadStrenght.Disable;
             TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.ThrowPlayer.Disable;
 
