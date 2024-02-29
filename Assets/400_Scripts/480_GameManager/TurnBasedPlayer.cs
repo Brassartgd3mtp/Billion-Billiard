@@ -37,6 +37,7 @@ public class TurnBasedPlayer : MonoBehaviour
 
         TurnBasedSystem.players.Add(gameObject);
 
+        shotRemaining = nbrOfShots;
         playerController = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody>();
         uI_ShotRemaining.UpdateUI(shotRemaining);
@@ -94,7 +95,7 @@ public class TurnBasedPlayer : MonoBehaviour
     public void PassiveReload()
     {
         shotRemaining++;
-        uI_ShotRemaining.UpdateUI();
+        uI_ShotRemaining.UpdateUI(shotRemaining);
         ParticleShotRemaining.PassiveUpdateShots();
         TurnBasedSystem.ReloadForPlayer();
     }
