@@ -53,7 +53,7 @@ public class ImpactFXPosition : MonoBehaviour
                 new ParticleSystem.Burst(0.0f, countBurst, 1, 0.025f)
                 });
 
-            Debug.Log(countBurst);
+            //Debug.Log(countBurst);
 
             Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
         }
