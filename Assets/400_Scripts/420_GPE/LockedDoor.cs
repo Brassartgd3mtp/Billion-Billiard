@@ -10,7 +10,8 @@ public class LockedDoor : MonoBehaviour
 
     private Animator myAnimator;
 
-    public GameObject IconPadlock;
+    public GameObject IconPadlockUnlocked;
+    public GameObject IconPadlockLocked;
 
     public bool Unlock
     {
@@ -18,9 +19,10 @@ public class LockedDoor : MonoBehaviour
         set
         {
             unlock = value;
-            //myAnimator.SetBool("Unlock", unlock);
-            IconPadlock.SetActive(true);
-            Destroy(gameObject);
+            myAnimator.SetBool("Unlock", unlock);
+            IconPadlockLocked.SetActive(false);
+            IconPadlockUnlocked.SetActive(true);
+            //Destroy(gameObject);
         }
     }
 
