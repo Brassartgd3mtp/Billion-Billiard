@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class EndLevel : MonoBehaviour
@@ -12,6 +13,7 @@ public class EndLevel : MonoBehaviour
         if (other.gameObject.layer == 3)
         {
             SceneManager.LoadScene(nextLevel);
+            Gamepad.current.ResetHaptics();
         }
     }
 }

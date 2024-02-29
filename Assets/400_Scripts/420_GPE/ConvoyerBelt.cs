@@ -8,7 +8,7 @@ public class ConvoyerBelt : MonoBehaviour
     [SerializeField] private GameObject endPoint;
     private Vector3 direction;
 
-    [SerializeField, Range(0, 10), Space] private float speed;
+    [SerializeField, Range(0, 100), Space] private float speed;
     // Start is called before the first frame update
     void Awake()
     {

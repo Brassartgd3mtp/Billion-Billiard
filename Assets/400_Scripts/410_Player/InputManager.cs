@@ -15,8 +15,10 @@ public class InputManager : MonoBehaviour
         if (gameObject.TryGetComponent(out PlayerController playerController))
         {
             #region Gamepad
-            TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.Enable;
-            TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.Disable;
+            TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.GamepadStrenght.Enable;
+            TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.GamepadStrenght.Enable;
+            TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.GamepadStrenght.Disable;
+            TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.ThrowPlayer.Disable;
 
             actions.Gamepad.ThrowPlayer.performed += playerController.GamepadThrow;
             actions.Gamepad.GamepadStrenght.performed += playerController.GamepadStrenght;
@@ -24,8 +26,8 @@ public class InputManager : MonoBehaviour
             actions.Gamepad.PauseMenu.performed += PauseMenu;
             #endregion
             #region Mouse/Keyboard
-            TurnBasedSystem.OnEnablePlayerInput += actions.MouseKeyboard.Enable;
-            TurnBasedSystem.OnDisablePlayerInput += actions.MouseKeyboard.Disable;
+            TurnBasedSystem.OnEnablePlayerInput += actions.MouseKeyboard.MouseStartDrag.Enable;
+            TurnBasedSystem.OnDisablePlayerInput += actions.MouseKeyboard.MouseStartDrag.Disable;
 
             actions.MouseKeyboard.MouseStrenght.performed += playerController.MouseStrenght;
             actions.MouseKeyboard.MouseStartDrag.performed += playerController.MouseStartDrag;
@@ -94,6 +96,7 @@ public class InputManager : MonoBehaviour
         if (panelActive)
         {
             panel.SetActive(true);
+            Gamepad.current.ResetHaptics();
             EventSystem.current.SetSelectedGameObject(null);
             //Selectionne le first button
             EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
@@ -102,7 +105,6 @@ public class InputManager : MonoBehaviour
         if (panelActive)
         {
             //actions.Gamepad.Disable();
-            Debug.Log("pause");
             Time.timeScale = 0f; // Met le temps à zéro pour mettre le jeu en pause
             
             //Time.fixedDeltaTime = 0f;
@@ -110,10 +112,8 @@ public class InputManager : MonoBehaviour
         else
         {
             //actions.Gamepad.Enable();
-            Debug.Log("Resume");
             panel.SetActive(false);
             Time.timeScale = 1f; // Rétablit le temps é sa valeur normale pour reprendre le jeu
-            //Time.fixedDeltaTime = 1f;
         }
     }
 
