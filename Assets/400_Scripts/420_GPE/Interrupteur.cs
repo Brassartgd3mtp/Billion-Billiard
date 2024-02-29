@@ -19,4 +19,11 @@ public class Interrupteur : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Start()
+    {
+        if(lockedDoor == null)
+            Debug.LogError("Veuillez assigner la porte à l'interrupteur");
+        return;
+    }
 }
