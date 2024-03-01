@@ -50,14 +50,8 @@ public class ParticleShotRemaining : MonoBehaviour
 
         lastParticle.TriggerSubEmitter(0);
 
-        StartCoroutine(Delay(lastParticle, .15f));
+        lastParticle.gameObject.SetActive(false);
 
         lastIndex--;
-    }
-
-    IEnumerator Delay(ParticleSystem p, float t)
-    {
-        yield return new WaitForSeconds(t);
-        p.gameObject.SetActive(false);
     }
 }

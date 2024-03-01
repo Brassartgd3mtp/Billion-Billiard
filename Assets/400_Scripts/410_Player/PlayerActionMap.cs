@@ -298,17 +298,6 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f418a2b6-7ac7-4d18-9692-0a4782b15491"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": ""MultiTap(tapCount=3)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""No-Clip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""46b72e63-06b2-4264-920b-354c3e160e83"",
                     ""path"": ""<Keyboard>/backslash"",
                     ""interactions"": ""MultiTap(tapCount=3)"",
