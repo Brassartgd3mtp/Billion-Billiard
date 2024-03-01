@@ -57,7 +57,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""PauseMenu"",
                     ""type"": ""Button"",
-                    ""id"": ""68438bbf-c94c-4f21-9c56-b5b5ddaca6b1"",
+                    ""id"": ""4d550153-e311-4107-87b9-22cd7ef4bca6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -100,30 +100,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2aa9db9b-a550-46af-aa7c-83b896ee28fa"",
+                    ""id"": ""8bb8bd9d-bbba-4836-acec-d64283c42d23"",
                     ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PauseMenu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f6996efc-d195-46ed-9800-49bf215e7d0e"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PauseMenu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e82b585f-cb8e-41f5-96c2-8b7f4e57c3d8"",
-                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -293,6 +271,17 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Reload Scene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f418a2b6-7ac7-4d18-9692-0a4782b15491"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": ""MultiTap(tapCount=3)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""No-Clip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
