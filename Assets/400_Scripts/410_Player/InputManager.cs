@@ -90,8 +90,8 @@ public class InputManager : MonoBehaviour
     }
 
     public GameObject panel;
-    private bool panelActive = false;
     public GameObject PauseFirstbutton;
+    [HideInInspector] public bool panelActive = false;
     public void PauseMenu(InputAction.CallbackContext context)
     {
         // Inverse l'�tat d'activation du panneau
@@ -108,17 +108,36 @@ public class InputManager : MonoBehaviour
         }
 
         if (panelActive)
-        {
-            //actions.Gamepad.Disable();
-            Time.timeScale = 0f; // Met le temps � z�ro pour mettre le jeu en pause
-            Time.fixedDeltaTime = 0f;
-        }
+            PauseOn();
         else
-        {
-            //actions.Gamepad.Enable();
-            Time.timeScale = 1f; // R�tablit le temps � sa valeur normale pour reprendre le jeu
-            Time.fixedDeltaTime = 1f;
-        }
+            PauseOff();
+    }
+
+    public void PauseOn()
+    {
+        actions.Gamepad.GamepadStrenght.Disable();
+        actions.Gamepad.ThrowPlayer.Disable();
+        actions.MouseKeyboard.MouseStartDrag.Disable();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        Time.timeScale = 0f; // Met le temps � z�ro pour mettre le jeu en pause
+        Time.fixedDeltaTime = 0f;
+    }
+
+    public void PauseOff()
+    {
+        actions.Gamepad.GamepadStrenght.Enable();
+        actions.Gamepad.ThrowPlayer.Enable();
+        actions.MouseKeyboard.MouseStartDrag.Enable();
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+
+        // R�tablit le temps � sa valeur normale pour reprendre le jeu
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f;
     }
 
     private void OnDisable()
