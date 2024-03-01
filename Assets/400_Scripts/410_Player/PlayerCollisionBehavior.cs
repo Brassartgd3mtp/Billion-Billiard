@@ -69,7 +69,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
                 lootAnimation.StartAnimation();
             }
 
-        if (other.gameObject.TryGetComponent(out CollectibleReloadBoost collectibleReloadBoost)) 
+        if (other.gameObject.TryGetComponent(out CollectibleReloadBoost collectibleReloadBoost) && TurnBasedPlayer.Instance.shotRemaining < TurnBasedPlayer.Instance.nbrOfShots) 
         {
             TurnBasedPlayer.Instance.RecupBoostReload();
             other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
