@@ -58,7 +58,8 @@ public class ButtonActions : MonoBehaviour
         // Recharge la scène actuelle
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
-        Time.timeScale = 1f; //Rétablit le temps du jeu
+        //Rétablit le temps du jeu
+        Time.timeScale = 1f; 
        
     }
 
