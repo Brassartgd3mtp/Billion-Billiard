@@ -1,14 +1,10 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour
+public class InputManagerd : MonoBehaviour
 {
     PlayerActionMap actions;
 
-    private PlayerController playerController;
-    private PlayerFreeCam playerFreeCam;
-    private ReloadScene reloadScene;
     private NoClip noClip;
     // Start is called before the first frame update
     void Awake()
@@ -17,17 +13,15 @@ public class InputManager : MonoBehaviour
 
         if (gameObject.TryGetComponent(out PlayerController playerController))
         {
-            this.playerController = playerController;
             #region Gamepad
             TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.GamepadStrenght.Enable;
             TurnBasedSystem.OnEnablePlayerInput += actions.Gamepad.ThrowPlayer.Enable;
             TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.GamepadStrenght.Disable;
             TurnBasedSystem.OnDisablePlayerInput += actions.Gamepad.ThrowPlayer.Disable;
 
-            actions.Gamepad.ThrowPlayer.performed += playerController.Throw;
+            //actions.Gamepad.ThrowPlayer.performed += playerController.GamepadThrow;
             actions.Gamepad.GamepadStrenght.performed += playerController.GamepadStrenght;
             actions.Gamepad.GamepadStrenght.canceled += playerController.GamepadStrenght;
-            actions.Gamepad.PauseMenu.performed += PauseMenu;
             #endregion
             #region Mouse/Keyboard
             TurnBasedSystem.OnEnablePlayerInput += actions.MouseKeyboard.MouseStartDrag.Enable;
@@ -36,14 +30,13 @@ public class InputManager : MonoBehaviour
             actions.MouseKeyboard.MouseStrenght.performed += playerController.MouseStrenght;
             actions.MouseKeyboard.MouseStartDrag.started += playerController.MouseStartDrag;
             actions.MouseKeyboard.MouseStartDrag.performed += playerController.MouseStartDrag;
-            actions.MouseKeyboard.MouseStartDrag.canceled += playerController.MouseThrow;
+            actions.MouseKeyboard.MouseStartDrag.canceled += playerController.MouseStartDrag;
             actions.MouseKeyboard.MouseCancelThrow.performed += playerController.MouseCancelThrow;
             #endregion
         }
 
         if (gameObject.TryGetComponent(out PlayerFreeCam playerFreeCam))
         {
-            this.playerFreeCam = playerFreeCam;
             actions.Gamepad.FreeCam.performed += playerFreeCam.FreeCam;
             actions.Gamepad.FreeCam.canceled += playerFreeCam.FreeCam;
             actions.MouseKeyboard.FreeCam.performed += playerFreeCam.FreeCam;
@@ -53,7 +46,6 @@ public class InputManager : MonoBehaviour
 
         if (gameObject.TryGetComponent(out ReloadScene reloadScene))
         {
-            this.reloadScene = reloadScene;
             actions.Cheat.ReloadScene.performed += reloadScene.Reload;
         }
 
@@ -89,57 +81,25 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public GameObject panel;
-    private bool panelActive = false;
-    public GameObject PauseFirstbutton;
-    public void PauseMenu(InputAction.CallbackContext context)
-    {
-        // Inverse l'�tat d'activation du panneau
-        panelActive = !panelActive;
-
-        // Active ou d�sactive le panneau selon l'�tat
-        panel.SetActive(panelActive);
-
-        if (panelActive)
-        {
-            EventSystem.current.SetSelectedGameObject(null);
-            //Selectionne le first button
-            EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
-        }
-
-        if (panelActive)
-        {
-            //actions.Gamepad.Disable();
-            Time.timeScale = 0f; // Met le temps � z�ro pour mettre le jeu en pause
-            Time.fixedDeltaTime = 0f;
-        }
-        else
-        {
-            //actions.Gamepad.Enable();
-            Time.timeScale = 1f; // R�tablit le temps � sa valeur normale pour reprendre le jeu
-            Time.fixedDeltaTime = 1f;
-        }
-    }
-
     private void OnDisable()
     {
-        if (playerController != null)
+        if (gameObject.TryGetComponent(out PlayerController playerController))
         {
             #region Gamepad
-            actions.Gamepad.ThrowPlayer.performed -= playerController.Throw;
+            //actions.Gamepad.ThrowPlayer.performed -= playerController.GamepadThrow;
             actions.Gamepad.GamepadStrenght.performed -= playerController.GamepadStrenght;
             actions.Gamepad.GamepadStrenght.canceled -= playerController.GamepadStrenght;
-            actions.Gamepad.PauseMenu.performed -= PauseMenu;
             #endregion
             #region Mouse/Keyboard
             actions.MouseKeyboard.MouseStrenght.performed -= playerController.MouseStrenght;
+            actions.MouseKeyboard.MouseStartDrag.started -= playerController.MouseStartDrag;
             actions.MouseKeyboard.MouseStartDrag.performed -= playerController.MouseStartDrag;
             actions.MouseKeyboard.MouseStartDrag.canceled -= playerController.MouseStartDrag;
             actions.MouseKeyboard.MouseCancelThrow.performed -= playerController.MouseCancelThrow;
             #endregion
         }
 
-        if (playerFreeCam != null)
+        if (gameObject.TryGetComponent(out PlayerFreeCam playerFreeCam))
         {
             actions.Gamepad.FreeCam.performed -= playerFreeCam.FreeCam;
             actions.Gamepad.FreeCam.canceled -= playerFreeCam.FreeCam;
@@ -148,12 +108,12 @@ public class InputManager : MonoBehaviour
             actions.MouseKeyboard.StartFreeCam.canceled -= playerFreeCam.StartFreeCam;
         }
 
-        if (reloadScene != null)
+        if (gameObject.TryGetComponent(out ReloadScene reloadScene))
         {
             actions.Cheat.ReloadScene.performed -= reloadScene.Reload;
         }
 
-        if (noClip != null)
+        if (gameObject.TryGetComponent(out NoClip noClip))
         {
             actions.Cheat.NoClip.performed -= NoClipMode;
             actions.Cheat.NoClipControl.performed -= noClip.MovePlayer;
