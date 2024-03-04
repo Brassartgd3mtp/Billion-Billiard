@@ -206,6 +206,7 @@ public class PlayerController : MonoBehaviour
 
         if (context.canceled && MouseEnd != Vector2.zero)
         {
+            speedEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             Cursor.lockState = CursorLockMode.Confined;
             dragEnabled = false;
 
