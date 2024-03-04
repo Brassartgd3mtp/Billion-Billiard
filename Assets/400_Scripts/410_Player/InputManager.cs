@@ -44,11 +44,13 @@ public class InputManager : MonoBehaviour
         if (gameObject.TryGetComponent(out PlayerFreeCam playerFreeCam))
         {
             this.playerFreeCam = playerFreeCam;
-            actions.Gamepad.FreeCam.performed += playerFreeCam.FreeCam;
-            actions.Gamepad.FreeCam.canceled += playerFreeCam.FreeCam;
-            actions.MouseKeyboard.FreeCam.performed += playerFreeCam.FreeCam;
-            actions.MouseKeyboard.StartFreeCam.performed += playerFreeCam.StartFreeCam;
-            actions.MouseKeyboard.StartFreeCam.canceled += playerFreeCam.StartFreeCam;
+            //actions.Gamepad.FreeCam.performed += playerFreeCam.FreeCam;
+            //actions.Gamepad.FreeCam.canceled += playerFreeCam.FreeCam;
+            actions.Gamepad.StartFreeCam.performed += playerFreeCam.StartFreeCam;
+            actions.Gamepad.StartFreeCam.canceled += playerFreeCam.StartFreeCam;
+            //actions.MouseKeyboard.FreeCam.performed += playerFreeCam.FreeCam;
+            actions.MouseKeyboard.StartFreeCam.started += playerFreeCam.StartFreeCam;
+            //actions.MouseKeyboard.StartFreeCam.canceled += playerFreeCam.StartFreeCam;
         }
 
         if (gameObject.TryGetComponent(out ReloadScene reloadScene))
@@ -160,11 +162,13 @@ public class InputManager : MonoBehaviour
 
         if (playerFreeCam != null)
         {
-            actions.Gamepad.FreeCam.performed -= playerFreeCam.FreeCam;
-            actions.Gamepad.FreeCam.canceled -= playerFreeCam.FreeCam;
-            actions.MouseKeyboard.FreeCam.performed -= playerFreeCam.FreeCam;
-            actions.MouseKeyboard.StartFreeCam.performed -= playerFreeCam.StartFreeCam;
-            actions.MouseKeyboard.StartFreeCam.canceled -= playerFreeCam.StartFreeCam;
+            //actions.Gamepad.FreeCam.performed -= playerFreeCam.FreeCam;
+            //actions.Gamepad.FreeCam.canceled -= playerFreeCam.FreeCam;
+            actions.Gamepad.StartFreeCam.started -= playerFreeCam.StartFreeCam;
+            actions.Gamepad.StartFreeCam.canceled -= playerFreeCam.StartFreeCam;
+            //actions.MouseKeyboard.FreeCam.performed -= playerFreeCam.FreeCam;
+            actions.MouseKeyboard.StartFreeCam.started -= playerFreeCam.StartFreeCam;
+            //actions.MouseKeyboard.StartFreeCam.canceled -= playerFreeCam.StartFreeCam;
         }
 
         if (reloadScene != null)

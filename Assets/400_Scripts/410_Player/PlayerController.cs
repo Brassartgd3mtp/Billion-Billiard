@@ -53,27 +53,30 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     public void Throw(InputAction.CallbackContext context)
     {
-        isShooted = true;
-        posBeforeHit = transform.position;
+        if (ThrowStrength > 0.1f)
+        {
+            isShooted = true;
+            posBeforeHit = transform.position;
 
-        //Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-        rb.AddForce(transform.forward * ThrowStrength, ForceMode.Impulse);
+            //Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+            rb.AddForce(transform.forward * ThrowStrength, ForceMode.Impulse);
 
-        smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-        smokePoof.SetFloat("SmokeSize", ThrowStrength / StrengthMultiplier);
-        smokePoof.Play();
+            smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            smokePoof.SetFloat("SmokeSize", ThrowStrength / StrengthMultiplier);
+            smokePoof.Play();
 
-        var emissionSpeedEffect = speedEffect.emission;
-        emissionSpeedEffect.rateOverTime = ThrowStrength / StrengthMultiplier * 200f;
+            var emissionSpeedEffect = speedEffect.emission;
+            emissionSpeedEffect.rateOverTime = ThrowStrength / StrengthMultiplier * 200f;
 
-        speedEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        var durationSpeedEffect = speedEffect.main;
-        durationSpeedEffect.duration = ThrowStrength / StrengthMultiplier;
+            speedEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            var durationSpeedEffect = speedEffect.main;
+            durationSpeedEffect.duration = ThrowStrength / StrengthMultiplier;
 
-        speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-        speedEffect.Play();
+            speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            speedEffect.Play();
 
-        turnBasedPlayer.ShotCount();
+            turnBasedPlayer.ShotCount();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
