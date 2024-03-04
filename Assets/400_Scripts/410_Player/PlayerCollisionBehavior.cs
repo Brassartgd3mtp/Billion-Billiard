@@ -61,12 +61,12 @@ public class PlayerCollisionBehavior : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out MoneyStats moneyStats))
-            {
-                AddMoney(moneyStats.value);
-                uI_Stats.UpdateStats();
-                other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
-                lootAnimation.StartAnimation();
-            }
+        {
+            AddMoney(moneyStats.value);
+            uI_Stats.UpdateStats();
+            other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
+            lootAnimation.StartAnimation();
+        }
 
         if (other.gameObject.TryGetComponent(out CollectibleReloadBoost collectibleReloadBoost)) 
         {

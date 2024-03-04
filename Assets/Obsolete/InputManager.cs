@@ -37,9 +37,9 @@ public class InputManagerd : MonoBehaviour
 
         if (gameObject.TryGetComponent(out PlayerFreeCam playerFreeCam))
         {
-            actions.Gamepad.FreeCam.performed += playerFreeCam.FreeCam;
-            actions.Gamepad.FreeCam.canceled += playerFreeCam.FreeCam;
-            actions.MouseKeyboard.FreeCam.performed += playerFreeCam.FreeCam;
+            //actions.Gamepad.FreeCam.performed += playerFreeCam.FreeCam;
+            //actions.Gamepad.FreeCam.canceled += playerFreeCam.FreeCam;
+            //actions.MouseKeyboard.FreeCam.performed += playerFreeCam.FreeCam;
             actions.MouseKeyboard.StartFreeCam.performed += playerFreeCam.StartFreeCam;
             actions.MouseKeyboard.StartFreeCam.canceled += playerFreeCam.StartFreeCam;
         }
@@ -101,9 +101,9 @@ public class InputManagerd : MonoBehaviour
 
         if (gameObject.TryGetComponent(out PlayerFreeCam playerFreeCam))
         {
-            actions.Gamepad.FreeCam.performed -= playerFreeCam.FreeCam;
-            actions.Gamepad.FreeCam.canceled -= playerFreeCam.FreeCam;
-            actions.MouseKeyboard.FreeCam.performed -= playerFreeCam.FreeCam;
+            //actions.Gamepad.FreeCam.performed -= playerFreeCam.FreeCam;
+            //actions.Gamepad.FreeCam.canceled -= playerFreeCam.FreeCam;
+            //actions.MouseKeyboard.FreeCam.performed -= playerFreeCam.FreeCam;
             actions.MouseKeyboard.StartFreeCam.performed -= playerFreeCam.StartFreeCam;
             actions.MouseKeyboard.StartFreeCam.canceled -= playerFreeCam.StartFreeCam;
         }
