@@ -4536,6 +4536,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &671428424 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8125212939013970026, guid: 2937f4216b86e8344b341c7018ac1359,
+    type: 3}
+  m_PrefabInstance: {fileID: 1904525194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &675556453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8194,6 +8200,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148240dd38be1744aab2f6d194f36330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1304187174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1125611072186449216, guid: 2937f4216b86e8344b341c7018ac1359,
+    type: 3}
+  m_PrefabInstance: {fileID: 1904525194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1310007402 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8799958315596893065, guid: c27a5836f46515246b4776af2f229955,
@@ -9235,7 +9247,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerController
       value: 
-      objectReference: {fileID: 1458796474}
+      objectReference: {fileID: 0}
     - target: {fileID: -6389856217533770102, guid: e29c926224c4a5641a2b2f079d0273fa,
         type: 3}
       propertyPath: uI_ShotRemaining
@@ -9250,7 +9262,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerController
       value: 
-      objectReference: {fileID: 1458796474}
+      objectReference: {fileID: 0}
     - target: {fileID: 1266396365229697169, guid: e29c926224c4a5641a2b2f079d0273fa,
         type: 3}
       propertyPath: panel
@@ -9336,6 +9348,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9127436154064041178, guid: e29c926224c4a5641a2b2f079d0273fa,
+        type: 3}
+      propertyPath: panel
+      value: 
+      objectReference: {fileID: 671428424}
+    - target: {fileID: 9127436154064041178, guid: e29c926224c4a5641a2b2f079d0273fa,
+        type: 3}
+      propertyPath: PauseFirstbutton
+      value: 
+      objectReference: {fileID: 1304187174}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -9373,18 +9395,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59782b71be0770544a8f36b1e5b2e382, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1458796474 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7235643447057658164, guid: e29c926224c4a5641a2b2f079d0273fa,
-    type: 3}
-  m_PrefabInstance: {fileID: 1458796466}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 845db6517468cfb4ca2dfba908b7a66f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1544836361 stripped
