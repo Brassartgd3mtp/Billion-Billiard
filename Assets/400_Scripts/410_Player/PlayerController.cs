@@ -156,8 +156,8 @@ public class PlayerController : MonoBehaviour
 
         if (context.canceled)
         {
-            SetLookDirection(Vector2.zero);
             ThrowStrength = 0;
+            SetLookDirection(Vector2.zero);
         }
     }
 
@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour
         {
             dragEnabled = false;
 
-            //MouseThrowStrenght = 0;
+            ThrowStrength = 0;
             MouseEnd = Vector2.zero;
             SetLookDirection(Vector2.zero);
         }
