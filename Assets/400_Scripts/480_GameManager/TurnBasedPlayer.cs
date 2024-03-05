@@ -87,6 +87,7 @@ public class TurnBasedPlayer : MonoBehaviour
         shotRemaining += 1;
         uI_ShotRemaining.UpdateUI(shotRemaining);
         TurnBasedSystem.ReloadForPlayer();
+        ParticleShotRemaining.PassiveUpdateShots();
     }
 
     public void PassiveReload()

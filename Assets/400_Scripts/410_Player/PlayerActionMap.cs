@@ -57,7 +57,16 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""PauseMenu"",
                     ""type"": ""Button"",
-                    ""id"": ""68438bbf-c94c-4f21-9c56-b5b5ddaca6b1"",
+                    ""id"": ""4d550153-e311-4107-87b9-22cd7ef4bca6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StartFreeCam"",
+                    ""type"": ""Button"",
+                    ""id"": ""a2c79c0b-55ae-4b1d-923c-f1bbe61ce3d3"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -100,7 +109,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2aa9db9b-a550-46af-aa7c-83b896ee28fa"",
+                    ""id"": ""8bb8bd9d-bbba-4836-acec-d64283c42d23"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -111,8 +120,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f6996efc-d195-46ed-9800-49bf215e7d0e"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""6af3867b-b8e2-4954-839c-ced0a4683ee8"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -122,12 +131,12 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e82b585f-cb8e-41f5-96c2-8b7f4e57c3d8"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""id"": ""26d4424c-ac7b-43a7-afb0-8e2552cb80b9"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PauseMenu"",
+                    ""action"": ""StartFreeCam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -298,6 +307,17 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""f418a2b6-7ac7-4d18-9692-0a4782b15491"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": ""MultiTap(tapCount=3)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""No-Clip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""46b72e63-06b2-4264-920b-354c3e160e83"",
                     ""path"": ""<Keyboard>/backslash"",
                     ""interactions"": ""MultiTap(tapCount=3)"",
@@ -412,6 +432,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         m_Gamepad_ThrowPlayer = m_Gamepad.FindAction("Throw Player", throwIfNotFound: true);
         m_Gamepad_FreeCam = m_Gamepad.FindAction("FreeCam", throwIfNotFound: true);
         m_Gamepad_PauseMenu = m_Gamepad.FindAction("PauseMenu", throwIfNotFound: true);
+        m_Gamepad_StartFreeCam = m_Gamepad.FindAction("StartFreeCam", throwIfNotFound: true);
         // Mouse/Keyboard
         m_MouseKeyboard = asset.FindActionMap("Mouse/Keyboard", throwIfNotFound: true);
         m_MouseKeyboard_MouseStartDrag = m_MouseKeyboard.FindAction("MouseStartDrag", throwIfNotFound: true);
@@ -492,6 +513,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gamepad_ThrowPlayer;
     private readonly InputAction m_Gamepad_FreeCam;
     private readonly InputAction m_Gamepad_PauseMenu;
+    private readonly InputAction m_Gamepad_StartFreeCam;
     public struct GamepadActions
     {
         private @PlayerActionMap m_Wrapper;
@@ -500,6 +522,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         public InputAction @ThrowPlayer => m_Wrapper.m_Gamepad_ThrowPlayer;
         public InputAction @FreeCam => m_Wrapper.m_Gamepad_FreeCam;
         public InputAction @PauseMenu => m_Wrapper.m_Gamepad_PauseMenu;
+        public InputAction @StartFreeCam => m_Wrapper.m_Gamepad_StartFreeCam;
         public InputActionMap Get() { return m_Wrapper.m_Gamepad; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -521,6 +544,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @PauseMenu.started += instance.OnPauseMenu;
             @PauseMenu.performed += instance.OnPauseMenu;
             @PauseMenu.canceled += instance.OnPauseMenu;
+            @StartFreeCam.started += instance.OnStartFreeCam;
+            @StartFreeCam.performed += instance.OnStartFreeCam;
+            @StartFreeCam.canceled += instance.OnStartFreeCam;
         }
 
         private void UnregisterCallbacks(IGamepadActions instance)
@@ -537,6 +563,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @PauseMenu.started -= instance.OnPauseMenu;
             @PauseMenu.performed -= instance.OnPauseMenu;
             @PauseMenu.canceled -= instance.OnPauseMenu;
+            @StartFreeCam.started -= instance.OnStartFreeCam;
+            @StartFreeCam.performed -= instance.OnStartFreeCam;
+            @StartFreeCam.canceled -= instance.OnStartFreeCam;
         }
 
         public void RemoveCallbacks(IGamepadActions instance)
@@ -746,6 +775,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         void OnThrowPlayer(InputAction.CallbackContext context);
         void OnFreeCam(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
+        void OnStartFreeCam(InputAction.CallbackContext context);
     }
     public interface IMouseKeyboardActions
     {

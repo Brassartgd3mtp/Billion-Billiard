@@ -499,7 +499,6 @@ GameObject:
   - component: {fileID: 4451921943200644511}
   - component: {fileID: 219965253872280635}
   - component: {fileID: 6769398492764119924}
-  - component: {fileID: 5830263648982149756}
   m_Layer: 8
   m_Name: Collectible_BoostReload
   m_TagString: Untagged
@@ -543,8 +542,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.79341763, z: 1}
-  m_Center: {x: 0, y: 0.44229713, z: 0}
+  m_Size: {x: 1.25, y: 1, z: 1.25}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &219965253872280635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,30 +574,3 @@ MonoBehaviour:
   timeToScale: 0.5
   scaleValue: 0.5
   timerToMove: 0.5
---- !u!54 &5830263648982149756
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9078195869008399680}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0

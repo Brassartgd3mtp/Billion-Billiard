@@ -12,13 +12,19 @@ public class EndLevel : MonoBehaviour
     {
         if (other.gameObject.layer == 3)
         {
-            Gamepad.current.ResetHaptics();
+            if (Gamepad.current != null)
+            {
+                Gamepad.current.ResetHaptics();
+            }
             SceneManager.LoadScene(nextLevel);
         }
     }
 
     private void OnDisable()
     {
+        if (Gamepad.current != null)
+        {
         Gamepad.current.ResetHaptics();
+        }
     }
 }

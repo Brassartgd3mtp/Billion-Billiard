@@ -10,7 +10,7 @@ public class ButtonActions : MonoBehaviour
     public GameObject OptionFirstbutton;
     public GameObject PauseFirstbutton;
 
-
+    public InputManager InputManager;
 
     void Start()
     {
@@ -23,8 +23,11 @@ public class ButtonActions : MonoBehaviour
     {
         // Ferme le panneau
         if (panel != null)
+        {
+            InputManager.PauseOff();
             panel.SetActive(false);
-        Time.timeScale = 1f;
+            InputManager.panelActive = false;
+        }
     }
 
     public void OnOptionButtonClick()
@@ -58,7 +61,8 @@ public class ButtonActions : MonoBehaviour
         // Recharge la scène actuelle
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
-        Time.timeScale = 1f; //Rétablit le temps du jeu
+        //Rétablit le temps du jeu
+        Time.timeScale = 1f; 
        
     }
 
