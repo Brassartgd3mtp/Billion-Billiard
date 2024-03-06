@@ -24,9 +24,9 @@ public class ButtonActions : MonoBehaviour
         // Ferme le panneau
         if (panel != null)
         {
-            InputManager.PauseOff();
+     //       InputManager.PauseOff();
             panel.SetActive(false);
-            InputManager.panelActive = false;
+     //       InputManager.panelActive = false;
         }
     }
 
