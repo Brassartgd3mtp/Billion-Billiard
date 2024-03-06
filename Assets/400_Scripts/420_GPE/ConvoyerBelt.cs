@@ -9,18 +9,13 @@ public class ConvoyerBelt : MonoBehaviour
     private Vector3 direction;
 
     [SerializeField, Range(0, 100), Space] private float speed;
-    // Start is called before the first frame update
-    void Awake()
+
+    void Update()
     {
         float directionX = endPoint.transform.position.x - startPoint.transform.position.x;
         float directionZ = endPoint.transform.position.z - startPoint.transform.position.z;
 
         direction = new Vector3(directionX, 0, directionZ);
-    }
-
-    void Update()
-    {
-        //Intégrer l'animation du convoyer en prenant compte de la speed
     }
 
     private void OnTriggerStay(Collider other)
