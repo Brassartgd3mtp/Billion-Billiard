@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8650171071199780517}
   - component: {fileID: 97374967629316815}
   - component: {fileID: 2303828487666668448}
-  - component: {fileID: 532569462287914861}
   m_Layer: 0
   m_Name: Shape
   m_TagString: Untagged
@@ -1861,7 +1860,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 296629149016627217}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 71d70a2dfd272c64582cd1b6ca4401e4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1876,19 +1875,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &532569462287914861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 296629149016627217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 1
 --- !u!1 &5234158855868370711
 GameObject:
   m_ObjectHideFlags: 0
@@ -1898,7 +1884,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1386986619437916721}
-  - component: {fileID: -3534420448544619627}
   m_Layer: 0
   m_Name: Bumper_Concave_Mild_L
   m_TagString: Untagged
@@ -1922,25 +1907,3 @@ Transform:
   - {fileID: 5638351250732049920}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &-3534420448544619627
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5234158855868370711}
-  m_Material: {fileID: 13400000, guid: 71d70a2dfd272c64582cd1b6ca4401e4, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
