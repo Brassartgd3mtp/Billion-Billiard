@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TurnBasedPlayer : MonoBehaviour
 {
-    private Rigidbody rb;
-    private Vector3 vel;
     public float speed;
 
     public bool hasStopped { get; private set; }
@@ -39,36 +37,13 @@ public class TurnBasedPlayer : MonoBehaviour
 
         shotRemaining = nbrOfShots;
         playerController = GetComponent<PlayerController>();
-        rb = GetComponent<Rigidbody>();
         uI_ShotRemaining.UpdateUI(shotRemaining);
         ParticleShotRemaining.Initialize(nbrOfShots);
     }
 
     public void Update()
     {
-        vel = rb.velocity;
-        speed = vel.magnitude;
-
-        if (speed > 0.3f)
-        {
-            dragChecker = true;
-            reShooted = false;
-        }
-
-        if (speed < 0.3f && dragChecker && !reShooted)
-        {
-            rb.velocity = Vector3.zero;
-        }
-        else rb.drag = 1;
-
-        if (speed == 0)
-            rb.drag = 1;
-
-        if (playerController.isShooted && !hasStopped && speed == 0) 
-        {
-            dragChecker = false;
-            hasStopped = true;
-        }
+        
 
         if (ReloadCooldown > 0)
         {
