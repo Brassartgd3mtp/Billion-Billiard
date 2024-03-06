@@ -92,7 +92,7 @@ public class InputManager : MonoBehaviour
     }
 
     public GameObject panel;
-    private bool panelActive = false;
+    public bool panelActive = false;
     public GameObject PauseFirstbutton;
     public void PauseMenu(InputAction.CallbackContext context)
     {
