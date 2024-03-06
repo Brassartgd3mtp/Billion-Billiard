@@ -886,7 +886,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4154005203041823379}
-  - component: {fileID: 482764440472992537}
+  - component: {fileID: 390472582929036348}
   m_Layer: 7
   m_Name: Wall-Corner
   m_TagString: Untagged
@@ -912,19 +912,28 @@ Transform:
   - {fileID: 6790986583427802330}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &482764440472992537
-MonoBehaviour:
+--- !u!64 &390472582929036348
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6155460155184200221}
+  m_Material: {fileID: 13400000, guid: 663277fccfd317b4c97f9c6f7c59d0dd, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 0
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &7144206591357088925
 GameObject:
   m_ObjectHideFlags: 0

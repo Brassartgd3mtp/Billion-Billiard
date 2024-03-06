@@ -119,7 +119,7 @@ public class InputManager : MonoBehaviour
         {
             //actions.Gamepad.Enable();
             Time.timeScale = 1f; // R�tablit le temps � sa valeur normale pour reprendre le jeu
-            Time.fixedDeltaTime = 1f;
+            Time.fixedDeltaTime = .02f;
         }
     }
 
