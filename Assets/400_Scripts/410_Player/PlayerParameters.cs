@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerParameters : MonoBehaviour
 {
     private PlayerController playerController;
-    private PhysicMaterial physicMaterial;
 
     private Rigidbody rb;
     public float playerMass;
@@ -15,19 +14,16 @@ public class PlayerParameters : MonoBehaviour
     public float timerOfCurve;
 
     public float speedForStartingDrag;
-    public bool startDrag;
+    private bool startDrag;
     private float timerForDrag;
 
     private Vector3 vel;
     [SerializeField] private float speed;
     private bool canDrag;
 
-    public float bounciness;
-
 
     public void Awake()
     {
-        physicMaterial = GetComponent<PhysicMaterial>();
         rb = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
     }
@@ -35,7 +31,6 @@ public class PlayerParameters : MonoBehaviour
     public void Start()
     {
         rb.mass = playerMass;
-        bounciness = physicMaterial.bounciness;
     }
 
     public void Update()
@@ -57,30 +52,11 @@ public class PlayerParameters : MonoBehaviour
             }
         }
 
-        //if (speed > speedForStartingDrag && !playerController.isShooted)
-        //{
-        //    canDrag = true;
-        //}
-
         if (speed < speedForStartingDrag && canDrag)
         {
-            //rb.velocity = Vector3.zero;
             timerOfCurve += Time.deltaTime;
             rb.drag = dragCurve.Evaluate(timerOfCurve);
         }
         else rb.drag = 1;
-
-        //if (speed == 0)
-        //    rb.drag = 1;
-
-        //if (playerController.isShooted && !hasStopped && speed == 0)
-        //{
-        //    canDrag = false;
-        //}
-
-        //if (speed <= speedForStartingDrag)
-        //{
-        //
-        //}
     }
 }
