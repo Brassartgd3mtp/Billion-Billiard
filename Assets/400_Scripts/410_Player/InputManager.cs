@@ -96,7 +96,7 @@ public class InputManager : MonoBehaviour
         if (panelActive)
         {
             panel.SetActive(true);
-            Gamepad.current.ResetHaptics();
+            Gamepad.current?.ResetHaptics();
             EventSystem.current.SetSelectedGameObject(null);
             //Selectionne le first button
             EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
