@@ -1428,7 +1428,6 @@ GameObject:
   - component: {fileID: 843082912}
   - component: {fileID: 843082911}
   - component: {fileID: 843082910}
-  - component: {fileID: 843082909}
   - component: {fileID: 843082908}
   m_Layer: 0
   m_Name: Sphere
@@ -1464,19 +1463,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
---- !u!114 &843082909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 843082907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 4
 --- !u!135 &843082910
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1749,7 +1735,7 @@ PrefabInstance:
     - target: {fileID: 8995588591882479197, guid: e29c926224c4a5641a2b2f079d0273fa,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: 3.92
       objectReference: {fileID: 0}
     - target: {fileID: 8995588591882479197, guid: e29c926224c4a5641a2b2f079d0273fa,
         type: 3}
@@ -1759,7 +1745,7 @@ PrefabInstance:
     - target: {fileID: 8995588591882479197, guid: e29c926224c4a5641a2b2f079d0273fa,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 4.64
       objectReference: {fileID: 0}
     - target: {fileID: 8995588591882479197, guid: e29c926224c4a5641a2b2f079d0273fa,
         type: 3}
@@ -2642,7 +2628,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 13400000, guid: 663277fccfd317b4c97f9c6f7c59d0dd,
+      objectReference: {fileID: 13400000, guid: 71d70a2dfd272c64582cd1b6ca4401e4,
         type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2767,18 +2753,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!114 &2078774218 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1262219747523450859, guid: 3460b9607fd8ff94eaffd653cda8e994,
-    type: 3}
-  m_PrefabInstance: {fileID: 2146033529}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d80acebfbdf86a342b2423732609d01e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2146033529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2795,23 +2769,13 @@ PrefabInstance:
     - target: {fileID: 446361636336302635, guid: 3460b9607fd8ff94eaffd653cda8e994,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.832369
-      objectReference: {fileID: 0}
-    - target: {fileID: 446361636336302635, guid: 3460b9607fd8ff94eaffd653cda8e994,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 12.108828
+      value: 16.752369
       objectReference: {fileID: 0}
     - target: {fileID: 446361636336302635, guid: 3460b9607fd8ff94eaffd653cda8e994,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.6683307
+      value: -1.0283298
       objectReference: {fileID: 0}
-    - target: {fileID: 6575973729945235384, guid: 3460b9607fd8ff94eaffd653cda8e994,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 1395266289}
     - target: {fileID: 6975304712669968987, guid: 3460b9607fd8ff94eaffd653cda8e994,
         type: 3}
       propertyPath: m_Name
@@ -2867,25 +2831,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8141712987838359156, guid: 3460b9607fd8ff94eaffd653cda8e994,
+    - target: {fileID: 7981766480983460366, guid: 3460b9607fd8ff94eaffd653cda8e994,
         type: 3}
-      propertyPath: playerFreeCam
+      propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 2078774218}
+      objectReference: {fileID: 1395266289}
     - target: {fileID: 9204050805870219788, guid: 3460b9607fd8ff94eaffd653cda8e994,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.832369
-      objectReference: {fileID: 0}
-    - target: {fileID: 9204050805870219788, guid: 3460b9607fd8ff94eaffd653cda8e994,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 12.108828
+      value: 16.752369
       objectReference: {fileID: 0}
     - target: {fileID: 9204050805870219788, guid: 3460b9607fd8ff94eaffd653cda8e994,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.6683307
+      value: -1.0283298
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
