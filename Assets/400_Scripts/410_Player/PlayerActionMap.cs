@@ -120,6 +120,17 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""59398852-e809-4197-95f8-d97939141b55"",
+                    ""path"": ""<Keyboard>/#(²)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""26d4424c-ac7b-43a7-afb0-8e2552cb80b9"",
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
