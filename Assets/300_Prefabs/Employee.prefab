@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4972168318465241603}
   - component: {fileID: 1735210756315005529}
   - component: {fileID: 311336812292505549}
+  - component: {fileID: 3766067467063141025}
   m_Layer: 0
   m_Name: Employee
   m_TagString: Untagged
@@ -133,3 +134,45 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
+--- !u!114 &3766067467063141025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7008318267522027370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba59cc4fd028ea498631efaa0ee3b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NPCMass: 1
+  dragCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 4.4954987
+      value: 4.104019
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  timerOfCurve: 0
+  speedForStartingDrag: 1
+  speed: 0
+  bounciness: 1
+  physicMaterial: {fileID: 0}
