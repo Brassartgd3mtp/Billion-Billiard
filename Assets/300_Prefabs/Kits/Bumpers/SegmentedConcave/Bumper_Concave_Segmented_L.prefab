@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2827059538931287821}
-  - component: {fileID: -2412508144994778233}
   m_Layer: 0
   m_Name: Bumper_Concave_Segmented_L
   m_TagString: Untagged
@@ -33,28 +32,6 @@ Transform:
   - {fileID: 1593673769498737016}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &-2412508144994778233
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4162405991968814209}
-  m_Material: {fileID: 13400000, guid: 71d70a2dfd272c64582cd1b6ca4401e4, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &4554318337496186174
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,7 +46,6 @@ GameObject:
   - component: {fileID: 5799104522630815122}
   - component: {fileID: 8618527161801415105}
   - component: {fileID: 7688391056587448295}
-  - component: {fileID: 8214523381030396897}
   m_Layer: 0
   m_Name: Shape
   m_TagString: Untagged
@@ -651,7 +627,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4554318337496186174}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 71d70a2dfd272c64582cd1b6ca4401e4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -666,16 +642,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &8214523381030396897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4554318337496186174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 1

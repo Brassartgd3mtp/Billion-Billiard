@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1953878343391636909}
   - component: {fileID: 9202191895657039707}
   - component: {fileID: 6946760894211297566}
-  - component: {fileID: 1648698761951567953}
   - component: {fileID: 3555382546265683011}
   m_Layer: 0
   m_Name: Shape
@@ -801,19 +800,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4149225557933116763}
   m_Mesh: {fileID: 0}
---- !u!114 &1648698761951567953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4149225557933116763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 2
 --- !u!64 &3555382546265683011
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -821,7 +807,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4149225557933116763}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5810a3964c3465d44b16a7d27e4f85d2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -845,7 +831,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4519337305700534595}
-  - component: {fileID: -2890119671813419958}
   m_Layer: 0
   m_Name: Wall_Felt_HalfCircle
   m_TagString: Untagged
@@ -869,25 +854,3 @@ Transform:
   - {fileID: 5832156559082015154}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &-2890119671813419958
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4343856178600412790}
-  m_Material: {fileID: 13400000, guid: 5810a3964c3465d44b16a7d27e4f85d2, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}

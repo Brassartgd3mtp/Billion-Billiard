@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2898444571117510751}
   - component: {fileID: 6344741107901760665}
   - component: {fileID: 1885199431264933222}
-  - component: {fileID: 5732713662216641687}
   - component: {fileID: 980530931747767519}
   m_Layer: 0
   m_Name: Shape
@@ -560,19 +559,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601916639241169672}
   m_Mesh: {fileID: 0}
---- !u!114 &5732713662216641687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1601916639241169672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 1
 --- !u!64 &980530931747767519
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -580,7 +566,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601916639241169672}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: cb502d32bb17d644c90018057f1fb8b3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -604,7 +590,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3592262248412329208}
-  - component: {fileID: -6559090068269666499}
   m_Layer: 0
   m_Name: Wall_Rubber_QuarterCircle
   m_TagString: Untagged
@@ -628,25 +613,3 @@ Transform:
   - {fileID: 5963772874202870528}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &-6559090068269666499
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4788893475671009903}
-  m_Material: {fileID: 13400000, guid: cb502d32bb17d644c90018057f1fb8b3, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
