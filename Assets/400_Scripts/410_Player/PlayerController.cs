@@ -177,19 +177,17 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     public void GamepadStrenght(InputAction.CallbackContext context)
     {
-        if (rb.velocity.magnitude > 0f)
+        if (context.performed)
         {
-            if (context.performed)
-            {
-                SetLookDirection(-context.ReadValue<Vector2>());
-                ThrowStrength = context.ReadValue<Vector2>().magnitude * StrengthMultiplier;
-            }
+            SetLookDirection(-context.ReadValue<Vector2>());
+            ThrowStrength = context.ReadValue<Vector2>().magnitude * StrengthMultiplier;
+            
+        }
 
-            if (context.canceled)
-            {
-                ThrowStrength = 0;
-                SetLookDirection(Vector2.zero);
-            }
+        if (context.canceled)
+        {
+            ThrowStrength = 0;
+            SetLookDirection(Vector2.zero);
         }
     }
 
