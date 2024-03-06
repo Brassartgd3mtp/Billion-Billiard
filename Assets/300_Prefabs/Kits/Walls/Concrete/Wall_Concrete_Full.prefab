@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8830281712411584417}
   - component: {fileID: 1056427483159731502}
   - component: {fileID: 4731945446893575787}
-  - component: {fileID: 7280409324481023831}
   m_Layer: 0
   m_Name: Shape
   m_TagString: Untagged
@@ -93,7 +92,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1212797815558080631}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 663277fccfd317b4c97f9c6f7c59d0dd, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -324,19 +323,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!114 &7280409324481023831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212797815558080631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 0
 --- !u!1 &5180758536187121291
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +332,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2921263437673336891}
-  - component: {fileID: 6936929354173762908}
   m_Layer: 0
   m_Name: Wall_Concrete_Full
   m_TagString: Untagged
@@ -370,25 +355,3 @@ Transform:
   - {fileID: 9189832424076565220}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &6936929354173762908
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5180758536187121291}
-  m_Material: {fileID: 13400000, guid: 663277fccfd317b4c97f9c6f7c59d0dd, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}

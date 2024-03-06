@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 577684562439053949}
-  - component: {fileID: -7223556846758182377}
   m_Layer: 0
   m_Name: Wall_Rubber_Triangle
   m_TagString: Untagged
@@ -33,28 +32,6 @@ Transform:
   - {fileID: 1224305505254975734}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &-7223556846758182377
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1375410868625989152}
-  m_Material: {fileID: 13400000, guid: cb502d32bb17d644c90018057f1fb8b3, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &2331171143158561080
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,7 +44,6 @@ GameObject:
   - component: {fileID: 4480842487050324676}
   - component: {fileID: 2578184421403197700}
   - component: {fileID: 897119882636727399}
-  - component: {fileID: 3076012250195309483}
   - component: {fileID: 931365879667392003}
   m_Layer: 0
   m_Name: Shape
@@ -411,19 +387,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2331171143158561080}
   m_Mesh: {fileID: 0}
---- !u!114 &3076012250195309483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2331171143158561080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 1
 --- !u!64 &931365879667392003
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -431,7 +394,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2331171143158561080}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: cb502d32bb17d644c90018057f1fb8b3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
