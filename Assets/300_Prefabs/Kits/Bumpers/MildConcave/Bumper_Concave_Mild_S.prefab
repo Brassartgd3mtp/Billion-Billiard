@@ -8,25 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2897268678533868014, guid: a4e04306b9d6ab24fbf5e7837d06b217,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3198667474625636322, guid: a4e04306b9d6ab24fbf5e7837d06b217,
         type: 3}
       propertyPath: m_Name
       value: Bumper_Concave_Mild_S
-      objectReference: {fileID: 0}
-    - target: {fileID: 3485113186121416225, guid: a4e04306b9d6ab24fbf5e7837d06b217,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5619987090106383359, guid: a4e04306b9d6ab24fbf5e7837d06b217,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5619987090106383359, guid: a4e04306b9d6ab24fbf5e7837d06b217,
         type: 3}
@@ -86,5 +71,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7129125223385465834, guid: a4e04306b9d6ab24fbf5e7837d06b217,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 739374386086292273}
   m_SourcePrefab: {fileID: 100100000, guid: a4e04306b9d6ab24fbf5e7837d06b217, type: 3}
+--- !u!1 &2738745504288759368 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7129125223385465834, guid: a4e04306b9d6ab24fbf5e7837d06b217,
+    type: 3}
+  m_PrefabInstance: {fileID: 4966985611241020834}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &739374386086292273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2738745504288759368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 1

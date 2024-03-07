@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bumper_Circle_M
       objectReference: {fileID: 0}
+    - target: {fileID: 1495054806756710190, guid: cb622b1cac5ccf94caeb2b4c3ba020e9,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6034430799305996113, guid: cb622b1cac5ccf94caeb2b4c3ba020e9,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -102,5 +107,28 @@ PrefabInstance:
     - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7512724064307360510, guid: cb622b1cac5ccf94caeb2b4c3ba020e9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3672647214705790731}
   m_SourcePrefab: {fileID: 100100000, guid: cb622b1cac5ccf94caeb2b4c3ba020e9, type: 3}
+--- !u!1 &6330755868564334797 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7512724064307360510, guid: cb622b1cac5ccf94caeb2b4c3ba020e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 4582925340320373299}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3672647214705790731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6330755868564334797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 1
