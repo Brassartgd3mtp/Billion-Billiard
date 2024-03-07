@@ -89,7 +89,6 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         pm = collision.collider.material;
-        Debug.Log(rb.velocity.magnitude);
 
         Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
         Quaternion newRot = Quaternion.LookRotation(reflect);
