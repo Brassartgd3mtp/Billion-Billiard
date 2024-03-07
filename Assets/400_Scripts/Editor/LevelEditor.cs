@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Diagnostics.Eventing.Reader;
+using UnityEngine.UIElements;
 
 public class LevelEditor : EditorWindow
 {
@@ -26,7 +28,12 @@ public class LevelEditor : EditorWindow
         {
            Instantiate(actualGameObject);
         }
+    }
 
-        
+    public void OnEnable()
+    {
+        Button button = new Button();
+        button.clicked += () => Debug.Log(button);
+        rootVisualElement.Add(button);
     }
 }
