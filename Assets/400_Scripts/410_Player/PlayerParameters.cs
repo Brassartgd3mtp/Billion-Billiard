@@ -8,11 +8,15 @@ public class PlayerParameters : MonoBehaviour
     private PlayerController playerController;
 
     private Rigidbody rb;
+
+    [Tooltip("Masse du player, la masse du Rigidbody se set au start à partir de cette valeur")]
     public float playerMass;
 
+    [Tooltip("Courbe de la valeur de Drag sur le temps. Elle débute lorsque la valeur de Speed est inférieure à speedForStartingDrag")]
     public AnimationCurve dragCurve;
     public float timerOfCurve;
 
+    [Tooltip("Valeur de la Speed à partir de laquelle la courbe de Drag débute")]
     public float speedForStartingDrag;
     private bool startDrag;
     private float timerForDrag;

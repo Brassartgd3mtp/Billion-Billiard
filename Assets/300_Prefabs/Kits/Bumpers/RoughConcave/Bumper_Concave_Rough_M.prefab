@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 255518305091380047}
   - component: {fileID: 1253126247187436728}
   - component: {fileID: 7728490775508944341}
-  - component: {fileID: 3605135311863179034}
   - component: {fileID: 9014970585768333095}
   m_Layer: 0
   m_Name: Shape
@@ -2051,19 +2050,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4719672793318803298}
   m_Mesh: {fileID: 0}
---- !u!114 &3605135311863179034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4719672793318803298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 1
 --- !u!64 &9014970585768333095
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2071,7 +2057,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4719672793318803298}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 71d70a2dfd272c64582cd1b6ca4401e4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

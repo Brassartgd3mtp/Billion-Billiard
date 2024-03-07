@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3045627336276856642}
   - component: {fileID: 8697622106397204519}
   - component: {fileID: 4738657429182626550}
-  - component: {fileID: 7851933005280342225}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -92,7 +91,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2548772467558623479}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 71d70a2dfd272c64582cd1b6ca4401e4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -106,19 +105,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7851933005280342225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2548772467558623479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 1
 --- !u!1 &5078236302160913495
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +117,6 @@ GameObject:
   - component: {fileID: 5114456686577524246}
   - component: {fileID: 7010180904548664170}
   - component: {fileID: 3868244981778157405}
-  - component: {fileID: 4837150022444059532}
   - component: {fileID: 7981159438270088539}
   m_Layer: 0
   m_Name: Curve_R
@@ -919,19 +904,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5078236302160913495}
   m_Mesh: {fileID: 0}
---- !u!114 &4837150022444059532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5078236302160913495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 1
 --- !u!64 &7981159438270088539
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -939,7 +911,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5078236302160913495}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 71d70a2dfd272c64582cd1b6ca4401e4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1000,7 +972,6 @@ GameObject:
   - component: {fileID: 7321369163709248962}
   - component: {fileID: 4777240581123290572}
   - component: {fileID: 6059164753753856024}
-  - component: {fileID: 4370746561365578203}
   - component: {fileID: 5067886977229852816}
   m_Layer: 0
   m_Name: Curve_L
@@ -1788,19 +1759,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6206240917854412568}
   m_Mesh: {fileID: 0}
---- !u!114 &4370746561365578203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6206240917854412568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 1
 --- !u!64 &5067886977229852816
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1808,7 +1766,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6206240917854412568}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 71d70a2dfd272c64582cd1b6ca4401e4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
