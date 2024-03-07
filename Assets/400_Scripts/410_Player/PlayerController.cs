@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
 
+    [SerializeField] private BounceValues bounceValues;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -85,58 +87,60 @@ public class PlayerController : MonoBehaviour
         lastVel = rb.velocity;
     }
 
-    PhysicMaterial pm;
+    //PhysicMaterial pm;
     private void OnCollisionEnter(Collision collision)
     {
-        pm = collision.collider.material;
-        Debug.Log(rb.velocity.magnitude);
-
-        Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
-        Quaternion newRot = Quaternion.LookRotation(reflect);
-        rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
-
-        StartCoroutine(Haptic(0f, 1f, .2f));
-
-        switch (pm.name)
-        {
-            case "Bumper (Instance)":
-                if (rb.velocity.magnitude > 20f)
-                    rb.AddForce(lastVel.normalized * 10f, ForceMode.Impulse);
-                break;
-
-            //Ajouter d'autres exceptions si nécessaire
-        }
-
-        //if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
-        //{
-        //    float speed = lastVel.magnitude;
-        //    Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
-        //    Quaternion newRot = Quaternion.LookRotation(reflect);
-        //    
-        //    rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
-        //    switch (obstacle.obstacleType)
-        //    {
-        //        case Obstacle.ObstacleType.Concrete:
-        //            rb.velocity = reflect * Mathf.Max(speed * ConcreteBounce, 0f);
-        //            StartCoroutine(Haptic(0f, 1f, .2f));
-        //            break;
-        //    
-        //        case Obstacle.ObstacleType.Rubber:
-        //            StartCoroutine(Haptic(0f, 1f, .2f));
-        //            rb.velocity = reflect * Mathf.Max(speed * RubberBounce, 0f);
-        //            break;
-        //    
-        //        case Obstacle.ObstacleType.Felt:
-        //            StartCoroutine(Haptic(0f, 1f, .2f));
-        //            rb.velocity = reflect * Mathf.Max(speed * FeltBounce, 0f);
-        //            break;
-        //    
-        //        case Obstacle.ObstacleType.NPC:
-        //            StartCoroutine(Haptic(0f, 1f, .2f));
-        //            break;
-        //    }
+        //pm = collision.collider.material;
         //
+        //Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
+        //Quaternion newRot = Quaternion.LookRotation(reflect);
+        //rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+
+        //StartCoroutine(Haptic(0f, 1f, .2f));
+
+        //switch (pm.name)
+        //{
+        //    case "Bumper (Instance)":
+        //        if (rb.velocity.magnitude > 20f)
+        //            rb.AddForce(lastVel.normalized * 10f, ForceMode.Impulse);
+        //        break;
+        //
+        //    //Ajouter d'autres exceptions si nécessaire
         //}
+
+        if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
+        {
+            float speed = lastVel.magnitude;
+            Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
+            Quaternion newRot = Quaternion.LookRotation(reflect);
+
+            rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+            switch (obstacle.obstacleType)
+            {
+                case Obstacle.ObstacleType.Concrete:
+                    rb.velocity = reflect * Mathf.Max(speed * bounceValues.Concrete, 0f);
+                    StartCoroutine(Haptic(0f, 1f, .2f));
+                    break;
+
+                case Obstacle.ObstacleType.Rubber:
+                    StartCoroutine(Haptic(0f, 1f, .2f));
+                    rb.velocity = reflect * Mathf.Max(speed * bounceValues.Rubber, 0f);
+                    break;
+
+                case Obstacle.ObstacleType.Felt:
+                    StartCoroutine(Haptic(0f, 1f, .2f));
+                    rb.velocity = reflect * Mathf.Max(speed * bounceValues.Felt, 0f);
+                    break;
+
+                case Obstacle.ObstacleType.NPC:
+                    StartCoroutine(Haptic(0f, 1f, .2f));
+                    break;
+                case Obstacle.ObstacleType.Bumper:
+                    StartCoroutine(Haptic(0f, 1f, .2f));
+                    rb.velocity = reflect * Mathf.Max(speed * bounceValues.Bumper, 0f);
+                    break;
+            }
+        }
     }
 
     /// <summary>
@@ -181,7 +185,7 @@ public class PlayerController : MonoBehaviour
         {
             SetLookDirection(-context.ReadValue<Vector2>());
             ThrowStrength = context.ReadValue<Vector2>().magnitude * StrengthMultiplier;
-            
+
         }
 
         if (context.canceled)
@@ -207,7 +211,7 @@ public class PlayerController : MonoBehaviour
             ThrowStrength = Mathf.Clamp(ThrowStrength, 0, StrengthMultiplier);
 
             // Set a better magnitude for the direction here
-            SetLookDirection(-(context.ReadValue<Vector2>() - MouseStart).normalized); 
+            SetLookDirection(-(context.ReadValue<Vector2>() - MouseStart).normalized);
             //LookingDirection = -(context.ReadValue<Vector2>() - MouseStart).normalized;
         }
     }
