@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
                     rb.AddForce(lastVel.normalized * 10f, ForceMode.Impulse);
                 break;
 
-            //Ajouter d'autres exceptions si n�cessaire
+                //Ajouter d'autres exceptions si n�cessaire
         }
 
         //if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
         {
             SetLookDirection(-context.ReadValue<Vector2>());
             ThrowStrength = context.ReadValue<Vector2>().magnitude * StrengthMultiplier;
-            
+
         }
 
         if (context.canceled)
@@ -207,7 +207,7 @@ public class PlayerController : MonoBehaviour
             ThrowStrength = Mathf.Clamp(ThrowStrength, 0, StrengthMultiplier);
 
             // Set a better magnitude for the direction here
-            SetLookDirection(-(context.ReadValue<Vector2>() - MouseStart).normalized); 
+            SetLookDirection(-(context.ReadValue<Vector2>() - MouseStart).normalized);
             //LookingDirection = -(context.ReadValue<Vector2>() - MouseStart).normalized;
         }
     }
@@ -223,40 +223,6 @@ public class PlayerController : MonoBehaviour
 
         if (context.performed)
             dragEnabled = true;
-        }
-
-        if (context.canceled && MouseEnd != Vector2.zero)
-        {
-            speedEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            Cursor.lockState = CursorLockMode.Confined;
-            dragEnabled = false;
-
-            isShooted = true;
-
-            posBeforeHit = transform.position;
-            Vector3 forceDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-            rb.AddForce(-forceDirection * ThrowStrenght, ForceMode.Impulse);
-
-            smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            //smokePoof.SetFloat("SmokeSize", ThrowStrenght / StrenghtMultiplier);
-
-            smokePoof.Play();
-
-            var emissionSpeedEffect = speedEffect.emission;
-            emissionSpeedEffect.rateOverTime = ThrowStrenght / StrenghtMultiplier * 200f;
-
-            var durationSpeedEffect = speedEffect.main;
-            durationSpeedEffect.duration = ThrowStrenght / StrenghtMultiplier;
-
-
-            speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            speedEffect.Play();
-
-            turnBasedPlayer.ShotCount();
-
-            ThrowStrenght = 0;
-            MouseEnd = Vector2.zero;
-        }
     }
 
     /// <summary>

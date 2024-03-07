@@ -97,41 +97,6 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public GameObject panel;
-    private bool panelActive = false;
-    public GameObject PauseFirstbutton;
-    public void PauseMenu(InputAction.CallbackContext context)
-    {
-        if (!panelActive)
-        {
-            panelActive = true;
-        } else panelActive = false;
-
-
-        if (panelActive)
-        {
-            panel.SetActive(true);
-            Gamepad.current?.ResetHaptics();
-            EventSystem.current.SetSelectedGameObject(null);
-            //Selectionne le first button
-            EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
-        }
-
-        if (panelActive)
-        {
-            //actions.Gamepad.Disable();
-            Time.timeScale = 0f; // Met le temps à zéro pour mettre le jeu en pause
-            
-            //Time.fixedDeltaTime = 0f;
-        }
-        else
-        {
-            //actions.Gamepad.Enable();
-            panel.SetActive(false);
-            Time.timeScale = 1f; // Rétablit le temps é sa valeur normale pour reprendre le jeu
-        }
-    }
-
     private void OnDisable()
     {
         if (playerController != null)
