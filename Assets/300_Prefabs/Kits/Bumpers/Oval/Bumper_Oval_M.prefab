@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 4926183417424518029}
   - component: {fileID: 8938118622178320709}
   - component: {fileID: 2309595189180558351}
-  - component: {fileID: 3339043066008721357}
   - component: {fileID: 3972165504925810523}
   m_Layer: 0
   m_Name: Shape
@@ -117,19 +116,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3339043066008721357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8899261708888985757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleType: 1
 --- !u!64 &3972165504925810523
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -137,7 +123,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8899261708888985757}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 71d70a2dfd272c64582cd1b6ca4401e4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

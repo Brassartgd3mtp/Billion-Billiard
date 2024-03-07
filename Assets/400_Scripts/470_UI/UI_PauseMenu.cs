@@ -100,7 +100,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
 
         Time.timeScale = 0f;
-        Time.fixedDeltaTime = 0f;
+        //Time.fixedDeltaTime = 0f;
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
@@ -124,6 +124,6 @@ public class PauseMenu : MonoBehaviour
 
         // R�tablit le temps � sa valeur normale pour reprendre le jeu
         Time.timeScale = 1f;
-        Time.fixedDeltaTime = 0.02f;
+        //Time.fixedDeltaTime = 1f;
     }
 }
