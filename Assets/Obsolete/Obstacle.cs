@@ -23,13 +23,17 @@ public class Obstacle : MonoBehaviour
         /// </summary>
         [InspectorName("Glace")] Ice,
         /// <summary>
-        /// Rubber wall type, default Unity physics bouce.
+        /// NPC GPE, default Unity physics bouce.
         /// </summary>
         [InspectorName("PNJ")] NPC,
         /// <summary>
         /// Props wall type, trigger object.
         /// </summary>
-        [InspectorName("Props")] Props
+        [InspectorName("Props")] Props,
+        /// <summary>
+        /// Bumper GPE, default bounce value : 1.15
+        /// </summary>
+        [InspectorName("Bumper")] Bumper
     }
 
     public ObstacleType obstacleType = ObstacleType.Rubber;
