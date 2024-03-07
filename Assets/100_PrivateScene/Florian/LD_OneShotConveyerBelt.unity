@@ -6194,7 +6194,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerController
       value: 
-      objectReference: {fileID: 1456844064}
+      objectReference: {fileID: 0}
     - target: {fileID: -6389856217533770102, guid: e29c926224c4a5641a2b2f079d0273fa,
         type: 3}
       propertyPath: uI_ShotRemaining
@@ -8463,14 +8463,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &1456844064 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7235643447057658164, guid: e29c926224c4a5641a2b2f079d0273fa,
+  m_CorrespondingSourceObject: {fileID: 9127436154064041178, guid: e29c926224c4a5641a2b2f079d0273fa,
     type: 3}
   m_PrefabInstance: {fileID: 1038094193}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 845db6517468cfb4ca2dfba908b7a66f, type: 3}
+  m_Script: {fileID: 11500000, guid: b65bc6311d018b4469ab830b8a378d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1464655461
@@ -8897,6 +8897,18 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &1507258003 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1350560134942746535, guid: 3460b9607fd8ff94eaffd653cda8e994,
+    type: 3}
+  m_PrefabInstance: {fileID: 759292947}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b65bc6311d018b4469ab830b8a378d0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1513002019
 Mesh:
   m_ObjectHideFlags: 0
@@ -10205,7 +10217,7 @@ PrefabInstance:
     - target: {fileID: 8125212939013970026, guid: 2937f4216b86e8344b341c7018ac1359,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8415336443235520981, guid: 2937f4216b86e8344b341c7018ac1359,
         type: 3}
@@ -10267,6 +10279,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -18.9
       objectReference: {fileID: 0}
+    - target: {fileID: 8989015498233877813, guid: 2937f4216b86e8344b341c7018ac1359,
+        type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 1456844064}
+    - target: {fileID: 8989015498233877813, guid: 2937f4216b86e8344b341c7018ac1359,
+        type: 3}
+      propertyPath: freeCamInput
+      value: 
+      objectReference: {fileID: 1507258003}
     - target: {fileID: 9165488966740125330, guid: 2937f4216b86e8344b341c7018ac1359,
         type: 3}
       propertyPath: m_AnchorMax.y

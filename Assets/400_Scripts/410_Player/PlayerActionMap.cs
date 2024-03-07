@@ -120,17 +120,6 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""59398852-e809-4197-95f8-d97939141b55"",
-                    ""path"": ""<Keyboard>/#(²)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PauseMenu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""26d4424c-ac7b-43a7-afb0-8e2552cb80b9"",
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
@@ -306,8 +295,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dc736d58-ed1b-4f32-b4bb-06a8a9ff11fd"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": ""MultiTap(tapCount=3)"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Reload Scene"",
@@ -327,8 +316,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f418a2b6-7ac7-4d18-9692-0a4782b15491"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""id"": ""46b72e63-06b2-4264-920b-354c3e160e83"",
+                    ""path"": ""<Keyboard>/backslash"",
                     ""interactions"": ""MultiTap(tapCount=3)"",
                     ""processors"": """",
                     ""groups"": """",
@@ -338,9 +327,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""46b72e63-06b2-4264-920b-354c3e160e83"",
-                    ""path"": ""<Keyboard>/backslash"",
-                    ""interactions"": ""MultiTap(tapCount=3)"",
+                    ""id"": ""763a894d-de23-499a-a4ce-a6fb700aa1ff"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""No-Clip"",
