@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Applique une force à notre bille vers son forward ainsi que les VFX la concernant
+    /// Applique une force ï¿½ notre bille vers son forward ainsi que les VFX la concernant
     /// </summary>
     /// <param name="context"></param>
     public void Throw(InputAction.CallbackContext context)
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         //            rb.AddForce(lastVel.normalized * 10f, ForceMode.Impulse);
         //        break;
         //
-        //    //Ajouter d'autres exceptions si nécessaire
+        //    //Ajouter d'autres exceptions si nï¿½cessaire
         //}
 
         if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
             float speed = lastVel.magnitude;
             Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
             Quaternion newRot = Quaternion.LookRotation(reflect);
-
+            
             rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
             switch (obstacle.obstacleType)
             {
@@ -121,17 +121,17 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = reflect * Mathf.Max(speed * bounceValues.Concrete, 0f);
                     StartCoroutine(Haptic(0f, 1f, .2f));
                     break;
-
+            
                 case Obstacle.ObstacleType.Rubber:
                     StartCoroutine(Haptic(0f, 1f, .2f));
                     rb.velocity = reflect * Mathf.Max(speed * bounceValues.Rubber, 0f);
                     break;
-
+            
                 case Obstacle.ObstacleType.Felt:
                     StartCoroutine(Haptic(0f, 1f, .2f));
                     rb.velocity = reflect * Mathf.Max(speed * bounceValues.Felt, 0f);
                     break;
-
+            
                 case Obstacle.ObstacleType.NPC:
                     StartCoroutine(Haptic(0f, 1f, .2f));
                     break;
@@ -160,8 +160,8 @@ public class PlayerController : MonoBehaviour
         }
     }
     /// <summary>
-    /// Met en place un vecteur en fonction de là où le joueur regarde et oriente la bille dans la direction du vecteur
-    /// Affiche la jauge de puissance en fonction du vecteur, de la puissance de lancer et divisé par 10 pour un meilleur rendu 
+    /// Met en place un vecteur en fonction de lï¿½ oï¿½ le joueur regarde et oriente la bille dans la direction du vecteur
+    /// Affiche la jauge de puissance en fonction du vecteur, de la puissance de lancer et divisï¿½ par 10 pour un meilleur rendu 
     /// </summary>
     /// <param name="_lookDirection"></param>
     private void SetLookDirection(Vector2 _lookDirection)
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Quand le joystick gauche est actif alors on appelle la méthode SetLookDirection avec son vecteur qui va dans la direction opposée
+    /// Quand le joystick gauche est actif alors on appelle la mï¿½thode SetLookDirection avec son vecteur qui va dans la direction opposï¿½e
     /// </summary>
     /// <param name="context"></param>
     public void GamepadStrenght(InputAction.CallbackContext context)
@@ -197,8 +197,8 @@ public class PlayerController : MonoBehaviour
 
     private bool dragEnabled = false;
     /// <summary>
-    /// Quand la souris effectue un drag on rend le curseur invisible et il est restreint de se déplacé dans l'écran
-    /// On appelle la méthode SetLookDirection avec son vecteur qui va dans la direction opposée
+    /// Quand la souris effectue un drag on rend le curseur invisible et il est restreint de se dï¿½placï¿½ dans l'ï¿½cran
+    /// On appelle la mï¿½thode SetLookDirection avec son vecteur qui va dans la direction opposï¿½e
     /// <param name="context"></param>
     public void MouseStrenght(InputAction.CallbackContext context)
     {
@@ -217,7 +217,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Quand le clic gauche de la souris est enfoncé on met le curseur au centre l'écran et on active le fait de pouvoir drag sa souris
+    /// Quand le clic gauche de la souris est enfoncï¿½ on met le curseur au centre l'ï¿½cran et on active le fait de pouvoir drag sa souris
     /// </summary>
     /// <param name="context"></param>
     public void MouseStartDrag(InputAction.CallbackContext context)
@@ -230,8 +230,8 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Quand le clic droit de la souris est activé alors que le clic gauche est enfoncé on reset le curseur (visible,position,drag non actif,pas de contrainte de déplacement)
-    /// On appelle la méthode SetLookDirection pour remettre le vecteur à zéro
+    /// Quand le clic droit de la souris est activï¿½ alors que le clic gauche est enfoncï¿½ on reset le curseur (visible,position,drag non actif,pas de contrainte de dï¿½placement)
+    /// On appelle la mï¿½thode SetLookDirection pour remettre le vecteur ï¿½ zï¿½ro
     /// </summary>
     /// <param name="context"></param>
     public void MouseCancelThrow(InputAction.CallbackContext context)
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Quand le clic gauche est laché on reset les contraintes du curseur, on appelle la méthode Throw et on reset le vecteur de la méthode SetLookDirection à zéro
+    /// Quand le clic gauche est lachï¿½ on reset les contraintes du curseur, on appelle la mï¿½thode Throw et on reset le vecteur de la mï¿½thode SetLookDirection ï¿½ zï¿½ro
     /// </summary>
     /// <param name="context"></param>
     public void MouseThrow(InputAction.CallbackContext context)
