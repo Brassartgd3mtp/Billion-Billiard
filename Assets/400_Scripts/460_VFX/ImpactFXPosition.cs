@@ -47,11 +47,11 @@ public class ImpactFXPosition : MonoBehaviour
         
             var burstVFX = impactVFX.emission;
         
-            //burstVFX.SetBursts(
-            //    new ParticleSystem.Burst[]
-            //    {
-            //    new ParticleSystem.Burst(0.0f, countBurst, 1, 0.025f)
-            //    });
+            burstVFX.SetBursts(
+                new ParticleSystem.Burst[]
+                {
+                new ParticleSystem.Burst(0.0f, countBurst, 1, 0.025f)
+                });
         
             //Debug.Log(countBurst);
         
@@ -61,13 +61,13 @@ public class ImpactFXPosition : MonoBehaviour
         {
             ParticleSystem impactVFX = particlePrefab.GetComponent<ParticleSystem>();
         
-            //var burstVFX = impactVFX.emission;
-            //
-            //burstVFX.SetBursts(
-            //    new ParticleSystem.Burst[]
-            //    {
-            //        new ParticleSystem.Burst(0.0f, countBurst/5, 1, 0.025f)
-            //    });
+            var burstVFX = impactVFX.emission;
+            
+            burstVFX.SetBursts(
+                new ParticleSystem.Burst[]
+                {
+                    new ParticleSystem.Burst(0.0f, countBurst/5, 1, 0.025f)
+                });
         
             Debug.Log(countBurst / 5);
         

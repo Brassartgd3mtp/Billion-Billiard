@@ -13,6 +13,7 @@ public class VFXScriptableObject : ScriptableObject
     public GameObject prefabParticleIce;
     public GameObject prefabParticleNPC;
     public GameObject prefabParticleProps;
+    public GameObject prefabParticleBumper;
     public GameObject prefabParticleDefault;
 
     public GameObject GetObstacleType(ObstacleType _type)
@@ -31,6 +32,8 @@ public class VFXScriptableObject : ScriptableObject
                 return prefabParticleNPC;
             case ObstacleType.Props:
                 return prefabParticleProps;
+            case ObstacleType.Bumper:
+                return prefabParticleBumper;
             default:
                 return prefabParticleDefault;
         }
