@@ -326,22 +326,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea0a12ebcce0054baa537e05bf973aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMass: 1
+  playerMass: 0.8
   dragCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 4.8410034
-      value: 4.9791107
+      time: 20.922983
+      value: 18.527851
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -352,8 +352,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   timerOfCurve: 0
-  speedForStartingDrag: 1
-  startDrag: 0
+  speedForStartingDrag: 6
   speed: 0
 --- !u!114 &3966543935812815712
 MonoBehaviour:
@@ -376,6 +375,7 @@ MonoBehaviour:
   speedEffect: {fileID: 3569593256469584753}
   speedEffectDirection: {fileID: 144483280763269323}
   smokePoof: {fileID: 9160850790323335691}
+  bounceValues: {fileID: 11400000, guid: 40bc9499a22daca4c820f67cc3d5b4a8, type: 2}
 --- !u!114 &9127436154064041178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,11 +560,11 @@ MonoBehaviour:
   speed: 0
   reShooted: 0
   dragChecker: 0
-  shotRemaining: 3
-  nbrOfShots: 3
+  shotRemaining: 90
+  nbrOfShots: 90
   PassiveReloadCooldown: 3
   ReloadCooldown: 0
-  playerController: {fileID: 3966543935812815712}
+  playerController: {fileID: 0}
   uI_ShotRemaining: {fileID: 0}
   ParticleShotRemaining: {fileID: 1749279749150066523}
 --- !u!114 &1749279749150066523
