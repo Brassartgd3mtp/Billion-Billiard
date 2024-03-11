@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
     [HideInInspector] public PlayerActionMap Actions;
 
     private PlayerController playerController;
+    private TrajectoryPrediction trajectoryPrediction;
     private PlayerFreeCam playerFreeCam;
     private ReloadScene reloadScene;
     private NoClip noClip;
@@ -38,6 +39,15 @@ public class InputManager : MonoBehaviour
             Actions.MouseKeyboard.MouseStartDrag.canceled += playerController.MouseThrow;
             Actions.MouseKeyboard.MouseCancelThrow.performed += playerController.MouseCancelThrow;
             #endregion
+        }
+
+        if (gameObject.TryGetComponent(out TrajectoryPrediction trajectoryPrediction))
+        {
+            this.trajectoryPrediction = trajectoryPrediction;
+            Actions.Gamepad.GamepadStrenght.performed += trajectoryPrediction.Predict;
+            Actions.Gamepad.GamepadStrenght.canceled += trajectoryPrediction.CancelPredict;
+            Actions.MouseKeyboard.MouseStrenght.performed += trajectoryPrediction.Predict;
+            Actions.MouseKeyboard.MouseCancelThrow.performed += trajectoryPrediction.CancelPredict;
         }
 
         if (gameObject.TryGetComponent(out PlayerFreeCam playerFreeCam))
@@ -112,6 +122,14 @@ public class InputManager : MonoBehaviour
             Actions.MouseKeyboard.MouseStartDrag.canceled -= playerController.MouseStartDrag;
             Actions.MouseKeyboard.MouseCancelThrow.performed -= playerController.MouseCancelThrow;
             #endregion
+        }
+
+        if (trajectoryPrediction != null)
+        {
+            Actions.Gamepad.GamepadStrenght.performed -= trajectoryPrediction.Predict;
+            Actions.Gamepad.GamepadStrenght.canceled -= trajectoryPrediction.CancelPredict;
+            Actions.MouseKeyboard.MouseStrenght.performed -= trajectoryPrediction.Predict;
+            Actions.MouseKeyboard.MouseCancelThrow.performed -= trajectoryPrediction.CancelPredict;
         }
 
         if (playerFreeCam != null)

@@ -36,8 +36,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
 
-    [SerializeField] private BounceValues bounceType;
-
     float timeSinceThrow = 0;
 
     private void Awake()
@@ -103,18 +101,18 @@ public class PlayerController : MonoBehaviour
         switch (obstacle.obstacleType)
         {
             case Obstacle.ObstacleType.Concrete:
-                rb.velocity = reflect * Mathf.Max(speed * bounceType.Concrete, 0f);
+                rb.velocity = reflect * Mathf.Max(speed * BounceValues.Concrete, 0f);
                 StartCoroutine(Haptic(0f, 1f, .2f));
                 break;
 
             case Obstacle.ObstacleType.Rubber:
                 StartCoroutine(Haptic(0f, 1f, .2f));
-                rb.velocity = reflect * Mathf.Max(speed * bounceType.Rubber, 0f);
+                rb.velocity = reflect * Mathf.Max(speed * BounceValues.Rubber, 0f);
                 break;
 
             case Obstacle.ObstacleType.Felt:
                 StartCoroutine(Haptic(0f, 1f, .2f));
-                rb.velocity = reflect * Mathf.Max(speed * bounceType.Felt, 0f);
+                rb.velocity = reflect * Mathf.Max(speed * BounceValues.Felt, 0f);
                 break;
 
             case Obstacle.ObstacleType.NPC:
@@ -122,7 +120,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case Obstacle.ObstacleType.Bumper:
                 StartCoroutine(Haptic(0f, 1f, .2f));
-                rb.velocity = reflect * Mathf.Max(speed * bounceType.Bumper, 0f);
+                rb.velocity = reflect * Mathf.Max(speed * BounceValues.Bumper, 0f);
                 break;
         }
     }
