@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5226720402643585669
+--- !u!114 &-6630855904645836900
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,14 +20,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Dissolve
-  m_Shader: {fileID: -6465566751694194690, guid: da4273e7d973b0c4b88d4bb34ec1f21b,
+  m_Name: M_Distortion
+  m_Shader: {fileID: -6465566751694194690, guid: 123e7f1275e39414c8da2485ecf9a10e,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -37,8 +37,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Base_Texture:
-        m_Texture: {fileID: 2800000, guid: c1b44c1ea1bcf9e45a7686e2d4ee7c4b, type: 3}
+    - _Mask:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -55,14 +55,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Cutoff_Height: 0.33
-    - _Glow_Thickness: 0.4
-    - _Noise_Scale: 1000
-    - _Noise_Strength: 0.87
+    - _Distortion: 0.536
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _REVERSE_DIRECTION: 0
     m_Colors:
-    - _Base_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _Glow_Color: {r: 0.71748126, g: 0.0764062, b: 0.9528302, a: 0}
+    - _DistortionSpeed: {r: -0.14, g: 0.29, b: 0, a: 0}
   m_BuildTextureStacks: []
