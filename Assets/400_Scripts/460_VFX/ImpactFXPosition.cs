@@ -42,35 +42,35 @@ public class ImpactFXPosition : MonoBehaviour
 
         if (impactVelocity > velocityThreshold)
         {
-
+        
             ParticleSystem impactVFX = particlePrefab.GetComponent<ParticleSystem>();
-
+        
             var burstVFX = impactVFX.emission;
-
+        
             burstVFX.SetBursts(
                 new ParticleSystem.Burst[]
                 {
                 new ParticleSystem.Burst(0.0f, countBurst, 1, 0.025f)
                 });
-
+        
             //Debug.Log(countBurst);
-
+        
             Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
         }
         else if (impactVelocity < velocityThreshold)
         {
             ParticleSystem impactVFX = particlePrefab.GetComponent<ParticleSystem>();
-
+        
             var burstVFX = impactVFX.emission;
-
+            
             burstVFX.SetBursts(
                 new ParticleSystem.Burst[]
                 {
                     new ParticleSystem.Burst(0.0f, countBurst/5, 1, 0.025f)
                 });
-
-            //Debug.Log(countBurst / 5);
-
+        
+            Debug.Log(countBurst / 5);
+        
             Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
         }
 
