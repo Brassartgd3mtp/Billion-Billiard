@@ -11,6 +11,8 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     public PlayerController playerController;
 
+    public InputManager inputManager;
+
     public static PlayerCollisionBehavior Instance;
 
     private Rigidbody rb;
@@ -26,6 +28,8 @@ public class PlayerCollisionBehavior : MonoBehaviour
         {
             Instance = this;
         }
+
+        inputManager = GetComponent<InputManager>();
 
         trailRenderer = GetComponent<TrailRenderer>();
 
@@ -89,6 +93,10 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     IEnumerator HolePlayerScale()
     {
+        inputManager.Actions.Gamepad.ThrowPlayer.Disable();
+        inputManager.Actions.Gamepad.GamepadStrenght.Disable();
+        inputManager.Actions.MouseKeyboard.MouseStartDrag.Disable();
+
         Vector3 startSize = transform.localScale;
         Vector3 endSize = new Vector3(0, 0, 0);
 
@@ -108,12 +116,13 @@ public class PlayerCollisionBehavior : MonoBehaviour
         trailRenderer.Clear();
         transform.localScale = new Vector3(1, 1, 1);
         StartCoroutine(HoleFeedBack());
+
+
+
     }
 
     IEnumerator HoleFeedBack()
     {
-
-
         while (nbrOfFlashing > 0) 
         {
             meshRenderer.material.color = Color.white;
@@ -124,6 +133,10 @@ public class PlayerCollisionBehavior : MonoBehaviour
         }
 
         meshRenderer.material.color = Color.white;
-        nbrOfFlashing = 3;
+        nbrOfFlashing = 2;
+        inputManager.Actions.Gamepad.ThrowPlayer.Enable();
+        inputManager.Actions.Gamepad.GamepadStrenght.Enable();
+        inputManager.Actions.MouseKeyboard.MouseStartDrag.Enable();
+
     }
 }
