@@ -9,21 +9,21 @@ public class VFXScriptableObject : ScriptableObject
 {
     public GameObject prefabParticleConcrete;
     public string ConcreteSound;
-    public string RubberSound;
-    public string FeltSound;
-    public string IceSound;
-    public string NPCSound;
-    public string PropsSound;
-    public string BumperSound;
-
-
     public GameObject prefabParticleRubber;
+    public string RubberSound;
     public GameObject prefabParticleFelt;
+    public string FeltSound;
     public GameObject prefabParticleIce;
+    public string IceSound;
     public GameObject prefabParticleNPC;
+    public string NPCSound;
     public GameObject prefabParticleProps;
+    public string PropsSound;
     public GameObject prefabParticleBumper;
+    public string BumperSound;
     public GameObject prefabParticleDefault;
+
+
 
 
 
