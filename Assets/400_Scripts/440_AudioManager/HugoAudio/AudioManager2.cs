@@ -50,7 +50,8 @@ public class AudioManager2 : MonoBehaviour
             {
                 musicSource.clip = s.clip; 
                 musicSource.Pause();
-            }
+            musicSource.Play();
+        }
         
     }
 
