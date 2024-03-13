@@ -47,6 +47,7 @@ public class InputManager : MonoBehaviour
             Actions.Gamepad.GamepadStrenght.performed += trajectoryPrediction.Predict;
             Actions.Gamepad.GamepadStrenght.canceled += trajectoryPrediction.CancelPredict;
             Actions.MouseKeyboard.MouseStrenght.performed += trajectoryPrediction.Predict;
+            Actions.MouseKeyboard.MouseStartDrag.canceled += trajectoryPrediction.CancelPredict;
             Actions.MouseKeyboard.MouseCancelThrow.performed += trajectoryPrediction.CancelPredict;
         }
 
