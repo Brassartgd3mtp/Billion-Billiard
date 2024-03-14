@@ -19,7 +19,7 @@ public class TrajectoryPrediction : MonoBehaviour
 
         predictionPoints = new GameObject[predictionSteps];
 
-        Vector3 pointsPos = new Vector3(transform.position.x, 2f, transform.position.z);
+        Vector3 pointsPos = new Vector3(transform.position.x, 0f, transform.position.z);
 
         for (int i = 0; i < predictionSteps; i++)
         {
@@ -40,7 +40,7 @@ public class TrajectoryPrediction : MonoBehaviour
             {
                 float time = i * predictionStepInterval;
                 Vector3 newPosition = currentPos + CalculateVelocity() * time;
-                newPosition.y = 0;
+                newPosition.y = .5f;
 
                 if (i > 0)
                 {
