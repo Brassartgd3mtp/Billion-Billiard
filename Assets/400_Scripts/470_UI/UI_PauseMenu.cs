@@ -11,14 +11,14 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseFirstbutton;
 
     private bool panelActive = false;
-    [SerializeField] private InputManager playerInput;
-    [SerializeField] private InputManager freeCamInput;
 
     void Start()
     {
         // Assurez-vous que les panneaux d'options sont désactivés au début
         if (optionPanel != null)
             optionPanel.SetActive(false);
+
+        InputManager.PauseMenuEnable(this);
     }
 
     public void OnPlayButtonClick()
@@ -87,14 +87,14 @@ public class PauseMenu : MonoBehaviour
     {
         panel.SetActive(true);
 
-        playerInput.Actions.Gamepad.GamepadStrenght.Disable();
-        playerInput.Actions.Gamepad.ThrowPlayer.Disable();
-        playerInput.Actions.MouseKeyboard.MouseStartDrag.Disable();
+        InputManager.Actions.Gamepad.GamepadStrenght.Disable();
+        InputManager.Actions.Gamepad.ThrowPlayer.Disable();
+        InputManager.Actions.MouseKeyboard.MouseStartDrag.Disable();
 
-        freeCamInput.Actions.Gamepad.FreeCam.Disable();
-        freeCamInput.Actions.Gamepad.StartFreeCam.Disable();
-        freeCamInput.Actions.MouseKeyboard.FreeCam.Disable();
-        freeCamInput.Actions.MouseKeyboard.StartFreeCam.Disable();
+        InputManager.Actions.Gamepad.FreeCam.Disable();
+        InputManager.Actions.Gamepad.StartFreeCam.Disable();
+        InputManager.Actions.MouseKeyboard.FreeCam.Disable();
+        InputManager.Actions.MouseKeyboard.StartFreeCam.Disable();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -110,14 +110,14 @@ public class PauseMenu : MonoBehaviour
     {
         panel.SetActive(false);
 
-        playerInput.Actions.Gamepad.GamepadStrenght.Enable();
-        playerInput.Actions.Gamepad.ThrowPlayer.Enable();
-        playerInput.Actions.MouseKeyboard.MouseStartDrag.Enable();
+        InputManager.Actions.Gamepad.GamepadStrenght.Enable();
+        InputManager.Actions.Gamepad.ThrowPlayer.Enable();
+        InputManager.Actions.MouseKeyboard.MouseStartDrag.Enable();
 
-        freeCamInput.Actions.Gamepad.FreeCam.Enable();
-        freeCamInput.Actions.Gamepad.StartFreeCam.Enable();
-        freeCamInput.Actions.MouseKeyboard.FreeCam.Enable();
-        freeCamInput.Actions.MouseKeyboard.StartFreeCam.Enable();
+        InputManager.Actions.Gamepad.FreeCam.Enable();
+        InputManager.Actions.Gamepad.StartFreeCam.Enable();
+        InputManager.Actions.MouseKeyboard.FreeCam.Enable();
+        InputManager.Actions.MouseKeyboard.StartFreeCam.Enable();
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
@@ -125,5 +125,10 @@ public class PauseMenu : MonoBehaviour
         // R�tablit le temps � sa valeur normale pour reprendre le jeu
         Time.timeScale = 1f;
         //Time.fixedDeltaTime = 1f;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.PauseMenuDisable(this);
     }
 }

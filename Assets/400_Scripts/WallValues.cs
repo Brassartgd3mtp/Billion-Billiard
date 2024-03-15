@@ -13,6 +13,18 @@ public class WallValues
     #endregion
 
     #region Haptics
+    /* Les vibrations de la manette :
+     * 
+     * LFH = Low Frequency Haptics
+     * HFH = High Frenquency Haptics
+     * TH = Timer Haptics
+     * 
+     * Les manettes ont deux modes de vibration, les fréquences hautes et les fréquences basses.
+     * La fréquence change le temps entre deux vibrations.
+     * La valeur qu'on lui assigne change l'intensité des vibrations.
+     * 
+     * Le Timer est la durée totale des vibrations. À la fin de ce timer, les vibrations s'arrêtent.
+     */
     public static float ConcreteLFH = 0f;
     public static float ConcreteHFH = 1f;
     public static float ConcreteTH = .2f;

@@ -11,8 +11,6 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     public PlayerController playerController;
 
-    public InputManager inputManager;
-
     public static PlayerCollisionBehavior Instance;
 
     private Rigidbody rb;
@@ -28,8 +26,6 @@ public class PlayerCollisionBehavior : MonoBehaviour
         {
             Instance = this;
         }
-
-        inputManager = GetComponent<InputManager>();
 
         trailRenderer = GetComponent<TrailRenderer>();
 
@@ -93,9 +89,9 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     IEnumerator HolePlayerScale()
     {
-        inputManager.Actions.Gamepad.ThrowPlayer.Disable();
-        inputManager.Actions.Gamepad.GamepadStrenght.Disable();
-        inputManager.Actions.MouseKeyboard.MouseStartDrag.Disable();
+        InputManager.Actions.Gamepad.ThrowPlayer.Disable();
+        InputManager.Actions.Gamepad.GamepadStrenght.Disable();
+        InputManager.Actions.MouseKeyboard.MouseStartDrag.Disable();
 
         Vector3 startSize = transform.localScale;
         Vector3 endSize = new Vector3(0, 0, 0);
@@ -134,9 +130,9 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
         meshRenderer.material.color = Color.white;
         nbrOfFlashing = 2;
-        inputManager.Actions.Gamepad.ThrowPlayer.Enable();
-        inputManager.Actions.Gamepad.GamepadStrenght.Enable();
-        inputManager.Actions.MouseKeyboard.MouseStartDrag.Enable();
+        InputManager.Actions.Gamepad.ThrowPlayer.Enable();
+        InputManager.Actions.Gamepad.GamepadStrenght.Enable();
+        InputManager.Actions.MouseKeyboard.MouseStartDrag.Enable();
 
     }
 }
