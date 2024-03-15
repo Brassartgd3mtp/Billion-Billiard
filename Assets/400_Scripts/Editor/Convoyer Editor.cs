@@ -10,6 +10,6 @@ public class ConvoyerEditor : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        GUILayout.Box("La direction du convoyer correspond à la direction de l'axe Z (flèche bleu)");
+        GUILayout.Box("La direction du convoyer correspond \u00e0 la direction de l'axe Z (fl\u00e8che bleu)");
     }
 }
