@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TrajectoryPrediction : MonoBehaviour
 {
@@ -10,37 +10,70 @@ public class TrajectoryPrediction : MonoBehaviour
 
     private GameObject[] predictionPoints;
     PlayerController playerController;
-    Rigidbody ballRigidbody;
+
+    Vector3 currentPos;
 
     void Start()
     {
-        ballRigidbody = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
 
         predictionPoints = new GameObject[predictionSteps];
 
+        Vector3 pointsPos = new Vector3(transform.position.x, 2f, transform.position.z);
+
         for (int i = 0; i < predictionSteps; i++)
         {
-            predictionPoints[i] = Instantiate(predictionPointPrefab, transform.position, Quaternion.identity, transform);
+            predictionPoints[i] = Instantiate(predictionPointPrefab, pointsPos, Quaternion.identity, transform);
         }
     }
 
-    void Update()
+    private void Update()
     {
-        Vector3 velocity = CalculateVelocity();
-        Vector3 currentPosition = transform.position;
-        for (int i = 0; i < predictionSteps; i++)
+        currentPos = transform.position;
+    }
+
+    public void Predict(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
-            float time = i * predictionStepInterval;
-            Vector3 newPosition = currentPosition + velocity * time;
-            newPosition.y = 0;
-            predictionPoints[i].transform.position = newPosition;
+            for (int i = 0; i < predictionSteps; i++)
+            {
+                float time = i * predictionStepInterval;
+                Vector3 newPosition = currentPos + CalculateVelocity() * time;
+                newPosition.y = 0;
+
+                if (i > 0)
+                {
+                    float maxDist = Vector3.Distance(predictionPoints[i - 1].transform.position, predictionPoints[i].transform.position);
+
+                    RaycastHit hit;
+                    if (Physics.Raycast(predictionPoints[i - 1].transform.position, newPosition - predictionPoints[i - 1].transform.position, out hit, maxDist))
+                    {
+                        newPosition = ReflectPosition(newPosition, hit.normal, hit.point);
+                    }
+                }
+
+                predictionPoints[i].transform.position = newPosition;
+            }
         }
     }
 
+    public void CancelPredict(InputAction.CallbackContext context)
+    {
+        foreach (GameObject point in predictionPoints)
+        {
+            point.transform.localPosition = new Vector3(0, -.5f, 0);
+        }
+    }
 
     Vector3 CalculateVelocity()
     {
         return transform.forward * playerController.ThrowStrength / 2;
+    }
+
+    Vector3 ReflectPosition(Vector3 position, Vector3 normal, Vector3 hitPoint)
+    {
+        Vector3 reflection = Vector3.Reflect(position - hitPoint, normal);
+        return hitPoint + reflection;
     }
 }

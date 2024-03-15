@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Strenght Value")]
     public int StrengthMultiplier = 40;
+    [Range(0f, 40f)]
     public float ThrowStrength;
-    public Vector2 LookingDirection;
+    [HideInInspector] public Vector2 LookingDirection;
     private float staticThrowStrength;
 
-    [Header("Mouse Values")]
+    [Header("Mouse Values"), Range(0f, 1f)]
+    [SerializeField] private float MouseSensitivity;
     private Vector2 MouseStart;
     private Vector2 MouseEnd;
 
@@ -35,8 +37,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem speedEffect;
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
-
-    [SerializeField] private BounceValues bounceType;
 
     float timeSinceThrow = 0;
 
@@ -103,26 +103,26 @@ public class PlayerController : MonoBehaviour
         switch (obstacle.obstacleType)
         {
             case Obstacle.ObstacleType.Concrete:
-                rb.velocity = reflect * Mathf.Max(speed * bounceType.Concrete, 0f);
-                StartCoroutine(Haptic(0f, 1f, .2f));
+                StartCoroutine(Haptic(WallValues.ConcreteLFH, WallValues.ConcreteHFH, WallValues.ConcreteTH));
+                rb.velocity = reflect * Mathf.Max(speed * WallValues.ConcreteBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.Rubber:
-                StartCoroutine(Haptic(0f, 1f, .2f));
-                rb.velocity = reflect * Mathf.Max(speed * bounceType.Rubber, 0f);
+                StartCoroutine(Haptic(WallValues.RubberLFH, WallValues.RubberHFH, WallValues.RubberTH));
+                rb.velocity = reflect * Mathf.Max(speed * WallValues.RubberBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.Felt:
-                StartCoroutine(Haptic(0f, 1f, .2f));
-                rb.velocity = reflect * Mathf.Max(speed * bounceType.Felt, 0f);
+                StartCoroutine(Haptic(WallValues.FeltLFH, WallValues.FeltHFH, WallValues.FeltTH));
+                rb.velocity = reflect * Mathf.Max(speed * WallValues.FeltBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.NPC:
-                StartCoroutine(Haptic(0f, 1f, .2f));
+                StartCoroutine(Haptic(WallValues.PawnLFH, WallValues.PawnHFH, WallValues.PawnTH));
                 break;
             case Obstacle.ObstacleType.Bumper:
-                StartCoroutine(Haptic(0f, 1f, .2f));
-                rb.velocity = reflect * Mathf.Max(speed * bounceType.Bumper, 0f);
+                StartCoroutine(Haptic(WallValues.BumperLFH, WallValues.BumperHFH, WallValues.BumperTH));
+                rb.velocity = reflect * Mathf.Max(speed * WallValues.BumperBounce, 0f);
                 break;
         }
     }
@@ -254,10 +254,10 @@ public class PlayerController : MonoBehaviour
     {
         if (dragEnabled)
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
             MouseEnd = context.ReadValue<Vector2>();
-            ThrowStrength = Vector2.Distance(MouseStart, MouseEnd);
+            ThrowStrength = Vector2.Distance(MouseStart, MouseEnd) * MouseSensitivity;
             ThrowStrength = Mathf.Clamp(ThrowStrength, 0, StrengthMultiplier);
 
             // Set a better magnitude for the direction here
@@ -306,7 +306,7 @@ public class PlayerController : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
 
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.None;
 
             dragEnabled = false;
 
