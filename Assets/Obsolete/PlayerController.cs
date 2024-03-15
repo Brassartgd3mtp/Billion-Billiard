@@ -17,7 +17,7 @@ public class PlayerControllerd : MonoBehaviour
 
     [Header("References")]
     public GameObject Pivot;
-    public BounceValues BounceValues;
+    public WallValues BounceValues;
 
     private Vector3 strenghtToScale;
     private Quaternion pivotToRotation;

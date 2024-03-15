@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 7460039460178502718}
   - component: {fileID: 8441742846845132006}
   - component: {fileID: 6698367044372519202}
+  - component: {fileID: 5457623265837311431}
   - component: {fileID: 9080468412780825529}
   - component: {fileID: 3966543935812815712}
   - component: {fileID: 9127436154064041178}
@@ -314,6 +315,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 2
+--- !u!114 &5457623265837311431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391655251862830221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b241d29b4d034445aedfcd83f5c4157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  predictionSteps: 5
+  predictionStepInterval: 0.2
+  predictionPointPrefab: {fileID: 3141116416068583652, guid: 408eb84251eb1104ea35ccb6a1c41a49,
+    type: 3}
 --- !u!114 &9080468412780825529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,13 +343,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea0a12ebcce0054baa537e05bf973aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMass: 0.8
+  playerMass: 0.6
   dragCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: -0.0041656494
-      value: 1.0047302
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -340,10 +357,10 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 20.922983
-      value: 18.527851
-      inSlope: 0
-      outSlope: 0
+      time: 1
+      value: 5
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -369,13 +386,13 @@ MonoBehaviour:
   StrengthMultiplier: 40
   ThrowStrength: 0
   LookingDirection: {x: 0, y: 0}
+  MouseSensitivity: 0.3
   PowerLineRenderer: {fileID: 4728191630864481060}
   isShooted: 0
   posBeforeHit: {x: 0, y: 0, z: 0}
   speedEffect: {fileID: 3569593256469584753}
   speedEffectDirection: {fileID: 144483280763269323}
   smokePoof: {fileID: 9160850790323335691}
-  bounceType: {fileID: 0}
 --- !u!114 &9127436154064041178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,6 +420,7 @@ MonoBehaviour:
   playerStats: {fileID: -5471499357105316639}
   uI_Stats: {fileID: 0}
   playerController: {fileID: 3966543935812815712}
+  inputManager: {fileID: 0}
 --- !u!114 &-5471499357105316639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,8 +578,8 @@ MonoBehaviour:
   speed: 0
   reShooted: 0
   dragChecker: 0
-  shotRemaining: 90
-  nbrOfShots: 90
+  shotRemaining: 3
+  nbrOfShots: 3
   PassiveReloadCooldown: 3
   ReloadCooldown: 0
   playerController: {fileID: 0}

@@ -26,14 +26,14 @@ public class NPCParameters : MonoBehaviour
     private bool isShooted;
 
     public float bounciness;
-    public PhysicMaterial physicMaterial;
+    PhysicMaterial physicMaterial;
 
 
     public void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        physicMaterial = rb.GetComponent<PhysicMaterial>();
-        bounciness = physicMaterial.bounciness;
+        physicMaterial = GetComponent<PhysicMaterial>();
+        //bounciness = physicMaterial.bounciness;
     }
 
     public void Start()
