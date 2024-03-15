@@ -89,9 +89,9 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     IEnumerator HolePlayerScale()
     {
-        InputManager.Actions.Gamepad.ThrowPlayer.Disable();
-        InputManager.Actions.Gamepad.GamepadStrenght.Disable();
-        InputManager.Actions.MouseKeyboard.MouseStartDrag.Disable();
+        InputHandler.Actions.Gamepad.ThrowPlayer.Disable();
+        InputHandler.Actions.Gamepad.GamepadStrenght.Disable();
+        InputHandler.Actions.MouseKeyboard.MouseStartDrag.Disable();
 
         Vector3 startSize = transform.localScale;
         Vector3 endSize = new Vector3(0, 0, 0);
@@ -130,9 +130,9 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
         meshRenderer.material.color = Color.white;
         nbrOfFlashing = 2;
-        InputManager.Actions.Gamepad.ThrowPlayer.Enable();
-        InputManager.Actions.Gamepad.GamepadStrenght.Enable();
-        InputManager.Actions.MouseKeyboard.MouseStartDrag.Enable();
+        InputHandler.Actions.Gamepad.ThrowPlayer.Enable();
+        InputHandler.Actions.Gamepad.GamepadStrenght.Enable();
+        InputHandler.Actions.MouseKeyboard.MouseStartDrag.Enable();
 
     }
 }

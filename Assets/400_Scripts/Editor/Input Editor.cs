@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(InputManager))]
+[CustomEditor(typeof(InputHandler))]
 public class InputEditor : Editor
 {
     public override void OnInspectorGUI()

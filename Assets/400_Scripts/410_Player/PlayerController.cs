@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
 
-        InputManager.PlayerControllerEnable(this);
+        InputHandler.PlayerControllerEnable(this);
     }
 
     /// <summary>
@@ -321,6 +321,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        InputManager.PlayerControllerDisable(this);
+        InputHandler.PlayerControllerDisable(this);
     }
 }
