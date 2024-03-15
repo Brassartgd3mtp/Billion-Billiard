@@ -21,7 +21,7 @@ public class WallValues
      * 
      * Les manettes ont deux modes de vibration, les fréquences hautes et les fréquences basses.
      * La fréquence change le temps entre deux vibrations.
-     * la valeur qu'on lui assigne change l'intensité des vibrations.
+     * La valeur qu'on lui assigne change l'intensité des vibrations.
      * 
      * Le Timer est la durée totale des vibrations. À la fin de ce timer, les vibrations s'arrêtent.
      */

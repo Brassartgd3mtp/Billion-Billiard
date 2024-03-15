@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
 
 public class NoClip : MonoBehaviour
@@ -11,7 +7,7 @@ public class NoClip : MonoBehaviour
 
     public bool ModeOn;
 
-    PlayerController pc;
+    PlayerController playerController;
     Rigidbody playerRb;
     public SphereCollider PlayerCollider;
 
@@ -22,11 +18,13 @@ public class NoClip : MonoBehaviour
     {
         ModeOn = false;
 
-        pc = FindAnyObjectByType<PlayerController>();
+        playerController = FindAnyObjectByType<PlayerController>();
 
-        playerRb = pc.GetComponent<Rigidbody>();
+        playerRb = playerController.GetComponent<Rigidbody>();
 
-        PlayerCollider = pc.GetComponent<SphereCollider>();
+        PlayerCollider = playerController.GetComponent<SphereCollider>();
+
+        InputManager.NoClipEnable(this);
     }
 
     public void MovePlayer(InputAction.CallbackContext context)
@@ -40,9 +38,32 @@ public class NoClip : MonoBehaviour
         }
     }
 
+    public void NoClipMode(InputAction.CallbackContext context)
+    {
+        if (ModeOn)
+        {
+            ModeOn = true;
+            InputManager.Actions.Gamepad.Disable();
+            InputManager.Actions.MouseKeyboard.Disable();
+            PlayerCollider.enabled = false;
+        }
+        else
+        {
+            ModeOn = false;
+            InputManager.Actions.Gamepad.Enable();
+            InputManager.Actions.MouseKeyboard.Enable();
+            PlayerCollider.enabled = true;
+        }
+    }
+
     private void Update()
     {
         if (ModeOn)
             playerRb.velocity = direction * Speed;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.NoClipDisable(this);
     }
 }

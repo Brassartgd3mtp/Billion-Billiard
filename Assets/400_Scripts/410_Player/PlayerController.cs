@@ -1,7 +1,4 @@
-using Cinemachine.Utility;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Splines;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
@@ -53,6 +50,8 @@ public class PlayerController : MonoBehaviour
         speedEffect = GetComponentInChildren<ParticleSystem>();
 
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
+
+        InputManager.PlayerControllerEnable(this);
     }
 
     /// <summary>
@@ -318,5 +317,10 @@ public class PlayerController : MonoBehaviour
             MouseEnd = Vector2.zero;
             SetLookDirection(Vector2.zero);
         }
+    }
+
+    private void OnDisable()
+    {
+        InputManager.PlayerControllerDisable(this);
     }
 }

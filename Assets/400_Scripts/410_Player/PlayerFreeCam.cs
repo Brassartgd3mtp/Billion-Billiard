@@ -24,6 +24,11 @@ public class PlayerFreeCam : MonoBehaviour
         camBlendDef = camBrain.m_DefaultBlend;
     }
 
+    private void Start()
+    {
+        InputManager.FreeCamEnable(this);
+    }
+
     public void FreeCam(InputAction.CallbackContext context)
     {
         freeCam = context;
@@ -81,5 +86,10 @@ public class PlayerFreeCam : MonoBehaviour
     
         camFVT.m_FollowOffset.x = Mathf.Clamp(camFVT.m_FollowOffset.x, -300, 300);
         camFVT.m_FollowOffset.z = Mathf.Clamp(camFVT.m_FollowOffset.z, -300, 300f);
+    }
+
+    private void OnDisable()
+    {
+        InputManager.FreeCamDisable(this);
     }
 }
