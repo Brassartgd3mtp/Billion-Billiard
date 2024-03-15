@@ -24,7 +24,7 @@ public class NoClip : MonoBehaviour
 
         PlayerCollider = playerController.GetComponent<SphereCollider>();
 
-        InputManager.NoClipEnable(this);
+        InputHandler.NoClipEnable(this);
     }
 
     public void MovePlayer(InputAction.CallbackContext context)
@@ -43,15 +43,15 @@ public class NoClip : MonoBehaviour
         if (ModeOn)
         {
             ModeOn = true;
-            InputManager.Actions.Gamepad.Disable();
-            InputManager.Actions.MouseKeyboard.Disable();
+            InputHandler.Actions.Gamepad.Disable();
+            InputHandler.Actions.MouseKeyboard.Disable();
             PlayerCollider.enabled = false;
         }
         else
         {
             ModeOn = false;
-            InputManager.Actions.Gamepad.Enable();
-            InputManager.Actions.MouseKeyboard.Enable();
+            InputHandler.Actions.Gamepad.Enable();
+            InputHandler.Actions.MouseKeyboard.Enable();
             PlayerCollider.enabled = true;
         }
     }
@@ -64,6 +64,6 @@ public class NoClip : MonoBehaviour
 
     private void OnDisable()
     {
-        InputManager.NoClipDisable(this);
+        InputHandler.NoClipDisable(this);
     }
 }

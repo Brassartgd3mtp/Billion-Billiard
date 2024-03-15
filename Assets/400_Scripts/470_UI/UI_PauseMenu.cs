@@ -18,7 +18,7 @@ public class PauseMenu : MonoBehaviour
         if (optionPanel != null)
             optionPanel.SetActive(false);
 
-        InputManager.PauseMenuEnable(this);
+        InputHandler.PauseMenuEnable(this);
     }
 
     public void OnPlayButtonClick()
@@ -87,14 +87,14 @@ public class PauseMenu : MonoBehaviour
     {
         panel.SetActive(true);
 
-        InputManager.Actions.Gamepad.GamepadStrenght.Disable();
-        InputManager.Actions.Gamepad.ThrowPlayer.Disable();
-        InputManager.Actions.MouseKeyboard.MouseStartDrag.Disable();
+        InputHandler.Actions.Gamepad.GamepadStrenght.Disable();
+        InputHandler.Actions.Gamepad.ThrowPlayer.Disable();
+        InputHandler.Actions.MouseKeyboard.MouseStartDrag.Disable();
 
-        InputManager.Actions.Gamepad.FreeCam.Disable();
-        InputManager.Actions.Gamepad.StartFreeCam.Disable();
-        InputManager.Actions.MouseKeyboard.FreeCam.Disable();
-        InputManager.Actions.MouseKeyboard.StartFreeCam.Disable();
+        InputHandler.Actions.Gamepad.FreeCam.Disable();
+        InputHandler.Actions.Gamepad.StartFreeCam.Disable();
+        InputHandler.Actions.MouseKeyboard.FreeCam.Disable();
+        InputHandler.Actions.MouseKeyboard.StartFreeCam.Disable();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -110,14 +110,14 @@ public class PauseMenu : MonoBehaviour
     {
         panel.SetActive(false);
 
-        InputManager.Actions.Gamepad.GamepadStrenght.Enable();
-        InputManager.Actions.Gamepad.ThrowPlayer.Enable();
-        InputManager.Actions.MouseKeyboard.MouseStartDrag.Enable();
+        InputHandler.Actions.Gamepad.GamepadStrenght.Enable();
+        InputHandler.Actions.Gamepad.ThrowPlayer.Enable();
+        InputHandler.Actions.MouseKeyboard.MouseStartDrag.Enable();
 
-        InputManager.Actions.Gamepad.FreeCam.Enable();
-        InputManager.Actions.Gamepad.StartFreeCam.Enable();
-        InputManager.Actions.MouseKeyboard.FreeCam.Enable();
-        InputManager.Actions.MouseKeyboard.StartFreeCam.Enable();
+        InputHandler.Actions.Gamepad.FreeCam.Enable();
+        InputHandler.Actions.Gamepad.StartFreeCam.Enable();
+        InputHandler.Actions.MouseKeyboard.FreeCam.Enable();
+        InputHandler.Actions.MouseKeyboard.StartFreeCam.Enable();
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
@@ -129,6 +129,6 @@ public class PauseMenu : MonoBehaviour
 
     private void OnDisable()
     {
-        InputManager.PauseMenuDisable(this);
+        InputHandler.PauseMenuDisable(this);
     }
 }

@@ -11,7 +11,7 @@ public class ReloadScene : MonoBehaviour
     {
         activeScene = SceneManager.GetActiveScene();
 
-        InputManager.ReloadSceneEnable(this);
+        InputHandler.ReloadSceneEnable(this);
     }
 
     public void Reload(InputAction.CallbackContext context)
@@ -21,7 +21,7 @@ public class ReloadScene : MonoBehaviour
 
     private void OnDisable()
     {
-        InputManager.ReloadSceneDisable(this);
+        InputHandler.ReloadSceneDisable(this);
     }
 
 }

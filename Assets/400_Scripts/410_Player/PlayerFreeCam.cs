@@ -26,7 +26,7 @@ public class PlayerFreeCam : MonoBehaviour
 
     private void Start()
     {
-        InputManager.FreeCamEnable(this);
+        InputHandler.FreeCamEnable(this);
     }
 
     public void FreeCam(InputAction.CallbackContext context)
@@ -90,6 +90,6 @@ public class PlayerFreeCam : MonoBehaviour
 
     private void OnDisable()
     {
-        InputManager.FreeCamDisable(this);
+        InputHandler.FreeCamDisable(this);
     }
 }
