@@ -56,9 +56,9 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
             if (collision.gameObject.TryGetComponent(out HoleForPlayer holeForPlayer))
             {
+                StartCoroutine(HolePlayerScale());
                 rb.velocity = Vector3.zero;
                 trailRenderer.enabled = false;
-                StartCoroutine(HolePlayerScale());
             }
         }
     }
