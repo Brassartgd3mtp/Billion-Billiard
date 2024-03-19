@@ -6,11 +6,14 @@ using UnityEngine.VFX;
 public class PlayerController : MonoBehaviour
 {
     [Header("Strenght Value")]
-    public int StrengthMultiplier = 40;
+    public int StrengthFactor = 40;
+    [SerializeField, Tooltip("Vélocité maximale de la balle basée sur le Strength Factor fois cette variable.\nValeur par défaut : 3.")]
+    private float maxVelocityMultiplier = 3f;
     [Range(0f, 40f)]
     public float ThrowStrength;
     [HideInInspector] public Vector2 LookingDirection;
     private float staticThrowStrength;
+    private float maxVel = 0;
 
     [Header("Mouse Values"), Range(0f, 1f)]
     [SerializeField] private float MouseSensitivity;
@@ -52,6 +55,8 @@ public class PlayerController : MonoBehaviour
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
 
         InputHandler.PlayerControllerEnable(this);
+
+        maxVel = StrengthFactor * maxVelocityMultiplier;
     }
 
     /// <summary>
@@ -71,15 +76,15 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(transform.forward * ThrowStrength, ForceMode.Impulse);
 
             smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            smokePoof.SetFloat("SmokeSize", ThrowStrength / StrengthMultiplier);
+            smokePoof.SetFloat("SmokeSize", ThrowStrength / StrengthFactor);
             smokePoof.Play();
 
             var emissionSpeedEffect = speedEffect.emission;
-            emissionSpeedEffect.rateOverTime = ThrowStrength / StrengthMultiplier * 200f;
+            emissionSpeedEffect.rateOverTime = ThrowStrength / StrengthFactor * 200f;
 
             speedEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             var durationSpeedEffect = speedEffect.main;
-            durationSpeedEffect.duration = ThrowStrength / StrengthMultiplier;
+            durationSpeedEffect.duration = ThrowStrength / StrengthFactor;
 
             speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             speedEffect.Play();
@@ -95,6 +100,12 @@ public class PlayerController : MonoBehaviour
 
         if (lastVel.magnitude > 0)
             timeSinceThrow += Time.fixedDeltaTime;
+
+        //Clamp Speed
+        rb.velocity =
+            rb.velocity.magnitude < maxVel ?
+            rb.velocity :
+            rb.velocity.normalized * maxVel;
     }
 
     void SwitchObstacle(Obstacle obstacle, float speed, Vector3 reflect)
@@ -235,7 +246,7 @@ public class PlayerController : MonoBehaviour
         {
             //SetLookDirection(-context.ReadValue<Vector2>());
             SetLookDirection(context.ReadValue<Vector2>());
-            ThrowStrength = context.ReadValue<Vector2>().magnitude * StrengthMultiplier;
+            ThrowStrength = context.ReadValue<Vector2>().magnitude * StrengthFactor;
 
         }
 
@@ -259,7 +270,7 @@ public class PlayerController : MonoBehaviour
             Cursor.visible = false;
             MouseEnd = context.ReadValue<Vector2>();
             ThrowStrength = Vector2.Distance(MouseStart, MouseEnd) * MouseSensitivity;
-            ThrowStrength = Mathf.Clamp(ThrowStrength, 0, StrengthMultiplier);
+            ThrowStrength = Mathf.Clamp(ThrowStrength, 0, StrengthFactor);
 
             // Set a better magnitude for the direction here
             //SetLookDirection(-(context.ReadValue<Vector2>() - MouseStart).normalized);
