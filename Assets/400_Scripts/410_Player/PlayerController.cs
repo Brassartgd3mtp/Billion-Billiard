@@ -1,7 +1,4 @@
-using Cinemachine.Utility;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Splines;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
@@ -53,6 +50,8 @@ public class PlayerController : MonoBehaviour
         speedEffect = GetComponentInChildren<ParticleSystem>();
 
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
+
+        InputHandler.PlayerControllerEnable(this);
     }
 
     /// <summary>
@@ -222,6 +221,7 @@ public class PlayerController : MonoBehaviour
             angle = Mathf.Atan2(LookingDirection.x, LookingDirection.y) * Mathf.Rad2Deg;
             rb.rotation = Quaternion.Euler(0f, angle, 0f);
         }
+        //PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 5);
         PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 5);
     }
 
@@ -233,7 +233,8 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            SetLookDirection(-context.ReadValue<Vector2>());
+            //SetLookDirection(-context.ReadValue<Vector2>());
+            SetLookDirection(context.ReadValue<Vector2>());
             ThrowStrength = context.ReadValue<Vector2>().magnitude * StrengthMultiplier;
 
         }
@@ -261,8 +262,8 @@ public class PlayerController : MonoBehaviour
             ThrowStrength = Mathf.Clamp(ThrowStrength, 0, StrengthMultiplier);
 
             // Set a better magnitude for the direction here
-            SetLookDirection(-(context.ReadValue<Vector2>() - MouseStart).normalized);
-            //LookingDirection = -(context.ReadValue<Vector2>() - MouseStart).normalized;
+            //SetLookDirection(-(context.ReadValue<Vector2>() - MouseStart).normalized);
+            SetLookDirection((context.ReadValue<Vector2>() - MouseStart).normalized);
         }
     }
 
@@ -316,5 +317,10 @@ public class PlayerController : MonoBehaviour
             MouseEnd = Vector2.zero;
             SetLookDirection(Vector2.zero);
         }
+    }
+
+    private void OnDisable()
+    {
+        InputHandler.PlayerControllerDisable(this);
     }
 }
