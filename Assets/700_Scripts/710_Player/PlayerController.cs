@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     public void Throw(InputAction.CallbackContext context)
     {
-        if (ThrowStrength > 0.1f)
+        if (ThrowStrength > 0.2f)
         {
             timeSinceThrow = 0;
             staticThrowStrength = ThrowStrength;
@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
         LookingDirection = _lookDirection;
         if (ThrowStrength > 0f)
         {
-            angle = Mathf.Atan2(LookingDirection.x, LookingDirection.y) * Mathf.Rad2Deg;
+            angle = Mathf.Atan2(-LookingDirection.x, -LookingDirection.y) * Mathf.Rad2Deg;
             rb.rotation = Quaternion.Euler(0f, angle, 0f);
         }
         //PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 5);
