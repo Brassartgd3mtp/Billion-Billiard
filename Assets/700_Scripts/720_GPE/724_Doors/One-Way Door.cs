@@ -5,7 +5,8 @@ using UnityEngine;
 public class OneWayDoor : MonoBehaviour
 {
     [SerializeField] private GameObject door;
-    [SerializeField] private bool isOpen;
+    [SerializeField] private GameObject wall;
+    private bool isOpen;
     Vector3 startPos;
     new BoxCollider collider;
 
@@ -14,9 +15,11 @@ public class OneWayDoor : MonoBehaviour
     {
         collider = GetComponent<BoxCollider>();
         startPos = door.transform.localPosition;
+
+        OpenDoor();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out PlayerController _pc) && isOpen)
             CloseDoor();
@@ -24,27 +27,26 @@ public class OneWayDoor : MonoBehaviour
 
     public void OpenDoor()
     {
+        Vector3 underground = new Vector3(0, -1.5f, 0);
         isOpen = true;
-        StartCoroutine(DoorState(-Vector3.forward));
-        //door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, -Vector3.forward, Time.deltaTime);
+        StartCoroutine(DoorState(door, underground));
     }
 
     void CloseDoor()
     {
         isOpen = false;
-        StartCoroutine(DoorState(startPos));
-        //door.transform.localPosition = Vector3.MoveTowards(door.transform.localPosition, startPos, Time.deltaTime);
+        StartCoroutine(DoorState(wall, startPos));
         enabled = false;
     }
 
-    IEnumerator DoorState(Vector3 endPos)
+    IEnumerator DoorState(GameObject mesh, Vector3 endPos)
     {
-        Vector3 doorPos = door.transform.localPosition;
+        Vector3 meshPos = mesh.transform.localPosition;
 
-        while (doorPos != endPos)
+        while (meshPos != endPos)
         {
-            doorPos = door.transform.localPosition;
-            door.transform.localPosition = Vector3.MoveTowards(doorPos, endPos, Time.deltaTime);
+            meshPos = mesh.transform.localPosition;
+            mesh.transform.localPosition = Vector3.MoveTowards(meshPos, endPos, Time.deltaTime);
             yield return null;
         }
         yield break;
