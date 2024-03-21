@@ -24,9 +24,11 @@ public class InputHandler : MonoBehaviour
         TurnBasedSystem.OnDisablePlayerInput += Actions.Gamepad.GamepadStrenght.Disable;
         TurnBasedSystem.OnDisablePlayerInput += Actions.Gamepad.ThrowPlayer.Disable;
 
-        Actions.Gamepad.ThrowPlayer.performed += playerController.Throw;
-        Actions.Gamepad.GamepadStrenght.performed += playerController.GamepadStrenght;
-        Actions.Gamepad.GamepadStrenght.canceled += playerController.GamepadStrenght;
+        Actions.Gamepad.ThrowPlayer.started += playerController.GamepadStrengthGauge;
+        Actions.Gamepad.ThrowPlayer.canceled += playerController.GamepadStrengthGauge;
+        Actions.Gamepad.ThrowPlayer.canceled += playerController.Throw;
+        Actions.Gamepad.GamepadStrenght.performed += playerController.GamepadDirection;
+        Actions.Gamepad.GamepadStrenght.canceled += playerController.GamepadDirection;
         #endregion
         #region Mouse/Keyboard
         TurnBasedSystem.OnEnablePlayerInput += Actions.MouseKeyboard.MouseStartDrag.Enable;
@@ -72,9 +74,11 @@ public class InputHandler : MonoBehaviour
     public static void PlayerControllerDisable(PlayerController playerController)
     {
         #region Gamepad
-        Actions.Gamepad.ThrowPlayer.performed -= playerController.Throw;
-        Actions.Gamepad.GamepadStrenght.performed -= playerController.GamepadStrenght;
-        Actions.Gamepad.GamepadStrenght.canceled -= playerController.GamepadStrenght;
+        Actions.Gamepad.ThrowPlayer.started -= playerController.GamepadStrengthGauge;
+        Actions.Gamepad.ThrowPlayer.canceled -= playerController.GamepadStrengthGauge;
+        Actions.Gamepad.ThrowPlayer.canceled -= playerController.Throw;
+        Actions.Gamepad.GamepadStrenght.performed -= playerController.GamepadDirection;
+        Actions.Gamepad.GamepadStrenght.canceled -= playerController.GamepadDirection;
         #endregion
         #region Mouse/Keyboard
         Actions.MouseKeyboard.MouseStrenght.performed -= playerController.MouseStrenght;
