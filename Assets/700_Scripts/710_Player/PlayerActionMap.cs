@@ -431,6 +431,65 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Swap"",
+            ""id"": ""30c0c3e5-ceb2-4284-bae3-ae39b48cf8a0"",
+            ""actions"": [
+                {
+                    ""name"": ""ToGamepad"",
+                    ""type"": ""Button"",
+                    ""id"": ""42ff434e-11fb-4c66-9ad2-932cb5a75265"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToMouseKeyboard"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfe998ff-257e-4844-81a5-b3de69f6f69d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c4234273-0399-4d1f-915a-cb5004b5eec8"",
+                    ""path"": ""<Gamepad>/*"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToGamepad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9365525e-58b2-4102-ae03-55ebeafc4e60"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToMouseKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37e5b929-2ed8-4130-991f-651cf16f68c9"",
+                    ""path"": ""<Mouse>/*"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToMouseKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -458,6 +517,10 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         // MainMenu
         m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
         m_MainMenu_Newaction = m_MainMenu.FindAction("New action", throwIfNotFound: true);
+        // Swap
+        m_Swap = asset.FindActionMap("Swap", throwIfNotFound: true);
+        m_Swap_ToGamepad = m_Swap.FindAction("ToGamepad", throwIfNotFound: true);
+        m_Swap_ToMouseKeyboard = m_Swap.FindAction("ToMouseKeyboard", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -787,6 +850,60 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         }
     }
     public MainMenuActions @MainMenu => new MainMenuActions(this);
+
+    // Swap
+    private readonly InputActionMap m_Swap;
+    private List<ISwapActions> m_SwapActionsCallbackInterfaces = new List<ISwapActions>();
+    private readonly InputAction m_Swap_ToGamepad;
+    private readonly InputAction m_Swap_ToMouseKeyboard;
+    public struct SwapActions
+    {
+        private @PlayerActionMap m_Wrapper;
+        public SwapActions(@PlayerActionMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ToGamepad => m_Wrapper.m_Swap_ToGamepad;
+        public InputAction @ToMouseKeyboard => m_Wrapper.m_Swap_ToMouseKeyboard;
+        public InputActionMap Get() { return m_Wrapper.m_Swap; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SwapActions set) { return set.Get(); }
+        public void AddCallbacks(ISwapActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SwapActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SwapActionsCallbackInterfaces.Add(instance);
+            @ToGamepad.started += instance.OnToGamepad;
+            @ToGamepad.performed += instance.OnToGamepad;
+            @ToGamepad.canceled += instance.OnToGamepad;
+            @ToMouseKeyboard.started += instance.OnToMouseKeyboard;
+            @ToMouseKeyboard.performed += instance.OnToMouseKeyboard;
+            @ToMouseKeyboard.canceled += instance.OnToMouseKeyboard;
+        }
+
+        private void UnregisterCallbacks(ISwapActions instance)
+        {
+            @ToGamepad.started -= instance.OnToGamepad;
+            @ToGamepad.performed -= instance.OnToGamepad;
+            @ToGamepad.canceled -= instance.OnToGamepad;
+            @ToMouseKeyboard.started -= instance.OnToMouseKeyboard;
+            @ToMouseKeyboard.performed -= instance.OnToMouseKeyboard;
+            @ToMouseKeyboard.canceled -= instance.OnToMouseKeyboard;
+        }
+
+        public void RemoveCallbacks(ISwapActions instance)
+        {
+            if (m_Wrapper.m_SwapActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ISwapActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SwapActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SwapActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public SwapActions @Swap => new SwapActions(this);
     public interface IGamepadActions
     {
         void OnGamepadStrenght(InputAction.CallbackContext context);
@@ -813,5 +930,10 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     public interface IMainMenuActions
     {
         void OnNewaction(InputAction.CallbackContext context);
+    }
+    public interface ISwapActions
+    {
+        void OnToGamepad(InputAction.CallbackContext context);
+        void OnToMouseKeyboard(InputAction.CallbackContext context);
     }
 }

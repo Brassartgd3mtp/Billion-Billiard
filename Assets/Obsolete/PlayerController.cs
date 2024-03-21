@@ -87,7 +87,7 @@ public class PlayerControllerd : MonoBehaviour
     void Update()
     {
         angle =
-            Gamepad.current != null ?
+            SwapControls.state == CurrentState.Gamepad ?
             Mathf.Atan2(PivotValue.x, PivotValue.y) * Mathf.Rad2Deg :
             Mathf.Atan2(MouseEnd.x - MouseStart.x, MouseEnd.y - MouseStart.y) * Mathf.Rad2Deg;
 
@@ -152,7 +152,7 @@ public class PlayerControllerd : MonoBehaviour
     /// <returns>Coroutine</returns>
     IEnumerator Haptic(float lowfreq_strenght, float highfreq_strenght, float timer)
     {
-        if (Gamepad.current != null)
+        if (SwapControls.state == CurrentState.Gamepad)
         {
             Gamepad.current.SetMotorSpeeds(lowfreq_strenght, highfreq_strenght);
             yield return new WaitForSeconds(timer);

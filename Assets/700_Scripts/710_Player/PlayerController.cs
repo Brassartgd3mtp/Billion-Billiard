@@ -220,7 +220,7 @@ public class PlayerController : MonoBehaviour
     /// <returns>Coroutine</returns>
     IEnumerator Haptic(float lowfreq_strenght, float highfreq_strenght, float timer)
     {
-        if (Gamepad.current != null)
+        if (SwapControls.state == CurrentState.Gamepad)
         {
             Gamepad.current.SetMotorSpeeds(lowfreq_strenght, highfreq_strenght);
             yield return new WaitForSeconds(timer);

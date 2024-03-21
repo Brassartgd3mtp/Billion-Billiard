@@ -409,6 +409,65 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Swap",
+            "id": "30c0c3e5-ceb2-4284-bae3-ae39b48cf8a0",
+            "actions": [
+                {
+                    "name": "ToGamepad",
+                    "type": "Button",
+                    "id": "42ff434e-11fb-4c66-9ad2-932cb5a75265",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ToMouseKeyboard",
+                    "type": "Button",
+                    "id": "cfe998ff-257e-4844-81a5-b3de69f6f69d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c4234273-0399-4d1f-915a-cb5004b5eec8",
+                    "path": "<Gamepad>/*",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToGamepad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9365525e-58b2-4102-ae03-55ebeafc4e60",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToMouseKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "37e5b929-2ed8-4130-991f-651cf16f68c9",
+                    "path": "<Mouse>/*",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToMouseKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
