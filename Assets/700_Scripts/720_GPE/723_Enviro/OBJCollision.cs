@@ -19,8 +19,6 @@ public class OBJCollision : MonoBehaviour
             Vector3 _forceDirection = transform.position - collision.transform.position;
 
             MyRigidbody.AddForce(_forceDirection * ImpactForce, ForceMode.VelocityChange);
-            Debug.Log("ça touche");
-
 
             MyRigidbody.transform.Rotate(Random.Range(0, 180), Random.Range(0, 180), Random.Range(0, 180), Space.World);
         }
