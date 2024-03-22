@@ -14,9 +14,12 @@ public class WallDestroySpeed : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (PlayerController.rb.velocity.magnitude > destroyValue)
+        if (other.gameObject.TryGetComponent(out PlayerController controller)) 
         {
-            Destroy(gameObject);
+            if (PlayerController.rb.velocity.magnitude > destroyValue)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
