@@ -16,7 +16,7 @@ public class TrajectoryPrediction : MonoBehaviour
     private void Update()
     {
         Ray ray = new Ray(transform.position, transform.forward);
-        if (Physics.Raycast(ray, out hit, playerController.ThrowStrength / 4, wallLayer))
+        if (Physics.Raycast(ray, out hit, 12/*playerController.ThrowStrength / 4*/, wallLayer))
         {
             lineRenderer.SetPosition(1, transform.InverseTransformPoint(hit.point));
 
@@ -28,9 +28,7 @@ public class TrajectoryPrediction : MonoBehaviour
         {
             lineRenderer.positionCount = 2;
 
-            lineRenderer.SetPosition(1, Vector3.forward * playerController.ThrowStrength / 4);
+            lineRenderer.SetPosition(1, Vector3.forward * 12/*playerController.ThrowStrength / 4*/);
         }
-
-        //lineRenderer.startWidth = 1 / (40 / playerController.ThrowStrength);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -73,6 +74,8 @@ public class PlayerController : MonoBehaviour
     {
         if (ThrowStrength > 0.2f)
         {
+            StartCoroutine(Haptic(ThrowStrength / 40, ThrowStrength / 40, .4f));
+
             timeSinceThrow = 0;
             staticThrowStrength = ThrowStrength;
 
@@ -236,11 +239,9 @@ public class PlayerController : MonoBehaviour
     private void SetLookDirection(Vector2 _lookDirection)
     {
         LookingDirection = _lookDirection;
-        if (ThrowStrength > 0f)
-        {
-            angle = Mathf.Atan2(-LookingDirection.x, -LookingDirection.y) * Mathf.Rad2Deg;
-            rb.rotation = Quaternion.Euler(0f, angle, 0f);
-        }
+
+        angle = Mathf.Atan2(-LookingDirection.x, -LookingDirection.y) * Mathf.Rad2Deg;
+        rb.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 
     /// <summary>
@@ -254,11 +255,6 @@ public class PlayerController : MonoBehaviour
             //SetLookDirection(-context.ReadValue<Vector2>());
             SetLookDirection(context.ReadValue<Vector2>());
         }
-
-        //if (context.canceled)
-        //{
-        //    SetLookDirection(Vector2.zero);
-        //}
     }
 
     float gaugeTime;
@@ -274,6 +270,7 @@ public class PlayerController : MonoBehaviour
         {
             gaugeObject.SetActive(false);
             isGaugeActive = false;
+            gaugeFill.fillAmount = 0;
         }
     }
 
@@ -282,10 +279,18 @@ public class PlayerController : MonoBehaviour
         gaugeTime += Time.deltaTime * gaugeSpeed * 100;
 
         if (isGaugeActive)
+        {
             ThrowStrength = Mathf.PingPong(gaugeTime, 40);
+            gaugeFill.fillAmount = ThrowStrength / StrengthFactor;
+        }
+        else
+            gaugeTime = 0;
 
-        PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 5);
-        gaugeFill.fillAmount = ThrowStrength / StrengthFactor;
+        //if (SwapControls.state == CurrentState.Gamepad)
+        //    PowerLineRenderer.SetPosition(1, Vector3.back * 8);
+        //else
+            //PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 5);
+        PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 8);
     }
 
     private bool dragEnabled = false;
@@ -357,7 +362,7 @@ public class PlayerController : MonoBehaviour
 
             ThrowStrength = 0;
             MouseEnd = Vector2.zero;
-            SetLookDirection(Vector2.zero);
+            //SetLookDirection(Vector2.zero);
         }
     }
 
