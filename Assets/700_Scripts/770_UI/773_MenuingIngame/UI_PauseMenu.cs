@@ -129,6 +129,6 @@ public class PauseMenu : MonoBehaviour
 
     private void OnDisable()
     {
-        InputHandler.PauseMenuDisable(this);
+        InputHandler.PauseMenuDisable();
     }
 }
