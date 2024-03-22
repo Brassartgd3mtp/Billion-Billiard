@@ -23,6 +23,10 @@ public class Obstacle : MonoBehaviour
         /// </summary>
         [InspectorName("Glace")] Ice,
         /// <summary>
+        /// Velcro wall type, Player will stop on it.
+        /// </summary>
+        [InspectorName("Velcro")] Velcro,
+        /// <summary>
         /// NPC GPE, default Unity physics bouce.
         /// </summary>
         [InspectorName("PNJ")] NPC,
