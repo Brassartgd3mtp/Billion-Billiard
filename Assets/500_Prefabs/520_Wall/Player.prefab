@@ -464,6 +464,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 5087432450527353141}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &9080468412780825529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,11 +519,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ed7dd69590c674e9d60607e3cea60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StrengthMultiplier: 40
+  StrengthFactor: 40
+  maxVelocityMultiplier: 3
   ThrowStrength: 0
   LookingDirection: {x: 0, y: 0}
   MouseSensitivity: 0.3
+  gaugeSpeed: 0.5
   PowerLineRenderer: {fileID: 4728191630864481060}
+  gaugeObject: {fileID: 0}
+  gaugeFill: {fileID: 0}
   isShooted: 0
   posBeforeHit: {x: 0, y: 0, z: 0}
   speedEffect: {fileID: 3569593256469584753}
