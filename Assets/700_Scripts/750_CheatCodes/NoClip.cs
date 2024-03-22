@@ -40,7 +40,7 @@ public class NoClip : MonoBehaviour
 
     public void NoClipMode(InputAction.CallbackContext context)
     {
-        if (ModeOn)
+        if (!ModeOn)
         {
             ModeOn = true;
             InputHandler.Actions.Gamepad.Disable();
