@@ -119,6 +119,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity.normalized * maxVel;
     }
 
+    bool velcroLock = false;
     void SwitchObstacle(Obstacle obstacle, float speed, Vector3 reflect)
     {
         switch (obstacle.obstacleType)
@@ -141,9 +142,19 @@ public class PlayerController : MonoBehaviour
             case Obstacle.ObstacleType.NPC:
                 StartCoroutine(Haptic(WallValues.PawnLFH, WallValues.PawnHFH, WallValues.PawnTH));
                 break;
+
             case Obstacle.ObstacleType.Bumper:
                 StartCoroutine(Haptic(WallValues.BumperLFH, WallValues.BumperHFH, WallValues.BumperTH));
                 rb.velocity = reflect * Mathf.Max(speed * WallValues.BumperBounce, 0f);
+                break;
+
+            case Obstacle.ObstacleType.Velcro:
+                if (!velcroLock)
+                {
+                    velcroLock = true;
+                    StartCoroutine(Haptic(WallValues.VelcroLFH, WallValues.VelcroHFH, WallValues.VelcroTH));
+                    rb.velocity = Vector3.zero;
+                }
                 break;
         }
     }
@@ -212,6 +223,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         stayOnce = false;
+        velcroLock = false;
     }
 
     /// <summary>
@@ -340,7 +352,6 @@ public class PlayerController : MonoBehaviour
 
             ThrowStrength = 0;
             MouseEnd = Vector2.zero;
-            SetLookDirection(Vector2.zero);
         }
     }
 
