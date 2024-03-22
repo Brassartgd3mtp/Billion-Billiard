@@ -368,6 +368,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        InputHandler.PlayerControllerDisable(this);
+        InputHandler.PlayerControllerDisable();
     }
 }
