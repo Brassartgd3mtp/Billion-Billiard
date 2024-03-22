@@ -6,14 +6,14 @@ public class OneWayDoor : MonoBehaviour
 {
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject wall;
+    [SerializeField] private LockedDoor lockedDoor;
+    [SerializeField] private bool isOneWay;
     private bool isOpen;
     Vector3 startPos;
-    new BoxCollider collider;
 
     // Start is called before the first frame update
     void Start()
     {
-        collider = GetComponent<BoxCollider>();
         startPos = door.transform.localPosition;
 
         OpenDoor();
@@ -21,7 +21,7 @@ public class OneWayDoor : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out PlayerController _pc) && isOpen)
+        if (other.gameObject.layer == 3 && isOpen && isOneWay)
             CloseDoor();
     }
 
@@ -30,6 +30,7 @@ public class OneWayDoor : MonoBehaviour
         Vector3 underground = new Vector3(0, -1.5f, 0);
         isOpen = true;
         StartCoroutine(DoorState(door, underground));
+        lockedDoor.Unlock = true;
     }
 
     void CloseDoor()
