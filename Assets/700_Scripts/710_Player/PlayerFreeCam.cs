@@ -72,7 +72,7 @@ public class PlayerFreeCam : MonoBehaviour
     
     private void Update()
     {
-        if (Gamepad.current != null && isFreeCamActive)
+        if (SwapControls.state == CurrentState.Gamepad && isFreeCamActive)
         {
             camFVT.m_FollowOffset.x += freeCam.ReadValue<Vector2>().x * CameraSpeed * Time.deltaTime * 5;
             camFVT.m_FollowOffset.z += freeCam.ReadValue<Vector2>().y * CameraSpeed * Time.deltaTime * 5;
@@ -90,6 +90,6 @@ public class PlayerFreeCam : MonoBehaviour
 
     private void OnDisable()
     {
-        InputHandler.FreeCamDisable(this);
+        InputHandler.FreeCamDisable();
     }
 }

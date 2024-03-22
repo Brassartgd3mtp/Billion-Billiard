@@ -101,6 +101,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
         do
         {
+            rb.velocity = Vector3.zero;
             transform.localScale = Vector3.Lerp(startSize, endSize, timerSize / timeToScale);
             timerSize += Time.deltaTime;
             yield return null;
@@ -108,6 +109,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
         while (timerSize < timeToScale);
 
         transform.position = playerController.posBeforeHit;
+        rb.velocity = Vector3.zero;
         trailRenderer.enabled = true;
         trailRenderer.Clear();
         transform.localScale = new Vector3(1, 1, 1);

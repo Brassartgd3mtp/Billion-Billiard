@@ -64,6 +64,6 @@ public class NoClip : MonoBehaviour
 
     private void OnDisable()
     {
-        InputHandler.NoClipDisable(this);
+        InputHandler.NoClipDisable();
     }
 }
