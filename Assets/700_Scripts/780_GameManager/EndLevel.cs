@@ -12,7 +12,7 @@ public class EndLevel : MonoBehaviour
     {
         if (other.gameObject.layer == 3)
         {
-            if (Gamepad.current != null)
+            if (SwapControls.state == CurrentState.Gamepad)
             {
                 Gamepad.current.ResetHaptics();
             }
@@ -22,9 +22,9 @@ public class EndLevel : MonoBehaviour
 
     private void OnDisable()
     {
-        if (Gamepad.current != null)
+        if (SwapControls.state == CurrentState.Gamepad)
         {
-        Gamepad.current.ResetHaptics();
+            Gamepad.current.ResetHaptics();
         }
     }
 }

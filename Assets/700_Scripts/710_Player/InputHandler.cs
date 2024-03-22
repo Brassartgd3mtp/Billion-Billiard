@@ -1,5 +1,8 @@
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class InputHandler : MonoBehaviour
 {
@@ -10,10 +13,8 @@ public class InputHandler : MonoBehaviour
     {
         Actions = new PlayerActionMap();
 
-        Actions.Gamepad.Enable();
-        if (Gamepad.current == null)
-            Actions.MouseKeyboard.Enable();
         Actions.Cheat.Enable();
+        Actions.Swap.Enable();
     }
 
     public static void PlayerControllerEnable(PlayerController playerController)
@@ -24,9 +25,11 @@ public class InputHandler : MonoBehaviour
         TurnBasedSystem.OnDisablePlayerInput += Actions.Gamepad.GamepadStrenght.Disable;
         TurnBasedSystem.OnDisablePlayerInput += Actions.Gamepad.ThrowPlayer.Disable;
 
-        Actions.Gamepad.ThrowPlayer.performed += playerController.Throw;
-        Actions.Gamepad.GamepadStrenght.performed += playerController.GamepadStrenght;
-        Actions.Gamepad.GamepadStrenght.canceled += playerController.GamepadStrenght;
+        Actions.Gamepad.ThrowPlayer.started += playerController.GamepadStrengthGauge;
+        Actions.Gamepad.ThrowPlayer.canceled += playerController.GamepadStrengthGauge;
+        Actions.Gamepad.ThrowPlayer.canceled += playerController.Throw;
+        Actions.Gamepad.GamepadStrenght.performed += playerController.GamepadDirection;
+        Actions.Gamepad.GamepadStrenght.canceled += playerController.GamepadDirection;
         #endregion
         #region Mouse/Keyboard
         TurnBasedSystem.OnEnablePlayerInput += Actions.MouseKeyboard.MouseStartDrag.Enable;
@@ -69,12 +72,20 @@ public class InputHandler : MonoBehaviour
         Actions.MouseKeyboard.PauseMenu.started += pauseMenu.PauseMenuState;
     }
 
+    public static void SwapEnable(SwapControls swapControls)
+    {
+        Actions.Swap.ToMouseKeyboard.started += swapControls.ToMouseKeyboard;
+        Actions.Swap.ToGamepad.started += swapControls.ToGamepad;
+    }
+
     public static void PlayerControllerDisable(PlayerController playerController)
     {
         #region Gamepad
-        Actions.Gamepad.ThrowPlayer.performed -= playerController.Throw;
-        Actions.Gamepad.GamepadStrenght.performed -= playerController.GamepadStrenght;
-        Actions.Gamepad.GamepadStrenght.canceled -= playerController.GamepadStrenght;
+        Actions.Gamepad.ThrowPlayer.started -= playerController.GamepadStrengthGauge;
+        Actions.Gamepad.ThrowPlayer.canceled -= playerController.GamepadStrengthGauge;
+        Actions.Gamepad.ThrowPlayer.canceled -= playerController.Throw;
+        Actions.Gamepad.GamepadStrenght.performed -= playerController.GamepadDirection;
+        Actions.Gamepad.GamepadStrenght.canceled -= playerController.GamepadDirection;
         #endregion
         #region Mouse/Keyboard
         Actions.MouseKeyboard.MouseStrenght.performed -= playerController.MouseStrenght;
@@ -111,5 +122,11 @@ public class InputHandler : MonoBehaviour
     {
         Actions.Gamepad.PauseMenu.started -= pauseMenu.PauseMenuState;
         Actions.MouseKeyboard.PauseMenu.started -= pauseMenu.PauseMenuState;
+    }
+
+    public static void SwapDisable(SwapControls swapControls)
+    {
+        Actions.Swap.ToMouseKeyboard.started -= swapControls.ToMouseKeyboard;
+        Actions.Swap.ToGamepad.started -= swapControls.ToGamepad;
     }
 }
