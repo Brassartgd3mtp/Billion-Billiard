@@ -102,8 +102,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         //Time.fixedDeltaTime = 0f;
 
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
+        //EventSystem.current.SetSelectedGameObject(null);
+        //EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
     }
 
     void PauseOff()
