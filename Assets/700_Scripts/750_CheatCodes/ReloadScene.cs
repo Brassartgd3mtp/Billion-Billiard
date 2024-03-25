@@ -21,7 +21,7 @@ public class ReloadScene : MonoBehaviour
 
     private void OnDisable()
     {
-        InputHandler.ReloadSceneDisable(this);
+        InputHandler.ReloadSceneDisable();
     }
 
 }

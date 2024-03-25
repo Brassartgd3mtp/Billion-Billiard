@@ -44,5 +44,9 @@ public class WallValues
     public static float PawnLFH = 0f;
     public static float PawnHFH = 1f;
     public static float PawnTH = .2f;
+
+    public static float VelcroLFH = 0f;
+    public static float VelcroHFH = 1f;
+    public static float VelcroTH = .2f;
     #endregion
 }
