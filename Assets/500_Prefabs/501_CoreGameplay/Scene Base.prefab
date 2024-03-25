@@ -6285,7 +6285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 3705272347710780647}
-  uI_Stats: {fileID: 0}
+  uI_Stats: {fileID: 540975006541408978}
   playerController: {fileID: 2429653923857696437}
 --- !u!114 &3705272347710780647
 MonoBehaviour:
@@ -6443,7 +6443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotRemaining: 3
   nbrOfShots: 3
-  PassiveReloadEnabled: 0
+  PassiveReloadEnabled: 1
   PassiveReloadCooldown: 1.5
   playerController: {fileID: 2429653923857696437}
   uI_ShotRemaining: {fileID: 891727099529141803}
@@ -17927,7 +17927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45c6f2573fdfaa54f95be99d36cbde38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelType: 0
+  levelType: 1
 --- !u!1 &4762669836358603550
 GameObject:
   m_ObjectHideFlags: 0
@@ -21637,6 +21637,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayToSkip: {fileID: 7354902577280820609}
+  XboxGamepad: {fileID: 0}
+  Mouse: {fileID: 0}
 --- !u!1 &6843566895515313416
 GameObject:
   m_ObjectHideFlags: 0
@@ -22068,8 +22070,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerImage: {fileID: 2756431192552143846}
   mouseImage: {fileID: 8014946486364260297}
-  controlSwitchToMouse: 0
-  controlSwitchToController: 0
 --- !u!1 &7354902577280820609
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,8 +15,6 @@ public class OneWayDoor : MonoBehaviour
     void Start()
     {
         startPos = door.transform.localPosition;
-
-        OpenDoor();
     }
 
     private void OnTriggerExit(Collider other)

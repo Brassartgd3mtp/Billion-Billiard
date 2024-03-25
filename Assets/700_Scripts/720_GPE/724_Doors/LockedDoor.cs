@@ -22,7 +22,6 @@ public class LockedDoor : MonoBehaviour
             //myAnimator.SetBool("Unlock", unlock);
             IconPadlockLocked.SetActive(false);
             IconPadlockUnlocked.SetActive(true);
-            //Destroy(gameObject);
         }
     }
 
