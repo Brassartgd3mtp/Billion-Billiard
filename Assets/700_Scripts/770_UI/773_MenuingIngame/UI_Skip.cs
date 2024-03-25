@@ -8,6 +8,9 @@ public class UI_Skip : MonoBehaviour
 {
     public GameObject DisplayToSkip;
 
+    public GameObject XboxGamepad;
+    public GameObject Mouse;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,19 @@ public class UI_Skip : MonoBehaviour
         InputHandler.PauseMenuDisable();
 
         DisplayToSkip.SetActive(true);
+    }
+    private void Update()
+    {
+        if (SwapControls.state == CurrentState.Gamepad)
+        {
+            XboxGamepad.gameObject.SetActive(true);
+            Mouse.gameObject.SetActive(false);
+        }
+        else
+        {
+            XboxGamepad.gameObject.SetActive(false);
+            Mouse.gameObject.SetActive(true);
+        }
     }
 
     public void SkipCanva(InputAction.CallbackContext context)
