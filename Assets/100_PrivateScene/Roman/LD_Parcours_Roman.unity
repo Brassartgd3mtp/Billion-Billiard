@@ -3316,7 +3316,7 @@ PrefabInstance:
         type: 3}
       propertyPath: lockedDoor
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 245729021}
     - target: {fileID: 8910097315810669939, guid: c162aa26aba9e84459d8f1d764c8fd03,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4746,6 +4746,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc80f0b85c585544aa792c70b914c3ae, type: 3}
+--- !u!114 &245729021 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2779254659055534569, guid: 5d504fcd76115de479a27f04c09ba675,
+    type: 3}
+  m_PrefabInstance: {fileID: 989373625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a39fb450052de4faa68cd5cd867872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &251892158
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14908,6 +14920,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Loocked_DoorV3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616716171066711272, guid: 5d504fcd76115de479a27f04c09ba675,
+        type: 3}
+      propertyPath: isOneWay
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5893555080033537447, guid: 5d504fcd76115de479a27f04c09ba675,
         type: 3}
@@ -31200,6 +31217,6 @@ SceneRoots:
   - {fileID: 1713862552}
   - {fileID: 2071753748}
   - {fileID: 950554653}
+  - {fileID: 989373625}
   - {fileID: 502366714}
   - {fileID: 1292999480}
-  - {fileID: 989373625}
