@@ -7950,6 +7950,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 679367503}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &679555880 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2003753589053465316, guid: 6c14a85aadea9bb4fa58db235d7d1118,
+    type: 3}
+  m_PrefabInstance: {fileID: 1406201729}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &690309182 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1610764486060859189, guid: b76da16807a10e94a8e04fbc91668752,
@@ -9935,6 +9941,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d5308230344c8e4a88d0b0242c6e1d2, type: 3}
+--- !u!1 &886884117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5704374119539466310, guid: 6c14a85aadea9bb4fa58db235d7d1118,
+    type: 3}
+  m_PrefabInstance: {fileID: 1406201729}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &890073360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14055,6 +14067,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2003753589053465316, guid: 6c14a85aadea9bb4fa58db235d7d1118,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5056546972909848793, guid: 6c14a85aadea9bb4fa58db235d7d1118,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14100,8 +14117,24 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 20.000008
       objectReference: {fileID: 0}
+    - target: {fileID: 6128190085542548071, guid: 6c14a85aadea9bb4fa58db235d7d1118,
+        type: 3}
+      propertyPath: Mouse
+      value: 
+      objectReference: {fileID: 886884117}
+    - target: {fileID: 6128190085542548071, guid: 6c14a85aadea9bb4fa58db235d7d1118,
+        type: 3}
+      propertyPath: XboxGamepad
+      value: 
+      objectReference: {fileID: 679555880}
+    - target: {fileID: 7354902577280820609, guid: 6c14a85aadea9bb4fa58db235d7d1118,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9161205103144796497, guid: 6c14a85aadea9bb4fa58db235d7d1118, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c14a85aadea9bb4fa58db235d7d1118, type: 3}
