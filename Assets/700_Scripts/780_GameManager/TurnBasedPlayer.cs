@@ -4,20 +4,16 @@ using UnityEngine;
 
 public class TurnBasedPlayer : MonoBehaviour
 {
-    public float speed;
-
-    public bool hasStopped { get; private set; }
-    public bool reShooted;
-
-    public bool dragChecker;
-
+    [Header("Shots")]
     public int shotRemaining;
     public int nbrOfShots;
 
+    [Header("Reload")]
+    public bool PassiveReloadEnabled;
     public float PassiveReloadCooldown = 3;
+    private float ReloadCooldown;
 
-    public float ReloadCooldown;
-
+    [Header("References")]
     public PlayerController playerController;
     public UI_ShotRemaining uI_ShotRemaining;
     public ParticleShotRemaining ParticleShotRemaining;
@@ -43,9 +39,7 @@ public class TurnBasedPlayer : MonoBehaviour
 
     public void Update()
     {
-        
-
-        if (ReloadCooldown > 0)
+        if (ReloadCooldown > 0 && PassiveReloadEnabled)
         {
             if (shotRemaining != nbrOfShots)
                 ReloadCooldown -= Time.deltaTime;
@@ -67,15 +61,17 @@ public class TurnBasedPlayer : MonoBehaviour
 
     public void PassiveReload()
     {
-        shotRemaining++;
-        uI_ShotRemaining.UpdateUI(shotRemaining);
-        ParticleShotRemaining.PassiveUpdateShots();
-        TurnBasedSystem.ReloadForPlayer();
+        if (PassiveReloadEnabled)
+        {
+            shotRemaining++;
+            uI_ShotRemaining.UpdateUI(shotRemaining);
+            ParticleShotRemaining.PassiveUpdateShots();
+            TurnBasedSystem.ReloadForPlayer();
+        }
     }
 
     public void ShotCount()
     {
-        hasStopped = false;
         shotRemaining--;
         ParticleShotRemaining.Death();
         uI_ShotRemaining.UpdateUI(shotRemaining);
