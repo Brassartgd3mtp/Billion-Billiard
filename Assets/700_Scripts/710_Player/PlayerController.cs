@@ -9,13 +9,12 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Strenght Value")]
     public int StrengthFactor = 40;
-    [SerializeField, Tooltip("Vélocité maximale de la balle basée sur le Strength Factor fois cette variable.\nValeur par défaut : 3.")]
-    private float maxVelocityMultiplier = 3f;
+    [SerializeField, Tooltip("Vélocité maximale de la balle.\nValeur par défaut : 80.")]
+    private float maximumVelocity = 80;
     [Range(0f, 40f)]
     public float ThrowStrength;
     [HideInInspector] public Vector2 LookingDirection;
     private float staticThrowStrength;
-    private float maxVel = 0;
 
     [Header("Mouse Values"), Range(0f, 1f)]
     [SerializeField] private float MouseSensitivity;
@@ -62,8 +61,6 @@ public class PlayerController : MonoBehaviour
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
 
         InputHandler.PlayerControllerEnable(this);
-
-        maxVel = StrengthFactor * maxVelocityMultiplier;
     }
 
     /// <summary>
@@ -114,9 +111,9 @@ public class PlayerController : MonoBehaviour
 
         //Clamp Speed
         rb.velocity =
-            rb.velocity.magnitude < maxVel ?
+            rb.velocity.magnitude < maximumVelocity ?
             rb.velocity :
-            rb.velocity.normalized * maxVel;
+            rb.velocity.normalized * maximumVelocity;
     }
 
     bool velcroLock = false;
