@@ -10,11 +10,6 @@ public class UI_ControllerSwitch : MonoBehaviour
     private bool Timer = false;
     private bool TimerFinished = false;
 
-    //Ces valeurs sont à supprimer, c'est juste pour voir si le script global fonctionne.
-    public bool controlSwitchToMouse = false;
-    public bool controlSwitchToController = false;
-
-
     void Start()
     {
         controllerImage.gameObject.SetActive(false);
@@ -23,14 +18,16 @@ public class UI_ControllerSwitch : MonoBehaviour
 
     void Update()
     {
-        if (controlSwitchToMouse)
-        {
-            mouseImage.gameObject.SetActive(true);
-            Timer = true;
-        }
-        if (controlSwitchToController)
+        if (SwapControls.state == CurrentState.Gamepad)
         {
             controllerImage.gameObject.SetActive(true);
+            mouseImage.gameObject.SetActive(false);
+            Timer = true;
+        }
+        else
+        {
+            mouseImage.gameObject.SetActive(true);
+            controllerImage.gameObject.SetActive(false);
             Timer = true;
         }
 
