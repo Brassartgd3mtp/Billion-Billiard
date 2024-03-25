@@ -90,6 +90,11 @@ public class LevelSelectorManager : MonoBehaviour
         SceneManager.LoadScene(levelLoader.levelID);
     }
 
+    public void ReturnMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void CheckIfNextPanelIsLocked()
     {
         Panels[PanelIndex + 1].TryGetComponent(out PanelManager panelManagerNext);
