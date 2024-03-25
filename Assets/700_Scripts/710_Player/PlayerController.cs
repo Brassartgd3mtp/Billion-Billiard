@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,8 +22,13 @@ public class PlayerController : MonoBehaviour
     private Vector2 MouseStart;
     private Vector2 MouseEnd;
 
+    [Header("Gamepad Values"), Range(0f, 2f)]
+    [SerializeField] private float gaugeSpeed;
+
     [Header("References")]
     public LineRenderer PowerLineRenderer;
+    [SerializeField] private GameObject gaugeObject;
+    [SerializeField] private Image gaugeFill;
 
     private float angle;
     public static Rigidbody rb;
@@ -65,8 +72,10 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     public void Throw(InputAction.CallbackContext context)
     {
-        if (ThrowStrength > 0.1f)
+        if (ThrowStrength > 0.2f)
         {
+            StartCoroutine(Haptic(ThrowStrength / 40, ThrowStrength / 40, .4f));
+
             timeSinceThrow = 0;
             staticThrowStrength = ThrowStrength;
 
@@ -90,6 +99,8 @@ public class PlayerController : MonoBehaviour
             speedEffect.Play();
 
             turnBasedPlayer.ShotCount();
+
+            ThrowStrength = 0;
         }
     }
 
@@ -212,13 +223,14 @@ public class PlayerController : MonoBehaviour
     /// <returns>Coroutine</returns>
     IEnumerator Haptic(float lowfreq_strenght, float highfreq_strenght, float timer)
     {
-        if (Gamepad.current != null)
+        if (SwapControls.state == CurrentState.Gamepad)
         {
             Gamepad.current.SetMotorSpeeds(lowfreq_strenght, highfreq_strenght);
             yield return new WaitForSeconds(timer);
             InputSystem.ResetHaptics();
         }
     }
+
     /// <summary>
     /// Met en place un vecteur en fonction de l� o� le joueur regarde et oriente la bille dans la direction du vecteur
     /// Affiche la jauge de puissance en fonction du vecteur, de la puissance de lancer et divis� par 10 pour un meilleur rendu 
@@ -227,39 +239,63 @@ public class PlayerController : MonoBehaviour
     private void SetLookDirection(Vector2 _lookDirection)
     {
         LookingDirection = _lookDirection;
-        if (ThrowStrength > 0f)
-        {
-            angle = Mathf.Atan2(LookingDirection.x, LookingDirection.y) * Mathf.Rad2Deg;
-            rb.rotation = Quaternion.Euler(0f, angle, 0f);
-        }
-        //PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 5);
-        PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 5);
+
+        angle = Mathf.Atan2(-LookingDirection.x, -LookingDirection.y) * Mathf.Rad2Deg;
+        rb.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 
     /// <summary>
     /// Quand le joystick gauche est actif alors on appelle la m�thode SetLookDirection avec son vecteur qui va dans la direction oppos�e
     /// </summary>
     /// <param name="context"></param>
-    public void GamepadStrenght(InputAction.CallbackContext context)
+    public void GamepadDirection(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             //SetLookDirection(-context.ReadValue<Vector2>());
             SetLookDirection(context.ReadValue<Vector2>());
-            ThrowStrength = context.ReadValue<Vector2>().magnitude * StrengthFactor;
-
         }
+    }
 
+    float gaugeTime;
+    bool isGaugeActive = false;
+    public void GamepadStrengthGauge(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            gaugeObject.SetActive(true);
+            isGaugeActive = true;
+        }
         if (context.canceled)
         {
-            ThrowStrength = 0;
-            SetLookDirection(Vector2.zero);
+            gaugeObject.SetActive(false);
+            isGaugeActive = false;
+            gaugeFill.fillAmount = 0;
         }
+    }
+
+    private void Update()
+    {
+        gaugeTime += Time.deltaTime * gaugeSpeed * 100;
+
+        if (isGaugeActive)
+        {
+            ThrowStrength = Mathf.PingPong(gaugeTime, 40);
+            gaugeFill.fillAmount = ThrowStrength / StrengthFactor;
+        }
+        else
+            gaugeTime = 0;
+
+        //if (SwapControls.state == CurrentState.Gamepad)
+        //    PowerLineRenderer.SetPosition(1, Vector3.back * 8);
+        //else
+            //PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 5);
+        PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 8);
     }
 
     private bool dragEnabled = false;
     /// <summary>
-    /// Quand la souris effectue un drag on rend le curseur invisible et il est restreint de se d�plac� dans l'�cran
+    /// Quand la souris effectue un drag on rend le curseur invisible et il est restreint de se d�placer dans l'�cran
     /// On appelle la m�thode SetLookDirection avec son vecteur qui va dans la direction oppos�e
     /// <param name="context"></param>
     public void MouseStrenght(InputAction.CallbackContext context)
@@ -326,7 +362,7 @@ public class PlayerController : MonoBehaviour
 
             ThrowStrength = 0;
             MouseEnd = Vector2.zero;
-            SetLookDirection(Vector2.zero);
+            //SetLookDirection(Vector2.zero);
         }
     }
 
