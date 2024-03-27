@@ -6443,7 +6443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotRemaining: 3
   nbrOfShots: 3
-  PassiveReloadEnabled: 0
+  PassiveReloadEnabled: 1
   PassiveReloadCooldown: 1.5
   playerController: {fileID: 2429653923857696437}
   uI_ShotRemaining: {fileID: 891727099529141803}
@@ -17927,7 +17927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45c6f2573fdfaa54f95be99d36cbde38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelType: 0
+  levelType: 1
 --- !u!1 &4762669836358603550
 GameObject:
   m_ObjectHideFlags: 0
@@ -22026,6 +22026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3153122740755676279}
   - component: {fileID: 8061111563242797248}
+  - component: {fileID: 5493448144552103836}
   m_Layer: 5
   m_Name: ControllerSwitch
   m_TagString: Untagged
@@ -22070,6 +22071,18 @@ MonoBehaviour:
   mouseImage: {fileID: 8014946486364260297}
   controlSwitchToMouse: 0
   controlSwitchToController: 0
+--- !u!225 &5493448144552103836
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7140032100405867208}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &7354902577280820609
 GameObject:
   m_ObjectHideFlags: 0
