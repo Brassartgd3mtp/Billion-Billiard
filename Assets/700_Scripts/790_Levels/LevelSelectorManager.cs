@@ -27,9 +27,12 @@ public class LevelSelectorManager : MonoBehaviour
 
     [SerializeField] private GameObject Content;
 
+    private MenuNavigation menuNavigation;
+
     public void Awake()
     {
         scrollRect = GetComponent<ScrollRect>();
+        menuNavigation = GetComponent<MenuNavigation>();
     }
 
     public void Start()
@@ -87,13 +90,22 @@ public class LevelSelectorManager : MonoBehaviour
         SceneManager.LoadScene(levelLoader.levelID);
     }
 
+    public void ReturnMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void CheckIfNextPanelIsLocked()
     {
         Panels[PanelIndex + 1].TryGetComponent(out PanelManager panelManagerNext);
         if (panelManagerNext.SO_Level.LevelData.isLocked)
         {
             Debug.Log("Locked");
-            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+            if (menuNavigation.GamepadIsActive)
+            {
+                _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+            }
+            else if (menuNavigation.MouseKeybordIsActive) _eventSystem.SetSelectedGameObject(null);
             RightArrow.gameObject.SetActive(false);
             RightArrow.enabled = false;
         } 
@@ -104,7 +116,10 @@ public class LevelSelectorManager : MonoBehaviour
         }
         if (ActualPanel == Panels[0])
         {
+            if (menuNavigation.GamepadIsActive)
+            {
             _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+            } else if (menuNavigation.MouseKeybordIsActive) _eventSystem.SetSelectedGameObject(null);
             LeftArrow.gameObject.SetActive(false);
             LeftArrow.enabled = false;
         } else if (ActualPanel != Panels[0])

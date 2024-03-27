@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class OneWayDoor : MonoBehaviour
 {
-    [SerializeField] private GameObject door;
-    [SerializeField] private GameObject wall;
     [SerializeField] private LockedDoor lockedDoor;
+    [SerializeField] private GameObject wall;
     [SerializeField] private bool isOneWay;
+    [SerializeField] private bool isOpenByDefault;
     private bool isOpen;
     Vector3 startPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        startPos = door.transform.localPosition;
+        startPos = lockedDoor.transform.localPosition;
 
-        OpenDoor();
+        if (isOpenByDefault)
+            OpenDoor();
     }
 
     private void OnTriggerExit(Collider other)
@@ -29,7 +30,7 @@ public class OneWayDoor : MonoBehaviour
     {
         Vector3 underground = new Vector3(0, -1.5f, 0);
         isOpen = true;
-        StartCoroutine(DoorState(door, underground));
+        StartCoroutine(DoorState(lockedDoor.gameObject, underground));
         lockedDoor.Unlock = true;
     }
 

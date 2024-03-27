@@ -1,26 +1,52 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class UI_Skip : MonoBehaviour
 {
     public GameObject DisplayToSkip;
-    private bool CanSkip = true;
+
+    public GameObject XboxGamepad;
+    public GameObject Mouse;
+
     // Start is called before the first frame update
     void Start()
     {
+        InputHandler.UISkipEnable(this);
+
+        InputHandler.PlayerControllerDisable();
+        InputHandler.FreeCamDisable();
+        InputHandler.PauseMenuDisable();
+
         DisplayToSkip.SetActive(true);
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (CanSkip)
+        if (SwapControls.state == CurrentState.Gamepad)
         {
-            if(Input.GetKey(KeyCode.Mouse0))
-            {
-                DisplayToSkip.SetActive(false);
-            }
+            XboxGamepad.gameObject.SetActive(true);
+            Mouse.gameObject.SetActive(false);
+        }
+        else
+        {
+            XboxGamepad.gameObject.SetActive(false);
+            Mouse.gameObject.SetActive(true);
+        }
+    }
+
+    public void SkipCanva(InputAction.CallbackContext context)
+    {
+        if (DisplayToSkip.activeSelf)
+        {
+            DisplayToSkip.SetActive(false);
+
+            InputHandler.PlayerControllerEnable();
+            InputHandler.FreeCamEnable();
+            InputHandler.PauseMenuEnable();
+
+            InputHandler.UISkipDisable();
         }
     }
 }
