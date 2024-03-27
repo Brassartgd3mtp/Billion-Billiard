@@ -6,49 +6,48 @@ public class UI_ControllerSwitch : MonoBehaviour
 {
     public GameObject controllerImage;
     public GameObject mouseImage;
-    private float TimeToDisplay = 2;
-    private bool Timer = false;
-    private bool TimerFinished = false;
+    public float DisplayTimer = 1;
+
+    CanvasGroup canvaGroup;
 
     void Start()
     {
         controllerImage.gameObject.SetActive(false);
         mouseImage.gameObject.SetActive(false);
+        canvaGroup = GetComponent<CanvasGroup>();
     }
 
-    void Update()
+    public void GamepadIcon()
     {
-        if (SwapControls.state == CurrentState.Gamepad)
+        controllerImage.gameObject.SetActive(true);
+        mouseImage.gameObject.SetActive(false);
+
+        DisplayTimer = 1;
+        canvaGroup.alpha = 1;
+
+        StartCoroutine(Timer());
+    }
+
+    public void MouseIcon()
+    {
+        mouseImage.gameObject.SetActive(true);
+        controllerImage.gameObject.SetActive(false);
+
+        DisplayTimer = 1;
+        canvaGroup.alpha = 1;
+
+        StartCoroutine(Timer());
+    }
+
+    IEnumerator Timer()
+    {
+        while (DisplayTimer > 0)
         {
-            controllerImage.gameObject.SetActive(true);
-            mouseImage.gameObject.SetActive(false);
-            Timer = true;
-        }
-        else
-        {
-            mouseImage.gameObject.SetActive(true);
-            controllerImage.gameObject.SetActive(false);
-            Timer = true;
+            DisplayTimer -= Time.deltaTime;
+            canvaGroup.alpha = DisplayTimer;
+            yield return null;
         }
 
-        if (Timer)
-        {
-            TimeToDisplay -= Time.deltaTime;
-            if (TimeToDisplay <= 0)
-            {
-                Timer = false;
-                TimerFinished = true;
-            }
-        }
-
-        if(TimerFinished)
-        {
-            controllerImage.gameObject.SetActive(false);
-            mouseImage.gameObject.SetActive(false);
-            TimeToDisplay = 2;
-            TimerFinished = false;
-        }
-
-        
+        yield break;
     }
 }
