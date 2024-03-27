@@ -22,7 +22,8 @@ public class Employees : MonoBehaviour
             {
                 interuptor = collision.gameObject;
                 interrupteur.ContactPNJ = true;
-                StartCoroutine(MoveInInteruptor());            }
+                StartCoroutine(MoveInInteruptor());
+            }
 
             if (collision.gameObject.TryGetComponent(out HoleForPNJ holeForPNJ))
             {
