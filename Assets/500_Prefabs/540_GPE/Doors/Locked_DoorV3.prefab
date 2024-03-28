@@ -458,7 +458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a39fb450052de4faa68cd5cd867872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DelayOpen: 0.5
   IconPadlockUnlocked: {fileID: 4557127847630340612}
   IconPadlockLocked: {fileID: 8740092002528253975}
 --- !u!114 &1107500805173823195
@@ -1023,7 +1022,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.07, y: 0.125, z: -5.59}
-  m_LocalScale: {x: 1.8, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7759109726810587541}
@@ -1077,10 +1076,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79daf9433306a745bafd1821d73a929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 1563400111878214862}
-  wall: {fileID: 4250805945268048838}
   lockedDoor: {fileID: 2779254659055534569}
+  wall: {fileID: 4250805945268048838}
+  speed: 1
   isOneWay: 0
+  isOpenByDefault: 0
 --- !u!1 &8740092002528253975
 GameObject:
   m_ObjectHideFlags: 0
