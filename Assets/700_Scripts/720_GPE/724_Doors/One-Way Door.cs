@@ -6,6 +6,7 @@ public class OneWayDoor : MonoBehaviour
 {
     [SerializeField] private LockedDoor lockedDoor;
     [SerializeField] private GameObject wall;
+    [SerializeField] private GameObject wallCollider;
     [SerializeField, Range(1, 5)] private float speed = 1;
     [SerializeField] private bool isOneWay;
     [SerializeField] private bool isOpenByDefault;
@@ -39,6 +40,8 @@ public class OneWayDoor : MonoBehaviour
 
     void CloseDoor()
     {
+        wallCollider.SetActive(true);
+
         isOpen = false;
         StartCoroutine(DoorState(wall, startPos));
         enabled = false;
