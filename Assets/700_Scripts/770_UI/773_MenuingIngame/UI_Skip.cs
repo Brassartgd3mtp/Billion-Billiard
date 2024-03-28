@@ -49,4 +49,9 @@ public class UI_Skip : MonoBehaviour
             InputHandler.UISkipDisable();
         }
     }
+
+    private void OnDisable()
+    {
+        InputHandler.UISkipDisable();
+    }
 }
