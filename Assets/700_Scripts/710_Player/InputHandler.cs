@@ -104,7 +104,7 @@ public class InputHandler : MonoBehaviour
     public static void UISkipEnable(UI_Skip uiskip)
     {
         skip = uiskip;
-        Actions.MouseKeyboard.MouseStartDrag.started += uiskip.SkipCanva;
+        Actions.MouseKeyboard.MouseStartDrag.canceled += uiskip.SkipCanva;
         Actions.Gamepad.ThrowPlayer.started += uiskip.SkipCanva;
     }
     #endregion
