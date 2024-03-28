@@ -10,6 +10,7 @@ public class UI_Skip : MonoBehaviour
 
     public GameObject XboxGamepad;
     public GameObject Mouse;
+    public GameObject NextObjToShow;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,7 @@ public class UI_Skip : MonoBehaviour
     {
         Debug.Log("Je suis joué");
         DisplayToSkip?.SetActive(false);
+        NextObjToShow?.SetActive(true);
 
         InputHandler.PlayerControllerEnable();
         InputHandler.FreeCamEnable();
