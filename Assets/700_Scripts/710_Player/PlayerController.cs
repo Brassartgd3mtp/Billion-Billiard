@@ -352,6 +352,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void GamepadCancelThrow(InputAction.CallbackContext context)
+    {
+        gaugeObject.SetActive(false);
+        gaugeFill.fillAmount = 0;
+        isGaugeActive = false;
+
+        ThrowStrength = 0;
+    }
+
     /// <summary>
     /// Quand le clic gauche est lach� on reset les contraintes du curseur, on appelle la m�thode Throw et on reset le vecteur de la m�thode SetLookDirection � z�ro
     /// </summary>
