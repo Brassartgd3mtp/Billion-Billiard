@@ -7,6 +7,7 @@ public class ConvoyerBelt : MonoBehaviour
     [SerializeField, Space] private GameObject startPoint;
     [SerializeField] private GameObject endPoint;
     private Vector3 direction;
+    public string ConvoyerSound;
 
     [SerializeField, Range(0, 100), Space] private float speed;
 
@@ -22,5 +23,13 @@ public class ConvoyerBelt : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Rigidbody _colrb))
             _colrb.AddForce(direction * speed * 2);
+        
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        AudioManager2.Instance.PlaySDFX(ConvoyerSound);
+    }
+
 }
