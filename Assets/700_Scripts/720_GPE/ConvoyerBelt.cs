@@ -7,7 +7,7 @@ public class ConvoyerBelt : MonoBehaviour
     [SerializeField, Space] private GameObject startPoint;
     [SerializeField] private GameObject endPoint;
     private Vector3 direction;
-    public string ConvoyerSound;
+    public string Conveyor_Belt;
 
     [SerializeField, Range(0, 100), Space] private float speed;
 
@@ -29,7 +29,7 @@ public class ConvoyerBelt : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        AudioManager2.Instance.PlaySDFX(ConvoyerSound);
+        AudioManager2.Instance.PlaySDFX(Conveyor_Belt);
     }
 
 }

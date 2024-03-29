@@ -7034,6 +7034,7 @@ MonoBehaviour:
   speedEffect: {fileID: 3792082301489345904}
   speedEffectDirection: {fileID: 3918158615536368089}
   smokePoof: {fileID: 3974159725226073086}
+  Player_Shot: Player_Shot
 --- !u!114 &5031325047204720743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7049,6 +7050,7 @@ MonoBehaviour:
   playerStats: {fileID: 3705272347710780647}
   uI_Stats: {fileID: 540975006541408978}
   playerController: {fileID: 2429653923857696437}
+  Player_Fall: Player_Fall
 --- !u!114 &3705272347710780647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7210,6 +7212,7 @@ MonoBehaviour:
   playerController: {fileID: 2429653923857696437}
   uI_ShotRemaining: {fileID: 891727099529141803}
   ParticleShotRemaining: {fileID: 4657487954711992899}
+  Shot_Reload: Shot_Reload
 --- !u!114 &4657487954711992899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21339,14 +21342,14 @@ VideoPlayer:
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
+  m_AudioOutputMode: 0
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
   m_Url: 
   m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
+  m_DirectAudioMutes: 01
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1

@@ -17,7 +17,7 @@ public class LevelSelectorManager : MonoBehaviour
     [SerializeField] private List<GameObject> Panels;
     [SerializeField] private List<SO_Level> SO_Levels;
     [SerializeField] private GameObject ActualPanel;
-    private int PanelIndex;
+    private static int PanelIndex = 0;
 
     [SerializeField] private CinemachineVirtualCamera VirtualCamera;
 
@@ -37,13 +37,14 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void Start()
     {
-        PanelIndex = 0;
         ActualPanel = Panels[PanelIndex];
-        CheckIfNextPanelIsLocked();
+        StartCoroutine(MovePanel(-PanelIndex));
+        //CheckIfNextPanelIsLocked();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-    }
 
+        
+    }
     public void NextPanel()
     {
         PanelIndex++;
