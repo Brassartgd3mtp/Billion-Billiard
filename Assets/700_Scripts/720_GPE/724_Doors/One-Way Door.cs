@@ -38,8 +38,6 @@ public class OneWayDoor : MonoBehaviour
         isOpen = true;
         StartCoroutine(UpdateDoorPos(lockedDoor.gameObject, underground));
         lockedDoor.Unlock = true;
-
-        Debug.Log("Open");
     }
 
     void CloseDoor()

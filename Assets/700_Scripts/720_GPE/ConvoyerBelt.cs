@@ -7,7 +7,7 @@ public class ConvoyerBelt : MonoBehaviour
 {
     private MeshRenderer meshRenderer;
     [SerializeField, Range(0, 5), Space] private float speedTexture;
-    [SerializeField, Range(1, 50)] float applyForce = 10;
+    [SerializeField, Range(1, 20)] float applyForce = 10;
     [SerializeField] private Vector2 Tiling;
     [SerializeField] private Vector2 Direction;
     private MaterialPropertyBlock materialPropertyBlock;
@@ -22,7 +22,7 @@ public class ConvoyerBelt : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.TryGetComponent(out Rigidbody _colrb))
-            _colrb.AddForce(transform.TransformDirection(forceDirection) * applyForce);
+            _colrb.AddForce(transform.TransformDirection(forceDirection) * applyForce * 10);
     }
 
     private void InitPropertyBlock()

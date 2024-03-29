@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 using UnityEngine.UI;
-using System.Runtime.CompilerServices;
 
 public class PlayerController : MonoBehaviour
 {
@@ -111,6 +110,11 @@ public class PlayerController : MonoBehaviour
 
         if (lastVel.magnitude > 0)
             timeSinceThrow += Time.fixedDeltaTime;
+
+        if (rb.velocity.magnitude > 0 && rb.velocity.magnitude < .1f)
+        {
+            rb.velocity = Vector3.zero;
+        }
 
         //Clamp Speed
         rb.velocity =
@@ -277,14 +281,14 @@ public class PlayerController : MonoBehaviour
         {
             gaugeObject.SetActive(true);
             isGaugeActive = true;
-            MyAnimator.SetBool("PreparationShoot", true);
+            //MyAnimator.SetBool("PreparationShoot", true);
         }
         if (context.canceled)
         {
             gaugeObject.SetActive(false);
             isGaugeActive = false;
             gaugeFill.fillAmount = 0;
-            MyAnimator.SetBool("PreparationShoot", false);
+            //MyAnimator.SetBool("PreparationShoot", false);
 
         }
     }
