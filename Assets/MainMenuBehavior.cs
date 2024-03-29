@@ -16,6 +16,11 @@ public class MainMenuBehavior : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
+
     public void SettingsButton()
     {
         mainPanel.SetActive(false);

@@ -17,7 +17,7 @@ public class LevelSelectorManager : MonoBehaviour
     [SerializeField] private List<GameObject> Panels;
     [SerializeField] private List<SO_Level> SO_Levels;
     [SerializeField] private GameObject ActualPanel;
-    private int PanelIndex;
+    private static int PanelIndex = 0;
 
     [SerializeField] private CinemachineVirtualCamera VirtualCamera;
 
@@ -37,13 +37,14 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void Start()
     {
-        PanelIndex = 0;
         ActualPanel = Panels[PanelIndex];
-        CheckIfNextPanelIsLocked();
+        StartCoroutine(MovePanel(-PanelIndex));
+        //CheckIfNextPanelIsLocked();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-    }
 
+        
+    }
     public void NextPanel()
     {
         PanelIndex++;
@@ -86,8 +87,10 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void PlayButton()
     {
-        ActualPanel.TryGetComponent(out LevelLoader levelLoader);
-        SceneManager.LoadScene(levelLoader.levelID);
+        if (ActualPanel.TryGetComponent(out PanelManager panelManager))
+        {
+            panelManager.SO_Level.LoadLevel();
+        }
     }
 
     public void ReturnMainMenu()
@@ -108,6 +111,7 @@ public class LevelSelectorManager : MonoBehaviour
             else if (menuNavigation.MouseKeybordIsActive) _eventSystem.SetSelectedGameObject(null);
             RightArrow.gameObject.SetActive(false);
             RightArrow.enabled = false;
+            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
         } 
         else if (RightArrow.enabled && !RightArrow.gameObject.activeInHierarchy)
         {
