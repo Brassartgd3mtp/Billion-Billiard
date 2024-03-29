@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 using UnityEngine.UI;
+using System.Runtime.CompilerServices;
 
 public class PlayerController : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem speedEffect;
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
+    [SerializeField] private Animator MyAnimator;
 
     float timeSinceThrow = 0;
 
@@ -57,6 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         smokePoof = GetComponentInChildren<VisualEffect>();
         speedEffect = GetComponentInChildren<ParticleSystem>();
+        MyAnimator = GetComponentInChildren<Animator>();
 
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
 
@@ -274,12 +277,15 @@ public class PlayerController : MonoBehaviour
         {
             gaugeObject.SetActive(true);
             isGaugeActive = true;
+            MyAnimator.SetBool("PreparationShoot", true);
         }
         if (context.canceled)
         {
             gaugeObject.SetActive(false);
             isGaugeActive = false;
             gaugeFill.fillAmount = 0;
+            MyAnimator.SetBool("PreparationShoot", false);
+
         }
     }
 
