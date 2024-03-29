@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "LevelUI", menuName = "Level Creation UI")
     ]
@@ -11,4 +13,23 @@ public class SO_Level : ScriptableObject
     public Sprite Image;
 
     public LevelData LevelData;
+
+    public int LevelID;
+
+    //public IEnumerator LoadScene(Image _progressBar)
+    //{
+    //    AsyncOperation _op = SceneManager.LoadSceneAsync(LevelID); 
+    //    while (_op != null && !_op.isDone) 
+    //    {
+    //        _progressBar.fillAmount = _op.progress;
+    //        yield return null;
+    //    }
+    //    //yield return SceneManager.LoadSceneAsync(LevelID);
+    //     SceneManager.LoadScene(LevelID);
+    //}
+
+    public void LoadLevel()
+    {
+        SceneManager.LoadScene(LevelID);
+    }
 }
