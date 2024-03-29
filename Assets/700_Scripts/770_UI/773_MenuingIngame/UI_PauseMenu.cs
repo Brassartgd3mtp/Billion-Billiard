@@ -19,6 +19,8 @@ public class PauseMenu : MonoBehaviour
             optionPanel.SetActive(false);
 
         InputHandler.PauseMenuEnable(this);
+
+        EventSystem.current.firstSelectedGameObject = PauseFirstbutton;
     }
 
     public void OnPlayButtonClick()
