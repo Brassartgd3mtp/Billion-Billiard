@@ -1,8 +1,4 @@
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 public class InputHandler : MonoBehaviour
 {
@@ -43,6 +39,7 @@ public class InputHandler : MonoBehaviour
         Actions.Gamepad.ThrowPlayer.canceled += playerController.Throw;
         Actions.Gamepad.GamepadStrenght.performed += playerController.GamepadDirection;
         Actions.Gamepad.GamepadStrenght.canceled += playerController.GamepadDirection;
+        Actions.Gamepad.CancelThrow.started += playerController.GamepadCancelThrow;
         #endregion
         #region Mouse/Keyboard
         TurnBasedSystem.OnEnablePlayerInput += Actions.MouseKeyboard.MouseStartDrag.Enable;
@@ -104,7 +101,7 @@ public class InputHandler : MonoBehaviour
     public static void UISkipEnable(UI_Skip uiskip)
     {
         skip = uiskip;
-        Actions.MouseKeyboard.MouseStartDrag.started += uiskip.SkipCanva;
+        Actions.MouseKeyboard.MouseStartDrag.canceled += uiskip.SkipCanva;
         Actions.Gamepad.ThrowPlayer.started += uiskip.SkipCanva;
     }
     #endregion
@@ -163,7 +160,7 @@ public class InputHandler : MonoBehaviour
 
     public static void UISkipDisable()
     {
-        Actions.MouseKeyboard.MouseStartDrag.started -= skip.SkipCanva;
+        Actions.MouseKeyboard.MouseStartDrag.canceled -= skip.SkipCanva;
         Actions.Gamepad.ThrowPlayer.started -= skip.SkipCanva;
     }
     #endregion

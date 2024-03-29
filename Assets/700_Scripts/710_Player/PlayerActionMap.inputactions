@@ -24,6 +24,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "CancelThrow",
+                    "type": "Button",
+                    "id": "14f4e278-ce55-4bc7-b79e-6dfdfe18b884",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "FreeCam",
                     "type": "Value",
                     "id": "4989151e-72b5-48fe-bbb5-eea2d8a909f1",
@@ -104,6 +113,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "StartFreeCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8b3f563-de3c-436a-9717-98297b275acb",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CancelThrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

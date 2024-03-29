@@ -18,15 +18,20 @@ public class MeshDestroy : MonoBehaviour
 
     public float dureeDeVieDesDebris = 5f;
 
+    public string CollisionSound;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 3 || collision.gameObject.layer == 6)
             DestroyMesh();
+        AudioManager2.Instance.PlaySDFX(CollisionSound);
+
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 3 || other.gameObject.layer == 6)
             DestroyMesh();
+        AudioManager2.Instance.PlaySDFX(CollisionSound);
     }
     private void DestroyMesh()
     {
