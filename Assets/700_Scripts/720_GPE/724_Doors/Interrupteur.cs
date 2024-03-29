@@ -5,11 +5,10 @@ using UnityEngine.InputSystem;
 
 public class Interrupteur : MonoBehaviour
 {
-    [SerializeField] private LockedDoor lockedDoor;
+    [SerializeField] private OneWayDoor lockedDoor;
 
     private bool contactPNJ = false;
     private new Collider collider;
-
    
     public bool ContactPNJ
     {
@@ -17,9 +16,8 @@ public class Interrupteur : MonoBehaviour
         set
         {
             contactPNJ = value;
-            lockedDoor.Unlock = value;
+            lockedDoor.OpenDoor();
             collider.isTrigger = true;
-            //Destroy(gameObject);
         }
     }
 
@@ -27,7 +25,7 @@ public class Interrupteur : MonoBehaviour
     {
         collider = GetComponent<Collider>();
 
-        if(lockedDoor == null)
+        if (lockedDoor == null)
             Debug.LogError("Veuillez assigner la porte à l'interrupteur");
         return;
     }

@@ -90,6 +90,6 @@ public class PlayerFreeCam : MonoBehaviour
 
     private void OnDisable()
     {
-        InputHandler.FreeCamDisable(this);
+        InputHandler.FreeCamDisable();
     }
 }

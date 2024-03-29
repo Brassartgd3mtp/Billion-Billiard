@@ -17,7 +17,7 @@ public class LevelSelectorManager : MonoBehaviour
     [SerializeField] private List<GameObject> Panels;
     [SerializeField] private List<SO_Level> SO_Levels;
     [SerializeField] private GameObject ActualPanel;
-    private int PanelIndex;
+    private static int PanelIndex = 0;
 
     [SerializeField] private CinemachineVirtualCamera VirtualCamera;
 
@@ -27,20 +27,24 @@ public class LevelSelectorManager : MonoBehaviour
 
     [SerializeField] private GameObject Content;
 
+    private MenuNavigation menuNavigation;
+
     public void Awake()
     {
         scrollRect = GetComponent<ScrollRect>();
+        menuNavigation = GetComponent<MenuNavigation>();
     }
 
     public void Start()
     {
-        PanelIndex = 0;
         ActualPanel = Panels[PanelIndex];
-        CheckIfNextPanelIsLocked();
+        StartCoroutine(MovePanel(-PanelIndex));
+        //CheckIfNextPanelIsLocked();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-    }
 
+        
+    }
     public void NextPanel()
     {
         PanelIndex++;
@@ -83,8 +87,15 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void PlayButton()
     {
-        ActualPanel.TryGetComponent(out LevelLoader levelLoader);
-        SceneManager.LoadScene(levelLoader.levelID);
+        if (ActualPanel.TryGetComponent(out PanelManager panelManager))
+        {
+            panelManager.SO_Level.LoadLevel();
+        }
+    }
+
+    public void ReturnMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void CheckIfNextPanelIsLocked()
@@ -93,9 +104,14 @@ public class LevelSelectorManager : MonoBehaviour
         if (panelManagerNext.SO_Level.LevelData.isLocked)
         {
             Debug.Log("Locked");
-            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+            if (menuNavigation.GamepadIsActive)
+            {
+                _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+            }
+            else if (menuNavigation.MouseKeybordIsActive) _eventSystem.SetSelectedGameObject(null);
             RightArrow.gameObject.SetActive(false);
             RightArrow.enabled = false;
+            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
         } 
         else if (RightArrow.enabled && !RightArrow.gameObject.activeInHierarchy)
         {
@@ -104,7 +120,10 @@ public class LevelSelectorManager : MonoBehaviour
         }
         if (ActualPanel == Panels[0])
         {
+            if (menuNavigation.GamepadIsActive)
+            {
             _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+            } else if (menuNavigation.MouseKeybordIsActive) _eventSystem.SetSelectedGameObject(null);
             LeftArrow.gameObject.SetActive(false);
             LeftArrow.enabled = false;
         } else if (ActualPanel != Panels[0])

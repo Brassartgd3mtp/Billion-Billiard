@@ -46,6 +46,15 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""CancelThrow"",
+                    ""type"": ""Button"",
+                    ""id"": ""14f4e278-ce55-4bc7-b79e-6dfdfe18b884"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""FreeCam"",
                     ""type"": ""Value"",
                     ""id"": ""4989151e-72b5-48fe-bbb5-eea2d8a909f1"",
@@ -126,6 +135,17 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""StartFreeCam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8b3f563-de3c-436a-9717-98297b275acb"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelThrow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -294,6 +314,17 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
+                    ""id"": ""5dc43dd1-5049-463b-9d00-df1220334d7c"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload Scene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""dc736d58-ed1b-4f32-b4bb-06a8a9ff11fd"",
                     ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
@@ -305,20 +336,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5dc43dd1-5049-463b-9d00-df1220334d7c"",
-                    ""path"": ""<Keyboard>/rightBracket"",
-                    ""interactions"": ""MultiTap(tapCount=3)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Reload Scene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""46b72e63-06b2-4264-920b-354c3e160e83"",
-                    ""path"": ""<Keyboard>/backslash"",
-                    ""interactions"": ""MultiTap(tapCount=3)"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""No-Clip"",
@@ -498,6 +518,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         m_Gamepad = asset.FindActionMap("Gamepad", throwIfNotFound: true);
         m_Gamepad_GamepadStrenght = m_Gamepad.FindAction("GamepadStrenght", throwIfNotFound: true);
         m_Gamepad_ThrowPlayer = m_Gamepad.FindAction("Throw Player", throwIfNotFound: true);
+        m_Gamepad_CancelThrow = m_Gamepad.FindAction("CancelThrow", throwIfNotFound: true);
         m_Gamepad_FreeCam = m_Gamepad.FindAction("FreeCam", throwIfNotFound: true);
         m_Gamepad_PauseMenu = m_Gamepad.FindAction("PauseMenu", throwIfNotFound: true);
         m_Gamepad_StartFreeCam = m_Gamepad.FindAction("StartFreeCam", throwIfNotFound: true);
@@ -584,6 +605,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     private List<IGamepadActions> m_GamepadActionsCallbackInterfaces = new List<IGamepadActions>();
     private readonly InputAction m_Gamepad_GamepadStrenght;
     private readonly InputAction m_Gamepad_ThrowPlayer;
+    private readonly InputAction m_Gamepad_CancelThrow;
     private readonly InputAction m_Gamepad_FreeCam;
     private readonly InputAction m_Gamepad_PauseMenu;
     private readonly InputAction m_Gamepad_StartFreeCam;
@@ -593,6 +615,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         public GamepadActions(@PlayerActionMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @GamepadStrenght => m_Wrapper.m_Gamepad_GamepadStrenght;
         public InputAction @ThrowPlayer => m_Wrapper.m_Gamepad_ThrowPlayer;
+        public InputAction @CancelThrow => m_Wrapper.m_Gamepad_CancelThrow;
         public InputAction @FreeCam => m_Wrapper.m_Gamepad_FreeCam;
         public InputAction @PauseMenu => m_Wrapper.m_Gamepad_PauseMenu;
         public InputAction @StartFreeCam => m_Wrapper.m_Gamepad_StartFreeCam;
@@ -611,6 +634,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @ThrowPlayer.started += instance.OnThrowPlayer;
             @ThrowPlayer.performed += instance.OnThrowPlayer;
             @ThrowPlayer.canceled += instance.OnThrowPlayer;
+            @CancelThrow.started += instance.OnCancelThrow;
+            @CancelThrow.performed += instance.OnCancelThrow;
+            @CancelThrow.canceled += instance.OnCancelThrow;
             @FreeCam.started += instance.OnFreeCam;
             @FreeCam.performed += instance.OnFreeCam;
             @FreeCam.canceled += instance.OnFreeCam;
@@ -630,6 +656,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @ThrowPlayer.started -= instance.OnThrowPlayer;
             @ThrowPlayer.performed -= instance.OnThrowPlayer;
             @ThrowPlayer.canceled -= instance.OnThrowPlayer;
+            @CancelThrow.started -= instance.OnCancelThrow;
+            @CancelThrow.performed -= instance.OnCancelThrow;
+            @CancelThrow.canceled -= instance.OnCancelThrow;
             @FreeCam.started -= instance.OnFreeCam;
             @FreeCam.performed -= instance.OnFreeCam;
             @FreeCam.canceled -= instance.OnFreeCam;
@@ -908,6 +937,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     {
         void OnGamepadStrenght(InputAction.CallbackContext context);
         void OnThrowPlayer(InputAction.CallbackContext context);
+        void OnCancelThrow(InputAction.CallbackContext context);
         void OnFreeCam(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnStartFreeCam(InputAction.CallbackContext context);

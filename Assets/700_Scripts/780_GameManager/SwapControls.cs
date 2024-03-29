@@ -8,12 +8,17 @@ public class SwapControls : MonoBehaviour
 {
     public static CurrentState state = CurrentState.MouseKeyboard;
 
+    [SerializeField] private UI_ControllerSwitch uiControllerSwitch;
+
     private void Start()
     {
         InputHandler.SwapEnable(this);
+
+        if (Gamepad.current != null)
+            StartCoroutine(DefaultIsGamepad());
     }
 
-    public void ToGamepad(InputAction.CallbackContext context)
+    void ToGamepad()
     {
         InputHandler.Actions.Swap.ToMouseKeyboard.Enable();
 
@@ -24,7 +29,14 @@ public class SwapControls : MonoBehaviour
 
         state = CurrentState.Gamepad;
 
+        uiControllerSwitch?.GamepadIcon();
+
         Debug.LogWarning("Switch main controller to Gamepad !");
+    }
+
+    public void ToGamepad(InputAction.CallbackContext context)
+    {
+        ToGamepad();
     }
 
     public void ToMouseKeyboard(InputAction.CallbackContext context)
@@ -38,12 +50,25 @@ public class SwapControls : MonoBehaviour
 
         state = CurrentState.MouseKeyboard;
 
+        uiControllerSwitch?.MouseIcon();
+
         Debug.LogWarning("Switch main controller to Mouse and Keyboard !");
     }
 
     private void OnDisable()
     {
-        InputHandler.SwapDisable(this);
+        InputHandler.SwapDisable();
+    }
+
+    IEnumerator DefaultIsGamepad()
+    {
+        ToGamepad();
+        InputHandler.Actions.Swap.ToMouseKeyboard.Disable();
+
+        yield return new WaitForSeconds(.1f);
+        InputHandler.Actions.Swap.ToMouseKeyboard.Enable();
+
+        yield break;
     }
 }
 

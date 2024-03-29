@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class LockedDoor : MonoBehaviour
 {
     private bool unlock = false;
-    public float DelayOpen = 0.5f;
 
     //private Animator myAnimator;
 
@@ -22,7 +21,6 @@ public class LockedDoor : MonoBehaviour
             //myAnimator.SetBool("Unlock", unlock);
             IconPadlockLocked.SetActive(false);
             IconPadlockUnlocked.SetActive(true);
-            //Destroy(gameObject);
         }
     }
 
