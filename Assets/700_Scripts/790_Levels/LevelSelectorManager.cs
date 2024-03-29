@@ -110,6 +110,7 @@ public class LevelSelectorManager : MonoBehaviour
             else if (menuNavigation.MouseKeybordIsActive) _eventSystem.SetSelectedGameObject(null);
             RightArrow.gameObject.SetActive(false);
             RightArrow.enabled = false;
+            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
         } 
         else if (RightArrow.enabled && !RightArrow.gameObject.activeInHierarchy)
         {
