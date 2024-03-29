@@ -181,9 +181,9 @@ public class PlayerController : MonoBehaviour
         {
             float speed = lastVel.magnitude;
             Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
-            Quaternion newRot = Quaternion.LookRotation(reflect);
-            
-            rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+            //Quaternion newRot = Quaternion.LookRotation(reflect);
+            //
+            //rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
             SwitchObstacle(obstacle, speed, reflect);
         }
@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
         {
             float speed;
             Vector3 reflect;
-            Quaternion newRot;
+            //Quaternion newRot;
             Vector3 contactPoint = collision.contacts[0].normal;
 
             if ((rb.velocity.x < .5f || rb.velocity.z < .5f) && timeSinceThrow < .1f && !stayOnce)
@@ -207,10 +207,10 @@ public class PlayerController : MonoBehaviour
 
                 speed = lastVel.magnitude - timeSinceThrow;
                 reflect = Vector3.Reflect(lastVel.normalized, contactPoint);
-                newRot = Quaternion.LookRotation(reflect);
+                //newRot = Quaternion.LookRotation(reflect);
 
-                if (timeSinceThrow != 0)
-                    rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+                //if (timeSinceThrow != 0)
+                //    rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
                 SwitchObstacle(obstacle, speed, reflect);
             }
@@ -311,7 +311,7 @@ public class PlayerController : MonoBehaviour
     {
         if (dragEnabled)
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
             MouseEnd = context.ReadValue<Vector2>();
             ThrowStrength = Vector2.Distance(MouseStart, MouseEnd) * MouseSensitivity;
