@@ -86,8 +86,10 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void PlayButton()
     {
-        ActualPanel.TryGetComponent(out LevelLoader levelLoader);
-        SceneManager.LoadScene(levelLoader.levelID);
+        if (ActualPanel.TryGetComponent(out PanelManager panelManager))
+        {
+            panelManager.SO_Level.LoadLevel();
+        }
     }
 
     public void ReturnMainMenu()
