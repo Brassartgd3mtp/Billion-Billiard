@@ -9,13 +9,13 @@ public class Employees : MonoBehaviour
     private Vector3 startPos;
     private GameObject interuptor;
     private Rigidbody rb;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.layer == 8) //Layer Interactable
         {
             if(collision.gameObject.TryGetComponent(out Interrupteur interrupteur))
