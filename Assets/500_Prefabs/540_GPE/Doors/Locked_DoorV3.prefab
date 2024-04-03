@@ -122,7 +122,7 @@ Transform:
   m_GameObject: {fileID: 1563400111878214862}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.90909094, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1070
+  m_VersionIndex: 1076
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -589,9 +589,10 @@ GameObject:
   - component: {fileID: 7820073383081675066}
   - component: {fileID: 988200889239939286}
   - component: {fileID: 5070055517005803145}
+  - component: {fileID: 5593762934625359217}
   - component: {fileID: 6446072356154377927}
   - component: {fileID: 1196776843520821464}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: OWD_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,7 +608,7 @@ Transform:
   m_GameObject: {fileID: 4250805945268048838}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalPosition: {x: 0.90909094, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -825,7 +826,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1070
+  m_VersionIndex: 1076
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -900,6 +901,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5593762934625359217
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4250805945268048838}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!33 &6446072356154377927
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1001,7 +1024,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.07, y: 0.125, z: -5.59}
-  m_LocalScale: {x: 2.2, y: 1.4, z: 1}
+  m_LocalScale: {x: 2.44882, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7759109726810587541}
@@ -1029,8 +1052,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1.3, z: 0.2}
-  m_Center: {x: -1, y: 0.7, z: -0.25}
+  m_Size: {x: 2.0862193, y: 1.3, z: 0.19999999}
+  m_Center: {x: -0.10018977, y: 0.6999999, z: -0.25}
 --- !u!114 &4235718877045984065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1056,12 +1079,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79daf9433306a745bafd1821d73a929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttons: []
   lockedDoor: {fileID: 2779254659055534569}
   wall: {fileID: 4250805945268048838}
   wallCollider: {fileID: 8416413432432687106}
   speed: 1
-  isOneWay: 0
-  isOpenByDefault: 0
+  isOneWay: 1
+  isOpenByDefault: 1
 --- !u!1 &8416413432432687106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,7 +1112,7 @@ Transform:
   m_GameObject: {fileID: 8416413432432687106}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: -0.090909064, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
