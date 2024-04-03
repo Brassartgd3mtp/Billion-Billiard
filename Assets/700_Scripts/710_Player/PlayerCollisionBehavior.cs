@@ -20,6 +20,8 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     private TrailRenderer trailRenderer;
 
+    public string Player_Fall;
+
     public void Awake()
     {
         if (Instance == null)
@@ -52,6 +54,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
             if (collision.gameObject.TryGetComponent(out HoleForPlayer holeForPlayer))
             {
+                AudioManager2.Instance.PlaySDFX(Player_Fall);
                 StartCoroutine(HolePlayerScale());
                 rb.velocity = Vector3.zero;
                 trailRenderer.enabled = false;

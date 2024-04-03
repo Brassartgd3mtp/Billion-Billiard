@@ -8,6 +8,11 @@ public class EndLevel : MonoBehaviour
 {
     public int nextLevel;
 
+    public void Start()
+    {
+        nextLevel = 1;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 3)
