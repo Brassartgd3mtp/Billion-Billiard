@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class OneWayDoor : MonoBehaviour
 {
+    [SerializeField] List<Interrupteur> buttons;
     [SerializeField] private LockedDoor lockedDoor;
     [SerializeField] private GameObject wall;
     [SerializeField] private GameObject wallCollider;
@@ -20,6 +22,8 @@ public class OneWayDoor : MonoBehaviour
 
         if (isOpenByDefault)
             OpenDoor();
+        else
+            StartCoroutine(DoorState());
     }
 
     private void OnTriggerExit(Collider other)
@@ -28,14 +32,12 @@ public class OneWayDoor : MonoBehaviour
             CloseDoor();
     }
 
+    Vector3 underground = new Vector3(0, -1.5f, 0);
     public void OpenDoor()
     {
-        Vector3 underground = new Vector3(0, -1.5f, 0);
         isOpen = true;
-        StartCoroutine(DoorState(lockedDoor.gameObject, underground));
+        StartCoroutine(UpdateDoorPos(lockedDoor.gameObject, underground));
         lockedDoor.Unlock = true;
-
-        Debug.Log("Open");
     }
 
     void CloseDoor()
@@ -43,11 +45,11 @@ public class OneWayDoor : MonoBehaviour
         wallCollider.SetActive(true);
 
         isOpen = false;
-        StartCoroutine(DoorState(wall, startPos));
+        StartCoroutine(UpdateDoorPos(wall, startPos));
         enabled = false;
     }
 
-    IEnumerator DoorState(GameObject mesh, Vector3 endPos)
+    IEnumerator UpdateDoorPos(GameObject mesh, Vector3 endPos)
     {
         Vector3 meshPos = mesh.transform.localPosition;
 
@@ -57,6 +59,26 @@ public class OneWayDoor : MonoBehaviour
             mesh.transform.localPosition = Vector3.MoveTowards(meshPos, endPos, Time.deltaTime * speed);
             yield return null;
         }
+        yield break;
+    }
+
+    IEnumerator DoorState()
+    {
+        yield return new WaitForSeconds(.2f);
+        
+        int buttonsEnabled = 0;
+
+        foreach (Interrupteur button in buttons)
+        {
+            if (button.ContactPNJ)
+                buttonsEnabled++;
+        }
+
+        if (buttonsEnabled == buttons.Count)
+            OpenDoor();
+        else
+            StartCoroutine(DoorState());
+
         yield break;
     }
 }

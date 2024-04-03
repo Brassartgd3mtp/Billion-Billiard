@@ -16,19 +16,29 @@ public class TrajectoryPrediction : MonoBehaviour
     private void Update()
     {
         Ray ray = new Ray(transform.position, transform.forward);
-        if (Physics.Raycast(ray, out hit, 12/*playerController.ThrowStrength / 4*/, wallLayer))
+
+        if (playerController.ThrowStrength > 0 || PlayerController.rb.velocity == Vector3.zero)
         {
-            lineRenderer.SetPosition(1, transform.InverseTransformPoint(hit.point));
+            if (Physics.Raycast(ray, out hit, 12, wallLayer))
+            {
+                lineRenderer.SetPosition(1, transform.InverseTransformPoint(hit.point));
 
-            lineRenderer.positionCount = 3;
+                lineRenderer.positionCount = 3;
 
-            lineRenderer.SetPosition(2, transform.InverseTransformPoint(hit.point + Vector3.Reflect(ray.direction, hit.normal) * 3));
+                lineRenderer.SetPosition(2, transform.InverseTransformPoint(hit.point + Vector3.Reflect(ray.direction, hit.normal) * 3));
+            }
+            else
+            {
+                lineRenderer.positionCount = 2;
+
+                lineRenderer.SetPosition(1, Vector3.forward * 12);
+            }
         }
         else
         {
             lineRenderer.positionCount = 2;
 
-            lineRenderer.SetPosition(1, Vector3.forward * 12/*playerController.ThrowStrength / 4*/);
+            lineRenderer.SetPosition(1, Vector3.zero);
         }
     }
 }
