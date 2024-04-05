@@ -9,16 +9,6 @@ public class MenuNavigation : MonoBehaviour
 {
     public GameObject playButton;
 
-    public bool GamepadIsActive, MouseKeybordIsActive;
-    public void Start()
-    {
-        if (SwapControls.state == CurrentState.Gamepad)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-    }
-
     private void Update()
     {
         if (SwapControls.state == CurrentState.Gamepad)
@@ -28,16 +18,12 @@ public class MenuNavigation : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(playButton);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-                MouseKeybordIsActive = false;
-                GamepadIsActive = true;
             }
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            GamepadIsActive = false;
-            MouseKeybordIsActive = true;
         }
     }
 }
