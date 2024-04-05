@@ -256,7 +256,10 @@ public class PlayerController : MonoBehaviour
     {
         LookingDirection = _lookDirection;
 
-        angle = Mathf.Atan2(-LookingDirection.x, -LookingDirection.y) * Mathf.Rad2Deg;
+        angle = SwapControls.state == CurrentState.Gamepad
+            ? Mathf.Atan2(LookingDirection.x, LookingDirection.y) * Mathf.Rad2Deg
+            : Mathf.Atan2(-LookingDirection.x, -LookingDirection.y) * Mathf.Rad2Deg;
+
         rb.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 

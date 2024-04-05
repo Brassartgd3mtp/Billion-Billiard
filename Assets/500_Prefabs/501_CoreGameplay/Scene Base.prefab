@@ -3914,10 +3914,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80acebfbdf86a342b2423732609d01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraSpeed: 20
-  camBrain: {fileID: 4530766227617142471}
   camFollow: {fileID: 5736719362004294076}
-  camFullView: {fileID: 5834906285230991281}
+  camCurrentRoom: {fileID: 0}
 --- !u!1 &2070462536820493197
 GameObject:
   m_ObjectHideFlags: 0
@@ -6060,7 +6058,7 @@ Transform:
   m_GameObject: {fileID: 3112321074169637873}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 20.700003, z: 0.0000023841858}
+  m_LocalPosition: {x: 0, y: 20.600002, z: 0.0000023841858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6844,7 +6842,7 @@ Transform:
   m_GameObject: {fileID: 3324805309106062234}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7034,6 +7032,7 @@ MonoBehaviour:
   speedEffect: {fileID: 3792082301489345904}
   speedEffectDirection: {fileID: 3918158615536368089}
   smokePoof: {fileID: 3974159725226073086}
+  MyAnimator: {fileID: 0}
 --- !u!114 &5031325047204720743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12626,7 +12625,7 @@ GameObject:
   - component: {fileID: 6977532078840313070}
   - component: {fileID: 7085006900366943893}
   m_Layer: 0
-  m_Name: Arrow
+  m_Name: Mouse Strength Gauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24052,7 +24051,7 @@ Transform:
   m_GameObject: {fileID: 7407205603221401091}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 15, y: 20.500002, z: 0.12500241}
+  m_LocalPosition: {x: 0, y: 20.600002, z: 0.0000023841858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
