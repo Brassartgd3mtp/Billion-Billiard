@@ -54,8 +54,9 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
             if (collision.gameObject.TryGetComponent(out HoleForPlayer holeForPlayer))
             {
-                AudioManager2.Instance.PlaySDFX(Player_Fall);
+                playerController.ThrowStrength = 0;
                 StartCoroutine(HolePlayerScale());
+                AudioManager2.Instance.PlaySDFX(Player_Fall);
                 rb.velocity = Vector3.zero;
                 trailRenderer.enabled = false;
             }
@@ -117,9 +118,6 @@ public class PlayerCollisionBehavior : MonoBehaviour
         trailRenderer.Clear();
         transform.localScale = new Vector3(1, 1, 1);
         StartCoroutine(HoleFeedBack());
-
-
-
     }
 
     IEnumerator HoleFeedBack()
@@ -138,6 +136,5 @@ public class PlayerCollisionBehavior : MonoBehaviour
         InputHandler.Actions.Gamepad.ThrowPlayer.Enable();
         InputHandler.Actions.Gamepad.GamepadStrenght.Enable();
         InputHandler.Actions.MouseKeyboard.MouseStartDrag.Enable();
-
     }
 }
