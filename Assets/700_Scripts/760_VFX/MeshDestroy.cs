@@ -17,21 +17,19 @@ public class MeshDestroy : MonoBehaviour
     public float ExplodeForce = 0;
 
     public float dureeDeVieDesDebris = 5f;
-
-    public string CollisionSound;
+    private int randomid;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 3 || collision.gameObject.layer == 6)
             DestroyMesh();
-        AudioManager2.Instance.PlaySDFX(CollisionSound);
-
+            SoundCeramicsDestroyed();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 3 || other.gameObject.layer == 6)
             DestroyMesh();
-        AudioManager2.Instance.PlaySDFX(CollisionSound);
+            SoundCeramicsDestroyed();
     }
     private void DestroyMesh()
     {
@@ -313,5 +311,13 @@ public class MeshDestroy : MonoBehaviour
             //meshDestroy.CutCascades = original.CutCascades;
             //meshDestroy.ExplodeForce = original.ExplodeForce;
         }
+    }
+    
+    private void SoundCeramicsDestroyed()
+    {
+        System.Random random = new System.Random();
+        int randomid = random.Next(0, 4);
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(randomid, audioSource);
     }
 }

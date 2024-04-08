@@ -20,8 +20,6 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     private TrailRenderer trailRenderer;
 
-    public string Player_Fall;
-
     public void Awake()
     {
         if (Instance == null)
@@ -56,11 +54,17 @@ public class PlayerCollisionBehavior : MonoBehaviour
             {
                 playerController.ThrowStrength = 0;
                 StartCoroutine(HolePlayerScale());
-                AudioManager2.Instance.PlaySDFX(Player_Fall);
+                SoundFall();
                 rb.velocity = Vector3.zero;
                 trailRenderer.enabled = false;
             }
         }
+    }
+
+    private void SoundFall()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(14, audioSource);
     }
 
     private void OnTriggerEnter(Collider other)

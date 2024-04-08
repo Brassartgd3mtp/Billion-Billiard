@@ -10,8 +10,6 @@ public class Employees : MonoBehaviour
     private GameObject interuptor;
     private Rigidbody rb;
 
-    public string Employee_Fall;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,10 +28,16 @@ public class Employees : MonoBehaviour
 
             if (collision.gameObject.TryGetComponent(out HoleForPNJ holeForPNJ))
             {
-                AudioManager2.Instance.PlaySDFX(Employee_Fall);
+                EmployeeFall();
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void EmployeeFall()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(11, audioSource);
     }
 
     private IEnumerator MoveInInteruptor() 

@@ -47,8 +47,6 @@ public class PlayerController : MonoBehaviour
 
     float timeSinceThrow = 0;
 
-    public string Player_Shot;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -75,6 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if (ThrowStrength > 0.2f)
         {
+            SoundShot();    
             StartCoroutine(Haptic(ThrowStrength / 40, ThrowStrength / 40, .4f));
 
             timeSinceThrow = 0;
@@ -99,12 +98,18 @@ public class PlayerController : MonoBehaviour
             speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             speedEffect.Play();
 
-            AudioManager2.Instance.PlaySDFX(Player_Shot);
-
             turnBasedPlayer.ShotCount();
 
             ThrowStrength = 0;
         }
+    }
+
+    private void SoundShot()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.loop = false;
+        audioSource.Stop();
+        AudioManager.Instance.PlaySound(16, audioSource);
     }
 
     Vector3 lastVel;
@@ -285,6 +290,7 @@ public class PlayerController : MonoBehaviour
         {
             gaugeObject.SetActive(true);
             isGaugeActive = true;
+            SoundGauge();
             //MyAnimator.SetBool("PreparationShoot", true);
         }
         if (context.canceled)
@@ -314,6 +320,14 @@ public class PlayerController : MonoBehaviour
         //else
             //PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 5);
         PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 8);
+    }
+
+    private void SoundGauge()
+    {
+        AudioSource audioSource = GetComponent <AudioSource>();
+        audioSource.pitch = gaugeFill.fillAmount / 2;
+        audioSource.loop = true;
+        AudioManager.Instance.PlaySound(18, audioSource);
     }
 
     private bool dragEnabled = false;
