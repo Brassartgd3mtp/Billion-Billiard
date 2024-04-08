@@ -124,6 +124,7 @@ public class LevelSelectorManager : MonoBehaviour
             {
             _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
             } else if (menuNavigation.MouseKeybordIsActive) _eventSystem.SetSelectedGameObject(null);
+            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
             LeftArrow.gameObject.SetActive(false);
             LeftArrow.enabled = false;
         } else if (ActualPanel != Panels[0])
