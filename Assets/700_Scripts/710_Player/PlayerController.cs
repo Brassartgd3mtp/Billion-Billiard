@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 using UnityEngine.UI;
+using Unity.VisualScripting.FullSerializer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -44,16 +45,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
     [SerializeField] private Animator MyAnimator;
+    AudioSource audioSource;
 
     float timeSinceThrow = 0;
-
-    public string Player_Shot;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
 
         turnBasedPlayer = GetComponent<TurnBasedPlayer>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -75,6 +77,7 @@ public class PlayerController : MonoBehaviour
     {
         if (ThrowStrength > 0.2f)
         {
+            SoundShot();    
             StartCoroutine(Haptic(ThrowStrength / 40, ThrowStrength / 40, .4f));
 
             timeSinceThrow = 0;
@@ -99,13 +102,12 @@ public class PlayerController : MonoBehaviour
             speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             speedEffect.Play();
 
-            AudioManager2.Instance.PlaySDFX(Player_Shot);
-
             turnBasedPlayer.ShotCount();
 
             ThrowStrength = 0;
         }
     }
+
 
     Vector3 lastVel;
     private void FixedUpdate()
@@ -289,12 +291,14 @@ public class PlayerController : MonoBehaviour
             gaugeObject.SetActive(true);
             isGaugeActive = true;
             //MyAnimator.SetBool("PreparationShoot", true);
+            SoundGauge();
         }
         if (context.canceled)
         {
             gaugeObject.SetActive(false);
             isGaugeActive = false;
             gaugeFill.fillAmount = 0;
+            audioSource.Stop();
             //MyAnimator.SetBool("PreparationShoot", false);
 
         }
@@ -308,6 +312,7 @@ public class PlayerController : MonoBehaviour
         {
             ThrowStrength = Mathf.PingPong(gaugeTime, 40);
             gaugeFill.fillAmount = ThrowStrength / StrengthFactor;
+            audioSource.pitch = 1 + ThrowStrength / 30;
         }
         else
             gaugeTime = 0;
@@ -318,6 +323,7 @@ public class PlayerController : MonoBehaviour
             //PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 5);
         PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 8);
     }
+
 
     private bool dragEnabled = false;
     /// <summary>
@@ -374,7 +380,7 @@ public class PlayerController : MonoBehaviour
         gaugeObject.SetActive(false);
         gaugeFill.fillAmount = 0;
         isGaugeActive = false;
-
+        audioSource.Stop();
         ThrowStrength = 0;
     }
 
@@ -403,5 +409,18 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         InputHandler.PlayerControllerDisable();
+    }
+    private void SoundGauge()
+    {
+        audioSource.loop = true;
+        AudioManager.Instance.PlaySoundLoop(18, audioSource);
+    }
+    private void SoundShot()
+    {
+        audioSource.loop = false;
+        audioSource.Stop();
+        audioSource.pitch = 1;
+        AudioManager.Instance.PlaySound(16, audioSource);
+        audioSource.loop = true;
     }
 }

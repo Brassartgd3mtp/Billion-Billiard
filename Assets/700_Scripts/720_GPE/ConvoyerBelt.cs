@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class ConvoyerBelt : MonoBehaviour
@@ -25,6 +24,11 @@ public class ConvoyerBelt : MonoBehaviour
             _colrb.AddForce(transform.TransformDirection(forceDirection) * applyForce * 10);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        SoundBooster();
+    }
+
     private void InitPropertyBlock()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -41,6 +45,13 @@ public class ConvoyerBelt : MonoBehaviour
         
         meshRenderer.SetPropertyBlock(materialPropertyBlock);
     }
+
+    private void SoundBooster()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(10, audioSource);
+    }
+
 #if UNITY_EDITOR
     private void OnValidate()
     {
