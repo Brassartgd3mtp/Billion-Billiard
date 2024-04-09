@@ -12,8 +12,6 @@ public class SimpleDoor : MonoBehaviour
     private Animator myAnimator;
     [SerializeField] private ParticleSystem myParticleSystem;
 
-    public string Ball_DestructibleDoor_Hit;
-
 
     public bool Open
     {
@@ -41,7 +39,6 @@ public class SimpleDoor : MonoBehaviour
     {
         if ((Player.value & 1 << collision.gameObject.layer) > 0)
         {
-            AudioManager2.Instance.PlaySDFX(Ball_DestructibleDoor_Hit);
             StartCoroutine(OpenWithDelay());
         }
     }
@@ -51,5 +48,11 @@ public class SimpleDoor : MonoBehaviour
         myParticleSystem.Play();
         yield return new WaitForSeconds(DelayOpen);
         Open = true;
+    }
+
+    private void SoundDoor()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(5, audioSource);
     }
 }

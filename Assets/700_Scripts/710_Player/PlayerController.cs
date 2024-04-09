@@ -289,6 +289,7 @@ public class PlayerController : MonoBehaviour
         if (context.started)
         {
             gaugeObject.SetActive(true);
+            SoundGauge();
             isGaugeActive = true;
             //MyAnimator.SetBool("PreparationShoot", true);
         }
@@ -324,7 +325,6 @@ public class PlayerController : MonoBehaviour
     private void SoundGauge()
     {
         AudioSource audioSource = GetComponent <AudioSource>();
-        audioSource.pitch = gaugeFill.fillAmount / 2;
         audioSource.loop = true;
         AudioManager.Instance.PlaySound(18, audioSource);
     }
