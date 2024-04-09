@@ -110,6 +110,7 @@ public class PlayerController : MonoBehaviour
         audioSource.loop = false;
         audioSource.Stop();
         AudioManager.Instance.PlaySound(16, audioSource);
+        audioSource.loop = true;
     }
 
     Vector3 lastVel;
@@ -289,7 +290,6 @@ public class PlayerController : MonoBehaviour
         if (context.started)
         {
             gaugeObject.SetActive(true);
-            SoundGauge();
             isGaugeActive = true;
             //MyAnimator.SetBool("PreparationShoot", true);
         }
@@ -325,7 +325,6 @@ public class PlayerController : MonoBehaviour
     private void SoundGauge()
     {
         AudioSource audioSource = GetComponent <AudioSource>();
-        audioSource.loop = true;
         AudioManager.Instance.PlaySound(18, audioSource);
     }
 
