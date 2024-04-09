@@ -290,7 +290,6 @@ public class PlayerController : MonoBehaviour
         {
             gaugeObject.SetActive(true);
             isGaugeActive = true;
-            SoundGauge();
             //MyAnimator.SetBool("PreparationShoot", true);
         }
         if (context.canceled)

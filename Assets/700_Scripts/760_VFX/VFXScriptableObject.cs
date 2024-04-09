@@ -15,12 +15,14 @@ public class VFXScriptableObject : ScriptableObject
     public GameObject prefabParticleProps;
     public GameObject prefabParticleBumper;
     public GameObject prefabParticleDefault;
+    public int soundObstacleId;
 
     public GameObject GetObstacleType(ObstacleType _type)
     {
         switch (_type)
         {
             case ObstacleType.Concrete:
+                soundObstacleId = 4;
                 return prefabParticleConcrete;
 
             case ObstacleType.Rubber:
