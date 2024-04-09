@@ -15,8 +15,7 @@ public class TurnBasedPlayer : MonoBehaviour
 
     [Header("References")]
     public PlayerController playerController;
-    public UI_ShotRemaining uI_ShotRemaining;
-    public ParticleShotRemaining ParticleShotRemaining;
+    public UI_ShotRemaining UIShotRemaining;
 
     public static TurnBasedPlayer Instance;
 
@@ -35,8 +34,8 @@ public class TurnBasedPlayer : MonoBehaviour
 
         shotRemaining = nbrOfShots;
         playerController = GetComponent<PlayerController>();
-        uI_ShotRemaining.UpdateUI(shotRemaining);
-        ParticleShotRemaining.Initialize(nbrOfShots);
+        //uI_ShotRemaining.UpdateUI(shotRemaining);
+        UIShotRemaining.Initialize(nbrOfShots);
     }
 
     public void Update()
@@ -56,10 +55,10 @@ public class TurnBasedPlayer : MonoBehaviour
     public void RecupBoostReload()
     {
         shotRemaining += 1;
-        uI_ShotRemaining.UpdateUI(shotRemaining);
+        //uI_ShotRemaining.UpdateUI(shotRemaining);
         AudioManager2.Instance.PlaySDFX(Shot_Reload);
         TurnBasedSystem.ReloadForPlayer();
-        ParticleShotRemaining.PassiveUpdateShots();
+        UIShotRemaining.PassiveUpdateShots();
     }
 
     public void PassiveReload()
@@ -67,9 +66,9 @@ public class TurnBasedPlayer : MonoBehaviour
         if (PassiveReloadEnabled)
         {
             shotRemaining++;
-            uI_ShotRemaining.UpdateUI(shotRemaining);
+            //uI_ShotRemaining.UpdateUI(shotRemaining);
             AudioManager2.Instance.PlaySDFX(Shot_Reload);
-            ParticleShotRemaining.PassiveUpdateShots();
+            UIShotRemaining.PassiveUpdateShots();
             TurnBasedSystem.ReloadForPlayer();
         }
     }
@@ -77,8 +76,8 @@ public class TurnBasedPlayer : MonoBehaviour
     public void ShotCount()
     {
         shotRemaining--;
-        ParticleShotRemaining.Death();
-        uI_ShotRemaining.UpdateUI(shotRemaining);
+        UIShotRemaining.Death();
+        //uI_ShotRemaining.UpdateUI(shotRemaining);
         
         if (shotRemaining <= 0)
             TurnBasedSystem.OnPlayerPlayed();
