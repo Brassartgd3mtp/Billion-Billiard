@@ -29,6 +29,7 @@ public class VFXScriptableObject : ScriptableObject
                 return prefabParticleRubber;
 
             case ObstacleType.Felt:
+                soundObstacleId = 7;
                 return prefabParticleFelt;
 
             case ObstacleType.Ice:
@@ -41,6 +42,7 @@ public class VFXScriptableObject : ScriptableObject
                 return prefabParticleProps;
 
             case ObstacleType.Bumper:
+                soundObstacleId = 9;
                 return prefabParticleBumper;
 
             default:
