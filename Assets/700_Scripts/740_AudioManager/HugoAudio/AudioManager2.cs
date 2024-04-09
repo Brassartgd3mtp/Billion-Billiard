@@ -20,7 +20,6 @@ public class AudioManager2 : MonoBehaviour
        if (Instance == null)
         {
             Instance = this; 
-            DontDestroyOnLoad(gameObject);
         }
 
        else

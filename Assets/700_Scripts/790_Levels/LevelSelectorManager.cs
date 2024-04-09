@@ -23,28 +23,14 @@ public class LevelSelectorManager : MonoBehaviour
 
     [SerializeField] private float scrollingSpeed;
 
-    [SerializeField] private ScrollRect scrollRect;
-
     [SerializeField] private GameObject Content;
-
-    private MenuNavigation menuNavigation;
-
-    public void Awake()
-    {
-        scrollRect = GetComponent<ScrollRect>();
-        menuNavigation = GetComponent<MenuNavigation>();
-    }
 
     public void Start()
     {
         ActualPanel = Panels[PanelIndex];
         StartCoroutine(MovePanel(-PanelIndex));
-        //CheckIfNextPanelIsLocked();
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        
     }
+
     public void NextPanel()
     {
         PanelIndex++;
@@ -52,36 +38,37 @@ public class LevelSelectorManager : MonoBehaviour
         LeftArrow.enabled = false;
         RightArrow.enabled = false;
         StartCoroutine(MovePanel(-1));
-
     }
+
     public void PrevPanel() 
     {
-        if(PanelIndex > 0) 
+        if (PanelIndex > 0) 
         {
-        PanelIndex--;
-        ActualPanel = Panels[PanelIndex];
-        LeftArrow.enabled = false;
-        RightArrow.enabled = false;
-        StartCoroutine (MovePanel(1));
+            PanelIndex--;
+            ActualPanel = Panels[PanelIndex];
+            LeftArrow.enabled = false;
+            RightArrow.enabled = false;
+            StartCoroutine(MovePanel(1));
         }
     }
+
     public IEnumerator MovePanel(int xValue)
     {
-        ScrollRect scrollRect = GetComponent<ScrollRect>();
-
         RectTransform rectTransform = Content.GetComponent<RectTransform>();
         Vector3 actualPos = rectTransform.transform.localPosition;
-        Vector3 targetPos = actualPos + new Vector3((xValue * 800),0,0);
+        Vector3 targetPos = actualPos + new Vector3(xValue * 800,0,0);
+
         while (rectTransform.localPosition !=  targetPos) 
         {
             rectTransform.localPosition = Vector3.MoveTowards(rectTransform.localPosition, targetPos, scrollingSpeed * Time.deltaTime);
             Debug.Log("là");
             yield return null;    
         }
+
         LeftArrow.enabled = true;
         RightArrow.enabled = true;
 
-        CheckIfNextPanelIsLocked() ;
+        CheckIfNextPanelIsLocked();
         yield break;
     }
 
@@ -101,38 +88,41 @@ public class LevelSelectorManager : MonoBehaviour
     public void CheckIfNextPanelIsLocked()
     {
         Panels[PanelIndex + 1].TryGetComponent(out PanelManager panelManagerNext);
+
         if (panelManagerNext.SO_Level.LevelData.isLocked)
         {
             Debug.Log("Locked");
-            if (menuNavigation.GamepadIsActive)
-            {
+
+            if (SwapControls.state == CurrentState.Gamepad)
                 _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
-            }
-            else if (menuNavigation.MouseKeybordIsActive) _eventSystem.SetSelectedGameObject(null);
+            else
+                _eventSystem.SetSelectedGameObject(null);
+
             RightArrow.gameObject.SetActive(false);
             RightArrow.enabled = false;
             _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
-        } 
+        }
         else if (RightArrow.enabled && !RightArrow.gameObject.activeInHierarchy)
         {
             RightArrow.gameObject.SetActive(true);
             RightArrow.enabled = true;
         }
+
         if (ActualPanel == Panels[0])
         {
-            if (menuNavigation.GamepadIsActive)
-            {
-            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
-            } else if (menuNavigation.MouseKeybordIsActive) _eventSystem.SetSelectedGameObject(null);
+            if (SwapControls.state == CurrentState.Gamepad)
+                _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+            else
+                _eventSystem.SetSelectedGameObject(null);
+
             _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
             LeftArrow.gameObject.SetActive(false);
             LeftArrow.enabled = false;
-        } else if (ActualPanel != Panels[0])
+        }
+        else if (ActualPanel != Panels[0])
         {
             LeftArrow.gameObject.SetActive(true);
             LeftArrow.enabled = true;
         }
     }
-
-
 }

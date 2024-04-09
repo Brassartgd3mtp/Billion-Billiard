@@ -52,7 +52,8 @@ public class UI_Skip : MonoBehaviour
         if (NextObjToShow != null) 
             NextObjToShow.SetActive(true);
 
-        DisplayToSkip?.SetActive(false);
+        if (DisplayToSkip != null)
+            DisplayToSkip.SetActive(false);
     }
 
     private void OnDisable()

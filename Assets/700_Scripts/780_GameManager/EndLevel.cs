@@ -17,10 +17,15 @@ public class EndLevel : MonoBehaviour
     {
         if (other.gameObject.layer == 3)
         {
+            InputHandler.PlayerControllerDisable();
+            InputHandler.Actions.Gamepad.Disable();
+            InputHandler.Actions.MouseKeyboard.Disable();
+
             if (SwapControls.state == CurrentState.Gamepad)
             {
                 Gamepad.current.ResetHaptics();
             }
+
             SceneManager.LoadScene(nextLevel);
         }
     }

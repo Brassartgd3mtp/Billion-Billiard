@@ -1,13 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class MenuNavigation : MonoBehaviour
 {
     public GameObject playButton;
+
+    private void Start()
+    {
+        //InputHandler.Actions.Gamepad.Disable();
+        //InputHandler.Actions.MouseKeyboard.Disable();
+
+        if (SwapControls.state == CurrentState.MouseKeyboard)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
 
     private void Update()
     {
@@ -19,11 +27,6 @@ public class MenuNavigation : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
         }
     }
 }
