@@ -20,6 +20,8 @@ public class TurnBasedPlayer : MonoBehaviour
 
     public static TurnBasedPlayer Instance;
 
+    public string Shot_Reload;
+
     public void Start()
     {
         ReloadCooldown = PassiveReloadCooldown;
@@ -55,6 +57,7 @@ public class TurnBasedPlayer : MonoBehaviour
     {
         shotRemaining += 1;
         uI_ShotRemaining.UpdateUI(shotRemaining);
+        AudioManager2.Instance.PlaySDFX(Shot_Reload);
         TurnBasedSystem.ReloadForPlayer();
         ParticleShotRemaining.PassiveUpdateShots();
     }
@@ -65,6 +68,7 @@ public class TurnBasedPlayer : MonoBehaviour
         {
             shotRemaining++;
             uI_ShotRemaining.UpdateUI(shotRemaining);
+            AudioManager2.Instance.PlaySDFX(Shot_Reload);
             ParticleShotRemaining.PassiveUpdateShots();
             TurnBasedSystem.ReloadForPlayer();
         }

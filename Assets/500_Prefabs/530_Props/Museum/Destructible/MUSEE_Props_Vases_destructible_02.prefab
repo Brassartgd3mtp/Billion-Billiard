@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6710398244424474720
+--- !u!1 &5526417246463689998
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5481590108310533542}
-  - component: {fileID: 8584989448268360847}
-  - component: {fileID: 6368330098506239252}
-  - component: {fileID: 145516623489026306}
-  - component: {fileID: 5014752705586545295}
-  - component: {fileID: 1233888140052418497}
-  - component: {fileID: 2472968857246568685}
+  - component: {fileID: 8456224945947347092}
+  - component: {fileID: 5311967964217748853}
+  - component: {fileID: 923783081386307447}
+  - component: {fileID: 1837264244398940103}
+  - component: {fileID: 1603287843868815396}
+  - component: {fileID: 4984479192693182703}
+  - component: {fileID: 2320916899226392621}
   m_Layer: 0
-  m_Name: MUSEE_Props_Vases_destructible_02
+  m_Name: MUSEE_Props_Vases_destructible_02.3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5481590108310533542
+--- !u!4 &8456224945947347092
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6710398244424474720}
+  m_GameObject: {fileID: 5526417246463689998}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.43542853, y: -0.13814823, z: -0.000000014305114}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.1147, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 8094021190848103586}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8584989448268360847
+--- !u!33 &5311967964217748853
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6710398244424474720}
+  m_GameObject: {fileID: 5526417246463689998}
   m_Mesh: {fileID: -5597002278806442958, guid: 47b8aa56f63e9024a868e71186f49a7a, type: 3}
---- !u!23 &6368330098506239252
+--- !u!23 &923783081386307447
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6710398244424474720}
+  m_GameObject: {fileID: 5526417246463689998}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -87,13 +87,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &145516623489026306
+--- !u!64 &1837264244398940103
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6710398244424474720}
+  m_GameObject: {fileID: 5526417246463689998}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -109,13 +109,13 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5597002278806442958, guid: 47b8aa56f63e9024a868e71186f49a7a, type: 3}
---- !u!114 &5014752705586545295
+--- !u!114 &1603287843868815396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6710398244424474720}
+  m_GameObject: {fileID: 5526417246463689998}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
@@ -124,13 +124,14 @@ MonoBehaviour:
   CutCascades: 1
   ExplodeForce: 0
   dureeDeVieDesDebris: 5
---- !u!64 &1233888140052418497
+  CollisionSound: 
+--- !u!64 &4984479192693182703
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6710398244424474720}
+  m_GameObject: {fileID: 5526417246463689998}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -146,13 +147,13 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5597002278806442958, guid: 47b8aa56f63e9024a868e71186f49a7a, type: 3}
---- !u!54 &2472968857246568685
+--- !u!54 &2320916899226392621
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6710398244424474720}
+  m_GameObject: {fileID: 5526417246463689998}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -173,3 +174,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &8787979746947778957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8094021190848103586}
+  m_Layer: 0
+  m_Name: MUSEE_Props_Vases_destructible_02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8094021190848103586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8787979746947778957}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 8456224945947347092}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

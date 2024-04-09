@@ -7033,6 +7033,7 @@ MonoBehaviour:
   speedEffectDirection: {fileID: 3918158615536368089}
   smokePoof: {fileID: 3974159725226073086}
   MyAnimator: {fileID: 0}
+  Player_Shot: Player_Shot
 --- !u!114 &5031325047204720743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7048,6 +7049,7 @@ MonoBehaviour:
   playerStats: {fileID: 3705272347710780647}
   uI_Stats: {fileID: 540975006541408978}
   playerController: {fileID: 2429653923857696437}
+  Player_Fall: Player_Fall
 --- !u!114 &3705272347710780647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7103,7 +7105,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1.5
+  m_Time: 0.8
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -7113,13 +7115,22 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 0.6580887
+        inSlope: -0.8902508
+        outSlope: -0.8902508
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.07020547
+      - serializedVersion: 3
+        time: 0.6314061
+        value: 0.051556457
+        inSlope: -0.34858948
+        outSlope: -0.34858948
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.22856943
       - serializedVersion: 3
         time: 1
         value: 0
@@ -7134,7 +7145,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.1254902, g: 0.58431375, b: 0.70980394, a: 1}
+      key0: {r: 0.1254902, g: 0.58431375, b: 0.70980394, a: 0.7411765}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -7209,6 +7220,7 @@ MonoBehaviour:
   playerController: {fileID: 2429653923857696437}
   uI_ShotRemaining: {fileID: 891727099529141803}
   ParticleShotRemaining: {fileID: 4657487954711992899}
+  Shot_Reload: Shot_Reload
 --- !u!114 &4657487954711992899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21338,14 +21350,14 @@ VideoPlayer:
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
+  m_AudioOutputMode: 0
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
   m_Url: 
   m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
+  m_DirectAudioMutes: 01
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
@@ -23977,7 +23989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &572705303449037027
 RectTransform:
   m_ObjectHideFlags: 0

@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
 
     float timeSinceThrow = 0;
 
+    public string Player_Shot;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -96,6 +98,8 @@ public class PlayerController : MonoBehaviour
 
             speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             speedEffect.Play();
+
+            AudioManager2.Instance.PlaySDFX(Player_Shot);
 
             turnBasedPlayer.ShotCount();
 

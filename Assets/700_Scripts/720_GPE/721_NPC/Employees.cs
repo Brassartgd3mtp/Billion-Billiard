@@ -10,12 +10,15 @@ public class Employees : MonoBehaviour
     private GameObject interuptor;
     private Rigidbody rb;
 
+    public string Employee_Fall;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.layer == 8) //Layer Interactable
         {
             if(collision.gameObject.TryGetComponent(out Interrupteur interrupteur))
@@ -27,6 +30,7 @@ public class Employees : MonoBehaviour
 
             if (collision.gameObject.TryGetComponent(out HoleForPNJ holeForPNJ))
             {
+                AudioManager2.Instance.PlaySDFX(Employee_Fall);
                 Destroy(gameObject);
             }
         }
