@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 using UnityEngine.UI;
+using Unity.VisualScripting.FullSerializer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
     [SerializeField] private Animator MyAnimator;
+    AudioSource audioSource;
 
     float timeSinceThrow = 0;
 
@@ -52,6 +54,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         turnBasedPlayer = GetComponent<TurnBasedPlayer>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -104,14 +108,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SoundShot()
-    {
-        AudioSource audioSource = GetComponent<AudioSource>();
-        audioSource.loop = false;
-        audioSource.Stop();
-        AudioManager.Instance.PlaySound(16, audioSource);
-        audioSource.loop = true;
-    }
 
     Vector3 lastVel;
     private void FixedUpdate()
@@ -292,12 +288,14 @@ public class PlayerController : MonoBehaviour
             gaugeObject.SetActive(true);
             isGaugeActive = true;
             //MyAnimator.SetBool("PreparationShoot", true);
+            SoundGauge();
         }
         if (context.canceled)
         {
             gaugeObject.SetActive(false);
             isGaugeActive = false;
             gaugeFill.fillAmount = 0;
+            audioSource.Stop();
             //MyAnimator.SetBool("PreparationShoot", false);
 
         }
@@ -311,6 +309,7 @@ public class PlayerController : MonoBehaviour
         {
             ThrowStrength = Mathf.PingPong(gaugeTime, 40);
             gaugeFill.fillAmount = ThrowStrength / StrengthFactor;
+            audioSource.pitch = 1 + ThrowStrength / 30;
         }
         else
             gaugeTime = 0;
@@ -322,11 +321,6 @@ public class PlayerController : MonoBehaviour
         PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 8);
     }
 
-    private void SoundGauge()
-    {
-        AudioSource audioSource = GetComponent <AudioSource>();
-        AudioManager.Instance.PlaySound(18, audioSource);
-    }
 
     private bool dragEnabled = false;
     /// <summary>
@@ -383,7 +377,7 @@ public class PlayerController : MonoBehaviour
         gaugeObject.SetActive(false);
         gaugeFill.fillAmount = 0;
         isGaugeActive = false;
-
+        audioSource.Stop();
         ThrowStrength = 0;
     }
 
@@ -412,5 +406,18 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         InputHandler.PlayerControllerDisable();
+    }
+    private void SoundGauge()
+    {
+        audioSource.loop = true;
+        AudioManager.Instance.PlaySoundLoop(18, audioSource);
+    }
+    private void SoundShot()
+    {
+        audioSource.loop = false;
+        audioSource.Stop();
+        audioSource.pitch = 1;
+        AudioManager.Instance.PlaySound(16, audioSource);
+        audioSource.loop = true;
     }
 }
