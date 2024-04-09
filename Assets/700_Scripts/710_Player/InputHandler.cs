@@ -6,7 +6,7 @@ public class InputHandler : MonoBehaviour
 
     #region References
     static PlayerController player;
-    static PlayerFreeCam freeCam;
+    static PlayerRoomCam freeCam;
     static ReloadScene rlScene;
     static NoClip nClip;
     static PauseMenu pMenu;
@@ -53,17 +53,17 @@ public class InputHandler : MonoBehaviour
         #endregion
     }
 
-    public static void FreeCamEnable(PlayerFreeCam playerFreeCam)
+    public static void FreeCamEnable(PlayerRoomCam playerFreeCam)
     {
         freeCam = playerFreeCam;
 
-        Actions.Gamepad.FreeCam.performed += playerFreeCam.FreeCam;
-        Actions.Gamepad.FreeCam.canceled += playerFreeCam.FreeCam;
-        Actions.Gamepad.StartFreeCam.started += playerFreeCam.StartFreeCam;
-        Actions.Gamepad.StartFreeCam.canceled += playerFreeCam.StartFreeCam;
-        Actions.MouseKeyboard.FreeCam.performed += playerFreeCam.FreeCam;
-        Actions.MouseKeyboard.StartFreeCam.started += playerFreeCam.StartFreeCam;
-        Actions.MouseKeyboard.StartFreeCam.canceled += playerFreeCam.StartFreeCam;
+        //Actions.Gamepad.FreeCam.performed += playerFreeCam.FreeCam;
+        //Actions.Gamepad.FreeCam.canceled += playerFreeCam.FreeCam;
+        //Actions.Gamepad.StartFreeCam.started += playerFreeCam.StartFreeCam;
+        Actions.Gamepad.RoomCam.canceled += playerFreeCam.StartFreeCam;
+        //Actions.MouseKeyboard.FreeCam.performed += playerFreeCam.FreeCam;
+        //Actions.MouseKeyboard.StartFreeCam.started += playerFreeCam.StartFreeCam;
+        Actions.MouseKeyboard.RoomCam.canceled += playerFreeCam.StartFreeCam;
     }
 
     public static void ReloadSceneEnable(ReloadScene reloadScene)
@@ -125,13 +125,13 @@ public class InputHandler : MonoBehaviour
 
     public static void FreeCamDisable()
     {
-        Actions.Gamepad.FreeCam.performed -= freeCam.FreeCam;
-        Actions.Gamepad.FreeCam.canceled -= freeCam.FreeCam;
-        Actions.Gamepad.StartFreeCam.started -= freeCam.StartFreeCam;
-        Actions.Gamepad.StartFreeCam.canceled -= freeCam.StartFreeCam;
-        Actions.MouseKeyboard.FreeCam.performed -= freeCam.FreeCam;
-        Actions.MouseKeyboard.StartFreeCam.started -= freeCam.StartFreeCam;
-        Actions.MouseKeyboard.StartFreeCam.canceled -= freeCam.StartFreeCam;
+        //Actions.Gamepad.FreeCam.performed -= freeCam.FreeCam;
+        //Actions.Gamepad.FreeCam.canceled -= freeCam.FreeCam;
+        //Actions.Gamepad.StartFreeCam.started -= freeCam.StartFreeCam;
+        Actions.Gamepad.RoomCam.canceled -= freeCam.StartFreeCam;
+        //Actions.MouseKeyboard.FreeCam.performed -= freeCam.FreeCam;
+        //Actions.MouseKeyboard.StartFreeCam.started -= freeCam.StartFreeCam;
+        Actions.MouseKeyboard.RoomCam.canceled -= freeCam.StartFreeCam;
     }
 
     public static void ReloadSceneDisable()
