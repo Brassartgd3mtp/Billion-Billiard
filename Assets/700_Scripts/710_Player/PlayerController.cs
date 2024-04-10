@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
         if (lastVel.magnitude > 0)
             timeSinceThrow += Time.fixedDeltaTime;
 
-        if (rb.velocity.magnitude > 0 && rb.velocity.magnitude < .001f)
+        if (rb.velocity.magnitude > 0 && rb.velocity.magnitude < .1f)
         {
             rb.velocity = Vector3.zero;
         }
