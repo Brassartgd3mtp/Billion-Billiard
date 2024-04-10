@@ -57,6 +57,8 @@ public class PlayerRoomCam : MonoBehaviour
                 isFreeCamActive = false;
             }
         }
+        else
+            Debug.LogWarning("Aucune caméra trouvée");
     }
 
     //private IEnumerator CameraReturn()

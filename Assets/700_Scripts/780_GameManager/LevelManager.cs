@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     public LevelType levelType = LevelType.HoleInOne;
     private Scene currentScene;
+    public float HIOCooldown = 1.5f;
 
     private void Start()
     {
@@ -42,9 +43,10 @@ public class LevelManager : MonoBehaviour
         {
             while (true)
             {
-                if (PlayerController.rb.velocity.magnitude <= 0.001f
+                if (PlayerController.rb.velocity.magnitude <= 0.1f
                 && TurnBasedPlayer.Instance.shotRemaining == 0)
                 {
+                    yield return new WaitForSeconds(HIOCooldown);
                     SceneManager.LoadScene(currentScene.buildIndex);
                     yield break;
                 }
