@@ -45,11 +45,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem speedEffect;
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
+    AudioSource audioSource;
     //[SerializeField] private Animator MyAnimator;
 
     float timeSinceThrow = 0;
-
-    string playerShot = "Player_Shot";
 
     private void Awake()
     {
