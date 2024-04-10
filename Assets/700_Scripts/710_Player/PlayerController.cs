@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public LineRenderer PowerLineRenderer;
     [SerializeField] private GameObject gaugeObject;
     [SerializeField] private Image gaugeFill;
+    [SerializeField] private UI_ShotRemaining shotRemaining;
 
     private float angle;
     public static Rigidbody rb;
@@ -43,11 +44,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem speedEffect;
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
-    [SerializeField] private Animator MyAnimator;
+    //[SerializeField] private Animator MyAnimator;
 
     float timeSinceThrow = 0;
 
-    public string Player_Shot;
+    string playerShot = "Player_Shot";
 
     private void Awake()
     {
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         smokePoof = GetComponentInChildren<VisualEffect>();
         speedEffect = GetComponentInChildren<ParticleSystem>();
-        MyAnimator = GetComponentInChildren<Animator>();
+        //MyAnimator = GetComponentInChildren<Animator>();
 
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
 
@@ -99,8 +100,9 @@ public class PlayerController : MonoBehaviour
             speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             speedEffect.Play();
 
-            AudioManager2.Instance.PlaySDFX(Player_Shot);
+            AudioManager2.Instance.PlaySDFX(playerShot);
 
+            UI_ShotRemaining.ToShot();
             turnBasedPlayer.ShotCount();
 
             ThrowStrength = 0;
@@ -170,24 +172,6 @@ public class PlayerController : MonoBehaviour
     //PhysicMaterial pm;
     private void OnCollisionEnter(Collision collision)
     {
-        //pm = collision.collider.material;
-        //
-        //Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
-        //Quaternion newRot = Quaternion.LookRotation(reflect);
-        //rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
-
-        //StartCoroutine(Haptic(0f, 1f, .2f));
-
-        //switch (pm.name)
-        //{
-        //    case "Bumper (Instance)":
-        //        if (rb.velocity.magnitude > 20f)
-        //            rb.AddForce(lastVel.normalized * 10f, ForceMode.Impulse);
-        //        break;
-        //
-        //    //Ajouter d'autres exceptions si n�cessaire
-        //}
-
         if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
         {
             float speed = lastVel.magnitude;
@@ -312,10 +296,6 @@ public class PlayerController : MonoBehaviour
         else
             gaugeTime = 0;
 
-        //if (SwapControls.state == CurrentState.Gamepad)
-        //    PowerLineRenderer.SetPosition(1, Vector3.back * 8);
-        //else
-            //PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 5);
         PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 8);
     }
 

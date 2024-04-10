@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class UI_ShotRemaining : MonoBehaviour
 {
-    public List<Image> Shots = new List<Image>(3);
+    private static List<Image> Shots = new List<Image>(3);
+    private static List<Animator> shotsAnimations = new List<Animator>(3);
     [SerializeField] private Image baseImage;
-    Image lastParticle;
-    int lastIndex;
+    private static int lastIndex;
 
     public void Initialize(int _totalShots)
     {
@@ -21,7 +21,7 @@ public class UI_ShotRemaining : MonoBehaviour
 
             angle -= 45 * Mathf.Deg2Rad;
 
-            lastParticle = Shots.Last();
+            shotsAnimations.Add(Shots[i].GetComponent<Animator>());
 
             lastIndex = i;
         }
@@ -31,7 +31,7 @@ public class UI_ShotRemaining : MonoBehaviour
     {
         for (int i = 0; i < Shots.Count; i++)
         {
-            if (Shots[i].gameObject.activeSelf)
+            if (!shotsAnimations[i].GetBool("ToShot"))
                 continue;
             else
             {
@@ -44,12 +44,18 @@ public class UI_ShotRemaining : MonoBehaviour
 
     public void Death()
     {
-        lastParticle = Shots[lastIndex];
-        //
-        //lastParticle.TriggerSubEmitter(0);
-
-        lastParticle.gameObject.SetActive(false);
+        shotsAnimations[lastIndex].SetBool("Reload", true);
 
         lastIndex--;
+    }
+
+    public static void ToShot()
+    {
+        shotsAnimations[lastIndex].SetBool("ToShot", true);
+    }
+
+    public void Reload()
+    {
+
     }
 }
