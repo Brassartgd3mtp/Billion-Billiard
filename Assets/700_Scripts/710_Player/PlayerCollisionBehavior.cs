@@ -15,7 +15,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     public static PlayerCollisionBehavior Instance;
 
-    [SerializeField] private Animator AnimMoney;
+    [SerializeField] private Animation AnimMoney;
 
     private Rigidbody rb;
     private MeshRenderer meshRenderer;
@@ -93,9 +93,8 @@ public class PlayerCollisionBehavior : MonoBehaviour
     public void AddMoney(int money)
     {
         playerStats.moneyCount += money;
-        AnimMoney.SetBool("Yes", true);
-        Debug.Log("Je suis en true");
-
+        //AnimMoney.Play();
+        //Debug.Log("je m'active");
         
     }
     //private void OnTriggerExit(Collider other)
