@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +14,8 @@ public class PlayerCollisionBehavior : MonoBehaviour
     public PlayerController playerController;
 
     public static PlayerCollisionBehavior Instance;
+
+    [SerializeField] private Animator AnimMoney;
 
     private Rigidbody rb;
     private MeshRenderer meshRenderer;
@@ -89,7 +93,19 @@ public class PlayerCollisionBehavior : MonoBehaviour
     public void AddMoney(int money)
     {
         playerStats.moneyCount += money;
+        AnimMoney.SetBool("Yes", true);
+        Debug.Log("Je suis en true");
+
+        
     }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.TryGetComponent(out MoneyStats moneyStats))
+    //    {
+    //        AnimMoney.SetBool("Yes", false);
+    //        Debug.Log("Je suis en false");
+    //    }
+    //}
 
     IEnumerator HolePlayerScale()
     {
