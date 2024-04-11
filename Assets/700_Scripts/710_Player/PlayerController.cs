@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
     float timeSinceThrow = 0;
 
+    public PlayerParameters playerParameters;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -68,6 +70,7 @@ public class PlayerController : MonoBehaviour
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
 
         InputHandler.PlayerControllerEnable(this);
+        playerParameters = GetComponent<PlayerParameters>();
     }
 
     /// <summary>
@@ -85,7 +88,7 @@ public class PlayerController : MonoBehaviour
             staticThrowStrength = ThrowStrength;
 
             isShooted = true;
-            posBeforeHit = transform.position;
+            RespawnPlayer();
 
             rb.AddForce(transform.forward * ThrowStrength, ForceMode.Impulse);
 
@@ -383,6 +386,14 @@ public class PlayerController : MonoBehaviour
             ThrowStrength = 0;
             MouseEnd = Vector2.zero;
             //SetLookDirection(Vector2.zero);
+        }
+    }
+
+    private void RespawnPlayer()
+    {
+        if (playerParameters.speed == 0)
+        {
+            posBeforeHit = transform.position;
         }
     }
 
