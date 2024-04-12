@@ -343,7 +343,8 @@ namespace Assets.SimpleLocalization.Scripts.Editor
 
         public static bool IsPro()
         {
-            if (Constants.LocalizationEditorUrl != "") return true;
+            if (Constants.LocalizationEditorUrl != string.Empty)
+                return true;
 
             if (EditorUtility.DisplayDialog("SimpleLocalization", "This feature is available in the PRO version only!\nOpen a store website with it?", "Yes", "No"))
             {

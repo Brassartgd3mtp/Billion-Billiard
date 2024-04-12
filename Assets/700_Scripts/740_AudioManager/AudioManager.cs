@@ -36,4 +36,21 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+    public void PlaySoundLoop(int clipIndex, AudioSource audioSource)
+    {
+        if (audioScriptable != null)
+        {
+            AudioClip clip = audioScriptable.GetAudioClip(clipIndex);
+
+            if (audioSource != null && clip != null)
+            {
+                audioSource.clip = clip;
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("N'as pas pu jouer le son, Checker l'AudioScriptable et l'AudioSource");
+            }
+        }
+    }
 }

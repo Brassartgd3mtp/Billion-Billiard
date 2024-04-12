@@ -18,9 +18,6 @@ public static class TurnBasedSystem
 
     public static TurnState state;
 
-    public static event Action OnEnablePlayerInput;
-    public static event Action OnDisablePlayerInput;
-
     private static void OnStateValueChanged(TurnState _state)
     {
         state = _state;
@@ -31,7 +28,7 @@ public static class TurnBasedSystem
                 break;
     
             case TurnState.PLAYERTURN:
-                OnEnablePlayerInput?.Invoke();
+                ReloadForPlayer();
                 Debug.Log("Player Turn");
                 break;
     
@@ -53,12 +50,12 @@ public static class TurnBasedSystem
 
     public static void OnPlayerPlayed() 
     {
-        OnDisablePlayerInput?.Invoke();
+        InputHandler.PlayerControllerDisable();
     }
     
     public static void ReloadForPlayer()
     {
-        OnEnablePlayerInput?.Invoke();
+        InputHandler.PlayerControllerEnable();
     }
         // Check si l'ensemble des personnage dans la list de player ont joué et que leur speed est à 0
         // Si tout est ok, joue : PlayerTurnEnd
