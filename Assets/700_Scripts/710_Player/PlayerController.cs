@@ -102,7 +102,6 @@ public class PlayerController : MonoBehaviour
 
             AudioManager2.Instance.PlaySDFX(playerShot);
 
-            UI_ShotRemaining.ToShot();
             turnBasedPlayer.ShotCount();
 
             ThrowStrength = 0;
