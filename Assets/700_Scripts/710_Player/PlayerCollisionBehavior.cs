@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
@@ -15,7 +16,8 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     public static PlayerCollisionBehavior Instance;
 
-    [SerializeField] private Animation AnimMoney;
+    [SerializeField] private Animator AnimMoney;
+    [SerializeField] private TextMeshProUGUI UI_ValueAdded;
 
     private Rigidbody rb;
     private MeshRenderer meshRenderer;
@@ -75,6 +77,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
             uI_Stats.UpdateStats();
             other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
             lootAnimation.StartAnimation();
+            UI_ValueAdded.gameObject.SetActive(false);
         }
 
         if (other.gameObject.TryGetComponent(out CollectibleReloadBoost collectibleReloadBoost) && TurnBasedPlayer.Instance.shotRemaining < TurnBasedPlayer.Instance.nbrOfShots) 
@@ -93,9 +96,11 @@ public class PlayerCollisionBehavior : MonoBehaviour
     public void AddMoney(int money)
     {
         playerStats.moneyCount += money;
-        //AnimMoney.Play();
+        //AnimMoney.Play("Money.Anim_GetMoney", 0);
         //Debug.Log("je m'active");
-        
+        //UI_ValueAdded.gameObject.SetActive(true);
+        //UI_ValueAdded.text = $"+{money}";
+
     }
     //private void OnTriggerExit(Collider other)
     //{

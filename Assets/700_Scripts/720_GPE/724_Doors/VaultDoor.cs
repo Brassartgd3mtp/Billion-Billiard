@@ -11,7 +11,10 @@ public class VaultDoor : MonoBehaviour
 
     void Start()
     {
-        
+        if (NeedButton)
+        {
+            StartCoroutine(DoorState());
+        }
     }
 
 
