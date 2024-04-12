@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class UI_ShotRemaining : MonoBehaviour
 {
-    private static List<Image> Shots = new List<Image>(3);
-    private static List<Animator> shotsAnimations = new List<Animator>(3);
+    [SerializeField] private List<Image> Shots = new List<Image>(3);
     [SerializeField] private Image baseImage;
-    private static int lastIndex;
+    [HideInInspector] public List<Animator> shotsAnimations = new List<Animator>(3);
+    public int lastIndex;
+    static float currentShot;
 
     public void Initialize(int _totalShots)
     {
@@ -25,37 +26,60 @@ public class UI_ShotRemaining : MonoBehaviour
 
             lastIndex = i;
         }
+
+        shotsAnimations[0].SetBool("isFirstIndex", true);
     }
 
+    /// <summary>
+    /// S'exécute à la fin d'un cooldown dans <c>TurnBasedPlayer</c>
+    /// </summary>
     public void PassiveUpdateShots()
     {
-        for (int i = 0; i < Shots.Count; i++)
+        if (lastIndex < 2)
         {
-            if (!shotsAnimations[i].GetBool("ToShot"))
-                continue;
-            else
-            {
-                Shots[i].gameObject.SetActive(true);
-                lastIndex++;
-                return;
-            }
+            shotsAnimations[lastIndex + 1].SetBool("ToShot", false);
+
+            if (shotsAnimations[lastIndex].GetInteger("ShotsLeft") >= 0)
+                shotsAnimations[lastIndex + 1].Play("Shots.Reload", 0);
+
+            lastIndex++;
         }
     }
 
-    public void Death()
+    public void Shot()
     {
-        shotsAnimations[lastIndex].SetBool("Reload", true);
+        if (lastIndex > -1)
+        {
+            if (lastIndex > 0 && shotsAnimations[lastIndex].GetInteger("ShotsLeft") < 3)
+                lastIndex--;
 
-        lastIndex--;
+            if (lastIndex < 2)
+            {
+                currentShot = GetCurrentAnimTime(shotsAnimations[lastIndex + 1]);
+
+                shotsAnimations[lastIndex].SetBool("ToShot", false);
+                shotsAnimations[lastIndex + 1].SetBool("ToShot", true);
+
+                shotsAnimations[lastIndex].Play("Shots.Reload", 0, currentShot);
+            }
+            else
+                shotsAnimations[lastIndex].Play("Shots.Reload", 0);
+        }
+        else
+            Debug.LogWarning("Can't perform Shot, there is no shots left !");
     }
 
-    public static void ToShot()
+    static float GetCurrentAnimTime(Animator anim)
     {
-        shotsAnimations[lastIndex].SetBool("ToShot", true);
-    }
+        AnimatorStateInfo stateInfo;
 
-    public void Reload()
-    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Reload"))
+        {
+            stateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
+            return stateInfo.normalizedTime;
+        }
+        else
+            return 0f;
     }
 }

@@ -31,7 +31,7 @@ public class SwapControls : MonoBehaviour
 
         uiControllerSwitch?.GamepadIcon();
 
-        Debug.LogWarning("Switch main controller to Gamepad !");
+        //Debug.LogWarning("Switch main controller to Gamepad !");
     }
 
     public void ToGamepad(InputAction.CallbackContext context)
@@ -52,7 +52,7 @@ public class SwapControls : MonoBehaviour
 
         uiControllerSwitch?.MouseIcon();
 
-        Debug.LogWarning("Switch main controller to Mouse and Keyboard !");
+        //Debug.LogWarning("Switch main controller to Mouse and Keyboard !");
     }
 
     private void OnDisable()

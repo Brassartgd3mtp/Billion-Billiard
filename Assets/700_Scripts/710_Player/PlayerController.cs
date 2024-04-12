@@ -106,7 +106,8 @@ public class PlayerController : MonoBehaviour
             speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             speedEffect.Play();
 
-            UI_ShotRemaining.ToShot();
+            AudioManager2.Instance.PlaySDFX(playerShot);
+
             turnBasedPlayer.ShotCount();
 
             ThrowStrength = 0;
