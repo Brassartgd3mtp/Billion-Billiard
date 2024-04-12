@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CollisionHandler : MonoBehaviour
+public class SlowingTime : MonoBehaviour
 {
     public GameObject pausePanel;
     public float timeToSlowDown = 1f; // Temps nécessaire pour ralentir complètement le jeu (en secondes)

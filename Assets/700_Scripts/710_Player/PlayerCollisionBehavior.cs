@@ -93,7 +93,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
         if (other.gameObject.TryGetComponent(out EndLevel endLevel))
         {
-            SceneManager.LoadScene(endLevel.nextLevel);
+            //SceneManager.LoadScene(endLevel.nextLevel);
         }
         
     }
