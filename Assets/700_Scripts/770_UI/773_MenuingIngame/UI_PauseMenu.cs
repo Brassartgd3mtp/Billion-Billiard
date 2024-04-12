@@ -100,6 +100,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        InputSystem.ResetHaptics();
         Time.timeScale = 0f;
         //Time.fixedDeltaTime = 0f;
 

@@ -22,7 +22,7 @@ public class PlayerParameters : MonoBehaviour
     private float timerForDrag;
 
     private Vector3 vel;
-    [SerializeField] private float speed;
+    [SerializeField] public float speed;
     private bool canDrag;
 
 

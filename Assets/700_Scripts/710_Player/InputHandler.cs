@@ -29,11 +29,6 @@ public class InputHandler : MonoBehaviour
         player = playerController;
 
         #region Gamepad
-        TurnBasedSystem.OnEnablePlayerInput += Actions.Gamepad.GamepadStrenght.Enable;
-        TurnBasedSystem.OnEnablePlayerInput += Actions.Gamepad.ThrowPlayer.Enable;
-        TurnBasedSystem.OnDisablePlayerInput += Actions.Gamepad.GamepadStrenght.Disable;
-        TurnBasedSystem.OnDisablePlayerInput += Actions.Gamepad.ThrowPlayer.Disable;
-
         Actions.Gamepad.ThrowPlayer.started += playerController.GamepadStrengthGauge;
         Actions.Gamepad.ThrowPlayer.canceled += playerController.GamepadStrengthGauge;
         Actions.Gamepad.ThrowPlayer.canceled += playerController.Throw;
@@ -42,9 +37,6 @@ public class InputHandler : MonoBehaviour
         Actions.Gamepad.CancelThrow.started += playerController.GamepadCancelThrow;
         #endregion
         #region Mouse/Keyboard
-        TurnBasedSystem.OnEnablePlayerInput += Actions.MouseKeyboard.MouseStartDrag.Enable;
-        TurnBasedSystem.OnDisablePlayerInput += Actions.MouseKeyboard.MouseStartDrag.Disable;
-
         Actions.MouseKeyboard.MouseStrenght.performed += playerController.MouseStrenght;
         Actions.MouseKeyboard.MouseStartDrag.started += playerController.MouseStartDrag;
         Actions.MouseKeyboard.MouseStartDrag.performed += playerController.MouseStartDrag;
