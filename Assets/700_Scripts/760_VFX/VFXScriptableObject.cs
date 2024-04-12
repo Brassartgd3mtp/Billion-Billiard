@@ -11,6 +11,7 @@ public class VFXScriptableObject : ScriptableObject
     public GameObject prefabParticleRubber;
     public GameObject prefabParticleFelt;
     public GameObject prefabParticleIce;
+    public GameObject prefabParticleVelcro;
     public GameObject prefabParticleNPC;
     public GameObject prefabParticleProps;
     public GameObject prefabParticleBumper;
@@ -34,6 +35,9 @@ public class VFXScriptableObject : ScriptableObject
 
             case ObstacleType.Ice:
                 return prefabParticleIce;
+
+            case ObstacleType.Velcro:
+                return prefabParticleVelcro;
 
             case ObstacleType.NPC:
                 return prefabParticleNPC;
