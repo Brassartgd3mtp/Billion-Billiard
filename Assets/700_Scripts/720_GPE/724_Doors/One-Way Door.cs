@@ -12,6 +12,7 @@ public class OneWayDoor : MonoBehaviour
     [SerializeField, Range(1, 5)] private float speed = 1;
     [SerializeField] private bool isOneWay;
     [SerializeField] private bool isOpenByDefault;
+    [SerializeField] Vector3 undergroundEndPos = new Vector3(0, -1.5f, 0);
     private bool isOpen;
     Vector3 startPos;
 
@@ -32,11 +33,10 @@ public class OneWayDoor : MonoBehaviour
             CloseDoor();
     }
 
-    Vector3 underground = new Vector3(0, -1.5f, 0);
     public void OpenDoor()
     {
         isOpen = true;
-        StartCoroutine(UpdateDoorPos(lockedDoor.gameObject, underground));
+        StartCoroutine(UpdateDoorPos(lockedDoor.gameObject, undergroundEndPos));
         lockedDoor.Unlock = true;
     }
 
