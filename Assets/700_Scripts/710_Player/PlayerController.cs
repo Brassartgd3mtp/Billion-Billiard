@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 using UnityEngine.UI;
+using Unity.VisualScripting.FullSerializer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -44,17 +45,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem speedEffect;
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
+    AudioSource audioSource;
     //[SerializeField] private Animator MyAnimator;
 
     float timeSinceThrow = 0;
 
-    string playerShot = "Player_Shot";
+    public PlayerParameters playerParameters;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
 
         turnBasedPlayer = GetComponent<TurnBasedPlayer>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -66,6 +70,7 @@ public class PlayerController : MonoBehaviour
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
 
         InputHandler.PlayerControllerEnable(this);
+        playerParameters = GetComponent<PlayerParameters>();
     }
 
     /// <summary>
@@ -76,13 +81,14 @@ public class PlayerController : MonoBehaviour
     {
         if (ThrowStrength > 0.2f)
         {
+            SoundShot();    
             StartCoroutine(Haptic(ThrowStrength / 40, ThrowStrength / 40, .4f));
 
             timeSinceThrow = 0;
             staticThrowStrength = ThrowStrength;
 
             isShooted = true;
-            posBeforeHit = transform.position;
+            RespawnPlayer();
 
             rb.AddForce(transform.forward * ThrowStrength, ForceMode.Impulse);
 
@@ -100,14 +106,12 @@ public class PlayerController : MonoBehaviour
             speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             speedEffect.Play();
 
-            AudioManager2.Instance.PlaySDFX(playerShot);
-
-            UI_ShotRemaining.ToShot();
             turnBasedPlayer.ShotCount();
 
             ThrowStrength = 0;
         }
     }
+
 
     Vector3 lastVel;
     private void FixedUpdate()
@@ -273,12 +277,14 @@ public class PlayerController : MonoBehaviour
             gaugeObject.SetActive(true);
             isGaugeActive = true;
             //MyAnimator.SetBool("PreparationShoot", true);
+            SoundGauge();
         }
         if (context.canceled)
         {
             gaugeObject.SetActive(false);
             isGaugeActive = false;
             gaugeFill.fillAmount = 0;
+            audioSource.Stop();
             //MyAnimator.SetBool("PreparationShoot", false);
 
         }
@@ -292,12 +298,14 @@ public class PlayerController : MonoBehaviour
         {
             ThrowStrength = Mathf.PingPong(gaugeTime, 40);
             gaugeFill.fillAmount = ThrowStrength / StrengthFactor;
+            audioSource.pitch = 1 + ThrowStrength / 30;
         }
         else
             gaugeTime = 0;
 
         PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 8);
     }
+
 
     private bool dragEnabled = false;
     /// <summary>
@@ -354,7 +362,7 @@ public class PlayerController : MonoBehaviour
         gaugeObject.SetActive(false);
         gaugeFill.fillAmount = 0;
         isGaugeActive = false;
-
+        audioSource.Stop();
         ThrowStrength = 0;
     }
 
@@ -380,8 +388,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void RespawnPlayer()
+    {
+        if (playerParameters.speed == 0)
+        {
+            posBeforeHit = transform.position;
+        }
+    }
+
     private void OnDisable()
     {
         InputHandler.PlayerControllerDisable();
+    }
+    private void SoundGauge()
+    {
+        audioSource.loop = true;
+        AudioManager.Instance.PlaySoundLoop(18, audioSource);
+    }
+    private void SoundShot()
+    {
+        audioSource.loop = false;
+        audioSource.Stop();
+        audioSource.pitch = 1;
+        AudioManager.Instance.PlaySound(16, audioSource);
+        audioSource.loop = true;
     }
 }
