@@ -7028,13 +7028,12 @@ MonoBehaviour:
   PowerLineRenderer: {fileID: 7085006900366943893}
   gaugeObject: {fileID: 3135062430984604475}
   gaugeFill: {fileID: 8521601127427028467}
+  shotRemaining: {fileID: 0}
   isShooted: 0
   posBeforeHit: {x: 0, y: 0, z: 0}
   speedEffect: {fileID: 3792082301489345904}
   speedEffectDirection: {fileID: 3918158615536368089}
   smokePoof: {fileID: 3974159725226073086}
-  MyAnimator: {fileID: 0}
-  Player_Shot: Player_Shot
 --- !u!114 &5031325047204720743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7050,6 +7049,8 @@ MonoBehaviour:
   playerStats: {fileID: 3705272347710780647}
   uI_Stats: {fileID: 540975006541408978}
   playerController: {fileID: 2429653923857696437}
+  AnimMoney: {fileID: 0}
+  UI_ValueAdded: {fileID: 0}
   Player_Fall: Player_Fall
 --- !u!114 &3705272347710780647
 MonoBehaviour:
@@ -18987,6 +18988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelType: 1
+  HIOCooldown: 1.5
 --- !u!1 &4762669836358603550
 GameObject:
   m_ObjectHideFlags: 0
@@ -23899,7 +23901,7 @@ Transform:
   m_GameObject: {fileID: 7407205603221401091}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 20.600002, z: 0.0000023841858}
+  m_LocalPosition: {x: 14.85, y: 20.600002, z: -7.4999995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23914,8 +23916,8 @@ Camera:
   m_GameObject: {fileID: 7407205603221401091}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -27567,7 +27569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148240dd38be1744aab2f6d194f36330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shots: []
   baseImage: {fileID: 4322728167534156763, guid: cacb72cd0c9d3244d8d15f2c13bab1b8,
     type: 3}
 --- !u!114 &3439671363458612112
