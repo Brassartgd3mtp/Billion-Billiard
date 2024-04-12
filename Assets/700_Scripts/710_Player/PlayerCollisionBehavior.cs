@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +15,9 @@ public class PlayerCollisionBehavior : MonoBehaviour
     public PlayerController playerController;
 
     public static PlayerCollisionBehavior Instance;
+
+    [SerializeField] private Animator AnimMoney;
+    [SerializeField] private TextMeshProUGUI UI_ValueAdded;
 
     private Rigidbody rb;
     private MeshRenderer meshRenderer;
@@ -71,6 +77,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
             uI_Stats.UpdateStats();
             other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
             lootAnimation.StartAnimation();
+            UI_ValueAdded.gameObject.SetActive(false);
         }
 
         if (other.gameObject.TryGetComponent(out CollectibleReloadBoost collectibleReloadBoost) && TurnBasedPlayer.Instance.shotRemaining < TurnBasedPlayer.Instance.nbrOfShots) 
@@ -89,7 +96,20 @@ public class PlayerCollisionBehavior : MonoBehaviour
     public void AddMoney(int money)
     {
         playerStats.moneyCount += money;
+        //AnimMoney.Play("Money.Anim_GetMoney", 0);
+        //Debug.Log("je m'active");
+        //UI_ValueAdded.gameObject.SetActive(true);
+        //UI_ValueAdded.text = $"+{money}";
+
     }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.TryGetComponent(out MoneyStats moneyStats))
+    //    {
+    //        AnimMoney.SetBool("Yes", false);
+    //        Debug.Log("Je suis en false");
+    //    }
+    //}
 
     IEnumerator HolePlayerScale()
     {

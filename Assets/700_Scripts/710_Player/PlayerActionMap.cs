@@ -73,7 +73,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""StartFreeCam"",
+                    ""name"": ""RoomCam"",
                     ""type"": ""Button"",
                     ""id"": ""a2c79c0b-55ae-4b1d-923c-f1bbe61ce3d3"",
                     ""expectedControlType"": ""Button"",
@@ -130,11 +130,11 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""26d4424c-ac7b-43a7-afb0-8e2552cb80b9"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""StartFreeCam"",
+                    ""action"": ""RoomCam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -174,7 +174,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""StartFreeCam"",
+                    ""name"": ""RoomCam"",
                     ""type"": ""Button"",
                     ""id"": ""9eec3fb6-c41e-42d7-aeda-34b17f7fe899"",
                     ""expectedControlType"": ""Button"",
@@ -240,7 +240,18 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""StartFreeCam"",
+                    ""action"": ""RoomCam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e27f04d-03e6-4e19-8c2a-a731957bc36e"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RoomCam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -521,12 +532,12 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         m_Gamepad_CancelThrow = m_Gamepad.FindAction("CancelThrow", throwIfNotFound: true);
         m_Gamepad_FreeCam = m_Gamepad.FindAction("FreeCam", throwIfNotFound: true);
         m_Gamepad_PauseMenu = m_Gamepad.FindAction("PauseMenu", throwIfNotFound: true);
-        m_Gamepad_StartFreeCam = m_Gamepad.FindAction("StartFreeCam", throwIfNotFound: true);
+        m_Gamepad_RoomCam = m_Gamepad.FindAction("RoomCam", throwIfNotFound: true);
         // Mouse/Keyboard
         m_MouseKeyboard = asset.FindActionMap("Mouse/Keyboard", throwIfNotFound: true);
         m_MouseKeyboard_MouseStartDrag = m_MouseKeyboard.FindAction("MouseStartDrag", throwIfNotFound: true);
         m_MouseKeyboard_MouseStrenght = m_MouseKeyboard.FindAction("MouseStrenght", throwIfNotFound: true);
-        m_MouseKeyboard_StartFreeCam = m_MouseKeyboard.FindAction("StartFreeCam", throwIfNotFound: true);
+        m_MouseKeyboard_RoomCam = m_MouseKeyboard.FindAction("RoomCam", throwIfNotFound: true);
         m_MouseKeyboard_MouseCancelThrow = m_MouseKeyboard.FindAction("MouseCancelThrow", throwIfNotFound: true);
         m_MouseKeyboard_FreeCam = m_MouseKeyboard.FindAction("FreeCam", throwIfNotFound: true);
         m_MouseKeyboard_PauseMenu = m_MouseKeyboard.FindAction("PauseMenu", throwIfNotFound: true);
@@ -608,7 +619,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gamepad_CancelThrow;
     private readonly InputAction m_Gamepad_FreeCam;
     private readonly InputAction m_Gamepad_PauseMenu;
-    private readonly InputAction m_Gamepad_StartFreeCam;
+    private readonly InputAction m_Gamepad_RoomCam;
     public struct GamepadActions
     {
         private @PlayerActionMap m_Wrapper;
@@ -618,7 +629,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         public InputAction @CancelThrow => m_Wrapper.m_Gamepad_CancelThrow;
         public InputAction @FreeCam => m_Wrapper.m_Gamepad_FreeCam;
         public InputAction @PauseMenu => m_Wrapper.m_Gamepad_PauseMenu;
-        public InputAction @StartFreeCam => m_Wrapper.m_Gamepad_StartFreeCam;
+        public InputAction @RoomCam => m_Wrapper.m_Gamepad_RoomCam;
         public InputActionMap Get() { return m_Wrapper.m_Gamepad; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -643,9 +654,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @PauseMenu.started += instance.OnPauseMenu;
             @PauseMenu.performed += instance.OnPauseMenu;
             @PauseMenu.canceled += instance.OnPauseMenu;
-            @StartFreeCam.started += instance.OnStartFreeCam;
-            @StartFreeCam.performed += instance.OnStartFreeCam;
-            @StartFreeCam.canceled += instance.OnStartFreeCam;
+            @RoomCam.started += instance.OnRoomCam;
+            @RoomCam.performed += instance.OnRoomCam;
+            @RoomCam.canceled += instance.OnRoomCam;
         }
 
         private void UnregisterCallbacks(IGamepadActions instance)
@@ -665,9 +676,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @PauseMenu.started -= instance.OnPauseMenu;
             @PauseMenu.performed -= instance.OnPauseMenu;
             @PauseMenu.canceled -= instance.OnPauseMenu;
-            @StartFreeCam.started -= instance.OnStartFreeCam;
-            @StartFreeCam.performed -= instance.OnStartFreeCam;
-            @StartFreeCam.canceled -= instance.OnStartFreeCam;
+            @RoomCam.started -= instance.OnRoomCam;
+            @RoomCam.performed -= instance.OnRoomCam;
+            @RoomCam.canceled -= instance.OnRoomCam;
         }
 
         public void RemoveCallbacks(IGamepadActions instance)
@@ -691,7 +702,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     private List<IMouseKeyboardActions> m_MouseKeyboardActionsCallbackInterfaces = new List<IMouseKeyboardActions>();
     private readonly InputAction m_MouseKeyboard_MouseStartDrag;
     private readonly InputAction m_MouseKeyboard_MouseStrenght;
-    private readonly InputAction m_MouseKeyboard_StartFreeCam;
+    private readonly InputAction m_MouseKeyboard_RoomCam;
     private readonly InputAction m_MouseKeyboard_MouseCancelThrow;
     private readonly InputAction m_MouseKeyboard_FreeCam;
     private readonly InputAction m_MouseKeyboard_PauseMenu;
@@ -701,7 +712,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         public MouseKeyboardActions(@PlayerActionMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @MouseStartDrag => m_Wrapper.m_MouseKeyboard_MouseStartDrag;
         public InputAction @MouseStrenght => m_Wrapper.m_MouseKeyboard_MouseStrenght;
-        public InputAction @StartFreeCam => m_Wrapper.m_MouseKeyboard_StartFreeCam;
+        public InputAction @RoomCam => m_Wrapper.m_MouseKeyboard_RoomCam;
         public InputAction @MouseCancelThrow => m_Wrapper.m_MouseKeyboard_MouseCancelThrow;
         public InputAction @FreeCam => m_Wrapper.m_MouseKeyboard_FreeCam;
         public InputAction @PauseMenu => m_Wrapper.m_MouseKeyboard_PauseMenu;
@@ -720,9 +731,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @MouseStrenght.started += instance.OnMouseStrenght;
             @MouseStrenght.performed += instance.OnMouseStrenght;
             @MouseStrenght.canceled += instance.OnMouseStrenght;
-            @StartFreeCam.started += instance.OnStartFreeCam;
-            @StartFreeCam.performed += instance.OnStartFreeCam;
-            @StartFreeCam.canceled += instance.OnStartFreeCam;
+            @RoomCam.started += instance.OnRoomCam;
+            @RoomCam.performed += instance.OnRoomCam;
+            @RoomCam.canceled += instance.OnRoomCam;
             @MouseCancelThrow.started += instance.OnMouseCancelThrow;
             @MouseCancelThrow.performed += instance.OnMouseCancelThrow;
             @MouseCancelThrow.canceled += instance.OnMouseCancelThrow;
@@ -742,9 +753,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @MouseStrenght.started -= instance.OnMouseStrenght;
             @MouseStrenght.performed -= instance.OnMouseStrenght;
             @MouseStrenght.canceled -= instance.OnMouseStrenght;
-            @StartFreeCam.started -= instance.OnStartFreeCam;
-            @StartFreeCam.performed -= instance.OnStartFreeCam;
-            @StartFreeCam.canceled -= instance.OnStartFreeCam;
+            @RoomCam.started -= instance.OnRoomCam;
+            @RoomCam.performed -= instance.OnRoomCam;
+            @RoomCam.canceled -= instance.OnRoomCam;
             @MouseCancelThrow.started -= instance.OnMouseCancelThrow;
             @MouseCancelThrow.performed -= instance.OnMouseCancelThrow;
             @MouseCancelThrow.canceled -= instance.OnMouseCancelThrow;
@@ -940,13 +951,13 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         void OnCancelThrow(InputAction.CallbackContext context);
         void OnFreeCam(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
-        void OnStartFreeCam(InputAction.CallbackContext context);
+        void OnRoomCam(InputAction.CallbackContext context);
     }
     public interface IMouseKeyboardActions
     {
         void OnMouseStartDrag(InputAction.CallbackContext context);
         void OnMouseStrenght(InputAction.CallbackContext context);
-        void OnStartFreeCam(InputAction.CallbackContext context);
+        void OnRoomCam(InputAction.CallbackContext context);
         void OnMouseCancelThrow(InputAction.CallbackContext context);
         void OnFreeCam(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
