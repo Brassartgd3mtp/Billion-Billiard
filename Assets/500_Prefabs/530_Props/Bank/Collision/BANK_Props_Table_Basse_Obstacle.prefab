@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 7335061028994019747}
   - component: {fileID: 6044147150218791891}
   - component: {fileID: 7887576286043163187}
-  - component: {fileID: 6314507475446833059}
+  - component: {fileID: 7734402094451666980}
+  - component: {fileID: 9000504757409758207}
   m_Layer: 0
   m_Name: BANK_Props_Table_Basse_Obstacle
   m_TagString: Untagged
@@ -106,7 +107,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6711221, y: 0.42209458, z: 0.85647994}
   m_Center: {x: 0, y: -0.000000014901161, z: 0}
---- !u!114 &6314507475446833059
+--- !u!54 &7734402094451666980
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2692031914778420675}
+  serializedVersion: 4
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &9000504757409758207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,10 +143,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2692031914778420675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Script: {fileID: 11500000, guid: 8eab9cb561192264381d731c17253b0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleType: 1
+  MyRigidbody: {fileID: 0}
+  ImpactForce: 1
 --- !u!1 &4315997498098686242
 GameObject:
   m_ObjectHideFlags: 0
