@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 3193416890074491908}
   - component: {fileID: 6883308863611890565}
   - component: {fileID: 632968258520380182}
-  - component: {fileID: 7474136333787235924}
-  - component: {fileID: 1492581183831333870}
   m_Layer: 0
   m_Name: or
   m_TagString: Untagged
@@ -85,43 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7474136333787235924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 248992412831707549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CutCascades: 2
-  ExplodeForce: 500
-  dureeDeVieDesDebris: 5
-  CollisionSound: 
---- !u!65 &1492581183831333870
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 248992412831707549}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.97078776, y: 1.5000001, z: 1}
-  m_Center: {x: 0.1222377, y: 0.7446355, z: 0.0026744157}
 --- !u!1 &6534120265705459276
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,8 +94,6 @@ GameObject:
   - component: {fileID: 5229898236343952930}
   - component: {fileID: 2953945422162264712}
   - component: {fileID: 2234939057532150991}
-  - component: {fileID: 1609565228366059660}
-  - component: {fileID: 2334649684089270427}
   m_Layer: 0
   m_Name: coussin
   m_TagString: Untagged
@@ -207,43 +166,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1609565228366059660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6534120265705459276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CutCascades: 2
-  ExplodeForce: 500
-  dureeDeVieDesDebris: 5
-  CollisionSound: 
---- !u!65 &2334649684089270427
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6534120265705459276}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.98, y: 2.51, z: 0.79}
-  m_Center: {x: -0.0024482906, y: 1.1330974, z: 0.010791272}
 --- !u!1 &7756942337934681873
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +177,7 @@ GameObject:
   - component: {fileID: 695270763477329191}
   - component: {fileID: 411057589180219771}
   - component: {fileID: 2920352102759336489}
+  - component: {fileID: 7004418447702159384}
   m_Layer: 0
   m_Name: CASINO_Props_Chaise_Black_Jack_Destructible
   m_TagString: Untagged
@@ -293,14 +216,14 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.51, z: 0}
+  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Center: {x: 0.12, y: 0.75, z: 0}
 --- !u!54 &2920352102759336489
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -309,7 +232,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7756942337934681873}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -328,6 +251,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7004418447702159384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756942337934681873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eab9cb561192264381d731c17253b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyRigidbody: {fileID: 0}
+  ImpactForce: 1
 --- !u!1 &8065828588959816642
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,8 +276,6 @@ GameObject:
   - component: {fileID: 7589428703118689904}
   - component: {fileID: 8851027234955068211}
   - component: {fileID: 7918809197228875848}
-  - component: {fileID: 1097127471624653520}
-  - component: {fileID: 2645909799239807502}
   m_Layer: 0
   m_Name: assise
   m_TagString: Untagged
@@ -413,40 +348,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1097127471624653520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8065828588959816642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CutCascades: 2
-  ExplodeForce: 500
-  dureeDeVieDesDebris: 5
-  CollisionSound: 
---- !u!65 &2645909799239807502
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8065828588959816642}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7658345, y: 2.57, z: 0.8034866}
-  m_Center: {x: -0.008875847, y: 1.0472705, z: 0.015852198}

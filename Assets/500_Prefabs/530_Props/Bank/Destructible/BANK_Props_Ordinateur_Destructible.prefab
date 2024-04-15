@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 7846059391311227496}
   - component: {fileID: 8141830322822544306}
   - component: {fileID: 8008734083964088529}
+  - component: {fileID: 2030252694748891674}
   m_Layer: 0
   m_Name: BANK_Props_Ordinateur
   m_TagString: Untagged
@@ -132,13 +133,13 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 5148971243177082969, guid: bea830f62f38e71498c8b75585088076, type: 3}
+  m_Mesh: {fileID: 5148971243177082969, guid: 38b7c400c5086564ebd6d29606b10b2b, type: 3}
 --- !u!114 &8008734083964088529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +155,33 @@ MonoBehaviour:
   CutCascades: 4
   ExplodeForce: 5000
   dureeDeVieDesDebris: 5
-  CollisionSound: 
+--- !u!54 &2030252694748891674
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6454618466940229176}
+  serializedVersion: 4
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8741444024816323643
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,8 +191,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6125245040740983500}
-  - component: {fileID: 6383438853579819628}
-  - component: {fileID: 6719319865533384760}
   m_Layer: 0
   m_Name: BANK_Props_Ordinateur_Destructible
   m_TagString: Untagged
@@ -189,51 +214,3 @@ Transform:
   - {fileID: 1239889458164786418}
   m_Father: {fileID: 5628098668144832605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6383438853579819628
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8741444024816323643}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.4, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &6719319865533384760
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8741444024816323643}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0

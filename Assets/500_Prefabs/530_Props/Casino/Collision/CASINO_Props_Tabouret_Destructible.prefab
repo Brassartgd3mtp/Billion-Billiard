@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 8517229403577116202}
   - component: {fileID: 7125235976360496206}
   - component: {fileID: 7181677711189037885}
-  - component: {fileID: 8011283782326096624}
-  - component: {fileID: 4103332285367128161}
   m_Layer: 0
   m_Name: coussin1
   m_TagString: Untagged
@@ -85,42 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8011283782326096624
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200933244884624737}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5316921, y: 1, z: 0.5315733}
-  m_Center: {x: 0.00000008940697, y: -0.34, z: 0.061490424}
---- !u!114 &4103332285367128161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200933244884624737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CutCascades: 1
-  ExplodeForce: 500
-  dureeDeVieDesDebris: 5
 --- !u!1 &1897875048041525690
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,8 +129,6 @@ GameObject:
   - component: {fileID: 3917463222383644345}
   - component: {fileID: 6528680468711631073}
   - component: {fileID: 7354618573376073885}
-  - component: {fileID: 5387484469745391693}
-  - component: {fileID: 2611700433424307574}
   m_Layer: 0
   m_Name: socle2
   m_TagString: Untagged
@@ -241,42 +201,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5387484469745391693
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2449585069886327033}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.39597762, y: 1, z: 0.39597797}
-  m_Center: {x: 0.0037893504, y: 0.41, z: 0.02564188}
---- !u!114 &2611700433424307574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2449585069886327033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CutCascades: 1
-  ExplodeForce: 500
-  dureeDeVieDesDebris: 5
 --- !u!1 &3097709471779769154
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,8 +212,6 @@ GameObject:
   - component: {fileID: 704160802907591085}
   - component: {fileID: 4179576987962415865}
   - component: {fileID: 7705848282122340901}
-  - component: {fileID: 5796600340126221289}
-  - component: {fileID: 6764266274734263338}
   m_Layer: 0
   m_Name: ornement2
   m_TagString: Untagged
@@ -362,42 +284,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5796600340126221289
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3097709471779769154}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.3, y: 1, z: 0.3}
-  m_Center: {x: -0.1, y: 0.3, z: 0}
---- !u!114 &6764266274734263338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3097709471779769154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CutCascades: 1
-  ExplodeForce: 500
-  dureeDeVieDesDebris: 5
 --- !u!1 &3205722421256434747
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +295,7 @@ GameObject:
   - component: {fileID: 7706332520666939817}
   - component: {fileID: 4269919016561961095}
   - component: {fileID: 68404470299747774}
+  - component: {fileID: 7418349545489674565}
   m_Layer: 0
   m_Name: CASINO_Props_Tabouret_Destructible
   m_TagString: Untagged
@@ -449,7 +336,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -465,7 +352,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3205722421256434747}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -484,6 +371,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7418349545489674565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3205722421256434747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eab9cb561192264381d731c17253b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyRigidbody: {fileID: 0}
+  ImpactForce: 1
 --- !u!1 &5289532460797879366
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,8 +396,6 @@ GameObject:
   - component: {fileID: 7836803885034990255}
   - component: {fileID: 3820267877204095190}
   - component: {fileID: 2624330516515636355}
-  - component: {fileID: 4988071743697615843}
-  - component: {fileID: 5918598653642720517}
   m_Layer: 0
   m_Name: cercle1
   m_TagString: Untagged
@@ -569,42 +468,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4988071743697615843
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5289532460797879366}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.3988408, y: 1, z: 0.3988408}
-  m_Center: {x: 0, y: 0.2, z: 0}
---- !u!114 &5918598653642720517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5289532460797879366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CutCascades: 1
-  ExplodeForce: 500
-  dureeDeVieDesDebris: 5
 --- !u!1 &5356517569552748657
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,8 +479,6 @@ GameObject:
   - component: {fileID: 6280397076730225806}
   - component: {fileID: 4406751271363683363}
   - component: {fileID: 8863106615181280059}
-  - component: {fileID: 9081861316963229726}
-  - component: {fileID: 8875425663173648024}
   m_Layer: 0
   m_Name: ornement3
   m_TagString: Untagged
@@ -690,42 +551,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9081861316963229726
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5356517569552748657}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.3, y: 1, z: 0.3}
-  m_Center: {x: 0, y: 0.3, z: 0.1}
---- !u!114 &8875425663173648024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5356517569552748657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CutCascades: 1
-  ExplodeForce: 500
-  dureeDeVieDesDebris: 5
 --- !u!1 &7488221913077970177
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,8 +562,6 @@ GameObject:
   - component: {fileID: 2905195862818511216}
   - component: {fileID: 1583591594487121257}
   - component: {fileID: 1792809397305830416}
-  - component: {fileID: 3007198292531574521}
-  - component: {fileID: 1821527182649173894}
   m_Layer: 0
   m_Name: ornement1
   m_TagString: Untagged
@@ -811,42 +634,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3007198292531574521
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7488221913077970177}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.3, y: 1, z: 0.3}
-  m_Center: {x: 0.1, y: 0.3, z: 0}
---- !u!114 &1821527182649173894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7488221913077970177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CutCascades: 1
-  ExplodeForce: 500
-  dureeDeVieDesDebris: 5
 --- !u!1 &7841565344707646319
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,8 +645,6 @@ GameObject:
   - component: {fileID: 7933028209572946249}
   - component: {fileID: 5919420659206437882}
   - component: {fileID: 8387205120353698994}
-  - component: {fileID: 4885538054094277905}
-  - component: {fileID: 7241275241825535454}
   m_Layer: 0
   m_Name: barre1
   m_TagString: Untagged
@@ -932,42 +717,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4885538054094277905
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7841565344707646319}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.80799884, z: 0.5}
-  m_Center: {x: 0.0000000037252903, y: -0.40399936, z: 0.016871708}
---- !u!114 &7241275241825535454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7841565344707646319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CutCascades: 1
-  ExplodeForce: 500
-  dureeDeVieDesDebris: 5
 --- !u!1 &8026129647160124161
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,8 +728,6 @@ GameObject:
   - component: {fileID: 7637864359603407763}
   - component: {fileID: 544293418189414881}
   - component: {fileID: 8360332538884573350}
-  - component: {fileID: 6521945841479001576}
-  - component: {fileID: 9196134479971140411}
   m_Layer: 0
   m_Name: ornement4
   m_TagString: Untagged
@@ -1053,42 +800,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6521945841479001576
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8026129647160124161}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.3, y: 1, z: 0.3}
-  m_Center: {x: 0, y: 0.3, z: -0.1}
---- !u!114 &9196134479971140411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8026129647160124161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CutCascades: 1
-  ExplodeForce: 500
-  dureeDeVieDesDebris: 5
 --- !u!1 &8837727213237090944
 GameObject:
   m_ObjectHideFlags: 0
