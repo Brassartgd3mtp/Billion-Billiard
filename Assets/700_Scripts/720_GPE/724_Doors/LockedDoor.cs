@@ -23,8 +23,8 @@ public class LockedDoor : MonoBehaviour
             unlock = value;
             //AudioManager2.Instance.PlaySDFX(LockedDoor_Open);
             //myAnimator.SetBool("Unlock", unlock);
-            IconPadlockLocked.SetActive(false);
-            IconPadlockUnlocked.SetActive(true);
+            //IconPadlockLocked.SetActive(false);
+            //IconPadlockUnlocked.SetActive(true);
         }
     }
 
