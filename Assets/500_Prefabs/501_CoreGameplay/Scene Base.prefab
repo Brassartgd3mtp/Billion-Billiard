@@ -9580,8 +9580,9 @@ MonoBehaviour:
   playerStats: {fileID: 3705272347710780647}
   uI_Stats: {fileID: 540975006541408978}
   playerController: {fileID: 2429653923857696437}
-  AnimMoney: {fileID: 0}
-  UI_ValueAdded: {fileID: 0}
+  UI_ValueAdded: {fileID: 2219103828642116126}
+  GetMoneyTXT: {fileID: 3708827165363058516}
+  addValue: {fileID: 4579781294335629596}
 --- !u!114 &3705272347710780647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32130,7 +32131,8 @@ GameObject:
   - component: {fileID: 2273190446796882943}
   - component: {fileID: 4456233649041253637}
   - component: {fileID: 540975006541408978}
-  - component: {fileID: 2845158320014318231}
+  - component: {fileID: 3746533424319786041}
+  - component: {fileID: 4579781294335629596}
   m_Layer: 5
   m_Name: CanvasMoney
   m_TagString: Untagged
@@ -32239,27 +32241,36 @@ MonoBehaviour:
   UIMoneyCount: 0
   playerStats: {fileID: 3705272347710780647}
   TEXT_Money_Count: {fileID: 8229030447056012807}
---- !u!95 &2845158320014318231
-Animator:
-  serializedVersion: 5
+  GetMoney: {fileID: 3746533424319786041}
+--- !u!111 &3746533424319786041
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8677759117576702177}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c994816bcdea83f48b0618d12f97f95b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a229674e8dac3544b8c62f0d2ab76538, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a229674e8dac3544b8c62f0d2ab76538, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &4579781294335629596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8677759117576702177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5f970ebdeb0a4c43bd74eecfd974017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text_Value: {fileID: 2219103828642116126}
 --- !u!1 &8778498114361911476
 GameObject:
   m_ObjectHideFlags: 0
