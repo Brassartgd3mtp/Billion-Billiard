@@ -11,6 +11,8 @@ public class UI_Stats : MonoBehaviour
 
     public static UI_Stats Instance;
 
+    public Animation GetMoney;
+
     public void Awake()
     {
         if (Instance == null)
@@ -30,5 +32,6 @@ public class UI_Stats : MonoBehaviour
     {
         UIMoneyCount = playerStats.moneyCount;
         TEXT_Money_Count.text = $"{UIMoneyCount}";
+        GetMoney.Play();
     }
 }

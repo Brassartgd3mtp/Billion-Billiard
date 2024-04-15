@@ -102,7 +102,7 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
@@ -117,7 +117,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5526417246463689998}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -134,7 +134,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &1603287843868815396
 MonoBehaviour:
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c74acb5093d534aa1be8c49812833a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CutCascades: 3
+  CutCascades: 1
   ExplodeForce: 600
   dureeDeVieDesDebris: 5
 --- !u!114 &8364710874781140199
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyRigidbody: {fileID: 0}
-  ImpactForce: 50
+  ImpactForce: 1
 --- !u!1 &8787979746947778957
 GameObject:
   m_ObjectHideFlags: 0
