@@ -89,7 +89,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: PreparationShoot
+    m_ConditionEvent: Player_Roll
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6557958867240519472}
@@ -238,12 +238,12 @@ AnimatorController:
   m_Name: ANIMATOR_Player
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: PreparationShoot
+  - m_Name: Player_Roll
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -318,7 +318,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: PreparationShoot
+    m_ConditionEvent: Player_Roll
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8843725382395198595}
