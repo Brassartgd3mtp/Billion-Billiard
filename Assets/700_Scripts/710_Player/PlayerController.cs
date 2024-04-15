@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
     AudioSource audioSource;
-    //[SerializeField] private Animator MyAnimator;
+    [SerializeField] private Animator MyAnimator;
 
     float timeSinceThrow = 0;
 
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         smokePoof = GetComponentInChildren<VisualEffect>();
         speedEffect = GetComponentInChildren<ParticleSystem>();
-        //MyAnimator = GetComponentInChildren<Animator>();
+        MyAnimator = GetComponentInChildren<Animator>();
 
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
 
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
             var durationSpeedEffect = speedEffect.main;
             durationSpeedEffect.duration = ThrowStrength / StrengthFactor;
 
-            speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            speedEffectDirection.transform.rotation = Quaternion.Euler(0f, -angle, 0f);
             speedEffect.Play();
 
             turnBasedPlayer.ShotCount();
@@ -126,6 +126,15 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.magnitude > 0 && rb.velocity.magnitude < .1f)
         {
             rb.velocity = Vector3.zero;
+        }
+
+        if (rb.velocity.magnitude < .7f)
+        {
+            MyAnimator.SetBool("Player_Roll", false);
+        }
+        else
+        {
+            MyAnimator.SetBool("Player_Roll", true);
         }
 
         //Clamp Speed
