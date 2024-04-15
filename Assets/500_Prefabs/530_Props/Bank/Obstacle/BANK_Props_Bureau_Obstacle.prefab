@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1785050472585075532}
   - component: {fileID: 7789409095468346212}
   - component: {fileID: 6290078362260168879}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bureau
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,9 @@ GameObject:
   - component: {fileID: 1177594105519239505}
   - component: {fileID: 7250425845878567470}
   - component: {fileID: 6386447750316970456}
-  m_Layer: 0
+  - component: {fileID: 7234736508809172778}
+  - component: {fileID: 7285638710565780803}
+  m_Layer: 7
   m_Name: Tirroir4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,6 +207,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7234736508809172778
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670792849750354224}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6307657936941268189, guid: 6b6ce0b947bd61948a3c5b8527a5efe4, type: 3}
+--- !u!114 &7285638710565780803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670792849750354224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 0
 --- !u!1 &1695851534297287458
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +253,9 @@ GameObject:
   - component: {fileID: 4907690156138522629}
   - component: {fileID: 4176875129126956939}
   - component: {fileID: 6824162297997824487}
-  m_Layer: 0
+  - component: {fileID: 7418169791877010645}
+  - component: {fileID: 4119213985911777618}
+  m_Layer: 7
   m_Name: Porte
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,6 +328,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7418169791877010645
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695851534297287458}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5424696581441372034, guid: 6b6ce0b947bd61948a3c5b8527a5efe4, type: 3}
+--- !u!114 &4119213985911777618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695851534297287458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 0
 --- !u!1 &3166711412108084168
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +374,9 @@ GameObject:
   - component: {fileID: 5426351728607978854}
   - component: {fileID: 1302018636989451268}
   - component: {fileID: 8500496853723030868}
-  m_Layer: 0
+  - component: {fileID: 4844800469604636817}
+  - component: {fileID: 742619180314592666}
+  m_Layer: 7
   m_Name: Tirroir6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,6 +449,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4844800469604636817
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166711412108084168}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8631115943447665503, guid: 6b6ce0b947bd61948a3c5b8527a5efe4, type: 3}
+--- !u!114 &742619180314592666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166711412108084168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 0
 --- !u!1 &3210126411388263455
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +495,9 @@ GameObject:
   - component: {fileID: 2188236996975983244}
   - component: {fileID: 3466687874029015353}
   - component: {fileID: 7059934015301464253}
-  m_Layer: 0
+  - component: {fileID: 2113053631538234902}
+  - component: {fileID: 6087400148905407690}
+  m_Layer: 7
   m_Name: Tirroir2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,6 +570,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2113053631538234902
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3210126411388263455}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1763993079915675749, guid: 6b6ce0b947bd61948a3c5b8527a5efe4, type: 3}
+--- !u!114 &6087400148905407690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3210126411388263455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 0
 --- !u!1 &4422344405127923737
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +616,9 @@ GameObject:
   - component: {fileID: 3604292869604602826}
   - component: {fileID: 8705334719763908110}
   - component: {fileID: 2076736273073693648}
-  m_Layer: 0
+  - component: {fileID: 635336676947961496}
+  - component: {fileID: 3149600519658456714}
+  m_Layer: 7
   m_Name: Tirroir1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -484,7 +634,7 @@ Transform:
   m_GameObject: {fileID: 4422344405127923737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5743602, y: 0.3387024, z: 0.257}
+  m_LocalPosition: {x: 0.563, y: 0.3387024, z: 0.021}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -541,6 +691,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &635336676947961496
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4422344405127923737}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2310869528076602179, guid: 6b6ce0b947bd61948a3c5b8527a5efe4, type: 3}
+--- !u!114 &3149600519658456714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4422344405127923737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 0
 --- !u!1 &4487305685762366859
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +769,9 @@ GameObject:
   - component: {fileID: 2660446358910118310}
   - component: {fileID: 995721976883037662}
   - component: {fileID: 4455860860100900701}
-  m_Layer: 0
+  - component: {fileID: 1920114227086396957}
+  - component: {fileID: 6890047094865937596}
+  m_Layer: 7
   m_Name: Tirroir3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,6 +844,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1920114227086396957
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4522367352588209501}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4323755514373905226, guid: 6b6ce0b947bd61948a3c5b8527a5efe4, type: 3}
+--- !u!114 &6890047094865937596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4522367352588209501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 0
 --- !u!1 &5434416542772746632
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +890,9 @@ GameObject:
   - component: {fileID: 4819842684107939439}
   - component: {fileID: 8041836391353054837}
   - component: {fileID: 8574341932876886425}
-  m_Layer: 0
+  - component: {fileID: 497888438031033686}
+  - component: {fileID: 7643433325366184626}
+  m_Layer: 7
   m_Name: Tirroir7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,6 +965,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &497888438031033686
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5434416542772746632}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2780486727021180830, guid: 6b6ce0b947bd61948a3c5b8527a5efe4, type: 3}
+--- !u!114 &7643433325366184626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5434416542772746632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 0
 --- !u!1 &5750028497132587489
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,7 +1011,9 @@ GameObject:
   - component: {fileID: 5964300704323164914}
   - component: {fileID: 4650737147215617082}
   - component: {fileID: 766495680902198446}
-  m_Layer: 0
+  - component: {fileID: 3846279531813732876}
+  - component: {fileID: 4918495899939813990}
+  m_Layer: 7
   m_Name: Tirroir5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -825,6 +1086,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3846279531813732876
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5750028497132587489}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7215258124984704486, guid: 6b6ce0b947bd61948a3c5b8527a5efe4, type: 3}
+--- !u!114 &4918495899939813990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5750028497132587489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00da40e5052a87342afbe5860b4b38da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleType: 0
 --- !u!1 &7272551687175621289
 GameObject:
   m_ObjectHideFlags: 0
