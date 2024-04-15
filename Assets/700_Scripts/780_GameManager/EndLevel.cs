@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class EndLevel : MonoBehaviour
 {
     public int nextLevel;
+    public GameObject VictoryScreen;
 
     public void Start()
     {
@@ -26,7 +27,12 @@ public class EndLevel : MonoBehaviour
                 Gamepad.current.ResetHaptics();
             }
 
-            SceneManager.LoadScene(nextLevel);
+            //SceneManager.LoadScene(nextLevel);
+            VictoryScreen.gameObject.SetActive(true);
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0f;
         }
     }
 
