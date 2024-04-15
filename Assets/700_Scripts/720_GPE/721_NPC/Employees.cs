@@ -10,9 +10,25 @@ public class Employees : MonoBehaviour
     private GameObject interuptor;
     private Rigidbody rb;
 
+    //[SerializeField]private Animator myAnimator;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        //myAnimator = GetComponentInChildren<Animator>();
+    }
+
+
+    private void Update()
+    {
+        //if (rb.velocity.magnitude > .5f)
+        //{
+        //    myAnimator.SetBool("Employe_Roll", true);
+        //}
+        //else
+        //{
+        //    myAnimator.SetBool("Employe_Roll", false);
+        //}
     }
     private void OnCollisionEnter(Collision collision)
     {

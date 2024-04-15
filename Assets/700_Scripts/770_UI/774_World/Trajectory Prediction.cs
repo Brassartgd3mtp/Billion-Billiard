@@ -1,15 +1,18 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class TrajectoryPrediction : MonoBehaviour
 {
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private PlayerController playerController;
     [SerializeField] private LayerMask wallLayer;
 
-    PlayerController playerController;
-
-    void Start()
+    private void Start()
     {
-        playerController = GetComponent<PlayerController>();
+        InputHandler.TrajectoryPredictionEnable(this);
     }
 
     RaycastHit hit;
@@ -40,5 +43,34 @@ public class TrajectoryPrediction : MonoBehaviour
 
             lineRenderer.SetPosition(1, Vector3.zero);
         }
+    }
+
+    float angle;
+    Vector2 LookingDirection;
+    private void SetLookDirection(Vector2 _lookDirection)
+    {
+        LookingDirection = _lookDirection;
+
+        angle = SwapControls.state == CurrentState.Gamepad
+            ? Mathf.Atan2(LookingDirection.x, LookingDirection.y) * Mathf.Rad2Deg
+            : Mathf.Atan2(-LookingDirection.x, -LookingDirection.y) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+    }
+
+    public void MouseDirection(InputAction.CallbackContext context)
+    {
+        if (playerController.dragEnabled)
+            SetLookDirection((context.ReadValue<Vector2>() - playerController.MouseStart).normalized);
+    }
+
+    public void GamepadDirection(InputAction.CallbackContext context)
+    {
+        SetLookDirection(context.ReadValue<Vector2>());
+    }
+
+    private void OnDisable()
+    {
+        InputHandler.TrajectoryPredictionDisable();
     }
 }

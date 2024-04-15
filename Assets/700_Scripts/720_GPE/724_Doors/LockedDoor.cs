@@ -21,20 +21,20 @@ public class LockedDoor : MonoBehaviour
         set
         {
             unlock = value;
-            AudioManager2.Instance.PlaySDFX(LockedDoor_Open);
+            //AudioManager2.Instance.PlaySDFX(LockedDoor_Open);
             //myAnimator.SetBool("Unlock", unlock);
-            IconPadlockLocked.SetActive(false);
-            IconPadlockUnlocked.SetActive(true);
+            //IconPadlockLocked.SetActive(false);
+            //IconPadlockUnlocked.SetActive(true);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer > 0)
-        {
-            AudioManager2.Instance.PlaySDFX(Ball_LockedDoor_Hit);
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.layer > 0)
+    //    {
+    //        AudioManager2.Instance.PlaySDFX(Ball_LockedDoor_Hit);
+    //    }
+    //}
 
     //private void Start()
     //{

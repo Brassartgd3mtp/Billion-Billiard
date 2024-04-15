@@ -6,6 +6,7 @@ public class InputHandler : MonoBehaviour
 
     #region References
     static PlayerController player;
+    static TrajectoryPrediction trajPred;
     static PlayerRoomCam freeCam;
     static ReloadScene rlScene;
     static NoClip nClip;
@@ -33,7 +34,6 @@ public class InputHandler : MonoBehaviour
         Actions.Gamepad.ThrowPlayer.canceled += playerController.GamepadStrengthGauge;
         Actions.Gamepad.ThrowPlayer.canceled += playerController.Throw;
         Actions.Gamepad.GamepadStrenght.performed += playerController.GamepadDirection;
-        Actions.Gamepad.GamepadStrenght.canceled += playerController.GamepadDirection;
         Actions.Gamepad.CancelThrow.started += playerController.GamepadCancelThrow;
         #endregion
         #region Mouse/Keyboard
@@ -43,6 +43,14 @@ public class InputHandler : MonoBehaviour
         Actions.MouseKeyboard.MouseStartDrag.canceled += playerController.MouseThrow;
         Actions.MouseKeyboard.MouseCancelThrow.performed += playerController.MouseCancelThrow;
         #endregion
+    }
+
+    public static void TrajectoryPredictionEnable(TrajectoryPrediction trajectoryPrediction)
+    {
+        trajPred = trajectoryPrediction;
+
+        Actions.MouseKeyboard.MouseStrenght.performed += trajectoryPrediction.MouseDirection;
+        Actions.Gamepad.GamepadStrenght.performed += trajectoryPrediction.GamepadDirection;
     }
 
     public static void FreeCamEnable(PlayerRoomCam playerFreeCam)
@@ -105,7 +113,6 @@ public class InputHandler : MonoBehaviour
         Actions.Gamepad.ThrowPlayer.canceled -= player.GamepadStrengthGauge;
         Actions.Gamepad.ThrowPlayer.canceled -= player.Throw;
         Actions.Gamepad.GamepadStrenght.performed -= player.GamepadDirection;
-        Actions.Gamepad.GamepadStrenght.canceled -= player.GamepadDirection;
         #endregion
         #region Mouse/Keyboard
         Actions.MouseKeyboard.MouseStrenght.performed -= player.MouseStrenght;
@@ -113,6 +120,12 @@ public class InputHandler : MonoBehaviour
         Actions.MouseKeyboard.MouseStartDrag.canceled -= player.MouseStartDrag;
         Actions.MouseKeyboard.MouseCancelThrow.performed -= player.MouseCancelThrow;
         #endregion
+    }
+
+    public static void TrajectoryPredictionDisable()
+    {
+        Actions.MouseKeyboard.MouseStrenght.performed -= trajPred.MouseDirection;
+        Actions.Gamepad.GamepadStrenght.performed -= trajPred.GamepadDirection;
     }
 
     public static void FreeCamDisable()
@@ -161,6 +174,11 @@ public class InputHandler : MonoBehaviour
     public static void PlayerControllerEnable()
     {
         PlayerControllerEnable(player);
+    }
+
+    public static void TrajectoryPredictionEnable()
+    {
+        TrajectoryPredictionEnable(trajPred);
     }
 
     public static void FreeCamEnable()

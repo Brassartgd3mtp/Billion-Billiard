@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Mouse Values"), Range(0f, 1f)]
     [SerializeField] private float MouseSensitivity;
-    private Vector2 MouseStart;
+    [HideInInspector] public Vector2 MouseStart;
     private Vector2 MouseEnd;
 
     [Header("Gamepad Values"), Range(0f, 2f)]
@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject gaugeObject;
     [SerializeField] private Image gaugeFill;
     [SerializeField] private UI_ShotRemaining shotRemaining;
+    [SerializeField] private TrajectoryPrediction trajectoryPrediction;
 
     private float angle;
     public static Rigidbody rb;
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
     AudioSource audioSource;
-    //[SerializeField] private Animator MyAnimator;
+    [SerializeField] private Animator MyAnimator;
 
     float timeSinceThrow = 0;
 
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         smokePoof = GetComponentInChildren<VisualEffect>();
         speedEffect = GetComponentInChildren<ParticleSystem>();
-        //MyAnimator = GetComponentInChildren<Animator>();
+        MyAnimator = GetComponentInChildren<Animator>();
 
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
 
@@ -90,7 +91,8 @@ public class PlayerController : MonoBehaviour
             isShooted = true;
             RespawnPlayer();
 
-            rb.AddForce(transform.forward * ThrowStrength, ForceMode.Impulse);
+            rb.AddForce(trajectoryPrediction.transform.forward * ThrowStrength, ForceMode.Impulse);
+            rb.rotation = trajectoryPrediction.transform.rotation;
 
             smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             smokePoof.SetFloat("SmokeSize", ThrowStrength / StrengthFactor);
@@ -103,7 +105,6 @@ public class PlayerController : MonoBehaviour
             var durationSpeedEffect = speedEffect.main;
             durationSpeedEffect.duration = ThrowStrength / StrengthFactor;
 
-            speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             speedEffect.Play();
 
             turnBasedPlayer.ShotCount();
@@ -124,6 +125,15 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.magnitude > 0 && rb.velocity.magnitude < .1f)
         {
             rb.velocity = Vector3.zero;
+        }
+
+        if (rb.velocity.magnitude < .7f)
+        {
+            MyAnimator.SetBool("Player_Roll", false);
+        }
+        else
+        {
+            MyAnimator.SetBool("Player_Roll", true);
         }
 
         //Clamp Speed
@@ -180,9 +190,9 @@ public class PlayerController : MonoBehaviour
         {
             float speed = lastVel.magnitude;
             Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
-            //Quaternion newRot = Quaternion.LookRotation(reflect);
-            //
-            //rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+            Quaternion newRot = Quaternion.LookRotation(reflect);
+            
+            rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
             SwitchObstacle(obstacle, speed, reflect);
         }
@@ -195,7 +205,7 @@ public class PlayerController : MonoBehaviour
         {
             float speed;
             Vector3 reflect;
-            //Quaternion newRot;
+            Quaternion newRot;
             Vector3 contactPoint = collision.contacts[0].normal;
 
             if ((rb.velocity.x < .5f || rb.velocity.z < .5f) && timeSinceThrow < .1f && !stayOnce)
@@ -206,10 +216,10 @@ public class PlayerController : MonoBehaviour
 
                 speed = lastVel.magnitude - timeSinceThrow;
                 reflect = Vector3.Reflect(lastVel.normalized, contactPoint);
-                //newRot = Quaternion.LookRotation(reflect);
+                newRot = Quaternion.LookRotation(reflect);
 
-                //if (timeSinceThrow != 0)
-                //    rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+                if (timeSinceThrow != 0)
+                    rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
                 SwitchObstacle(obstacle, speed, reflect);
             }
@@ -252,7 +262,8 @@ public class PlayerController : MonoBehaviour
             ? Mathf.Atan2(LookingDirection.x, LookingDirection.y) * Mathf.Rad2Deg
             : Mathf.Atan2(-LookingDirection.x, -LookingDirection.y) * Mathf.Rad2Deg;
 
-        rb.rotation = Quaternion.Euler(0f, angle, 0f);
+        if (rb.velocity == Vector3.zero)
+            rb.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 
     /// <summary>
@@ -307,7 +318,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private bool dragEnabled = false;
+    [HideInInspector] public bool dragEnabled = false;
     /// <summary>
     /// Quand la souris effectue un drag on rend le curseur invisible et il est restreint de se d�placer dans l'�cran
     /// On appelle la m�thode SetLookDirection avec son vecteur qui va dans la direction oppos�e

@@ -16,7 +16,6 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     public static PlayerCollisionBehavior Instance;
 
-    [SerializeField] private Animator AnimMoney;
     [SerializeField] private TextMeshProUGUI UI_ValueAdded;
 
     private Rigidbody rb;
@@ -24,7 +23,11 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     private int nbrOfFlashing = 3;
 
+    public GameObject GetMoneyTXT;
+
     private TrailRenderer trailRenderer;
+
+    public AddValueUI addValue;
 
     public void Awake()
     {
@@ -78,10 +81,12 @@ public class PlayerCollisionBehavior : MonoBehaviour
         if (other.gameObject.TryGetComponent(out MoneyStats moneyStats))
         {
             AddMoney(moneyStats.value);
+            addValue.updateUI(moneyStats.value);
+            GetMoneyTXT.SetActive(true);
             uI_Stats.UpdateStats();
             other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
             lootAnimation.StartAnimation();
-            UI_ValueAdded.gameObject.SetActive(false);
+            //UI_ValueAdded.gameObject.SetActive(false);
         }
 
         if (other.gameObject.TryGetComponent(out CollectibleReloadBoost collectibleReloadBoost) && TurnBasedPlayer.Instance.shotRemaining < TurnBasedPlayer.Instance.nbrOfShots) 
@@ -100,20 +105,9 @@ public class PlayerCollisionBehavior : MonoBehaviour
     public void AddMoney(int money)
     {
         playerStats.moneyCount += money;
-        //AnimMoney.Play("Money.Anim_GetMoney", 0);
-        //Debug.Log("je m'active");
-        //UI_ValueAdded.gameObject.SetActive(true);
-        //UI_ValueAdded.text = $"+{money}";
 
     }
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.TryGetComponent(out MoneyStats moneyStats))
-    //    {
-    //        AnimMoney.SetBool("Yes", false);
-    //        Debug.Log("Je suis en false");
-    //    }
-    //}
+    
 
     IEnumerator HolePlayerScale()
     {
