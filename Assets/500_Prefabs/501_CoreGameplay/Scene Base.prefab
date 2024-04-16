@@ -15346,6 +15346,7 @@ GameObject:
   - component: {fileID: 7890041631998457589}
   - component: {fileID: 5977060872258430511}
   - component: {fileID: 2219103828642116126}
+  - component: {fileID: 5455691539763108384}
   m_Layer: 5
   m_Name: Added Value
   m_TagString: Untagged
@@ -15469,6 +15470,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!111 &5455691539763108384
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3708827165363058516}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 46aed2f58a3592642a495a96021e29b6, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 46aed2f58a3592642a495a96021e29b6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &3724883728199766240
 GameObject:
   m_ObjectHideFlags: 0
@@ -32242,6 +32259,7 @@ MonoBehaviour:
   playerStats: {fileID: 3705272347710780647}
   TEXT_Money_Count: {fileID: 8229030447056012807}
   GetMoney: {fileID: 3746533424319786041}
+  AddValue: {fileID: 5455691539763108384}
 --- !u!111 &3746533424319786041
 Animation:
   m_ObjectHideFlags: 0
