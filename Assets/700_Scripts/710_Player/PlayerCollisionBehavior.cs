@@ -56,6 +56,8 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("PAF");
+        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.layer == 8)
         {
 
@@ -67,6 +69,13 @@ public class PlayerCollisionBehavior : MonoBehaviour
                 rb.velocity = Vector3.zero;
                 trailRenderer.enabled = false;
             }
+
+        }
+
+        if (collision.gameObject.TryGetComponent(out Animator animator))
+        {
+            Debug.Log("COLLISION");
+            animator.SetBool("hasCollided", true);
         }
     }
 
