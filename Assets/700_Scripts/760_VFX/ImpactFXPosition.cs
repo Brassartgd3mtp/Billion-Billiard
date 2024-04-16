@@ -37,8 +37,8 @@ public class ImpactFXPosition : MonoBehaviour
             Obstacle.ObstacleType obstacleType = _obstacle.obstacleType;
 
             particlePrefab = vFXScriptableObject.GetObstacleType(obstacleType);
-            soundId = vFXScriptableObject.soundObstacleId;
-            SoundCollision();
+            //soundId = vFXScriptableObject.soundObstacleId;
+            //SoundCollision();
 
         }
         else particlePrefab = vFXScriptableObject.prefabParticleDefault;
