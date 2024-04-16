@@ -8,57 +8,45 @@ using ObstacleType = Obstacle.ObstacleType;
 public class VFXScriptableObject : ScriptableObject
 {
     public GameObject prefabParticleConcrete;
-    public string ConcreteSound;
     public GameObject prefabParticleRubber;
-    public string RubberSound;
     public GameObject prefabParticleFelt;
-    public string FeltSound;
     public GameObject prefabParticleIce;
-    public string IceSound;
+    public GameObject prefabParticleVelcro;
     public GameObject prefabParticleNPC;
-    public string NPCSound;
     public GameObject prefabParticleProps;
-    public string PropsSound;
     public GameObject prefabParticleBumper;
-    public string BumperSound;
     public GameObject prefabParticleDefault;
-
-
-
-
-
+    public int soundObstacleId;
 
     public GameObject GetObstacleType(ObstacleType _type)
     {
         switch (_type)
         {
             case ObstacleType.Concrete:
-                AudioManager2.Instance.PlaySDFX(ConcreteSound);
+                soundObstacleId = 4;
                 return prefabParticleConcrete;
 
             case ObstacleType.Rubber:
-                AudioManager2.Instance.PlaySDFX(RubberSound);
                 return prefabParticleRubber;
 
             case ObstacleType.Felt:
-                AudioManager2.Instance.PlaySDFX(FeltSound);
+                soundObstacleId = 7;
                 return prefabParticleFelt;
 
-
             case ObstacleType.Ice:
-                AudioManager2.Instance.PlaySDFX(IceSound);
                 return prefabParticleIce;
 
+            case ObstacleType.Velcro:
+                return prefabParticleVelcro;
+
             case ObstacleType.NPC:
-                AudioManager2.Instance.PlaySDFX(NPCSound);
                 return prefabParticleNPC;
 
             case ObstacleType.Props:
-                AudioManager2.Instance.PlaySDFX(PropsSound);
                 return prefabParticleProps;
 
             case ObstacleType.Bumper:
-                AudioManager2.Instance.PlaySDFX(BumperSound);
+                soundObstacleId = 9;
                 return prefabParticleBumper;
 
             default:

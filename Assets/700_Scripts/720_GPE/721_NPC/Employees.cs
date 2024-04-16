@@ -10,12 +10,29 @@ public class Employees : MonoBehaviour
     private GameObject interuptor;
     private Rigidbody rb;
 
+    //[SerializeField]private Animator myAnimator;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        //myAnimator = GetComponentInChildren<Animator>();
+    }
+
+
+    private void Update()
+    {
+        //if (rb.velocity.magnitude > .5f)
+        //{
+        //    myAnimator.SetBool("Employe_Roll", true);
+        //}
+        //else
+        //{
+        //    myAnimator.SetBool("Employe_Roll", false);
+        //}
     }
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.layer == 8) //Layer Interactable
         {
             if(collision.gameObject.TryGetComponent(out Interrupteur interrupteur))
@@ -27,9 +44,16 @@ public class Employees : MonoBehaviour
 
             if (collision.gameObject.TryGetComponent(out HoleForPNJ holeForPNJ))
             {
+                EmployeeFall();
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void EmployeeFall()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(11, audioSource);
     }
 
     private IEnumerator MoveInInteruptor() 

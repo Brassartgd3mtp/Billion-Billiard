@@ -10,6 +10,7 @@ public class ImpactFXPosition : MonoBehaviour
     public float velocityThreshold = 5f;
     public int countBurst = 50;
     private Rigidbody rb;
+    private int soundId;
 
     private void Start()
     {
@@ -36,6 +37,9 @@ public class ImpactFXPosition : MonoBehaviour
             Obstacle.ObstacleType obstacleType = _obstacle.obstacleType;
 
             particlePrefab = vFXScriptableObject.GetObstacleType(obstacleType);
+            soundId = vFXScriptableObject.soundObstacleId;
+            SoundCollision();
+
         }
         else particlePrefab = vFXScriptableObject.prefabParticleDefault;
 
@@ -45,13 +49,13 @@ public class ImpactFXPosition : MonoBehaviour
         
             ParticleSystem impactVFX = particlePrefab.GetComponent<ParticleSystem>();
         
-            var burstVFX = impactVFX.emission;
-        
-            burstVFX.SetBursts(
-                new ParticleSystem.Burst[]
-                {
-                new ParticleSystem.Burst(0.0f, countBurst, 1, 0.025f)
-                });
+            //var burstVFX = impactVFX.emission;
+            //
+            //burstVFX.SetBursts(
+            //    new ParticleSystem.Burst[]
+            //    {
+            //    new ParticleSystem.Burst(0.0f, countBurst, 1, 0.025f)
+            //    });
         
             //Debug.Log(countBurst);
         
@@ -61,13 +65,13 @@ public class ImpactFXPosition : MonoBehaviour
         {
             ParticleSystem impactVFX = particlePrefab.GetComponent<ParticleSystem>();
         
-            var burstVFX = impactVFX.emission;
-            
-            burstVFX.SetBursts(
-                new ParticleSystem.Burst[]
-                {
-                    new ParticleSystem.Burst(0.0f, countBurst/5, 1, 0.025f)
-                });
+            //var burstVFX = impactVFX.emission;
+            //
+            //burstVFX.SetBursts(
+            //    new ParticleSystem.Burst[]
+            //    {
+            //        new ParticleSystem.Burst(0.0f, countBurst/5, 1, 0.025f)
+            //    });
         
             //Debug.Log(countBurst / 5);
         
@@ -103,4 +107,11 @@ public class ImpactFXPosition : MonoBehaviour
 
         Instantiate(particlePrefab, colliderPosition, rotationFromNormal);
     }
+
+    private void SoundCollision()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(soundId, audioSource);
+    }
+
 }

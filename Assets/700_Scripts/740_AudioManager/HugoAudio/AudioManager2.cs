@@ -20,7 +20,6 @@ public class AudioManager2 : MonoBehaviour
        if (Instance == null)
         {
             Instance = this; 
-            DontDestroyOnLoad(gameObject);
         }
 
        else
@@ -31,7 +30,7 @@ public class AudioManager2 : MonoBehaviour
 
     private void Start()
     {
-        PlayMusic("Theme");
+        //PlayMusic("Theme");
     }
 
   

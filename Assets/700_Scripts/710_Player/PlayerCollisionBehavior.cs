@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
+//using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,12 +16,18 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     public static PlayerCollisionBehavior Instance;
 
+    [SerializeField] private TextMeshProUGUI UI_ValueAdded;
+
     private Rigidbody rb;
     private MeshRenderer meshRenderer;
 
     private int nbrOfFlashing = 3;
 
+    public GameObject GetMoneyTXT;
+
     private TrailRenderer trailRenderer;
+
+    public AddValueUI addValue;
 
     public void Awake()
     {
@@ -52,11 +61,19 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
             if (collision.gameObject.TryGetComponent(out HoleForPlayer holeForPlayer))
             {
+                playerController.ThrowStrength = 0;
                 StartCoroutine(HolePlayerScale());
+                SoundFall();
                 rb.velocity = Vector3.zero;
                 trailRenderer.enabled = false;
             }
         }
+    }
+
+    private void SoundFall()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(14, audioSource);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -64,9 +81,12 @@ public class PlayerCollisionBehavior : MonoBehaviour
         if (other.gameObject.TryGetComponent(out MoneyStats moneyStats))
         {
             AddMoney(moneyStats.value);
+            addValue.updateUI(moneyStats.value);
+            GetMoneyTXT.SetActive(true);
             uI_Stats.UpdateStats();
             other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
             lootAnimation.StartAnimation();
+            //UI_ValueAdded.gameObject.SetActive(false);
         }
 
         if (other.gameObject.TryGetComponent(out CollectibleReloadBoost collectibleReloadBoost) && TurnBasedPlayer.Instance.shotRemaining < TurnBasedPlayer.Instance.nbrOfShots) 
@@ -78,14 +98,16 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
         if (other.gameObject.TryGetComponent(out EndLevel endLevel))
         {
-            SceneManager.LoadScene(endLevel.nextLevel);
+            //SceneManager.LoadScene(endLevel.nextLevel);
         }
         
     }
     public void AddMoney(int money)
     {
         playerStats.moneyCount += money;
+
     }
+    
 
     IEnumerator HolePlayerScale()
     {
@@ -114,9 +136,6 @@ public class PlayerCollisionBehavior : MonoBehaviour
         trailRenderer.Clear();
         transform.localScale = new Vector3(1, 1, 1);
         StartCoroutine(HoleFeedBack());
-
-
-
     }
 
     IEnumerator HoleFeedBack()
@@ -135,6 +154,5 @@ public class PlayerCollisionBehavior : MonoBehaviour
         InputHandler.Actions.Gamepad.ThrowPlayer.Enable();
         InputHandler.Actions.Gamepad.GamepadStrenght.Enable();
         InputHandler.Actions.MouseKeyboard.MouseStartDrag.Enable();
-
     }
 }

@@ -20,6 +20,8 @@ public class UI_Skip : MonoBehaviour
         InputHandler.PlayerControllerDisable();
         InputHandler.FreeCamDisable();
         InputHandler.PauseMenuDisable();
+
+        Time.timeScale = 0f;
     }
     private void Update()
     {
@@ -45,14 +47,19 @@ public class UI_Skip : MonoBehaviour
 
         InputHandler.UISkipDisable();
 
+        Time.timeScale = 1f;
+
         if (NextObjToShow != null) 
             NextObjToShow.SetActive(true);
 
-        DisplayToSkip?.SetActive(false);
+        if (DisplayToSkip != null)
+            DisplayToSkip.SetActive(false);
     }
 
     private void OnDisable()
     {
+        Time.timeScale = 1f;
+
         InputHandler.UISkipDisable();
     }
 }

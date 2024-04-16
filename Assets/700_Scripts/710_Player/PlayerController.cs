@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 using UnityEngine.UI;
+using Unity.VisualScripting.FullSerializer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Mouse Values"), Range(0f, 1f)]
     [SerializeField] private float MouseSensitivity;
-    private Vector2 MouseStart;
+    [HideInInspector] public Vector2 MouseStart;
     private Vector2 MouseEnd;
 
     [Header("Gamepad Values"), Range(0f, 2f)]
@@ -28,6 +29,8 @@ public class PlayerController : MonoBehaviour
     public LineRenderer PowerLineRenderer;
     [SerializeField] private GameObject gaugeObject;
     [SerializeField] private Image gaugeFill;
+    [SerializeField] private UI_ShotRemaining shotRemaining;
+    [SerializeField] private TrajectoryPrediction trajectoryPrediction;
 
     private float angle;
     public static Rigidbody rb;
@@ -43,24 +46,32 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem speedEffect;
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
+    AudioSource audioSource;
+    [SerializeField] private Animator MyAnimator;
 
     float timeSinceThrow = 0;
+
+    public PlayerParameters playerParameters;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
 
         turnBasedPlayer = GetComponent<TurnBasedPlayer>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
     {
         smokePoof = GetComponentInChildren<VisualEffect>();
         speedEffect = GetComponentInChildren<ParticleSystem>();
+        MyAnimator = GetComponentInChildren<Animator>();
 
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
 
         InputHandler.PlayerControllerEnable(this);
+        playerParameters = GetComponent<PlayerParameters>();
     }
 
     /// <summary>
@@ -71,15 +82,17 @@ public class PlayerController : MonoBehaviour
     {
         if (ThrowStrength > 0.2f)
         {
+            SoundShot();    
             StartCoroutine(Haptic(ThrowStrength / 40, ThrowStrength / 40, .4f));
 
             timeSinceThrow = 0;
             staticThrowStrength = ThrowStrength;
 
             isShooted = true;
-            posBeforeHit = transform.position;
+            RespawnPlayer();
 
-            rb.AddForce(transform.forward * ThrowStrength, ForceMode.Impulse);
+            rb.AddForce(trajectoryPrediction.transform.forward * ThrowStrength, ForceMode.Impulse);
+            rb.rotation = trajectoryPrediction.transform.rotation;
 
             smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             smokePoof.SetFloat("SmokeSize", ThrowStrength / StrengthFactor);
@@ -92,7 +105,6 @@ public class PlayerController : MonoBehaviour
             var durationSpeedEffect = speedEffect.main;
             durationSpeedEffect.duration = ThrowStrength / StrengthFactor;
 
-            speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             speedEffect.Play();
 
             turnBasedPlayer.ShotCount();
@@ -101,6 +113,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     Vector3 lastVel;
     private void FixedUpdate()
     {
@@ -108,6 +121,20 @@ public class PlayerController : MonoBehaviour
 
         if (lastVel.magnitude > 0)
             timeSinceThrow += Time.fixedDeltaTime;
+
+        if (rb.velocity.magnitude > 0 && rb.velocity.magnitude < .1f)
+        {
+            rb.velocity = Vector3.zero;
+        }
+
+        if (rb.velocity.magnitude < .7f)
+        {
+            MyAnimator.SetBool("Player_Roll", false);
+        }
+        else
+        {
+            MyAnimator.SetBool("Player_Roll", true);
+        }
 
         //Clamp Speed
         rb.velocity =
@@ -159,24 +186,6 @@ public class PlayerController : MonoBehaviour
     //PhysicMaterial pm;
     private void OnCollisionEnter(Collision collision)
     {
-        //pm = collision.collider.material;
-        //
-        //Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
-        //Quaternion newRot = Quaternion.LookRotation(reflect);
-        //rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
-
-        //StartCoroutine(Haptic(0f, 1f, .2f));
-
-        //switch (pm.name)
-        //{
-        //    case "Bumper (Instance)":
-        //        if (rb.velocity.magnitude > 20f)
-        //            rb.AddForce(lastVel.normalized * 10f, ForceMode.Impulse);
-        //        break;
-        //
-        //    //Ajouter d'autres exceptions si n�cessaire
-        //}
-
         if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
         {
             float speed = lastVel.magnitude;
@@ -249,8 +258,12 @@ public class PlayerController : MonoBehaviour
     {
         LookingDirection = _lookDirection;
 
-        angle = Mathf.Atan2(-LookingDirection.x, -LookingDirection.y) * Mathf.Rad2Deg;
-        rb.rotation = Quaternion.Euler(0f, angle, 0f);
+        angle = SwapControls.state == CurrentState.Gamepad
+            ? Mathf.Atan2(LookingDirection.x, LookingDirection.y) * Mathf.Rad2Deg
+            : Mathf.Atan2(-LookingDirection.x, -LookingDirection.y) * Mathf.Rad2Deg;
+
+        if (rb.velocity == Vector3.zero)
+            rb.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 
     /// <summary>
@@ -274,12 +287,17 @@ public class PlayerController : MonoBehaviour
         {
             gaugeObject.SetActive(true);
             isGaugeActive = true;
+            //MyAnimator.SetBool("PreparationShoot", true);
+            SoundGauge();
         }
         if (context.canceled)
         {
             gaugeObject.SetActive(false);
             isGaugeActive = false;
             gaugeFill.fillAmount = 0;
+            audioSource.Stop();
+            //MyAnimator.SetBool("PreparationShoot", false);
+
         }
     }
 
@@ -291,18 +309,16 @@ public class PlayerController : MonoBehaviour
         {
             ThrowStrength = Mathf.PingPong(gaugeTime, 40);
             gaugeFill.fillAmount = ThrowStrength / StrengthFactor;
+            audioSource.pitch = 1 + ThrowStrength / 30;
         }
         else
             gaugeTime = 0;
 
-        //if (SwapControls.state == CurrentState.Gamepad)
-        //    PowerLineRenderer.SetPosition(1, Vector3.back * 8);
-        //else
-            //PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 5);
         PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 8);
     }
 
-    private bool dragEnabled = false;
+
+    [HideInInspector] public bool dragEnabled = false;
     /// <summary>
     /// Quand la souris effectue un drag on rend le curseur invisible et il est restreint de se d�placer dans l'�cran
     /// On appelle la m�thode SetLookDirection avec son vecteur qui va dans la direction oppos�e
@@ -311,7 +327,7 @@ public class PlayerController : MonoBehaviour
     {
         if (dragEnabled)
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
             MouseEnd = context.ReadValue<Vector2>();
             ThrowStrength = Vector2.Distance(MouseStart, MouseEnd) * MouseSensitivity;
@@ -357,7 +373,7 @@ public class PlayerController : MonoBehaviour
         gaugeObject.SetActive(false);
         gaugeFill.fillAmount = 0;
         isGaugeActive = false;
-
+        audioSource.Stop();
         ThrowStrength = 0;
     }
 
@@ -383,8 +399,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void RespawnPlayer()
+    {
+        if (playerParameters.speed == 0)
+        {
+            posBeforeHit = transform.position;
+        }
+    }
+
     private void OnDisable()
     {
         InputHandler.PlayerControllerDisable();
+    }
+    private void SoundGauge()
+    {
+        audioSource.loop = true;
+        AudioManager.Instance.PlaySoundLoop(18, audioSource);
+    }
+    private void SoundShot()
+    {
+        audioSource.loop = false;
+        audioSource.Stop();
+        audioSource.pitch = 1;
+        AudioManager.Instance.PlaySound(16, audioSource);
+        audioSource.loop = true;
     }
 }

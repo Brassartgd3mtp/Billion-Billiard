@@ -15,8 +15,7 @@ public class TurnBasedPlayer : MonoBehaviour
 
     [Header("References")]
     public PlayerController playerController;
-    public UI_ShotRemaining uI_ShotRemaining;
-    public ParticleShotRemaining ParticleShotRemaining;
+    public UI_ShotRemaining UIShotRemaining;
 
     public static TurnBasedPlayer Instance;
 
@@ -33,30 +32,43 @@ public class TurnBasedPlayer : MonoBehaviour
 
         shotRemaining = nbrOfShots;
         playerController = GetComponent<PlayerController>();
-        uI_ShotRemaining.UpdateUI(shotRemaining);
-        ParticleShotRemaining.Initialize(nbrOfShots);
+
+        UIShotRemaining.Initialize(nbrOfShots);
     }
 
     public void Update()
     {
-        if (ReloadCooldown > 0 && PassiveReloadEnabled)
+        if (shotRemaining <= 0)
+            TurnBasedSystem.OnPlayerPlayed();
+
+        if (PassiveReloadEnabled)
         {
-            if (shotRemaining != nbrOfShots)
-                ReloadCooldown -= Time.deltaTime;
+            if (ReloadCooldown > 0)
+            {
+                if (shotRemaining != nbrOfShots)
+                    ReloadCooldown -= Time.deltaTime;
+            }
+            else
+            {
+                PassiveReload();
+                ReloadCooldown = PassiveReloadCooldown;
+            }
         }
-        else
+
+        foreach (Animator anim in UIShotRemaining.shotsAnimations)
         {
-            PassiveReload();
-            ReloadCooldown = PassiveReloadCooldown;
+            anim.SetInteger("ShotsLeft", shotRemaining);
         }
     }
     
     public void RecupBoostReload()
     {
-        shotRemaining += 1;
-        uI_ShotRemaining.UpdateUI(shotRemaining);
+        shotRemaining++;
+
+        SoundReload();
         TurnBasedSystem.ReloadForPlayer();
-        ParticleShotRemaining.PassiveUpdateShots();
+
+        UIShotRemaining.PassiveUpdateShots();
     }
 
     public void PassiveReload()
@@ -64,19 +76,34 @@ public class TurnBasedPlayer : MonoBehaviour
         if (PassiveReloadEnabled)
         {
             shotRemaining++;
-            uI_ShotRemaining.UpdateUI(shotRemaining);
-            ParticleShotRemaining.PassiveUpdateShots();
+
+            SoundReload();
             TurnBasedSystem.ReloadForPlayer();
+
+            UIShotRemaining.PassiveUpdateShots();
         }
+    }
+
+    private void SoundReload()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(17, audioSource);
     }
 
     public void ShotCount()
     {
-        shotRemaining--;
-        ParticleShotRemaining.Death();
-        uI_ShotRemaining.UpdateUI(shotRemaining);
-        
-        if (shotRemaining <= 0)
-            TurnBasedSystem.OnPlayerPlayed();
+        if (shotRemaining > 0)
+        {
+            foreach (Animator anim in UIShotRemaining.shotsAnimations)
+            {
+                if (anim.GetInteger("ShotsLeft") == 0/* && UIShotRemaining.lastIndex == 0*/)
+                    /*anim.Play("Shots.TryToShoot", 0);*/
+                    Debug.Log($"Shots left : {anim.GetInteger("ShotsLeft")}");
+            }
+
+            UIShotRemaining.Shot();
+
+            shotRemaining--;
+        }
     }
 }

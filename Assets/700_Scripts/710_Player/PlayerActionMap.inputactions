@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "StartFreeCam",
+                    "name": "RoomCam",
                     "type": "Button",
                     "id": "a2c79c0b-55ae-4b1d-923c-f1bbe61ce3d3",
                     "expectedControlType": "Button",
@@ -108,11 +108,11 @@
                 {
                     "name": "",
                     "id": "26d4424c-ac7b-43a7-afb0-8e2552cb80b9",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "StartFreeCam",
+                    "action": "RoomCam",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -152,7 +152,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "StartFreeCam",
+                    "name": "RoomCam",
                     "type": "Button",
                     "id": "9eec3fb6-c41e-42d7-aeda-34b17f7fe899",
                     "expectedControlType": "Button",
@@ -218,7 +218,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "StartFreeCam",
+                    "action": "RoomCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e27f04d-03e6-4e19-8c2a-a731957bc36e",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RoomCam",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -49,4 +49,10 @@ public class SimpleDoor : MonoBehaviour
         yield return new WaitForSeconds(DelayOpen);
         Open = true;
     }
+
+    private void SoundDoor()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(5, audioSource);
+    }
 }

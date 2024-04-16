@@ -4,32 +4,58 @@ using UnityEngine;
 
 public class ConvoyerBelt : MonoBehaviour
 {
-    [SerializeField, Space] private GameObject startPoint;
-    [SerializeField] private GameObject endPoint;
-    private Vector3 direction;
-    public string ConvoyerSound;
+    private MeshRenderer meshRenderer;
+    [SerializeField, Range(0, 5), Space] private float speedTexture;
+    [SerializeField, Range(1, 20)] float applyForce = 10;
+    [SerializeField] private Vector2 Tiling;
+    [SerializeField] private Vector2 Direction;
+    private MaterialPropertyBlock materialPropertyBlock;
+    private float rotateTexture;
+    private Vector3 forceDirection;
 
-    [SerializeField, Range(0, 100), Space] private float speed;
-
-    void Update()
+    private void Start()
     {
-        float directionX = endPoint.transform.position.x - startPoint.transform.position.x;
-        float directionZ = endPoint.transform.position.z - startPoint.transform.position.z;
-
-        direction = new Vector3(directionX, 0, directionZ);
+        InitPropertyBlock();
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.TryGetComponent(out Rigidbody _colrb))
-            _colrb.AddForce(direction * speed * 2);
-        
+            _colrb.AddForce(transform.TransformDirection(forceDirection) * applyForce * 10);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        AudioManager2.Instance.PlaySDFX(ConvoyerSound);
+        SoundBooster();
     }
 
+    private void InitPropertyBlock()
+    {
+        meshRenderer = GetComponent<MeshRenderer>();
+
+        rotateTexture = Vector2.SignedAngle(Vector2.right, Direction);
+        forceDirection = new Vector3(Direction.x, 0, Direction.y).normalized;
+        
+        materialPropertyBlock = new MaterialPropertyBlock();
+        meshRenderer.GetPropertyBlock(materialPropertyBlock);
+        
+        materialPropertyBlock.SetFloat("_Rotate", rotateTexture);
+        materialPropertyBlock.SetVector("_Tiling", Tiling);
+        materialPropertyBlock.SetVector("_Speed", Vector2.right * speedTexture);
+        
+        meshRenderer.SetPropertyBlock(materialPropertyBlock);
+    }
+
+    private void SoundBooster()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(10, audioSource);
+    }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        InitPropertyBlock();
+    }
+#endif
 }

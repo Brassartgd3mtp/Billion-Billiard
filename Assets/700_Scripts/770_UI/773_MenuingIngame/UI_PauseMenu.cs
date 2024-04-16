@@ -20,7 +20,8 @@ public class PauseMenu : MonoBehaviour
 
         InputHandler.PauseMenuEnable(this);
 
-        EventSystem.current.firstSelectedGameObject = PauseFirstbutton;
+        if (EventSystem.current != null)
+            EventSystem.current.firstSelectedGameObject = PauseFirstbutton;
     }
 
     public void OnPlayButtonClick()
@@ -93,14 +94,13 @@ public class PauseMenu : MonoBehaviour
         InputHandler.Actions.Gamepad.ThrowPlayer.Disable();
         InputHandler.Actions.MouseKeyboard.MouseStartDrag.Disable();
 
-        InputHandler.Actions.Gamepad.FreeCam.Disable();
-        InputHandler.Actions.Gamepad.StartFreeCam.Disable();
-        InputHandler.Actions.MouseKeyboard.FreeCam.Disable();
-        InputHandler.Actions.MouseKeyboard.StartFreeCam.Disable();
+        InputHandler.Actions.Gamepad.RoomCam.Disable();
+        InputHandler.Actions.MouseKeyboard.RoomCam.Disable();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        InputSystem.ResetHaptics();
         Time.timeScale = 0f;
         //Time.fixedDeltaTime = 0f;
 
@@ -116,10 +116,8 @@ public class PauseMenu : MonoBehaviour
         InputHandler.Actions.Gamepad.ThrowPlayer.Enable();
         InputHandler.Actions.MouseKeyboard.MouseStartDrag.Enable();
 
-        InputHandler.Actions.Gamepad.FreeCam.Enable();
-        InputHandler.Actions.Gamepad.StartFreeCam.Enable();
-        InputHandler.Actions.MouseKeyboard.FreeCam.Enable();
-        InputHandler.Actions.MouseKeyboard.StartFreeCam.Enable();
+        InputHandler.Actions.Gamepad.RoomCam.Enable();
+        InputHandler.Actions.MouseKeyboard.RoomCam.Enable();
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
