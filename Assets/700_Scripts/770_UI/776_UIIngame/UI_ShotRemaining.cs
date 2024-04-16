@@ -12,6 +12,8 @@ public class UI_ShotRemaining : MonoBehaviour
     public int lastIndex;
     static float currentShot;
 
+    public LevelManager levelManager;
+
     public void Initialize(int _totalShots)
     {
         float angle = Mathf.PI / 2;
@@ -55,15 +57,20 @@ public class UI_ShotRemaining : MonoBehaviour
 
             if (lastIndex < 2)
             {
-                currentShot = GetCurrentAnimTime(shotsAnimations[lastIndex + 1]);
+                if (levelManager.levelType == LevelType.HoleInOne)
+                {
+                    shotsAnimations[lastIndex].SetBool("ToShot", true);
+                }
+                else
+                {
+                    currentShot = GetCurrentAnimTime(shotsAnimations[lastIndex + 1]);
+                    shotsAnimations[lastIndex].SetBool("ToShot", false);
+                    shotsAnimations[lastIndex + 1].SetBool("ToShot", true);
 
-                shotsAnimations[lastIndex].SetBool("ToShot", false);
-                shotsAnimations[lastIndex + 1].SetBool("ToShot", true);
-
-                shotsAnimations[lastIndex].Play("Shots.Reload", 0, currentShot);
+                    shotsAnimations[lastIndex].Play("Shots.Reload", 0, currentShot);
+                }
             }
-            else
-                shotsAnimations[lastIndex].Play("Shots.Reload", 0);
+            else shotsAnimations[lastIndex].Play("Shots.Reload", 0);
         }
         else
             Debug.LogWarning("Can't perform Shot, there is no shots left !");
