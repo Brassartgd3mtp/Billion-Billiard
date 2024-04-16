@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     public float CircleSize = 0;
     private readonly int CircleSizeId = Shader.PropertyToID("_Circle_Size");
 
+    public UI_ShotRemaining uI_ShotRemaining;
+
     private void Start()
     {
         if (levelType == LevelType.HoleInOne)
