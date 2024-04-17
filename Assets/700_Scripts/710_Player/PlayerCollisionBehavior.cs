@@ -23,8 +23,6 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     private int nbrOfFlashing = 3;
 
-    public GameObject GetMoneyTXT;
-
     private TrailRenderer trailRenderer;
 
     public AddValueUI addValue;
@@ -90,8 +88,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
         if (other.gameObject.TryGetComponent(out MoneyStats moneyStats))
         {
             AddMoney(moneyStats.value); //Actually add th emoney
-            addValue.updateUI(moneyStats.value); 
-            GetMoneyTXT.SetActive(true); // Show the text that display the amount of money the player took just now
+            addValue.updateUI(moneyStats.value);
             uI_Stats.UpdateStats(); // Update the money in the UI
             other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
             lootAnimation.StartAnimation();
