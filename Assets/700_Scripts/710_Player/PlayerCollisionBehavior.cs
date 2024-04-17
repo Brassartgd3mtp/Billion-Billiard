@@ -56,7 +56,6 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("PAF");
         Debug.Log(collision.gameObject.name);
         if (collision.gameObject.layer == 8)
         {
@@ -72,9 +71,10 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
         }
 
+
+        //Function to animate (with the bounce effect) the obstacles whrn hit by the player
         if (collision.gameObject.TryGetComponent(out Animator animator))
         {
-            Debug.Log("COLLISION");
             animator.SetBool("hasCollided", true);
         }
     }
@@ -89,10 +89,10 @@ public class PlayerCollisionBehavior : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out MoneyStats moneyStats))
         {
-            AddMoney(moneyStats.value);
-            addValue.updateUI(moneyStats.value);
-            GetMoneyTXT.SetActive(true);
-            uI_Stats.UpdateStats();
+            AddMoney(moneyStats.value); //Actually add th emoney
+            addValue.updateUI(moneyStats.value); 
+            GetMoneyTXT.SetActive(true); // Show the text that display the amount of money the player took just now
+            uI_Stats.UpdateStats(); // Update the money in the UI
             other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
             lootAnimation.StartAnimation();
             //UI_ValueAdded.gameObject.SetActive(false);
