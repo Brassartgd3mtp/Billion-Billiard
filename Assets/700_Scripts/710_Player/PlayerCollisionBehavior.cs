@@ -23,8 +23,6 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     private int nbrOfFlashing = 3;
 
-    public GameObject GetMoneyTXT;
-
     private TrailRenderer trailRenderer;
 
     public AddValueUI addValue;
@@ -56,6 +54,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.layer == 8)
         {
 
@@ -67,6 +66,14 @@ public class PlayerCollisionBehavior : MonoBehaviour
                 rb.velocity = Vector3.zero;
                 trailRenderer.enabled = false;
             }
+
+        }
+
+
+        //Function to animate (with the bounce effect) the obstacles whrn hit by the player
+        if (collision.gameObject.TryGetComponent(out Animator animator))
+        {
+            animator.SetBool("hasCollided", true);
         }
     }
 
@@ -80,10 +87,9 @@ public class PlayerCollisionBehavior : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out MoneyStats moneyStats))
         {
-            AddMoney(moneyStats.value);
+            AddMoney(moneyStats.value); //Actually add th emoney
             addValue.updateUI(moneyStats.value);
-            GetMoneyTXT.SetActive(true);
-            uI_Stats.UpdateStats();
+            uI_Stats.UpdateStats(); // Update the money in the UI
             other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
             lootAnimation.StartAnimation();
             //UI_ValueAdded.gameObject.SetActive(false);

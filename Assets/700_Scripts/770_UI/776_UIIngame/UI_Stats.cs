@@ -1,6 +1,8 @@
+using Assets.SimpleLocalization.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 public class UI_Stats : MonoBehaviour
@@ -12,7 +14,6 @@ public class UI_Stats : MonoBehaviour
     public static UI_Stats Instance;
 
     public Animation GetMoney;
-    public Animation AddValue;
 
     public void Awake()
     {
@@ -34,6 +35,6 @@ public class UI_Stats : MonoBehaviour
         UIMoneyCount = playerStats.moneyCount;
         TEXT_Money_Count.text = $"{UIMoneyCount}";
         GetMoney.Play();
-        AddValue.Play();
     }
+
 }
