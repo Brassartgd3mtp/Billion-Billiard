@@ -54,7 +54,6 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.layer == 8)
         {
 
