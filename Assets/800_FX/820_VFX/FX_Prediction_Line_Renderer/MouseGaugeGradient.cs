@@ -9,7 +9,7 @@ public class MouseGaugeGradient : MonoBehaviour
 
     void Update()
     {
-        //Je récupère la valeur Z de l'index 1 qui est entre 0 et -5 que je normalise et j'applique une couleur à partir d'un gradient en fonction de la valeur
+        //Je récupère la valeur Z de l'index 1 qui est entre 0 et -5 que je normalise et j'applique une couleur à partir d'un gradient en fonction de la valeur 
         if (lineRenderer != null && colorGradient != null)
         {
             Vector3 sizePosition = lineRenderer.GetPosition(1);

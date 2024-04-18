@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("References")]
     public LineRenderer PowerLineRenderer;
+    public LineRenderer PowerLineRendererOutline;
     [SerializeField] private GameObject gaugeObject;
     [SerializeField] private Image gaugeFill;
     [SerializeField] private UI_ShotRemaining shotRemaining;
@@ -315,6 +316,7 @@ public class PlayerController : MonoBehaviour
             gaugeTime = 0;
 
         PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 8);
+        PowerLineRendererOutline.SetPosition(1, Vector3.back * ThrowStrength / 7.9f);
     }
 
 
