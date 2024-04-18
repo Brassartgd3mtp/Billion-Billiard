@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
             var durationSpeedEffect = speedEffect.main;
             durationSpeedEffect.duration = ThrowStrength / StrengthFactor;
 
-            speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            //speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             speedEffect.Play();
 
             turnBasedPlayer.ShotCount();

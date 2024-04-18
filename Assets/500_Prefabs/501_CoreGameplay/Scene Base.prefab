@@ -596,6 +596,7 @@ GameObject:
   - component: {fileID: 4860071584380490633}
   - component: {fileID: 1194952215494977630}
   - component: {fileID: 2885882295411645563}
+  - component: {fileID: 2722303910997277114}
   m_Layer: 5
   m_Name: Victory
   m_TagString: Untagged
@@ -665,6 +666,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2722303910997277114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221884782698930584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cfca9bcb6635fa4fa19a3b98cc9f707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstButton: {fileID: 1381128435222161525}
 --- !u!1 &226192641612114042
 GameObject:
   m_ObjectHideFlags: 0
@@ -4134,7 +4148,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.25882354, b: 0.25882354, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -4875,7 +4889,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.25882354, b: 0.25882354, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -20875,15 +20889,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3918158615536368089}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1689559361526271321}
   - {fileID: 7825869293232976474}
   m_Father: {fileID: 5056546972909848793}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &3973788946419674700
 GameObject:
   m_ObjectHideFlags: 0
@@ -27423,13 +27437,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5846410177067946333}
-  - {fileID: 2252368081428828588}
-  - {fileID: 3153122740755676279}
   - {fileID: 3585687555270689218}
-  - {fileID: 572705303449037027}
   - {fileID: 6719300977643501239}
   - {fileID: 5193124043219632455}
   - {fileID: 4860071584380490633}
+  - {fileID: 2252368081428828588}
+  - {fileID: 3153122740755676279}
+  - {fileID: 572705303449037027}
   m_Father: {fileID: 806607038850017939}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -27776,7 +27790,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 0.25882354, b: 0.25882354, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -28701,7 +28715,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &572705303449037027
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28745,7 +28759,7 @@ MonoBehaviour:
   DisplayToSkip: {fileID: 7354902577280820609}
   XboxGamepad: {fileID: 2003753589053465316}
   Mouse: {fileID: 5704374119539466310}
-  NextObjToShow: {fileID: 0}
+  NextObjToShow: {fileID: 3546817537276591325}
 --- !u!1 &7407205603221401091
 GameObject:
   m_ObjectHideFlags: 0
