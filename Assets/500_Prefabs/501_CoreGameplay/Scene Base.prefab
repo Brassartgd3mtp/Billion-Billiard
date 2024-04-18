@@ -28833,6 +28833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4189533446127004332}
+  - component: {fileID: 4249702694647580777}
   m_Layer: 5
   m_Name: Compteur
   m_TagString: Untagged
@@ -28862,6 +28863,22 @@ RectTransform:
   m_AnchoredPosition: {x: 934.8301, y: 532.75}
   m_SizeDelta: {x: 272.40057, y: 125.10681}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4249702694647580777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312695814690643719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a983228f4280b643b3c2f78b603aae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShakeIntensity: 0
+  baseShakeDuration: 0
+  shakeIntensity: 0.5
+  shakeDuration: 0.3
 --- !u!1 &7354902577280820609
 GameObject:
   m_ObjectHideFlags: 0
@@ -32414,7 +32431,9 @@ MonoBehaviour:
   UIMoneyCount: 0
   playerStats: {fileID: 3705272347710780647}
   TEXT_Money_Count: {fileID: 8229030447056012807}
-  GetMoney: {fileID: 3746533424319786041}
+  CompteurAnimator: {fileID: 5188030845591383363}
+  DollarText: {fileID: 3788254847084220183}
+  DollarImage: {fileID: 679767838275382158}
 --- !u!111 &3746533424319786041
 Animation:
   m_ObjectHideFlags: 0
@@ -32446,6 +32465,7 @@ MonoBehaviour:
   PopUpText: {fileID: 3049005440173390321, guid: ae642fa255b9eb54d8e97a13379f1826,
     type: 3}
   AddedValueEmptyParent: {fileID: 6443316590848707615}
+  ShakeScript: {fileID: 0}
 --- !u!1 &8778498114361911476
 GameObject:
   m_ObjectHideFlags: 0
@@ -32457,6 +32477,7 @@ GameObject:
   - component: {fileID: 5700522971696674107}
   - component: {fileID: 5418484345844870359}
   - component: {fileID: 8229030447056012807}
+  - component: {fileID: 5188030845591383363}
   m_Layer: 5
   m_Name: TEXT_Money
   m_TagString: Untagged
@@ -32580,6 +32601,27 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!95 &5188030845591383363
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8778498114361911476}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 51a8222b28a3bf64f82bff1103cee69c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8812210016239891267
 GameObject:
   m_ObjectHideFlags: 0

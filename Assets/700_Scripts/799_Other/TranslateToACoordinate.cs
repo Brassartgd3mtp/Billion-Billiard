@@ -19,10 +19,13 @@ public class TranslateToACoordinate : MonoBehaviour
     {
         BaseTranslateLocation = transform.position;
         offset = new Vector3(Random.Range(xMin,xMax), Random.Range(yMin, yMax), 0);
+
+        TranslateLocation = BaseTranslateLocation + offset;
+
     }
     void Start()
     {
-        TranslateLocation = BaseTranslateLocation + offset;
+        
     }
 
     // Update is called once per frame
