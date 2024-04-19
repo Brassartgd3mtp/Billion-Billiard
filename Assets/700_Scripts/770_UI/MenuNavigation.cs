@@ -28,5 +28,10 @@ public class MenuNavigation : MonoBehaviour
                 Cursor.visible = false;
             }
         }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }
