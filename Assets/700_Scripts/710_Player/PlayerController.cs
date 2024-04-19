@@ -288,7 +288,7 @@ public class PlayerController : MonoBehaviour
         {
             gaugeObject.SetActive(true);
             isGaugeActive = true;
-            //MyAnimator.SetBool("PreparationShoot", true);
+            MyAnimator.SetBool("PreparationShoot", true);
             SoundGauge();
         }
         if (context.canceled)
@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour
             isGaugeActive = false;
             gaugeFill.fillAmount = 0;
             audioSource.Stop();
-            //MyAnimator.SetBool("PreparationShoot", false);
+            MyAnimator.SetBool("PreparationShoot", false);
 
         }
     }
@@ -338,7 +338,12 @@ public class PlayerController : MonoBehaviour
             // Set a better magnitude for the direction here
             //SetLookDirection(-(context.ReadValue<Vector2>() - MouseStart).normalized);
             SetLookDirection((context.ReadValue<Vector2>() - MouseStart).normalized);
+
+            MyAnimator.SetBool("PreparationShoot", true);
         }
+        else
+            MyAnimator.SetBool("PreparationShoot", false);
+
     }
 
     /// <summary>
