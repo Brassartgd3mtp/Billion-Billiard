@@ -23,6 +23,26 @@ public class PauseMenu : MonoBehaviour
         if (EventSystem.current != null)
             EventSystem.current.firstSelectedGameObject = PauseFirstbutton;
     }
+    private void Update()
+    {
+        if (panelActive)
+        {
+            if (SwapControls.state == CurrentState.Gamepad)
+            {
+                if (EventSystem.current.currentSelectedGameObject == null)
+                {
+                    EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+    }
 
     public void OnPlayButtonClick()
     {
@@ -101,11 +121,11 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
 
         InputSystem.ResetHaptics();
-        Time.timeScale = 0f;
-        //Time.fixedDeltaTime = 0f;
+        InputHandler.PlayerControllerDisable();
+        InputHandler.TrajectoryPredictionDisable();
+        InputHandler.FreeCamDisable();
 
-        //EventSystem.current.SetSelectedGameObject(null);
-        //EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
+        Time.timeScale = 0f;
     }
 
     void PauseOff()
@@ -122,9 +142,11 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
 
-        // R�tablit le temps � sa valeur normale pour reprendre le jeu
+        InputHandler.PlayerControllerEnable();
+        InputHandler.TrajectoryPredictionEnable();
+        InputHandler.FreeCamEnable();
+
         Time.timeScale = 1f;
-        //Time.fixedDeltaTime = 1f;
     }
 
     private void OnDisable()
