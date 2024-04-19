@@ -40,7 +40,7 @@ public class TrajectoryPrediction : MonoBehaviour
             //    lineRenderer.SetPosition(1, Vector3.forward * 12);
             //}
 
-            if (Physics.BoxCast(transform.position + new Vector3(0, -.5f, 0), sphereCollider / 1.4f, transform.forward, out hit, Quaternion.identity, 12))
+            if (Physics.BoxCast(transform.position + new Vector3(0, -.5f, 0), sphereCollider / 1.4f, transform.forward, out hit, Quaternion.identity, 12, wallLayer))
             {
                 lineRenderer.SetPosition(1, transform.InverseTransformPoint(hit.point));
             
@@ -62,6 +62,8 @@ public class TrajectoryPrediction : MonoBehaviour
             lineRenderer.SetPosition(1, Vector3.zero);
         }
     }
+
+    
 
     float angle;
     Vector2 LookingDirection;
