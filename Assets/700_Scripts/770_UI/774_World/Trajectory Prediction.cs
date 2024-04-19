@@ -1,8 +1,6 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 
 public class TrajectoryPrediction : MonoBehaviour
 {
@@ -62,8 +60,6 @@ public class TrajectoryPrediction : MonoBehaviour
             lineRenderer.SetPosition(1, Vector3.zero);
         }
     }
-
-    
 
     float angle;
     Vector2 LookingDirection;
