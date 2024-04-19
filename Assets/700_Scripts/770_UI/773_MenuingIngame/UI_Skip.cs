@@ -18,6 +18,7 @@ public class UI_Skip : MonoBehaviour
         InputHandler.UISkipEnable(this);
 
         InputHandler.PlayerControllerDisable();
+        InputHandler.TrajectoryPredictionDisable();
         InputHandler.FreeCamDisable();
         InputHandler.PauseMenuDisable();
 
@@ -39,9 +40,8 @@ public class UI_Skip : MonoBehaviour
 
     public void SkipCanva(InputAction.CallbackContext context)
     {
-        Debug.Log("Je suis joué");
-
         InputHandler.PlayerControllerEnable();
+        InputHandler.TrajectoryPredictionEnable();
         InputHandler.FreeCamEnable();
         InputHandler.PauseMenuEnable();
 
