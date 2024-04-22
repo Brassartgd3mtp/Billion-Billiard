@@ -339,12 +339,16 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     public void MouseStrenght(InputAction.CallbackContext context)
     {
+        float dynamicMouseSensitivity = (.01f + ThrowStrength) / 5 * MouseSensitivity;
+
+        dynamicMouseSensitivity = Mathf.Min(dynamicMouseSensitivity, MouseSensitivity);
+
         if (dragEnabled)
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
             MouseEnd = context.ReadValue<Vector2>();
-            ThrowStrength = Vector2.Distance(MouseStart, MouseEnd) * MouseSensitivity;
+            ThrowStrength = Vector2.Distance(MouseStart, MouseEnd) * dynamicMouseSensitivity;
             ThrowStrength = Mathf.Clamp(ThrowStrength, 0, StrengthFactor);
 
             // Set a better magnitude for the direction here
