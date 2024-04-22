@@ -42,7 +42,7 @@ public class PlayerParameters : MonoBehaviour
         vel = rb.velocity;
         speed = vel.magnitude;
 
-        if (playerController.isShooted)
+        if (playerController.isShooted && !playerController.iceLock)
         {
             timerOfCurve = 0;
             timerForDrag -= Time.deltaTime;
@@ -52,7 +52,7 @@ public class PlayerParameters : MonoBehaviour
             {
                 playerController.isShooted = false;
                 timerForDrag = 0.5f;
-                canDrag= true;
+                canDrag = true;
             }
         }
 
@@ -61,6 +61,6 @@ public class PlayerParameters : MonoBehaviour
             timerOfCurve += Time.deltaTime;
             rb.drag = dragCurve.Evaluate(timerOfCurve);
         }
-        else rb.drag = 1;
+        //else rb.drag = 1;
     }
 }

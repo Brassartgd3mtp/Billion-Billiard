@@ -114,6 +114,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: Player_Roll
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: PreparationShoot
+    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Idle_Change
     m_EventTreshold: 0
@@ -251,10 +257,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -6470426555297133842}
-    m_Position: {x: 440, y: 120, z: 0}
+    m_Position: {x: 540, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3059018794248944203}
-    m_Position: {x: 530, y: 220, z: 0}
+    m_Position: {x: 380, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8573638309727187904}
     m_Position: {x: 150, y: 0, z: 0}
@@ -269,16 +275,19 @@ AnimatorStateMachine:
     m_Position: {x: 100, y: 450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3184770935137882425}
-    m_Position: {x: 530, y: 350, z: 0}
+    m_Position: {x: 380, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -810221284280748161}
-    m_Position: {x: 440, y: 500, z: 0}
+    m_Position: {x: 540, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6557958867240519472}
     m_Position: {x: 70, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7992726297364915918}
-    m_Position: {x: -170, y: 330, z: 0}
+    m_Position: {x: -270, y: 300, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 7366798790199558191}
+    m_Position: {x: -270, y: 460, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -440,19 +449,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: PreparationShoot
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Idle_Change
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -646,6 +655,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &7366798790199558191
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ANIM_CHARA_SHOOT_PREP_2
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 5fbd52dcbd6bedc4f8e40e7217a30a17, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &7779705198168748518
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -654,6 +689,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: Player_Roll
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: PreparationShoot
+    m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Idle_Change
     m_EventTreshold: 0
@@ -678,7 +719,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ANIM_CHARA_SHOOT_PREP
+  m_Name: ANIM_CHARA_SHOOT_PREP_1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8777578963360803437}
   - component: {fileID: 6433591251624109477}
   - component: {fileID: 7456267223306938760}
+  - component: {fileID: 9035689792573744559}
   - component: {fileID: 5144278619914666978}
   - component: {fileID: 2137973308617667633}
   m_Layer: 0
@@ -100,7 +101,7 @@ MeshCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -109,6 +110,27 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6329158148709259305, guid: b33675a1eea6b7f4d9dad525c9d5b33d, type: 3}
+--- !u!135 &9035689792573744559
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693736090328801777}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4087
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.1188126
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5144278619914666978
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,4 +171,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyRigidbody: {fileID: 0}
-  ImpactForce: 0
+  ImpactForce: 2

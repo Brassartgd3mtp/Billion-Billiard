@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour
     {
         if (ThrowStrength > 0.2f)
         {
+            rb.drag = 1;
+
             SoundShot();    
             StartCoroutine(Haptic(ThrowStrength / 40, ThrowStrength / 40, .4f));
 
@@ -145,6 +147,7 @@ public class PlayerController : MonoBehaviour
     }
 
     bool velcroLock = false;
+    [HideInInspector] public bool iceLock = false;
     void SwitchObstacle(Obstacle obstacle, float speed, Vector3 reflect)
     {
         switch (obstacle.obstacleType)
@@ -179,6 +182,14 @@ public class PlayerController : MonoBehaviour
                     velcroLock = true;
                     StartCoroutine(Haptic(WallValues.VelcroLFH, WallValues.VelcroHFH, WallValues.VelcroTH));
                     rb.velocity = Vector3.zero;
+                }
+                break;
+            case Obstacle.ObstacleType.Ice:
+                if (!iceLock)
+                {
+                    rb.drag = 0;
+                    iceLock = true;
+                    Debug.Log("Collision Type : Ice");
                 }
                 break;
         }
@@ -231,6 +242,7 @@ public class PlayerController : MonoBehaviour
     {
         stayOnce = false;
         velcroLock = false;
+        iceLock = false;
     }
 
     /// <summary>
@@ -327,12 +339,16 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     public void MouseStrenght(InputAction.CallbackContext context)
     {
+        float dynamicMouseSensitivity = (.01f + ThrowStrength) / 5 * MouseSensitivity;
+
+        dynamicMouseSensitivity = Mathf.Min(dynamicMouseSensitivity, MouseSensitivity);
+
         if (dragEnabled)
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
             MouseEnd = context.ReadValue<Vector2>();
-            ThrowStrength = Vector2.Distance(MouseStart, MouseEnd) * MouseSensitivity;
+            ThrowStrength = Vector2.Distance(MouseStart, MouseEnd) * dynamicMouseSensitivity;
             ThrowStrength = Mathf.Clamp(ThrowStrength, 0, StrengthFactor);
 
             // Set a better magnitude for the direction here

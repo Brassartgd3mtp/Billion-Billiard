@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 5286420023898642621}
   - component: {fileID: 3805092292245667373}
   - component: {fileID: 5243145041716726093}
+  - component: {fileID: 1982897112696974882}
   m_Layer: 0
   m_Name: MUSEE_Props_Coffre_Obstacle
   m_TagString: Untagged
@@ -251,7 +252,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -300,6 +301,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyRigidbody: {fileID: 0}
   ImpactForce: 1
+--- !u!65 &1982897112696974882
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5114645838533272212}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4087
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 0.6, z: 0.9}
+  m_Center: {x: -0.24, y: 0.3, z: 0}
 --- !u!1 &5613967871124290503
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,9 +22,17 @@ public class OBJCollision : MonoBehaviour
 
             MyRigidbody.transform.Rotate(Random.Range(0, 180), Random.Range(0, 180), Random.Range(0, 180), Space.World);
         }
-        
+
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.TryGetComponent(out PlayerController playerController))
+        {
+            Vector3 _forceDirection = transform.position - other.transform.position;
+
+            MyRigidbody.AddForce(_forceDirection * ImpactForce, ForceMode.VelocityChange);
+
+            MyRigidbody.transform.Rotate(Random.Range(0, 180), Random.Range(0, 180), Random.Range(0, 180), Space.World);
+        }
     }
 }
