@@ -147,33 +147,32 @@ public class PlayerController : MonoBehaviour
     }
 
     bool velcroLock = false;
-    [HideInInspector] public bool iceLock = false;
     void SwitchObstacle(Obstacle obstacle, float speed, Vector3 reflect)
     {
         switch (obstacle.obstacleType)
         {
             case Obstacle.ObstacleType.Concrete:
-                StartCoroutine(Haptic(WallValues.ConcreteLFH, WallValues.ConcreteHFH, WallValues.ConcreteTH));
-                rb.velocity = reflect * Mathf.Max(speed * WallValues.ConcreteBounce, 0f);
+                    StartCoroutine(Haptic(WallValues.ConcreteLFH, WallValues.ConcreteHFH, WallValues.ConcreteTH));
+                    rb.velocity = reflect * Mathf.Max(speed * WallValues.ConcreteBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.Rubber:
-                StartCoroutine(Haptic(WallValues.RubberLFH, WallValues.RubberHFH, WallValues.RubberTH));
-                rb.velocity = reflect * Mathf.Max(speed * WallValues.RubberBounce, 0f);
+                    StartCoroutine(Haptic(WallValues.RubberLFH, WallValues.RubberHFH, WallValues.RubberTH));
+                    rb.velocity = reflect * Mathf.Max(speed * WallValues.RubberBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.Felt:
-                StartCoroutine(Haptic(WallValues.FeltLFH, WallValues.FeltHFH, WallValues.FeltTH));
-                rb.velocity = reflect * Mathf.Max(speed * WallValues.FeltBounce, 0f);
+                    StartCoroutine(Haptic(WallValues.FeltLFH, WallValues.FeltHFH, WallValues.FeltTH));
+                    rb.velocity = reflect * Mathf.Max(speed * WallValues.FeltBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.NPC:
-                StartCoroutine(Haptic(WallValues.PawnLFH, WallValues.PawnHFH, WallValues.PawnTH));
+                    StartCoroutine(Haptic(WallValues.PawnLFH, WallValues.PawnHFH, WallValues.PawnTH));
                 break;
 
             case Obstacle.ObstacleType.Bumper:
-                StartCoroutine(Haptic(WallValues.BumperLFH, WallValues.BumperHFH, WallValues.BumperTH));
-                rb.velocity = reflect * Mathf.Max(speed * WallValues.BumperBounce, 0f);
+                    StartCoroutine(Haptic(WallValues.BumperLFH, WallValues.BumperHFH, WallValues.BumperTH));
+                    rb.velocity = reflect * Mathf.Max(speed * WallValues.BumperBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.Velcro:
@@ -184,18 +183,10 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = Vector3.zero;
                 }
                 break;
-            case Obstacle.ObstacleType.Ice:
-                if (!iceLock)
-                {
-                    rb.drag = 0;
-                    iceLock = true;
-                    Debug.Log("Collision Type : Ice");
-                }
-                break;
         }
     }
 
-    //PhysicMaterial pm;
+    [HideInInspector] public bool iceLock = false;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
@@ -206,7 +197,23 @@ public class PlayerController : MonoBehaviour
             
             rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
-            SwitchObstacle(obstacle, speed, reflect);
+            if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
+            {
+                Vector2 transform2 = new Vector2(transform.position.x, transform.position.z);
+                Vector2 contact2 = new Vector2(collision.contacts[0].point.x, collision.contacts[0].point.z);
+
+                float angle = Vector2.Angle(transform2 - contact2, transform.forward);
+
+                Debug.Log(angle);
+
+                if (angle > 65)
+                {
+                    StartCoroutine(Haptic(WallValues.IceLFH, WallValues.IceHFH, WallValues.IceTH));
+                    rb.velocity = reflect * Mathf.Max(speed * WallValues.IceBounce, 0f);
+                }
+            }
+            else
+                SwitchObstacle(obstacle, speed, reflect);
         }
     }
 
@@ -233,7 +240,16 @@ public class PlayerController : MonoBehaviour
                 if (timeSinceThrow != 0)
                     rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
-                SwitchObstacle(obstacle, speed, reflect);
+                if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
+                {
+                    if (!iceLock && angle <= 65)
+                    {
+                        rb.drag = 0;
+                        iceLock = true;
+                    }
+                }
+                else
+                    SwitchObstacle(obstacle, speed, reflect);
             }
         }
     }
@@ -243,6 +259,7 @@ public class PlayerController : MonoBehaviour
         stayOnce = false;
         velcroLock = false;
         iceLock = false;
+        rb.drag = 1;
     }
 
     /// <summary>
@@ -410,7 +427,7 @@ public class PlayerController : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
 
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
 
             dragEnabled = false;
 
