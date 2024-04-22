@@ -356,7 +356,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     public void MouseStrenght(InputAction.CallbackContext context)
     {
-        float dynamicMouseSensitivity = (1 + ThrowStrength) / 40 * MouseSensitivity;
+        float dynamicMouseSensitivity = (.01f + ThrowStrength) / 5 * MouseSensitivity;
 
         dynamicMouseSensitivity = Mathf.Min(dynamicMouseSensitivity, MouseSensitivity);
 
