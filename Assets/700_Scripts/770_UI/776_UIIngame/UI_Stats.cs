@@ -36,7 +36,7 @@ public class UI_Stats : MonoBehaviour
         UpdateStats();
 
         moneyCountColor = TEXT_Money_Count.color;
-        Debug.Log(moneyCountColor);
+        //Debug.Log(moneyCountColor);
 
     }
 
@@ -66,7 +66,7 @@ public class UI_Stats : MonoBehaviour
     {
         moneyCountColor = new Color(0.23f, 0.88f, 0.25f);
         UpdateColors();
-        Debug.Log(moneyCountColor);
+        //Debug.Log(moneyCountColor);
         colorTimer = 0.2f;
     }
 
