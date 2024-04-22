@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8792941540070968254}
   - component: {fileID: 7140709295173885156}
   - component: {fileID: 1984962095713730934}
+  - component: {fileID: 2088167634102913552}
   - component: {fileID: 8878623511593523956}
   m_Layer: 0
   m_Name: BANK_Props_PoteauRelies_Collision
@@ -126,9 +127,30 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1748489, y: 0.821555, z: 0.25099206}
+  m_Center: {x: 0.004738332, y: -0.000000074505806, z: -0.005308734}
+--- !u!65 &2088167634102913552
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5372586946633515441}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4087
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -147,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyRigidbody: {fileID: 0}
-  ImpactForce: 1
+  ImpactForce: 2
 --- !u!1 &8815670691971790145
 GameObject:
   m_ObjectHideFlags: 0

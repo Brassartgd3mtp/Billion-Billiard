@@ -1093,6 +1093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6187903669602356106}
   - component: {fileID: 5495686869891587521}
+  - component: {fileID: 9002014153597109990}
   - component: {fileID: 3368587698878547909}
   - component: {fileID: 6643290362613659331}
   m_Layer: 0
@@ -1145,7 +1146,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1153,6 +1154,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6, y: 2, z: 1.15}
   m_Center: {x: 0.17, y: 0.34, z: 0}
+--- !u!136 &9002014153597109990
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921407473699844190}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4087
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.8
+  m_Height: 2.55
+  m_Direction: 1
+  m_Center: {x: 0.19, y: 0.35, z: 0}
 --- !u!54 &3368587698878547909
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1193,7 +1217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyRigidbody: {fileID: 0}
-  ImpactForce: 1
+  ImpactForce: 2
 --- !u!1 &7929601679791347397
 GameObject:
   m_ObjectHideFlags: 0
