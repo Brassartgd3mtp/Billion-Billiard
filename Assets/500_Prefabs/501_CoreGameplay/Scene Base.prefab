@@ -2579,6 +2579,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223697327111248193}
   - component: {fileID: 4731151006632485478}
+  - component: {fileID: 8854925664687892514}
   m_Layer: 0
   m_Name: CHARA_PLAYER_RIG
   m_TagString: Untagged
@@ -2626,6 +2627,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8854925664687892514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630729570151193004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e188bc643e59034d86de26d6424739a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyAnimator: {fileID: 4731151006632485478}
 --- !u!1 &636514234710062314
 GameObject:
   m_ObjectHideFlags: 0
