@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     [Header("Gamepad Values"), Range(0f, 2f)]
     [SerializeField] private float gaugeSpeed;
 
+    [Header("Ice Bounce Angle"), Range(0f, 180f)]
+    [SerializeField] float iceAngle = 45f;
+
     [Header("References")]
     public LineRenderer PowerLineRenderer;
     public LineRenderer PowerLineRendererOutline;
@@ -183,10 +186,15 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = Vector3.zero;
                 }
                 break;
+
+            default:
+                Debug.Log("Collision is Ice or not recognized.");
+                break;
         }
     }
 
     [HideInInspector] public bool iceLock = false;
+    float iceAngleDynamic;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
@@ -194,26 +202,25 @@ public class PlayerController : MonoBehaviour
             float speed = lastVel.magnitude;
             Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
             Quaternion newRot = Quaternion.LookRotation(reflect);
-            
-            rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
             if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
             {
-                Vector2 transform2 = new Vector2(transform.position.x, transform.position.z);
-                Vector2 contact2 = new Vector2(collision.contacts[0].point.x, collision.contacts[0].point.z);
+                Vector3 contact2 = new Vector3(collision.contacts[0].normal.x - 1, 0, collision.contacts[0].normal.z - 1);
 
-                float angle = Vector2.Angle(transform2 - contact2, transform.forward);
+                iceAngleDynamic = Vector3.Angle(transform.forward, contact2);
 
-                Debug.Log(angle);
+                Debug.Log(iceAngleDynamic);
 
-                if (angle > 65)
+                if (iceAngleDynamic > iceAngle)
                 {
                     StartCoroutine(Haptic(WallValues.IceLFH, WallValues.IceHFH, WallValues.IceTH));
                     rb.velocity = reflect * Mathf.Max(speed * WallValues.IceBounce, 0f);
                 }
             }
-            else
-                SwitchObstacle(obstacle, speed, reflect);
+            
+            rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+
+            SwitchObstacle(obstacle, speed, reflect);
         }
     }
 
@@ -237,19 +244,19 @@ public class PlayerController : MonoBehaviour
                 reflect = Vector3.Reflect(lastVel.normalized, contactPoint);
                 newRot = Quaternion.LookRotation(reflect);
 
-                if (timeSinceThrow != 0)
-                    rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
-
                 if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
                 {
-                    if (!iceLock && angle <= 65)
+                    if (!iceLock && iceAngleDynamic <= iceAngle)
                     {
                         rb.drag = 0;
                         iceLock = true;
                     }
                 }
-                else
-                    SwitchObstacle(obstacle, speed, reflect);
+
+                if (timeSinceThrow != 0)
+                    rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+
+                SwitchObstacle(obstacle, speed, reflect);
             }
         }
     }
