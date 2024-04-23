@@ -59,7 +59,7 @@ public class PauseMenu : MonoBehaviour
         // Ouvre le panneau d'options
         if (optionPanel != null)
         {
-            optionPanel.SetActive(true);
+            optionPanel.gameObject.SetActive(true);
             Debug.Log(optionPanel.activeSelf);
         }
 
