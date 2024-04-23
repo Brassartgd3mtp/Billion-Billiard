@@ -86,10 +86,12 @@ public class PlayerController : MonoBehaviour
     {
         if (ThrowStrength > 0.2f)
         {
+            ScreenShake.instance.Shake(ThrowStrength / StrengthFactor);
+
             rb.drag = 1;
 
             SoundShot();    
-            StartCoroutine(Haptic(ThrowStrength / 40, ThrowStrength / 40, .4f));
+            StartCoroutine(Haptic(ThrowStrength / StrengthFactor, ThrowStrength / StrengthFactor, .4f));
 
             timeSinceThrow = 0;
             staticThrowStrength = ThrowStrength;
@@ -212,8 +214,6 @@ public class PlayerController : MonoBehaviour
                 Vector3 contact2 = normale - projection;
 
                 iceAngleDynamic = Vector3.Angle(transform.forward, contact2);
-
-                Debug.Log(iceAngleDynamic);
 
                 if (iceAngleDynamic > iceAngle && !iceLock)
                 {
