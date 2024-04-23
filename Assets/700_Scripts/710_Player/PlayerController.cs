@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("Collision is Ice or not recognized.");
+                Debug.Log("Collision is either Ice or not recognized.");
                 break;
         }
     }
@@ -205,13 +205,17 @@ public class PlayerController : MonoBehaviour
 
             if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
             {
-                Vector3 contact2 = new Vector3(collision.contacts[0].normal.x - 1, 0, collision.contacts[0].normal.z - 1);
+                Vector3 normale = collision.contacts[0].normal;
+                Vector3 ortho = new Vector3(1, 0, 1);
+
+                Vector3 projection = Vector3.Dot(normale, ortho) * ortho;
+                Vector3 contact2 = normale - projection;
 
                 iceAngleDynamic = Vector3.Angle(transform.forward, contact2);
 
                 Debug.Log(iceAngleDynamic);
 
-                if (iceAngleDynamic > iceAngle)
+                if (iceAngleDynamic > iceAngle && !iceLock)
                 {
                     StartCoroutine(Haptic(WallValues.IceLFH, WallValues.IceHFH, WallValues.IceTH));
                     rb.velocity = reflect * Mathf.Max(speed * WallValues.IceBounce, 0f);
@@ -246,7 +250,7 @@ public class PlayerController : MonoBehaviour
 
                 if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
                 {
-                    if (!iceLock && iceAngleDynamic <= iceAngle)
+                    if (!iceLock && iceAngleDynamic <= iceAngle && !iceLock)
                     {
                         rb.drag = 0;
                         iceLock = true;
