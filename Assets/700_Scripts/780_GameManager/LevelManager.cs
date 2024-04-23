@@ -58,12 +58,14 @@ public class LevelManager : MonoBehaviour
     {
         AnimatorCircleWipe.SetTrigger("In");
         isIn = true;
+        SoundTransitionOpen();
     }
 
     public void AnimateOut()
     {
         AnimatorCircleWipe.SetTrigger("Out");
         isIn = false;
+        SoundTransitionClose();
     }
 
     // Update is called once per frame
@@ -104,8 +106,20 @@ public class LevelManager : MonoBehaviour
             yield break;
         }
     }
+
+private void SoundTransitionOpen()
+{
+    AudioSource audioSource = GetComponent<AudioSource>();
+    AudioManager.Instance.PlaySound(20, audioSource);
 }
 
+private void SoundTransitionClose()
+{
+    AudioSource audioSource = GetComponent<AudioSource>();
+    AudioManager.Instance.PlaySound(21, audioSource);
+}
+
+}
 public enum LevelType
 {
     HoleInOne,
