@@ -5401,6 +5401,7 @@ GameObject:
   - component: {fileID: 800420719981076773}
   - component: {fileID: 5067981909943377142}
   - component: {fileID: 5213204415389227372}
+  - component: {fileID: 1854282324388120257}
   m_Layer: 0
   m_Name: CameraPrefab
   m_TagString: Untagged
@@ -5452,6 +5453,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camFollow: {fileID: 5736719362004294076}
   camCurrentRoom: {fileID: 0}
+--- !u!114 &1854282324388120257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064603200459814918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba5b22bc6f4640344ad7e8653fa22eb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 1
+  sourceDuration: 0.2
+  velocity: {x: 0, y: -1, z: 0}
+  amplitude: 10
+  frequency: 20
+  listenerDuration: 0.2
+  source: {fileID: 1890049004893077091}
+  listener: {fileID: 4122287271865043572}
 --- !u!1 &2070462536820493197
 GameObject:
   m_ObjectHideFlags: 0
@@ -8446,6 +8467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5661729526845252858}
   - component: {fileID: 5736719362004294076}
+  - component: {fileID: 4122287271865043572}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -8508,6 +8530,29 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 455274760297717364}
+--- !u!114 &4122287271865043572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3112321074169637873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_AmplitudeGain: 10
+    m_FrequencyGain: 20
+    m_Duration: 0.2
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &3126849880399257910
 GameObject:
   m_ObjectHideFlags: 0
@@ -9398,6 +9443,7 @@ GameObject:
   - component: {fileID: 9105115901308099147}
   - component: {fileID: 9074854541134695590}
   - component: {fileID: 3766630935938494115}
+  - component: {fileID: 1890049004893077091}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -9414,7 +9460,7 @@ Transform:
   m_GameObject: {fileID: 3324805309106062234}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9879,6 +9925,113 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1890049004893077091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3324805309106062234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 4
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 5
+        outSlope: 5
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.2
+        value: 1
+        inSlope: 0.00268694
+        outSlope: 0.00268694
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.2749225
+      - serializedVersion: 3
+        time: 0.4
+        value: 0
+        inSlope: -0.003035336
+        outSlope: -0.003035336
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.35922468
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.6
+        value: 1
+        inSlope: 0.0023927602
+        outSlope: 0.0023927602
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.74301183
+      - serializedVersion: 3
+        time: 0.8
+        value: 0
+        inSlope: 0.0041200705
+        outSlope: 0.0041200705
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 1
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0.002148244
+        outSlope: 0.002148244
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 1
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 257
+  m_DefaultVelocity: {x: 0, y: 0, z: -1}
 --- !u!1 &3360380858181639983
 GameObject:
   m_ObjectHideFlags: 0

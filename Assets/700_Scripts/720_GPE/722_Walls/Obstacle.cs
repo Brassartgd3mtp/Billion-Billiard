@@ -23,10 +23,6 @@ public class Obstacle : MonoBehaviour
         /// </summary>
         [InspectorName("Glace")] Ice,
         /// <summary>
-        /// Ice sliding wall type, Player will follow the shape.
-        /// </summary>
-        [InspectorName("Glace Angulée")] IceAngle,
-        /// <summary>
         /// Velcro wall type, Player will stop on it.
         /// </summary>
         [InspectorName("Velcro")] Velcro,
@@ -41,7 +37,11 @@ public class Obstacle : MonoBehaviour
         /// <summary>
         /// Bumper GPE, default bounce value : 1.15
         /// </summary>
-        [InspectorName("Bumper")] Bumper
+        [InspectorName("Bumper")] Bumper,
+        /// <summary>
+        /// Ice sliding wall type, Player will follow the shape.
+        /// </summary>
+        [InspectorName("Glace Angulée")] IceAngle
     }
 
     public ObstacleType obstacleType = ObstacleType.Rubber;

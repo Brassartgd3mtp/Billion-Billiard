@@ -10,7 +10,7 @@ public class PlayerRoomCam : MonoBehaviour
 
     //[SerializeField] CinemachineBrain camBrain;
     [SerializeField] CinemachineVirtualCamera camFollow;
-    [SerializeField] CinemachineVirtualCamera camCurrentRoom;
+    public CinemachineVirtualCamera camCurrentRoom;
 
     //CinemachineTransposer camFVT;
     //CinemachineBlendDefinition camBlendDef;
@@ -26,7 +26,7 @@ public class PlayerRoomCam : MonoBehaviour
 
     private void Start()
     {
-        InputHandler.FreeCamEnable(this);
+        InputHandler.RoomCamEnable(this);
     }
 
     //public void FreeCam(InputAction.CallbackContext context)
@@ -97,6 +97,6 @@ public class PlayerRoomCam : MonoBehaviour
 
     private void OnDisable()
     {
-        InputHandler.FreeCamDisable();
+        InputHandler.RoomCamDisable();
     }
 }
