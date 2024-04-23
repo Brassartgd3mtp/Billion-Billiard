@@ -19,7 +19,7 @@ public class UI_Skip : MonoBehaviour
 
         InputHandler.PlayerControllerDisable();
         InputHandler.TrajectoryPredictionDisable();
-        InputHandler.FreeCamDisable();
+        InputHandler.RoomCamDisable();
         InputHandler.PauseMenuDisable();
 
         Time.timeScale = 0f;
@@ -42,7 +42,7 @@ public class UI_Skip : MonoBehaviour
     {
         InputHandler.PlayerControllerEnable();
         InputHandler.TrajectoryPredictionEnable();
-        InputHandler.FreeCamEnable();
+        InputHandler.RoomCamEnable();
         InputHandler.PauseMenuEnable();
 
         InputHandler.UISkipDisable();
