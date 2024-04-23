@@ -256,6 +256,11 @@ public class PlayerController : MonoBehaviour
                         iceLock = true;
                     }
                 }
+                else if (obstacle.obstacleType == Obstacle.ObstacleType.IceAngle)
+                {
+                    rb.drag = 0;
+                    iceLock = true;
+                }
 
                 if (timeSinceThrow != 0)
                     rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
