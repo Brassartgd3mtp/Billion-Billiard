@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     [Header("Gamepad Values"), Range(0f, 2f)]
     [SerializeField] private float gaugeSpeed;
 
+    [Header("Ice Bounce Angle"), Range(0f, 180f)]
+    [SerializeField] float iceAngle = 45f;
+
     [Header("References")]
     public LineRenderer PowerLineRenderer;
     public LineRenderer PowerLineRendererOutline;
@@ -147,33 +150,32 @@ public class PlayerController : MonoBehaviour
     }
 
     bool velcroLock = false;
-    [HideInInspector] public bool iceLock = false;
     void SwitchObstacle(Obstacle obstacle, float speed, Vector3 reflect)
     {
         switch (obstacle.obstacleType)
         {
             case Obstacle.ObstacleType.Concrete:
-                StartCoroutine(Haptic(WallValues.ConcreteLFH, WallValues.ConcreteHFH, WallValues.ConcreteTH));
-                rb.velocity = reflect * Mathf.Max(speed * WallValues.ConcreteBounce, 0f);
+                    StartCoroutine(Haptic(WallValues.ConcreteLFH, WallValues.ConcreteHFH, WallValues.ConcreteTH));
+                    rb.velocity = reflect * Mathf.Max(speed * WallValues.ConcreteBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.Rubber:
-                StartCoroutine(Haptic(WallValues.RubberLFH, WallValues.RubberHFH, WallValues.RubberTH));
-                rb.velocity = reflect * Mathf.Max(speed * WallValues.RubberBounce, 0f);
+                    StartCoroutine(Haptic(WallValues.RubberLFH, WallValues.RubberHFH, WallValues.RubberTH));
+                    rb.velocity = reflect * Mathf.Max(speed * WallValues.RubberBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.Felt:
-                StartCoroutine(Haptic(WallValues.FeltLFH, WallValues.FeltHFH, WallValues.FeltTH));
-                rb.velocity = reflect * Mathf.Max(speed * WallValues.FeltBounce, 0f);
+                    StartCoroutine(Haptic(WallValues.FeltLFH, WallValues.FeltHFH, WallValues.FeltTH));
+                    rb.velocity = reflect * Mathf.Max(speed * WallValues.FeltBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.NPC:
-                StartCoroutine(Haptic(WallValues.PawnLFH, WallValues.PawnHFH, WallValues.PawnTH));
+                    StartCoroutine(Haptic(WallValues.PawnLFH, WallValues.PawnHFH, WallValues.PawnTH));
                 break;
 
             case Obstacle.ObstacleType.Bumper:
-                StartCoroutine(Haptic(WallValues.BumperLFH, WallValues.BumperHFH, WallValues.BumperTH));
-                rb.velocity = reflect * Mathf.Max(speed * WallValues.BumperBounce, 0f);
+                    StartCoroutine(Haptic(WallValues.BumperLFH, WallValues.BumperHFH, WallValues.BumperTH));
+                    rb.velocity = reflect * Mathf.Max(speed * WallValues.BumperBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.Velcro:
@@ -184,18 +186,15 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = Vector3.zero;
                 }
                 break;
-            case Obstacle.ObstacleType.Ice:
-                if (!iceLock)
-                {
-                    rb.drag = 0;
-                    iceLock = true;
-                    Debug.Log("Collision Type : Ice");
-                }
+
+            default:
+                Debug.Log("Collision is either Ice or not recognized.");
                 break;
         }
     }
 
-    //PhysicMaterial pm;
+    [HideInInspector] public bool iceLock = false;
+    float iceAngleDynamic;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
@@ -203,6 +202,25 @@ public class PlayerController : MonoBehaviour
             float speed = lastVel.magnitude;
             Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
             Quaternion newRot = Quaternion.LookRotation(reflect);
+
+            if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
+            {
+                Vector3 normale = collision.contacts[0].normal;
+                Vector3 ortho = new Vector3(1, 0, 1);
+
+                Vector3 projection = Vector3.Dot(normale, ortho) * ortho;
+                Vector3 contact2 = normale - projection;
+
+                iceAngleDynamic = Vector3.Angle(transform.forward, contact2);
+
+                Debug.Log(iceAngleDynamic);
+
+                if (iceAngleDynamic > iceAngle && !iceLock)
+                {
+                    StartCoroutine(Haptic(WallValues.IceLFH, WallValues.IceHFH, WallValues.IceTH));
+                    rb.velocity = reflect * Mathf.Max(speed * WallValues.IceBounce, 0f);
+                }
+            }
             
             rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
@@ -230,6 +248,20 @@ public class PlayerController : MonoBehaviour
                 reflect = Vector3.Reflect(lastVel.normalized, contactPoint);
                 newRot = Quaternion.LookRotation(reflect);
 
+                if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
+                {
+                    if (!iceLock && iceAngleDynamic <= iceAngle)
+                    {
+                        rb.drag = 0;
+                        iceLock = true;
+                    }
+                }
+                else if (obstacle.obstacleType == Obstacle.ObstacleType.IceAngle)
+                {
+                    rb.drag = 0;
+                    iceLock = true;
+                }
+
                 if (timeSinceThrow != 0)
                     rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
@@ -243,6 +275,7 @@ public class PlayerController : MonoBehaviour
         stayOnce = false;
         velcroLock = false;
         iceLock = false;
+        rb.drag = 1;
     }
 
     /// <summary>
@@ -410,7 +443,7 @@ public class PlayerController : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
 
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
 
             dragEnabled = false;
 
