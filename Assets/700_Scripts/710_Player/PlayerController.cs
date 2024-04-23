@@ -86,10 +86,12 @@ public class PlayerController : MonoBehaviour
     {
         if (ThrowStrength > 0.2f)
         {
+            ScreenShake.instance.Shake(ThrowStrength / StrengthFactor);
+
             rb.drag = 1;
 
             SoundShot();    
-            StartCoroutine(Haptic(ThrowStrength / 40, ThrowStrength / 40, .4f));
+            StartCoroutine(Haptic(ThrowStrength / StrengthFactor, ThrowStrength / StrengthFactor, .4f));
 
             timeSinceThrow = 0;
             staticThrowStrength = ThrowStrength;
@@ -213,8 +215,6 @@ public class PlayerController : MonoBehaviour
 
                 iceAngleDynamic = Vector3.Angle(transform.forward, contact2);
 
-                Debug.Log(iceAngleDynamic);
-
                 if (iceAngleDynamic > iceAngle && !iceLock)
                 {
                     StartCoroutine(Haptic(WallValues.IceLFH, WallValues.IceHFH, WallValues.IceTH));
@@ -255,6 +255,11 @@ public class PlayerController : MonoBehaviour
                         rb.drag = 0;
                         iceLock = true;
                     }
+                }
+                else if (obstacle.obstacleType == Obstacle.ObstacleType.IceAngle)
+                {
+                    rb.drag = 0;
+                    iceLock = true;
                 }
 
                 if (timeSinceThrow != 0)

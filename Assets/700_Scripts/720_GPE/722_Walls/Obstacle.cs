@@ -15,11 +15,11 @@ public class Obstacle : MonoBehaviour
         /// </summary>
         [InspectorName("Caoutchouc")] Rubber,
         /// <summary>
-        /// Rubber wall type, default bounce value : .5
+        /// Felt wall type, default bounce value : .5
         /// </summary>
         [InspectorName("Feutre")] Felt,
         /// <summary>
-        /// Rubber wall type, Player will follow the shape.
+        /// Ice wall type, Player will follow the shape.
         /// </summary>
         [InspectorName("Glace")] Ice,
         /// <summary>
@@ -37,7 +37,11 @@ public class Obstacle : MonoBehaviour
         /// <summary>
         /// Bumper GPE, default bounce value : 1.15
         /// </summary>
-        [InspectorName("Bumper")] Bumper
+        [InspectorName("Bumper")] Bumper,
+        /// <summary>
+        /// Ice sliding wall type, Player will follow the shape.
+        /// </summary>
+        [InspectorName("Glace Angulée")] IceAngle
     }
 
     public ObstacleType obstacleType = ObstacleType.Rubber;
