@@ -15,11 +15,18 @@ public class Interrupteur : MonoBehaviour
         {
             contactPNJ = value;
             collider.isTrigger = true;
+            SoundButton();
         }
     }
 
     private void Start()
     {
         collider = GetComponent<Collider>();
+    }
+
+    private void SoundButton()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(26, audioSource);
     }
 }
