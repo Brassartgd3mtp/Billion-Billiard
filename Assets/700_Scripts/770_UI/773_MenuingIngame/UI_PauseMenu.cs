@@ -123,7 +123,7 @@ public class PauseMenu : MonoBehaviour
         InputSystem.ResetHaptics();
         InputHandler.PlayerControllerDisable();
         InputHandler.TrajectoryPredictionDisable();
-        InputHandler.FreeCamDisable();
+        InputHandler.RoomCamDisable();
 
         Time.timeScale = 0f;
     }
@@ -144,7 +144,7 @@ public class PauseMenu : MonoBehaviour
 
         InputHandler.PlayerControllerEnable();
         InputHandler.TrajectoryPredictionEnable();
-        InputHandler.FreeCamEnable();
+        InputHandler.RoomCamEnable();
 
         Time.timeScale = 1f;
     }

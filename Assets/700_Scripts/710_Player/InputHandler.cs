@@ -7,7 +7,7 @@ public class InputHandler : MonoBehaviour
     #region References
     static PlayerController player;
     static TrajectoryPrediction trajPred;
-    static PlayerRoomCam freeCam;
+    static PlayerRoomCam roomCam;
     static ReloadScene rlScene;
     static NoClip nClip;
     static PauseMenu pMenu;
@@ -53,17 +53,17 @@ public class InputHandler : MonoBehaviour
         Actions.Gamepad.GamepadStrenght.performed += trajectoryPrediction.GamepadDirection;
     }
 
-    public static void FreeCamEnable(PlayerRoomCam playerFreeCam)
+    public static void RoomCamEnable(PlayerRoomCam playerRoomCam)
     {
-        freeCam = playerFreeCam;
+        roomCam = playerRoomCam;
 
         //Actions.Gamepad.FreeCam.performed += playerFreeCam.FreeCam;
         //Actions.Gamepad.FreeCam.canceled += playerFreeCam.FreeCam;
         //Actions.Gamepad.StartFreeCam.started += playerFreeCam.StartFreeCam;
-        Actions.Gamepad.RoomCam.canceled += playerFreeCam.StartFreeCam;
+        Actions.Gamepad.RoomCam.canceled += playerRoomCam.StartFreeCam;
         //Actions.MouseKeyboard.FreeCam.performed += playerFreeCam.FreeCam;
         //Actions.MouseKeyboard.StartFreeCam.started += playerFreeCam.StartFreeCam;
-        Actions.MouseKeyboard.RoomCam.canceled += playerFreeCam.StartFreeCam;
+        Actions.MouseKeyboard.RoomCam.canceled += playerRoomCam.StartFreeCam;
     }
 
     public static void ReloadSceneEnable(ReloadScene reloadScene)
@@ -128,15 +128,15 @@ public class InputHandler : MonoBehaviour
         Actions.Gamepad.GamepadStrenght.performed -= trajPred.GamepadDirection;
     }
 
-    public static void FreeCamDisable()
+    public static void RoomCamDisable()
     {
         //Actions.Gamepad.FreeCam.performed -= freeCam.FreeCam;
         //Actions.Gamepad.FreeCam.canceled -= freeCam.FreeCam;
         //Actions.Gamepad.StartFreeCam.started -= freeCam.StartFreeCam;
-        Actions.Gamepad.RoomCam.canceled -= freeCam.StartFreeCam;
+        Actions.Gamepad.RoomCam.canceled -= roomCam.StartFreeCam;
         //Actions.MouseKeyboard.FreeCam.performed -= freeCam.FreeCam;
         //Actions.MouseKeyboard.StartFreeCam.started -= freeCam.StartFreeCam;
-        Actions.MouseKeyboard.RoomCam.canceled -= freeCam.StartFreeCam;
+        Actions.MouseKeyboard.RoomCam.canceled -= roomCam.StartFreeCam;
     }
 
     public static void ReloadSceneDisable()
@@ -181,9 +181,9 @@ public class InputHandler : MonoBehaviour
         TrajectoryPredictionEnable(trajPred);
     }
 
-    public static void FreeCamEnable()
+    public static void RoomCamEnable()
     {
-        FreeCamEnable(freeCam);
+        RoomCamEnable(roomCam);
     }
 
     public static void ReloadSceneEnable()
