@@ -375,6 +375,7 @@ GameObject:
   - component: {fileID: 6746461007928328458}
   - component: {fileID: 8805930038281111620}
   - component: {fileID: 4501987893556435947}
+  - component: {fileID: 2266535605640006753}
   - component: {fileID: 6353513190872116006}
   m_Layer: 0
   m_Name: BANK_Props_Table_Obstacle
@@ -416,7 +417,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -451,6 +452,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &2266535605640006753
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6750743300731140983}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4087
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.72
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6353513190872116006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,7 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyRigidbody: {fileID: 0}
-  ImpactForce: 1
+  ImpactForce: 2
 --- !u!1 &8899667882372367306
 GameObject:
   m_ObjectHideFlags: 0

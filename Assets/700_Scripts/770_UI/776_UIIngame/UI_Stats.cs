@@ -1,7 +1,9 @@
+using Assets.SimpleLocalization.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Stats : MonoBehaviour
 {
@@ -11,8 +13,13 @@ public class UI_Stats : MonoBehaviour
 
     public static UI_Stats Instance;
 
-    public Animation GetMoney;
-    public Animation AddValue;
+    [SerializeField] private Animator CompteurAnimator;
+
+    private Color moneyCountColor;
+    float colorTimer = 0.2f;
+    [SerializeField] private TextMeshProUGUI DollarText;
+    [SerializeField] private Image DollarImage;
+
 
     public void Awake()
     {
@@ -27,13 +34,47 @@ public class UI_Stats : MonoBehaviour
         playerStats = PlayerStats.Instance;
         UIMoneyCount = 0;
         UpdateStats();
+
+        moneyCountColor = TEXT_Money_Count.color;
+        //Debug.Log(moneyCountColor);
+
+    }
+
+    private void Update()
+    {
+        if(colorTimer > 0)
+        {
+            colorTimer -= Time.deltaTime;
+        }
+        else
+        {
+            float addColorValue = 0.025f;
+            moneyCountColor = new Color(moneyCountColor.r + addColorValue, moneyCountColor.g + addColorValue, moneyCountColor.b + addColorValue);
+            UpdateColors();
+        }
     }
 
     public void UpdateStats()
     {
         UIMoneyCount = playerStats.moneyCount;
         TEXT_Money_Count.text = $"{UIMoneyCount}";
-        GetMoney.Play();
-        AddValue.Play();
+        DoColorChange();
+        CompteurAnimator.SetTrigger("AddMoney");
     }
+
+    public void DoColorChange()
+    {
+        moneyCountColor = new Color(0.23f, 0.88f, 0.25f);
+        UpdateColors();
+        //Debug.Log(moneyCountColor);
+        colorTimer = 0.2f;
+    }
+
+    void UpdateColors()
+    {
+        TEXT_Money_Count.color = moneyCountColor;
+        DollarText.color = moneyCountColor;
+        DollarImage.color = moneyCountColor;
+    }
+
 }

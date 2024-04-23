@@ -77,9 +77,20 @@ public class LevelManager : MonoBehaviour
                 if (PlayerController.rb.velocity.magnitude <= 0.1f
                 && TurnBasedPlayer.Instance.shotRemaining == 0)
                 {
-                    AnimateOut();
-                    yield return new WaitForSeconds(HIOCooldown);
-                    SceneManager.LoadScene(currentScene.buildIndex);
+                    yield return new WaitForSeconds(1f);
+
+                    if (PlayerController.rb.velocity.magnitude <= 0.1f)
+                    {
+                        AnimateOut();
+                        yield return new WaitForSeconds(HIOCooldown);
+                        SceneManager.LoadScene(currentScene.buildIndex);
+                    }
+                    else
+                    {
+                        yield return new WaitForSeconds(.1f);
+                        StartCoroutine(HoleInOne());
+                    }
+
                     yield break;
                 }
                 else
