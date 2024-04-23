@@ -1,15 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine; 
+using Cinemachine;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 public class ScreenShake : MonoBehaviour
 {
     public static ScreenShake instance;
 
-    [SerializeField] float amplitude = 5f; 
-    [SerializeField] float duration = 1f;
-    [SerializeField] CinemachineVirtualCamera vCam;
+    [Header("Source")]
+    [SerializeField] float impulseForce = 1f;
+    [SerializeField] float sourceDuration = .2f;
+    [SerializeField] Vector3 velocity = new Vector3(0, -1, 0);
+
+    [Header("Listener")]
+    [SerializeField] float amplitude = 1f;
+    [SerializeField] float frequency = 1f;
+    [SerializeField] float listenerDuration = 1f;
+    //[SerializeField] CinemachineVirtualCamera vCam;
+
+    [Header("References")]
+    [SerializeField] CinemachineImpulseSource source;
+    [SerializeField] CinemachineImpulseListener listener;
+    CinemachineImpulseDefinition definition;
 
 
     private void Awake()
@@ -19,21 +32,33 @@ public class ScreenShake : MonoBehaviour
             instance = this;
         }
 
-        Shake();
+        definition = source.m_ImpulseDefinition;
+        //Shake();
     }
 
-    public void Shake()
+    private void Start()
     {
-        StartCoroutine(ShakeCoroutine());
+        definition.m_ImpulseDuration = sourceDuration;
+        source.m_DefaultVelocity = velocity;
+
+        listener.m_ReactionSettings.m_AmplitudeGain = amplitude;
+        listener.m_ReactionSettings.m_FrequencyGain = frequency;
+        listener.m_ReactionSettings.m_Duration = listenerDuration;
     }
 
-    public IEnumerator ShakeCoroutine()
+    public void Shake(float force)
     {
-        Debug.Log("shake");
-
-        vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = amplitude;
-        yield return new WaitForSeconds(duration);
-        vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-        Debug.Log("fin screenshake"); 
+        //StartCoroutine(ShakeCoroutine());
+        source.GenerateImpulseWithForce(force * impulseForce);
     }
+
+    //public IEnumerator ShakeCoroutine()
+    //{
+    //    Debug.Log("shake");
+    //
+    //    vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = amplitude;
+    //    yield return new WaitForSeconds(duration);
+    //    vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+    //    Debug.Log("fin screenshake"); 
+    //}
 }
