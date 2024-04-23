@@ -10,6 +10,7 @@ public class WallValues
     public static float FeltBounce = .5f;
     public static float BumperBounce = 1.25f;
     public static float VelcroBounce = 0f;
+    public static float IceBounce = .7f;
     #endregion
 
     #region Haptics
@@ -48,5 +49,9 @@ public class WallValues
     public static float VelcroLFH = 0f;
     public static float VelcroHFH = 1f;
     public static float VelcroTH = .2f;
+
+    public static float IceLFH = 0f;
+    public static float IceHFH = 1f;
+    public static float IceTH = .2f;
     #endregion
 }
