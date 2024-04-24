@@ -100,7 +100,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseMenuState(InputAction.CallbackContext context)
     {
-        if (victoryPanel.activeSelf)
+        if (!victoryPanel.activeSelf)
         {
             panelActive = !panelActive;
 
