@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class VictoryLevelLoader : MonoBehaviour
 {
- 
-    public void LoadScene(string sceneName)
+    public void LoadScene(int sceneIndex)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneIndex);
         Time.timeScale = 1.0f;
     }
 
