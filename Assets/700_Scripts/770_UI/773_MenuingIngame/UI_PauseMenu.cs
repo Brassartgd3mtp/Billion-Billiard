@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject OptionFirstbutton;
     public GameObject PauseFirstbutton;
 
+    [SerializeField] private GameObject victoryPanel;
+
     private bool panelActive = false;
 
     void Start()
@@ -36,7 +38,7 @@ public class PauseMenu : MonoBehaviour
                     Cursor.visible = false;
                 }
             }
-            else
+            else if (Cursor.lockState == CursorLockMode.Locked || Cursor.lockState == CursorLockMode.Confined)
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -98,12 +100,17 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseMenuState(InputAction.CallbackContext context)
     {
-        panelActive = !panelActive;
+        if (!victoryPanel.activeSelf)
+        {
+            panelActive = !panelActive;
 
-        if (panelActive)
-            PauseOn();
+            if (panelActive)
+                PauseOn();
+            else
+                PauseOff();
+        }
         else
-            PauseOff();
+            Debug.Log("Can't open Pause menu while being on Victory Screen !");
     }
 
     void PauseOn()
@@ -140,10 +147,7 @@ public class PauseMenu : MonoBehaviour
         InputHandler.Actions.Gamepad.RoomCam.Enable();
         InputHandler.Actions.MouseKeyboard.RoomCam.Enable();
 
-        InputHandler.Actions.Gamepad.RoomCam.Enable();
-        InputHandler.Actions.MouseKeyboard.RoomCam.Enable();
-
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         InputHandler.PlayerControllerEnable();
