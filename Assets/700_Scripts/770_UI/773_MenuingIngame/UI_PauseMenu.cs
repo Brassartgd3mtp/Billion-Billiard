@@ -36,7 +36,7 @@ public class PauseMenu : MonoBehaviour
                     Cursor.visible = false;
                 }
             }
-            else
+            else if (Cursor.lockState == CursorLockMode.Locked || Cursor.lockState == CursorLockMode.Confined)
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -110,12 +110,12 @@ public class PauseMenu : MonoBehaviour
     {
         panel.SetActive(true);
 
-        InputHandler.Actions.Gamepad.GamepadStrenght.Disable();
-        InputHandler.Actions.Gamepad.ThrowPlayer.Disable();
-        InputHandler.Actions.MouseKeyboard.MouseStartDrag.Disable();
-
-        InputHandler.Actions.Gamepad.RoomCam.Disable();
-        InputHandler.Actions.MouseKeyboard.RoomCam.Disable();
+        //InputHandler.Actions.Gamepad.GamepadStrenght.Disable();
+        //InputHandler.Actions.Gamepad.ThrowPlayer.Disable();
+        //InputHandler.Actions.MouseKeyboard.MouseStartDrag.Disable();
+        //
+        //InputHandler.Actions.Gamepad.RoomCam.Disable();
+        //InputHandler.Actions.MouseKeyboard.RoomCam.Disable();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -132,14 +132,14 @@ public class PauseMenu : MonoBehaviour
     {
         panel.SetActive(false);
 
-        InputHandler.Actions.Gamepad.GamepadStrenght.Enable();
-        InputHandler.Actions.Gamepad.ThrowPlayer.Enable();
-        InputHandler.Actions.MouseKeyboard.MouseStartDrag.Enable();
+        //InputHandler.Actions.Gamepad.GamepadStrenght.Enable();
+        //InputHandler.Actions.Gamepad.ThrowPlayer.Enable();
+        //InputHandler.Actions.MouseKeyboard.MouseStartDrag.Enable();
+        //
+        //InputHandler.Actions.Gamepad.RoomCam.Enable();
+        //InputHandler.Actions.MouseKeyboard.RoomCam.Enable();
 
-        InputHandler.Actions.Gamepad.RoomCam.Enable();
-        InputHandler.Actions.MouseKeyboard.RoomCam.Enable();
-
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         InputHandler.PlayerControllerEnable();

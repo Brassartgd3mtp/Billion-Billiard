@@ -7,9 +7,14 @@ public class VictoryScreen : MonoBehaviour
 {
     [SerializeField] private GameObject firstButton;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(firstButton);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     // Update is called once per frame
@@ -26,7 +31,7 @@ public class VictoryScreen : MonoBehaviour
         }
         else
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
     }
