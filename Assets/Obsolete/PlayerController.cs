@@ -248,7 +248,7 @@ public class PlayerControllerd : MonoBehaviour
     {
         if (dragEnabled)
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             dragEnabled = false;
             
             posBeforeHit = transform.position;

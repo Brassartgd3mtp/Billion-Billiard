@@ -280,7 +280,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bd4ab856-b143-45cb-9c44-7be20cb3dbac"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -336,45 +336,12 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""dc736d58-ed1b-4f32-b4bb-06a8a9ff11fd"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Reload Scene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""46b72e63-06b2-4264-920b-354c3e160e83"",
                     ""path"": ""<Keyboard>/n"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""No-Clip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""763a894d-de23-499a-a4ce-a6fb700aa1ff"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""No-Clip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""02ac39ac-505b-4e67-a967-304219bdc89c"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""No-Clip Control"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
