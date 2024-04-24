@@ -43,6 +43,7 @@ public class VFXScriptableObject : ScriptableObject
                 return prefabParticleVelcro;
 
             case ObstacleType.NPC:
+                soundObstacleId = 30;
                 return prefabParticleNPC;
 
             case ObstacleType.Props:

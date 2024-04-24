@@ -11,6 +11,7 @@ public class ObstacleSound : MonoBehaviour
     {
         AudioSource audioSource = GetComponent<AudioSource>();
         AudioManager.Instance.PlaySound(vFXScriptableObject.soundObstacleId, audioSource);
+        audioSource.clip = null;
     }
 
     private void OnCollisionEnter(Collision collision)
