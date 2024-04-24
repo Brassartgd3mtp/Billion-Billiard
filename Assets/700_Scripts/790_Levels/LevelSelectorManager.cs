@@ -25,11 +25,23 @@ public class LevelSelectorManager : MonoBehaviour
 
     [SerializeField] private GameObject Content;
 
+
+    [Header("Background")]
+ 
+    [SerializeField] private Image backgroundImage;
+ //   [SerializeField] private bool updatingImage = false;
+ //   private float baseTimer = 0.2f;
+  //  private float timer;
+  //  [SerializeField] private Image fadingImage;
+
     public void Start()
     {
         ActualPanel = Panels[PanelIndex];
         StartCoroutine(MovePanel(-PanelIndex));
+   //     timer = baseTimer;
     }
+
+
 
     public void NextPanel()
     {
@@ -52,6 +64,20 @@ public class LevelSelectorManager : MonoBehaviour
         }
     }
 
+  //  private void Update()
+  //  {
+    //    if(updatingImage) 
+     //   {
+    //        baseTimer -= Time.deltaTime;
+     //       if (baseTimer >= 0)
+     //       {
+     //           DoFading(baseTimer);
+     //       }
+     //       else Refade(baseTimer);
+    //    }
+    //    Debug.Log(fadingImage.color);
+  //  }
+
     public IEnumerator MovePanel(int xValue)
     {
         RectTransform rectTransform = Content.GetComponent<RectTransform>();
@@ -68,6 +94,7 @@ public class LevelSelectorManager : MonoBehaviour
         LeftArrow.enabled = true;
         RightArrow.enabled = true;
 
+        UpdateBackgroundImage();
         CheckIfNextPanelIsLocked();
         yield break;
     }
@@ -125,4 +152,34 @@ public class LevelSelectorManager : MonoBehaviour
             LeftArrow.enabled = true;
         }
     }
+
+    private void UpdateBackgroundImage() // update the background image in the level selector using the variable BackgroundImage of the current SO
+    {
+      //  updatingImage = true;
+        backgroundImage.sprite = SO_Levels[PanelIndex].BackgroundImage;
+        
+    }
+ //   private void DoFading(float _timer)
+  //  {
+   //     {
+   //         if(_timer > 0)
+   //         {
+   //             fadingImage.color -= new Color(0.01f, 0.01f, 0.01f, 0f);
+   //             _timer -= Time.deltaTime;
+    //        }
+//
+   //     }
+ //   }
+
+  //  private void Refade(float _timer)
+   // {
+    //    {
+    //        if(_timer > 0)
+    //        {
+    //            fadingImage.color += new Color(0.01f, 0.01f, 0.01f, 0f);
+    //            _timer -= Time.deltaTime;
+     //       }
+     //       else updatingImage = false;
+   //     }
+  //  }
 }
