@@ -37,9 +37,9 @@ public class AddValueUI : MonoBehaviour
             ShakeScript.StartShake();
         }
     }
-    public void SoundMoney(float pitchvalue)
-    {
-        audioSource.pitch = pitchvalue;
-        AudioManager.Instance.PlaySound(22, audioSource);
-    }
+    //public void SoundMoney(float pitchvalue)
+    //{
+    //    audioSource.pitch = pitchvalue;
+    //    AudioManager.Instance.PlaySound(22, audioSource);
+    //}
 }

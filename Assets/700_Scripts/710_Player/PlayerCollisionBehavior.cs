@@ -88,7 +88,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
         {
             AddMoney(moneyStats.value); //Actually add th emoney
             addValue.updateUI(moneyStats.value);
-            addValue.SoundMoney(moneyStats.pitchValue);
+            //addValue.SoundMoney(moneyStats.pitchValue);
             uI_Stats.UpdateStats(); // Update the money in the UI
             other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
             lootAnimation.StartAnimation();
