@@ -280,7 +280,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bd4ab856-b143-45cb-9c44-7be20cb3dbac"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
