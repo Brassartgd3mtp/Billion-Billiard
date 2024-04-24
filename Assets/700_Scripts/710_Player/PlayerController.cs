@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         if (ThrowStrength > 0.2f)
         {
-            ScreenShake.instance.Shake(ThrowStrength / StrengthFactor);
+            //ScreenShake.instance.Shake(ThrowStrength / StrengthFactor);
 
             rb.drag = 1;
 
