@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
             rb.drag = 1;
 
-            SoundShot();    
+            SoundShot();
             StartCoroutine(Haptic(ThrowStrength / StrengthFactor, ThrowStrength / StrengthFactor, .4f));
 
             timeSinceThrow = 0;
@@ -135,15 +135,6 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
 
-        if (rb.velocity.magnitude < .7f)
-        {
-            MyAnimator.SetBool("Player_Roll", false);
-        }
-        else
-        {
-            MyAnimator.SetBool("Player_Roll", true);
-        }
-
         //Clamp Speed
         rb.velocity =
             rb.velocity.magnitude < maximumVelocity ?
@@ -157,27 +148,27 @@ public class PlayerController : MonoBehaviour
         switch (obstacle.obstacleType)
         {
             case Obstacle.ObstacleType.Concrete:
-                    StartCoroutine(Haptic(WallValues.ConcreteLFH, WallValues.ConcreteHFH, WallValues.ConcreteTH));
-                    rb.velocity = reflect * Mathf.Max(speed * WallValues.ConcreteBounce, 0f);
+                StartCoroutine(Haptic(WallValues.ConcreteLFH, WallValues.ConcreteHFH, WallValues.ConcreteTH));
+                rb.velocity = reflect * Mathf.Max(speed * WallValues.ConcreteBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.Rubber:
-                    StartCoroutine(Haptic(WallValues.RubberLFH, WallValues.RubberHFH, WallValues.RubberTH));
-                    rb.velocity = reflect * Mathf.Max(speed * WallValues.RubberBounce, 0f);
+                StartCoroutine(Haptic(WallValues.RubberLFH, WallValues.RubberHFH, WallValues.RubberTH));
+                rb.velocity = reflect * Mathf.Max(speed * WallValues.RubberBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.Felt:
-                    StartCoroutine(Haptic(WallValues.FeltLFH, WallValues.FeltHFH, WallValues.FeltTH));
-                    rb.velocity = reflect * Mathf.Max(speed * WallValues.FeltBounce, 0f);
+                StartCoroutine(Haptic(WallValues.FeltLFH, WallValues.FeltHFH, WallValues.FeltTH));
+                rb.velocity = reflect * Mathf.Max(speed * WallValues.FeltBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.NPC:
-                    StartCoroutine(Haptic(WallValues.PawnLFH, WallValues.PawnHFH, WallValues.PawnTH));
+                StartCoroutine(Haptic(WallValues.PawnLFH, WallValues.PawnHFH, WallValues.PawnTH));
                 break;
 
             case Obstacle.ObstacleType.Bumper:
-                    StartCoroutine(Haptic(WallValues.BumperLFH, WallValues.BumperHFH, WallValues.BumperTH));
-                    rb.velocity = reflect * Mathf.Max(speed * WallValues.BumperBounce, 0f);
+                StartCoroutine(Haptic(WallValues.BumperLFH, WallValues.BumperHFH, WallValues.BumperTH));
+                rb.velocity = reflect * Mathf.Max(speed * WallValues.BumperBounce, 0f);
                 break;
 
             case Obstacle.ObstacleType.Velcro:
@@ -221,7 +212,7 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = reflect * Mathf.Max(speed * WallValues.IceBounce, 0f);
                 }
             }
-            
+
             rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
             SwitchObstacle(obstacle, speed, reflect);
@@ -333,7 +324,6 @@ public class PlayerController : MonoBehaviour
         {
             gaugeObject.SetActive(true);
             isGaugeActive = true;
-            MyAnimator.SetBool("PreparationShoot", true);
             SoundGauge();
         }
         if (context.canceled)
@@ -342,7 +332,6 @@ public class PlayerController : MonoBehaviour
             isGaugeActive = false;
             gaugeFill.fillAmount = 0;
             audioSource.Stop();
-            MyAnimator.SetBool("PreparationShoot", false);
 
         }
     }
@@ -362,6 +351,40 @@ public class PlayerController : MonoBehaviour
 
         PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 8);
         PowerLineRendererOutline.SetPosition(1, Vector3.back * ThrowStrength / 7.9f);
+
+
+        if (rb.velocity.magnitude < .7f)
+        {
+            MyAnimator.SetBool("Player_Roll", false);
+        }
+        else
+        {
+            MyAnimator.SetBool("Player_Roll", true);
+        }
+        
+        if (ThrowStrength == 0f)
+        {
+            MyAnimator.SetBool("PreparationShoot_1", false);
+            MyAnimator.SetBool("PreparationShoot_2", false);
+        }
+        else
+        {
+            MyAnimator.SetBool("PreparationShoot_1", false);
+            MyAnimator.SetBool("PreparationShoot_2", true);
+            //if (ThrowStrength > 0f && ThrowStrength < 20f)
+            //{
+            //    MyAnimator.SetBool("PreparationShoot_1", true);
+            //    MyAnimator.SetBool("PreparationShoot_2", false);
+            //
+            //
+            //}
+            //else if (ThrowStrength >= 20f)
+            //{
+            //    MyAnimator.SetBool("PreparationShoot_1", false);
+            //    MyAnimator.SetBool("PreparationShoot_2", true);
+            //
+            //}
+        }
     }
 
 
@@ -387,12 +410,7 @@ public class PlayerController : MonoBehaviour
             // Set a better magnitude for the direction here
             //SetLookDirection(-(context.ReadValue<Vector2>() - MouseStart).normalized);
             SetLookDirection((context.ReadValue<Vector2>() - MouseStart).normalized);
-
-            MyAnimator.SetBool("PreparationShoot", true);
         }
-        else
-            MyAnimator.SetBool("PreparationShoot", false);
-
     }
 
     /// <summary>
