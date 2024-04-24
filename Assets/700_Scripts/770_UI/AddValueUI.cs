@@ -8,9 +8,11 @@ public class AddValueUI : MonoBehaviour
     public GameObject PopUpText;
     public GameObject AddedValueEmptyParent;
     public Shake ShakeScript;
+    public AudioSource audioSource;
     void Start()
     {
         ShakeScript = GetComponentInChildren<Shake>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -34,8 +36,10 @@ public class AddValueUI : MonoBehaviour
             ShakeScript.shakeIntensity = ShakeScript.baseShakeIntensity + value * 0.1f;
             ShakeScript.StartShake();
         }
-
-
-
+    }
+    public void SoundMoney(float pitchvalue)
+    {
+        audioSource.pitch = pitchvalue;
+        AudioManager.Instance.PlaySound(22, audioSource);
     }
 }

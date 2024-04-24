@@ -27,16 +27,19 @@ public class VFXScriptableObject : ScriptableObject
                 return prefabParticleConcrete;
 
             case ObstacleType.Rubber:
+                soundObstacleId = 25;
                 return prefabParticleRubber;
 
             case ObstacleType.Felt:
-                soundObstacleId = 7;
+                soundObstacleId = 23;
                 return prefabParticleFelt;
 
             case ObstacleType.Ice:
+                soundObstacleId = 24;
                 return prefabParticleIce;
 
             case ObstacleType.Velcro:
+                soundObstacleId = 27;
                 return prefabParticleVelcro;
 
             case ObstacleType.NPC:
