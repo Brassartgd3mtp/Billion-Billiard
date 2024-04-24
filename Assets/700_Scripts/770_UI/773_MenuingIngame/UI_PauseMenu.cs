@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject OptionFirstbutton;
     public GameObject PauseFirstbutton;
 
+    [SerializeField] private GameObject victoryPanel;
+
     private bool panelActive = false;
 
     void Start()
@@ -40,7 +42,7 @@ public class PauseMenu : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-            }
+            }   
         }
     }
 
@@ -98,24 +100,30 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseMenuState(InputAction.CallbackContext context)
     {
-        panelActive = !panelActive;
+        if (victoryPanel.activeSelf)
+        {
+            panelActive = !panelActive;
 
-        if (panelActive)
-            PauseOn();
+            if (panelActive)
+                PauseOn();
+            else
+                PauseOff();
+        }
         else
-            PauseOff();
+            Debug.Log("Can't open Pause menu while being on Victory Screen !");
     }
 
     void PauseOn()
     {
         panel.SetActive(true);
 
-        //InputHandler.Actions.Gamepad.GamepadStrenght.Disable();
-        //InputHandler.Actions.Gamepad.ThrowPlayer.Disable();
-        //InputHandler.Actions.MouseKeyboard.MouseStartDrag.Disable();
-        //
-        //InputHandler.Actions.Gamepad.RoomCam.Disable();
-        //InputHandler.Actions.MouseKeyboard.RoomCam.Disable();
+        InputHandler.Actions.Gamepad.GamepadStrenght.Disable();
+        InputHandler.Actions.Gamepad.ThrowPlayer.Disable();
+        InputHandler.Actions.MouseKeyboard.MouseStartDrag.Disable();
+        InputHandler.Actions.MouseKeyboard.MouseStrenght.Disable();
+        
+        InputHandler.Actions.Gamepad.RoomCam.Disable();
+        InputHandler.Actions.MouseKeyboard.RoomCam.Disable();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -123,7 +131,6 @@ public class PauseMenu : MonoBehaviour
         InputSystem.ResetHaptics();
         InputHandler.PlayerControllerDisable();
         InputHandler.TrajectoryPredictionDisable();
-        InputHandler.RoomCamDisable();
 
         Time.timeScale = 0f;
     }
@@ -132,19 +139,19 @@ public class PauseMenu : MonoBehaviour
     {
         panel.SetActive(false);
 
-        //InputHandler.Actions.Gamepad.GamepadStrenght.Enable();
-        //InputHandler.Actions.Gamepad.ThrowPlayer.Enable();
-        //InputHandler.Actions.MouseKeyboard.MouseStartDrag.Enable();
-        //
-        //InputHandler.Actions.Gamepad.RoomCam.Enable();
-        //InputHandler.Actions.MouseKeyboard.RoomCam.Enable();
+        InputHandler.Actions.Gamepad.GamepadStrenght.Enable();
+        InputHandler.Actions.Gamepad.ThrowPlayer.Enable();
+        InputHandler.Actions.MouseKeyboard.MouseStartDrag.Enable();
+        InputHandler.Actions.MouseKeyboard.MouseStrenght.Enable();
+        
+        InputHandler.Actions.Gamepad.RoomCam.Enable();
+        InputHandler.Actions.MouseKeyboard.RoomCam.Enable();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         InputHandler.PlayerControllerEnable();
         InputHandler.TrajectoryPredictionEnable();
-        InputHandler.RoomCamEnable();
 
         Time.timeScale = 1f;
     }
