@@ -38,6 +38,8 @@ public class OneWayDoor : MonoBehaviour
         isOpen = true;
         StartCoroutine(UpdateDoorPos(lockedDoor.gameObject, undergroundEndPos));
         lockedDoor.Unlock = true;
+        
+        SoundDoorOpen();
     }
 
     void CloseDoor()
@@ -47,6 +49,8 @@ public class OneWayDoor : MonoBehaviour
         isOpen = false;
         StartCoroutine(UpdateDoorPos(wall, startPos));
         enabled = false;
+
+        SoundDoorClose();
     }
 
     IEnumerator UpdateDoorPos(GameObject mesh, Vector3 endPos)
@@ -80,5 +84,16 @@ public class OneWayDoor : MonoBehaviour
             StartCoroutine(DoorState());
 
         yield break;
+    }
+
+    private void SoundDoorOpen()
+    {
+        AudioSource audioSource = GetComponentInChildren<AudioSource>();
+        AudioManager.Instance.PlaySound(28, audioSource);
+    }
+    private void SoundDoorClose()
+    {
+        AudioSource audioSource = GetComponentInChildren<AudioSource>();
+        AudioManager.Instance.PlaySound(29, audioSource);
     }
 }
