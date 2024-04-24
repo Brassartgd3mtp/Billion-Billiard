@@ -65,6 +65,9 @@ public class SwapControls : MonoBehaviour
         ToGamepad();
         InputHandler.Actions.Swap.ToMouseKeyboard.Disable();
 
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         yield return new WaitForSeconds(.1f);
         InputHandler.Actions.Swap.ToMouseKeyboard.Enable();
 
