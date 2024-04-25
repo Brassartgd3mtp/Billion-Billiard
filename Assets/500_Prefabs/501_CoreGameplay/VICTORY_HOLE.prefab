@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6682252987433905114}
   - component: {fileID: 2581487974479612655}
-  - component: {fileID: 7640426532894427575}
+  - component: {fileID: 4213849858114552833}
   m_Layer: 0
   m_Name: VICTORY_HOLE
   m_TagString: Untagged
@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevel: 0
   VictoryScreen: {fileID: 0}
---- !u!135 &7640426532894427575
-SphereCollider:
+--- !u!65 &4213849858114552833
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -67,7 +67,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3.5
+  m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5583701772475544905
 GameObject:
