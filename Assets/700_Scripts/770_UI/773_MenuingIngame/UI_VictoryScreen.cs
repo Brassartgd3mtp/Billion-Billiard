@@ -6,28 +6,29 @@ using UnityEngine.EventSystems;
 public class VictoryScreen : MonoBehaviour
 {
     [SerializeField] private GameObject firstButton;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
         if (SwapControls.state == CurrentState.Gamepad)
         {
-            if (EventSystem.current.currentSelectedGameObject == null)
-            {
+            Debug.Log(EventSystem.current.currentSelectedGameObject);
+
+            if (EventSystem.current.currentSelectedGameObject != firstButton)
                 EventSystem.current.SetSelectedGameObject(firstButton);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
         }
     }
+
+    // Update is called once per frame
+    //void Update()
+    //{
+    //    if (SwapControls.state == CurrentState.MouseKeyboard)
+    //    {
+    //        Debug.Log(EventSystem.current.currentSelectedGameObject);
+    //    }
+    //    else
+    //    {
+    //        Cursor.lockState = CursorLockMode.Confined;
+    //        Cursor.visible = true;
+    //    }
+    //}
 }
