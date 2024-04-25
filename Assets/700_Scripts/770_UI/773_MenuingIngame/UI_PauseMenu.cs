@@ -75,8 +75,8 @@ public class PauseMenu : MonoBehaviour
 
     public void OnMainMenuButtonClick()
     {
-        // Recharge la scène "Main Menu"
-        SceneManager.LoadScene(0);
+        // Recharge la scène "Level Selector"
+        SceneManager.LoadScene(1);
         Time.timeScale = 1f;
     }
 

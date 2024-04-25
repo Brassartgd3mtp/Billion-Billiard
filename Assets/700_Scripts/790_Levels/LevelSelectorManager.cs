@@ -25,11 +25,19 @@ public class LevelSelectorManager : MonoBehaviour
 
     [SerializeField] private GameObject Content;
 
+
+    [Header("Background")]
+ 
+    [SerializeField] private Image backgroundImage;
+    [SerializeField] Animator backgroundImageAnimator;
+
     public void Start()
     {
         ActualPanel = Panels[PanelIndex];
         StartCoroutine(MovePanel(-PanelIndex));
     }
+
+
 
     public void NextPanel()
     {
@@ -38,6 +46,7 @@ public class LevelSelectorManager : MonoBehaviour
         LeftArrow.enabled = false;
         RightArrow.enabled = false;
         StartCoroutine(MovePanel(-1));
+        backgroundImageAnimator.SetTrigger("MakeTransition");
     }
 
     public void PrevPanel() 
@@ -49,6 +58,7 @@ public class LevelSelectorManager : MonoBehaviour
             LeftArrow.enabled = false;
             RightArrow.enabled = false;
             StartCoroutine(MovePanel(1));
+            backgroundImageAnimator.SetTrigger("MakeTransition");
         }
     }
 
@@ -68,6 +78,7 @@ public class LevelSelectorManager : MonoBehaviour
         LeftArrow.enabled = true;
         RightArrow.enabled = true;
 
+        UpdateBackgroundImage();
         CheckIfNextPanelIsLocked();
         yield break;
     }
@@ -124,5 +135,10 @@ public class LevelSelectorManager : MonoBehaviour
             LeftArrow.gameObject.SetActive(true);
             LeftArrow.enabled = true;
         }
+    }
+
+    private void UpdateBackgroundImage() // update the background image in the level selector using the variable BackgroundImage of the current SO
+    {
+        backgroundImage.sprite = SO_Levels[PanelIndex].BackgroundImage;
     }
 }

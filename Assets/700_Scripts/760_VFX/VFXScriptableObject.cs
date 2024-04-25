@@ -15,6 +15,7 @@ public class VFXScriptableObject : ScriptableObject
     public GameObject prefabParticleNPC;
     public GameObject prefabParticleProps;
     public GameObject prefabParticleBumper;
+    public GameObject prefabParticleIceAngle;
     public GameObject prefabParticleDefault;
     public int soundObstacleId;
 
@@ -52,6 +53,10 @@ public class VFXScriptableObject : ScriptableObject
             case ObstacleType.Bumper:
                 soundObstacleId = 9;
                 return prefabParticleBumper;
+
+            case ObstacleType.IceAngle:
+                soundObstacleId = 24;
+                return prefabParticleIceAngle;
 
             default:
                 return prefabParticleDefault;
