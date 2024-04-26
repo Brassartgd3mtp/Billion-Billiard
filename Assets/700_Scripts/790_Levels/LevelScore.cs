@@ -6,27 +6,74 @@ public class LevelScore : MonoBehaviour
 {
     [Header("References")]
 
-    private MoneyStats moneyStatsScript; // a reference for the script that holds the ingots vvalues
-
+    private MoneyStats moneyStatsScript; // a reference to the script that holds the ingots vvalues
+    private PlayerStats playerStatsScript; // a reference to the script that holds the current score of the player
 
     [Header("Ingot Lists")] // the lists of all the differents ingots
 
-    [SerializeField] private List<GameObject> bronzeIngots = new List<GameObject>();
-    [SerializeField] private List<GameObject> silverIngots = new List<GameObject>();
-    [SerializeField] private List<GameObject> goldIngots = new List<GameObject>();
-    [SerializeField] private List<GameObject> platiniumIngots = new List<GameObject>();
+    private List<GameObject> bronzeIngots = new List<GameObject>();
+    private List<GameObject> silverIngots = new List<GameObject>();
+    private List<GameObject> goldIngots = new List<GameObject>();
+    private List<GameObject> bigGoldIngots = new List<GameObject>();
+    private List<GameObject> platiniumIngots = new List<GameObject>();
+
 
     [Header("Score")] // all the total score values for each list of ingots
 
     private int bronzeScore;
     private int silverScore;
     private int goldScore;
+    private int bigGoldScore;
     private int platiniumScore;
 
     public int TotalScore;
 
+    [Header("Thresholds")] // the differents score thresholds the player must reach to increase their rating
+
+    private int Threshold1; // the value the player must reach to get a two star rating
+    private int Threshold2; // the value the player must reach to get a three star rating
+
+    [Header("Level Timer")] // The timer of the level
+
+    private float levelTimer;
+
+
+
     private void Awake()
     {
+
+    // First we find all the ingots and put then in the lists
+
+        // we create an array that will contain all the ingots
+        MoneyStats[] allIngots = FindObjectsByType<MoneyStats>(FindObjectsInactive.Exclude,FindObjectsSortMode.None);
+        
+        //then we sort the ingots to get their value later
+        foreach(MoneyStats ingot in allIngots)
+        {
+            if (ingot.type == IngotType.Bronze)
+            {
+                bronzeIngots.Add(ingot.gameObject);
+            }
+            else if (ingot.type == IngotType.Silver)
+            {
+                silverIngots.Add(ingot.gameObject);
+            }
+            else if (ingot.type == IngotType.Gold)
+            {
+                goldIngots.Add(ingot.gameObject);
+            }
+            else if (ingot.type == IngotType.BigGold)
+            {
+                bigGoldIngots.Add(ingot.gameObject);
+            }
+            else if (ingot.type == IngotType.Platinium)
+            {
+                platiniumIngots.Add(ingot.gameObject);
+            }
+            else break;
+        }
+
+     // Then we calculate the total score avaliable in the level by summing up the score of all the types of ingots
 
         // Get the score of all the bronze ingots
         if (bronzeIngots.Count > 0)
@@ -58,6 +105,16 @@ public class LevelScore : MonoBehaviour
         }
         else goldScore = 0;
 
+        // Get the score of all the big gold ingots
+        if (bigGoldIngots.Count > 0)
+        {
+            if (bigGoldIngots[0].gameObject.TryGetComponent(out MoneyStats moneyStats))
+            {
+                bigGoldScore = moneyStats.value * bigGoldIngots.Count;
+            }
+        }
+        else bigGoldScore = 0;
+
         // Get the score of all the platinium ingots
         if (platiniumIngots.Count > 0)
         {
@@ -70,11 +127,12 @@ public class LevelScore : MonoBehaviour
 
 
         // Get the total score
-        TotalScore = bronzeScore + silverScore + goldScore + platiniumScore;
+        TotalScore = bronzeScore + silverScore + goldScore + bigGoldScore + platiniumScore;
 
         Debug.Log(bronzeScore);
         Debug.Log(silverScore);
         Debug.Log(goldScore);
+        Debug.Log(bigGoldScore);
         Debug.Log(platiniumScore);
         Debug.Log(TotalScore);
     }
