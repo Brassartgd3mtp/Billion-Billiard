@@ -34,7 +34,7 @@ public class EndLevel : MonoBehaviour
                 Cursor.visible = true;
             }
             
-            Time.timeScale = 0f;
+            // Time.timeScale = 0f;
         }
     }
 

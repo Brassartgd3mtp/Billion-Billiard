@@ -129,12 +129,6 @@ public class LevelScore : MonoBehaviour
         // Get the total score
         TotalScore = bronzeScore + silverScore + goldScore + bigGoldScore + platiniumScore;
 
-        Debug.Log(bronzeScore);
-        Debug.Log(silverScore);
-        Debug.Log(goldScore);
-        Debug.Log(bigGoldScore);
-        Debug.Log(platiniumScore);
-        Debug.Log(TotalScore);
     }
 
 

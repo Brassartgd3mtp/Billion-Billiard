@@ -10,27 +10,39 @@ public class EndLevelProgressBar : MonoBehaviour
     private LevelScore levelScoreScript;
     private PlayerStats playerStatsScript;
 
-
     private Slider slider;
+    private ParticleSystem progressBarParticleSystem;
+
+    [Header("SliderBehaviour")]
+
     private float targetProgress;
-    private float fillspeed = 0.5f;
+    private float fillspeed = 0.25f;
+    private float currentScore; // it's moneyCount but float instead of int
     private void Awake()
     {
         slider = GetComponent<Slider>();
+        progressBarParticleSystem = GetComponentInChildren<ParticleSystem>();
+
         levelScoreScript = FindAnyObjectByType<LevelScore>();
-        playerStatsScript = FindAnyObjectByType<PlayerStats>();
+        playerStatsScript = PlayerStats.Instance;
+
+        currentScore = playerStatsScript.moneyCount;
     }
 
     private void Start()
     {
-        IncrementProgress(playerStatsScript.moneyCount/levelScoreScript.TotalScore);
+        IncrementProgress(currentScore / levelScoreScript.TotalScore);
     }
     private void Update()
     {
-        if(slider.value < targetProgress)
+        if (slider.value < targetProgress)
         {
             slider.value += fillspeed * Time.deltaTime;
+
+            if (!progressBarParticleSystem.isPlaying)
+                progressBarParticleSystem.Play();
         }
+        else progressBarParticleSystem.Stop();
     }
 
     public void IncrementProgress(float newProgress)
