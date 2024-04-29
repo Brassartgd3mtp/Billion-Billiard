@@ -5,10 +5,25 @@ using UnityEngine.EventSystems;
 
 public class VictoryScreen : MonoBehaviour
 {
+    [Header("References")]
+
+    private StarRating starRatingScript;
+    private LevelTimer timerScript;
+
+    [Header("Objects")]
+
     [SerializeField] private GameObject firstButton;
 
     private void OnEnable()
     {
+        timerScript = FindAnyObjectByType<LevelTimer>();
+        timerScript.TimeStarted = false;
+        starRatingScript = FindAnyObjectByType<StarRating>();
+        starRatingScript.HasWon = true;
+        starRatingScript.numberOfStars++;
+        starRatingScript.CalculateStarRating();
+        
+
         if (SwapControls.state == CurrentState.Gamepad)
         {
             Debug.Log(EventSystem.current.currentSelectedGameObject);

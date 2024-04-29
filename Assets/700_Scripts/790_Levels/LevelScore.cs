@@ -23,7 +23,8 @@ public class LevelScore : MonoBehaviour
     private int bigGoldScore;
     private int platiniumScore;
 
-    public int TotalIngotScore;
+    public float PercentageNecessaryForMaxScore;
+    [HideInInspector] public int TotalIngotScore;
 
     [Header("Thresholds")] // the differents score thresholds the player must reach to increase their rating
 

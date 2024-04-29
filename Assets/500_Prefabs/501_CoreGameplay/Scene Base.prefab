@@ -31080,7 +31080,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 2287068010311329389}
   m_HandleRect: {fileID: 0}
@@ -33652,6 +33652,8 @@ GameObject:
   - component: {fileID: 6764072660880900616}
   - component: {fileID: 6581566936166033366}
   - component: {fileID: 2098600946818039568}
+  - component: {fileID: 1486504069822048801}
+  - component: {fileID: 5768922805587319583}
   m_Layer: 0
   m_Name: ScoreManager
   m_TagString: Untagged
@@ -33686,6 +33688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 488b149e374c8be4e971ddc919b8f1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PercentageNecessaryForMaxScore: 85
   TotalIngotScore: 0
 --- !u!114 &6581566936166033366
 MonoBehaviour:
@@ -33699,6 +33702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa3c90732300be41a36abe32e15ea1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerScore: 0
 --- !u!114 &2098600946818039568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33712,6 +33716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerInSeconds: 0
+  TimeStarted: 1
   goldMedalThresholdInSeconds: 30
   silverMedalThresholdInSeconds: 45
   bronzeMedalThresholdInSeconds: 60
@@ -33720,6 +33725,37 @@ MonoBehaviour:
   bronzeScore: 100
   FinalTimerScore: 0
   TXT_Timer: {fileID: 1740682969163923587}
+--- !u!114 &1486504069822048801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6856900943767378568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7cc56df2b6dba340a774624242af8d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstStar: {fileID: 0}
+  secondStar: {fileID: 0}
+  thirdStar: {fileID: 0}
+  scoreForStarTwo: 200
+  scoreForStarThree: 500
+  numberOfStars: 0
+  HasWon: 0
+--- !u!114 &5768922805587319583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6856900943767378568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb4992aecda014c4bab9933899037b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6955014769310623169
 GameObject:
   m_ObjectHideFlags: 0
@@ -34742,7 +34778,7 @@ Transform:
   m_GameObject: {fileID: 7407205603221401091}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 20.493502, z: 0.0000023841858}
+  m_LocalPosition: {x: 0, y: 20.700003, z: 0.0000023841858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

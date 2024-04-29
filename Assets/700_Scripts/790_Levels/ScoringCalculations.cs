@@ -9,20 +9,23 @@ public class ScoringCalculations : MonoBehaviour
     private LevelTimer levelTimerScript;
     private PlayerStats playerStatsScript;
 
+    [Header("Scores")]
+
+    public float PlayerScore;
+
     private void Awake()
     {
-        levelTimerScript = FindAnyObjectByType<LevelTimer>();
-        levelScoreScript = FindAnyObjectByType<LevelScore>();
+        levelTimerScript = GetComponent<LevelTimer>();
+        levelScoreScript = GetComponent<LevelScore>();
         playerStatsScript = FindAnyObjectByType<PlayerStats>();
-
-        Debug.Log(playerStatsScript);
     }
 
     public float CalculateTotalScore()
     {
+
         float scoreIngot = levelScoreScript.TotalIngotScore;
         float scoreTimer = levelTimerScript.GoldScore;
-        float total = scoreIngot + scoreTimer;
+        float total = scoreIngot*levelScoreScript.PercentageNecessaryForMaxScore/100 + scoreTimer;
 
         return total;
     }
@@ -32,8 +35,8 @@ public float CalculatePlayerScore()
 
         float scoreMoney = playerStatsScript.moneyCount;
         float scoreTimer = levelTimerScript.FinalTimerScore;
-        float total = scoreMoney + scoreTimer;
+        PlayerScore = scoreMoney + scoreTimer;
 
-        return total;
+        return PlayerScore;
     }
 }

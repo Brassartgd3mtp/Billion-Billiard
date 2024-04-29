@@ -10,10 +10,10 @@ public class LevelTimer : MonoBehaviour
 
     [Header("Time logic")]
 
-    [SerializeField] private float timerInSeconds;
-    private bool timeStarted = true;
-    private float minutes;
-    private float seconds;
+    public float TimerInSeconds;
+    public bool TimeStarted = true;
+    public float Minutes;
+    public float Seconds;
 
     [Header("Medals Timers")]
 
@@ -36,41 +36,46 @@ public class LevelTimer : MonoBehaviour
 
     void Update()
     {
-        if (timeStarted == true)
+        if (TimeStarted == true)
         {
-            timerInSeconds += Time.deltaTime;
+            TimerInSeconds += Time.deltaTime;
             CalculateTime();
         }
-        if(timerInSeconds <= bronzeMedalThresholdInSeconds + 1)
+        if(TimerInSeconds <= bronzeMedalThresholdInSeconds + 1)
         {
             CheckForMedal();
         }
 
-        if (timerInSeconds < 0)
+        if (TimerInSeconds < 0)
         {
-            timerInSeconds = 0;
+            TimerInSeconds = 0;
         }
     }
 
     private void CalculateTime()
     {
-        minutes = Mathf.Floor(timerInSeconds / 60);
-        seconds = timerInSeconds % 60;
+        Minutes = Mathf.Floor(TimerInSeconds / 60);
+        Seconds = TimerInSeconds % 60;
 
-        TXT_Timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        TXT_Timer.text = string.Format("{0:00}:{1:00}", Minutes, Seconds);
+    }
+
+    public float GetTimer()
+    {
+        return TimerInSeconds;
     }
 
     private void CheckForMedal()
     {
-        if(timerInSeconds < goldMedalThresholdInSeconds)
+        if(TimerInSeconds < goldMedalThresholdInSeconds)
         {
             FinalTimerScore = GoldScore;
         }
-        else if(timerInSeconds < silverMedalThresholdInSeconds) 
+        else if(TimerInSeconds < silverMedalThresholdInSeconds) 
         { 
             FinalTimerScore = silverScore; 
         }
-        else if(timerInSeconds < bronzeMedalThresholdInSeconds)
+        else if(TimerInSeconds < bronzeMedalThresholdInSeconds)
         {
             FinalTimerScore = bronzeScore;
         }
