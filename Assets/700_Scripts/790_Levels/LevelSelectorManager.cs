@@ -29,16 +29,12 @@ public class LevelSelectorManager : MonoBehaviour
     [Header("Background")]
  
     [SerializeField] private Image backgroundImage;
- //   [SerializeField] private bool updatingImage = false;
- //   private float baseTimer = 0.2f;
-  //  private float timer;
-  //  [SerializeField] private Image fadingImage;
+    [SerializeField] Animator backgroundImageAnimator;
 
     public void Start()
     {
         ActualPanel = Panels[PanelIndex];
         StartCoroutine(MovePanel(-PanelIndex));
-   //     timer = baseTimer;
     }
 
 
@@ -50,6 +46,7 @@ public class LevelSelectorManager : MonoBehaviour
         LeftArrow.enabled = false;
         RightArrow.enabled = false;
         StartCoroutine(MovePanel(-1));
+        backgroundImageAnimator.SetTrigger("MakeTransition");
     }
 
     public void PrevPanel() 
@@ -61,22 +58,9 @@ public class LevelSelectorManager : MonoBehaviour
             LeftArrow.enabled = false;
             RightArrow.enabled = false;
             StartCoroutine(MovePanel(1));
+            backgroundImageAnimator.SetTrigger("MakeTransition");
         }
     }
-
-  //  private void Update()
-  //  {
-    //    if(updatingImage) 
-     //   {
-    //        baseTimer -= Time.deltaTime;
-     //       if (baseTimer >= 0)
-     //       {
-     //           DoFading(baseTimer);
-     //       }
-     //       else Refade(baseTimer);
-    //    }
-    //    Debug.Log(fadingImage.color);
-  //  }
 
     public IEnumerator MovePanel(int xValue)
     {
@@ -155,31 +139,6 @@ public class LevelSelectorManager : MonoBehaviour
 
     private void UpdateBackgroundImage() // update the background image in the level selector using the variable BackgroundImage of the current SO
     {
-      //  updatingImage = true;
         backgroundImage.sprite = SO_Levels[PanelIndex].BackgroundImage;
-        
     }
- //   private void DoFading(float _timer)
-  //  {
-   //     {
-   //         if(_timer > 0)
-   //         {
-   //             fadingImage.color -= new Color(0.01f, 0.01f, 0.01f, 0f);
-   //             _timer -= Time.deltaTime;
-    //        }
-//
-   //     }
- //   }
-
-  //  private void Refade(float _timer)
-   // {
-    //    {
-    //        if(_timer > 0)
-    //        {
-    //            fadingImage.color += new Color(0.01f, 0.01f, 0.01f, 0f);
-    //            _timer -= Time.deltaTime;
-     //       }
-     //       else updatingImage = false;
-   //     }
-  //  }
 }
