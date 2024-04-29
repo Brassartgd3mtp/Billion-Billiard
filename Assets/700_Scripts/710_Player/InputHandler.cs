@@ -13,6 +13,7 @@ public class InputHandler : MonoBehaviour
     static PauseMenu pMenu;
     static SwapControls spControls;
     static UI_Skip skip;
+    static LevelSelectorManager lsManager;
     #endregion
 
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class InputHandler : MonoBehaviour
 
         Actions.Cheat.Enable();
         Actions.Swap.Enable();
+        Actions.MainMenu.Enable();
     }
 
     #region Enable
@@ -71,6 +73,14 @@ public class InputHandler : MonoBehaviour
         rlScene = reloadScene;
 
         Actions.Cheat.ReloadScene.performed += reloadScene.Reload;
+    }
+
+    public static void MovePanelSelectorEnable(LevelSelectorManager levelSelectorManager)
+    {
+        lsManager = levelSelectorManager;
+
+        Actions.MainMenu.ScrollLeft.performed += levelSelectorManager.PrevPanel;
+        Actions.MainMenu.ScrollRight.performed += levelSelectorManager.NextPanel;
     }
 
     public static void NoClipEnable(NoClip noClip)
