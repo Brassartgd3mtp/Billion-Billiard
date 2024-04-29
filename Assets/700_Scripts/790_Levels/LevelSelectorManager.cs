@@ -12,7 +12,7 @@ public class LevelSelectorManager : MonoBehaviour
 {
     [SerializeField] private EventSystem _eventSystem;
 
-    [SerializeField] private Button LeftArrow, RightArrow;
+    [SerializeField] private GameObject LeftArrow, RightArrow;
     [SerializeField] private Button BTN_Play;
 
     [SerializeField] private List<GameObject> Panels;
@@ -52,8 +52,8 @@ public class LevelSelectorManager : MonoBehaviour
         {
             PanelIndex++;
             ActualPanel = Panels[PanelIndex];
-            LeftArrow.enabled = false;
-            RightArrow.enabled = false;
+            //LeftArrow.enabled = false;
+            //RightArrow.enabled = false;
             StartCoroutine(MovePanel(-1));
             backgroundImageAnimator.SetTrigger("MakeTransition");
         }
@@ -66,8 +66,8 @@ public class LevelSelectorManager : MonoBehaviour
             {
                 PanelIndex--;
                 ActualPanel = Panels[PanelIndex];
-                LeftArrow.enabled = false;
-                RightArrow.enabled = false;
+                //LeftArrow.enabled = false;
+                //RightArrow.enabled = false;
                 StartCoroutine(MovePanel(1));
                 backgroundImageAnimator.SetTrigger("MakeTransition");
             }
@@ -123,14 +123,14 @@ public class LevelSelectorManager : MonoBehaviour
                 _eventSystem.SetSelectedGameObject(null);
 
             RightArrow.gameObject.SetActive(false);
-            RightArrow.enabled = false;
+            //RightArrow.enabled = false;
             _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
         }
-        else if (!RightArrow.enabled) //&& !RightArrow.gameObject.activeInHierarchy)
+        else //if (!RightArrow.enabled) //&& !RightArrow.gameObject.activeInHierarchy)
         {
             panelCanMoveright = true;
             RightArrow.gameObject.SetActive(true);
-            RightArrow.enabled = true;
+            //RightArrow.enabled = true;
         }
 
         if (ActualPanel == Panels[0])
@@ -143,13 +143,13 @@ public class LevelSelectorManager : MonoBehaviour
 
             _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
             LeftArrow.gameObject.SetActive(false);
-            LeftArrow.enabled = false;
+            //LeftArrow.enabled = false;
         }
         else if (ActualPanel != Panels[0])
         {
             panelCanMoveLeft = true;
             LeftArrow.gameObject.SetActive(true);
-            LeftArrow.enabled = true;
+            //LeftArrow.enabled = true;
         }
     }
 
