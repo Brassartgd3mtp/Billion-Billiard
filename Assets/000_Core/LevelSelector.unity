@@ -1391,8 +1391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eventSystem: {fileID: 220856744}
-  LeftArrow: {fileID: 1565987447}
-  RightArrow: {fileID: 982429289}
+  LeftArrow: {fileID: 1565987445}
+  RightArrow: {fileID: 982429287}
   BTN_Play: {fileID: 852670794}
   Panels:
   - {fileID: 38272780}
@@ -1414,6 +1414,8 @@ MonoBehaviour:
   VirtualCamera: {fileID: 0}
   scrollingSpeed: 1500
   Content: {fileID: 1491515624}
+  panelCanMoveLeft: 0
+  panelCanMoveright: 0
   backgroundImage: {fileID: 2112945847}
   backgroundImageAnimator: {fileID: 2112945849}
 --- !u!114 &307686570
@@ -3189,10 +3191,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1565987447}
+    m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 1799400173}
-    m_SelectOnLeft: {fileID: 1565987447}
-    m_SelectOnRight: {fileID: 982429289}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3960,7 +3962,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982429287}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -6575,7 +6577,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565987445}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 

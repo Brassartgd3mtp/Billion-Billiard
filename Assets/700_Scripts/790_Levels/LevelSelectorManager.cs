@@ -6,12 +6,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class LevelSelectorManager : MonoBehaviour
 {
     [SerializeField] private EventSystem _eventSystem;
 
-    [SerializeField] private Button LeftArrow, RightArrow;
+    [SerializeField] private GameObject LeftArrow, RightArrow;
     [SerializeField] private Button BTN_Play;
 
     [SerializeField] private List<GameObject> Panels;
@@ -25,41 +26,51 @@ public class LevelSelectorManager : MonoBehaviour
 
     [SerializeField] private GameObject Content;
 
+    [SerializeField] private bool panelCanMoveLeft, panelCanMoveright;
+
 
     [Header("Background")]
  
     [SerializeField] private Image backgroundImage;
     [SerializeField] Animator backgroundImageAnimator;
 
+    public void Awake()
+    {
+
+    }
     public void Start()
     {
+        InputHandler.MovePanelSelectorEnable(this);
         ActualPanel = Panels[PanelIndex];
         StartCoroutine(MovePanel(-PanelIndex));
     }
 
-
-
-    public void NextPanel()
+    public void NextPanel(InputAction.CallbackContext context)
     {
-        PanelIndex++;
-        ActualPanel = Panels[PanelIndex];
-        LeftArrow.enabled = false;
-        RightArrow.enabled = false;
-        StartCoroutine(MovePanel(-1));
-        backgroundImageAnimator.SetTrigger("MakeTransition");
-    }
-
-    public void PrevPanel() 
-    {
-        if (PanelIndex > 0) 
+        Debug.Log(panelCanMoveright);
+        if (panelCanMoveright)
         {
-            PanelIndex--;
+            PanelIndex++;
             ActualPanel = Panels[PanelIndex];
-            LeftArrow.enabled = false;
-            RightArrow.enabled = false;
-            StartCoroutine(MovePanel(1));
+            //LeftArrow.enabled = false;
+            //RightArrow.enabled = false;
+            StartCoroutine(MovePanel(-1));
             backgroundImageAnimator.SetTrigger("MakeTransition");
         }
+    }
+
+    public void PrevPanel(InputAction.CallbackContext context) 
+    {
+        Debug.Log(panelCanMoveLeft);
+            if (PanelIndex > 0 && panelCanMoveLeft) 
+            {
+                PanelIndex--;
+                ActualPanel = Panels[PanelIndex];
+                //LeftArrow.enabled = false;
+                //RightArrow.enabled = false;
+                StartCoroutine(MovePanel(1));
+                backgroundImageAnimator.SetTrigger("MakeTransition");
+            }
     }
 
     public IEnumerator MovePanel(int xValue)
@@ -67,6 +78,8 @@ public class LevelSelectorManager : MonoBehaviour
         RectTransform rectTransform = Content.GetComponent<RectTransform>();
         Vector3 actualPos = rectTransform.transform.localPosition;
         Vector3 targetPos = actualPos + new Vector3(xValue * 800,0,0);
+        panelCanMoveLeft = false;
+        panelCanMoveright = false;
 
         while (rectTransform.localPosition !=  targetPos) 
         {
@@ -75,8 +88,8 @@ public class LevelSelectorManager : MonoBehaviour
             yield return null;    
         }
 
-        LeftArrow.enabled = true;
-        RightArrow.enabled = true;
+        //LeftArrow.enabled = true;
+        //RightArrow.enabled = true;
 
         UpdateBackgroundImage();
         CheckIfNextPanelIsLocked();
@@ -110,17 +123,19 @@ public class LevelSelectorManager : MonoBehaviour
                 _eventSystem.SetSelectedGameObject(null);
 
             RightArrow.gameObject.SetActive(false);
-            RightArrow.enabled = false;
+            //RightArrow.enabled = false;
             _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
         }
-        else if (RightArrow.enabled && !RightArrow.gameObject.activeInHierarchy)
+        else //if (!RightArrow.enabled) //&& !RightArrow.gameObject.activeInHierarchy)
         {
+            panelCanMoveright = true;
             RightArrow.gameObject.SetActive(true);
-            RightArrow.enabled = true;
+            //RightArrow.enabled = true;
         }
 
         if (ActualPanel == Panels[0])
         {
+            panelCanMoveright = true;
             if (SwapControls.state == CurrentState.Gamepad)
                 _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
             else
@@ -128,12 +143,13 @@ public class LevelSelectorManager : MonoBehaviour
 
             _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
             LeftArrow.gameObject.SetActive(false);
-            LeftArrow.enabled = false;
+            //LeftArrow.enabled = false;
         }
         else if (ActualPanel != Panels[0])
         {
+            panelCanMoveLeft = true;
             LeftArrow.gameObject.SetActive(true);
-            LeftArrow.enabled = true;
+            //LeftArrow.enabled = true;
         }
     }
 
