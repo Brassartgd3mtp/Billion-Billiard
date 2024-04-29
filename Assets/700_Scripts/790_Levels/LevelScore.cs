@@ -6,9 +6,6 @@ public class LevelScore : MonoBehaviour
 {
     [Header("References")]
 
-    private MoneyStats moneyStatsScript; // a reference to the script that holds the ingots vvalues
-    private PlayerStats playerStatsScript; // a reference to the script that holds the current score of the player
-
     [Header("Ingot Lists")] // the lists of all the differents ingots
 
     private List<GameObject> bronzeIngots = new List<GameObject>();
@@ -26,17 +23,12 @@ public class LevelScore : MonoBehaviour
     private int bigGoldScore;
     private int platiniumScore;
 
-    public int TotalScore;
+    public int TotalIngotScore;
 
     [Header("Thresholds")] // the differents score thresholds the player must reach to increase their rating
 
     private int Threshold1; // the value the player must reach to get a two star rating
     private int Threshold2; // the value the player must reach to get a three star rating
-
-    [Header("Level Timer")] // The timer of the level
-
-    private float levelTimer;
-
 
 
     private void Awake()
@@ -127,7 +119,7 @@ public class LevelScore : MonoBehaviour
 
 
         // Get the total score
-        TotalScore = bronzeScore + silverScore + goldScore + bigGoldScore + platiniumScore;
+        TotalIngotScore = bronzeScore + silverScore + goldScore + bigGoldScore + platiniumScore;
 
     }
 
