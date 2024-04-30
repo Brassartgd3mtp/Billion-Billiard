@@ -27,7 +27,7 @@ public class GlobalData : MonoBehaviour
         {
             PlayerPrefs.SetFloat("hiscore" + SceneManager.GetActiveScene().buildIndex, calculationsScript.PlayerScore);
         }
-        if (PlayerPrefs.GetString("PB" + SceneManager.GetActiveScene().buildIndex) == null || timerScript.TimerInSeconds < PlayerPrefs.GetFloat("PBinSeconds" + SceneManager.GetActiveScene().buildIndex))
+        if (PlayerPrefs.GetFloat("PBinSeconds" + SceneManager.GetActiveScene().buildIndex) ==0 || timerScript.TimerInSeconds <= PlayerPrefs.GetFloat("PBinSeconds" + SceneManager.GetActiveScene().buildIndex))
         {
             PlayerPrefs.SetFloat("PBinSeconds" + SceneManager.GetActiveScene().buildIndex, timerScript.TimerInSeconds);
             PlayerPrefs.SetString("PB" + SceneManager.GetActiveScene().buildIndex, string.Format("{0:00}:{1:00}", timerScript.Minutes, timerScript.Seconds));

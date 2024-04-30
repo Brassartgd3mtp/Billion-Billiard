@@ -20,14 +20,6 @@ public class ScoringCalculations : MonoBehaviour
         playerStatsScript = FindAnyObjectByType<PlayerStats>();
     }
 
-  /*  private void Update()
-    {
-        if(Input.GetKeyUp(KeyCode.P)) 
-        {
-            PlayerPrefs.DeleteAll();
-        }
-    }*/
-
     public float CalculateTotalScore()
     {
 
