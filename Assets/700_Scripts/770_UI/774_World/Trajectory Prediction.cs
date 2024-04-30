@@ -7,13 +7,14 @@ public class TrajectoryPrediction : MonoBehaviour
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private LayerMask wallLayer;
-    private Vector3 sphereCollider;
+    private float maxDist = 12;
+    private float sphereCollider;
 
     private void Start()
     {
         InputHandler.TrajectoryPredictionEnable(this);
 
-        sphereCollider = playerController.GetComponent<SphereCollider>().bounds.extents;
+        sphereCollider = playerController.GetComponent<SphereCollider>().radius;
     }
 
     RaycastHit hit;
@@ -37,14 +38,39 @@ public class TrajectoryPrediction : MonoBehaviour
             //
             //    lineRenderer.SetPosition(1, Vector3.forward * 12);
             //}
+            //
+            //if (Physics.BoxCast(transform.position + new Vector3(0, -.5f, 0), sphereCollider / 1.4f, transform.forward, out hit, Quaternion.identity, 12, wallLayer))
+            //{
+            //    Vector3 hitPointwoY = new Vector3(hit.point.x, 0, hit.point.z);
+            //
+            //    Vector3 hitNormwoY = new Vector3(hit.normal.x, 0, hit.normal.z);
+            //
+            //    lineRenderer.SetPosition(1, transform.InverseTransformPoint(hitPointwoY));
+            //
+            //    lineRenderer.positionCount = 3;
+            //
+            //    lineRenderer.SetPosition(2, transform.InverseTransformPoint(hitPointwoY + Vector3.Reflect(ray.direction, hitNormwoY) * 3));
+            //}
+            //else
+            //{
+            //    lineRenderer.positionCount = 2;
+            //
+            //    lineRenderer.SetPosition(1, Vector3.forward * 12);
+            //}
 
-            if (Physics.BoxCast(transform.position + new Vector3(0, -.5f, 0), sphereCollider / 1.4f, transform.forward, out hit, Quaternion.identity, 12, wallLayer))
+            if (Physics.CapsuleCast(transform.position, transform.position, sphereCollider - .03f, transform.forward, out hit, maxDist, wallLayer))
             {
-                lineRenderer.SetPosition(1, transform.InverseTransformPoint(hit.point));
+                Vector3 hitPoint = new Vector3(hit.point.x, .3f, hit.point.z);
+                Vector3 hitPointnoY = new Vector3(hit.point.x, .3f, hit.point.z);
+                Vector3 hitNormnoY = new Vector3(hit.normal.x, 0, hit.normal.z);
+
+                float hitDist = maxDist - Vector3.Distance(hit.point, transform.position);
+            
+                lineRenderer.SetPosition(1, transform.InverseTransformPoint(hitPoint));
             
                 lineRenderer.positionCount = 3;
             
-                lineRenderer.SetPosition(2, transform.InverseTransformPoint(hit.point + Vector3.Reflect(ray.direction, hit.normal) * 3));
+                lineRenderer.SetPosition(2, transform.InverseTransformPoint(hitPointnoY + Vector3.Reflect(ray.direction, hitNormnoY) * (2 + hitDist)));
             }
             else
             {
