@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     private Scene currentScene;
     public float HIOCooldown = 1.5f;
 
+
     [Header("PARAMETER CIRCLE WIPE")]
 
     public Animator AnimatorCircleWipe;
@@ -20,6 +21,7 @@ public class LevelManager : MonoBehaviour
     private readonly int CircleSizeId = Shader.PropertyToID("_Circle_Size");
 
     public UI_ShotRemaining uI_ShotRemaining;
+    [SerializeField] private GameObject victoryScreen;
 
     private void Start()
     {
@@ -77,7 +79,8 @@ public class LevelManager : MonoBehaviour
             while (true)
             {
                 if (PlayerController.rb.velocity.magnitude <= 0.1f
-                && TurnBasedPlayer.Instance.shotRemaining == 0)
+                && TurnBasedPlayer.Instance.shotRemaining == 0 
+                && !victoryScreen.activeSelf)
                 {
                     yield return new WaitForSeconds(1f);
 
@@ -99,7 +102,7 @@ public class LevelManager : MonoBehaviour
                     yield return null;
             }
         }
-        else
+        else if(!victoryScreen.activeSelf)
         {
             yield return new WaitForSeconds(.1f);
             StartCoroutine(HoleInOne());
