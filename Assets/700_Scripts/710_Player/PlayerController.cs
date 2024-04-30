@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    [HideInInspector] public bool iceLock = false;
+    /*[HideInInspector]*/ public bool iceLock = false;
     float iceAngleDynamic;
     private void OnCollisionEnter(Collision collision)
     {
@@ -205,6 +205,7 @@ public class PlayerController : MonoBehaviour
                 Vector3 contact2 = normale - projection;
 
                 iceAngleDynamic = Vector3.Angle(transform.forward, contact2);
+                iceAngleDynamic = iceAngleDynamic > 90 ? 180 - iceAngleDynamic : iceAngleDynamic;
 
                 if (iceAngleDynamic > iceAngle && !iceLock)
                 {
@@ -239,24 +240,27 @@ public class PlayerController : MonoBehaviour
                 reflect = Vector3.Reflect(lastVel.normalized, contactPoint);
                 newRot = Quaternion.LookRotation(reflect);
 
-                if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
-                {
-                    if (!iceLock && iceAngleDynamic <= iceAngle)
-                    {
-                        rb.drag = 0;
-                        iceLock = true;
-                    }
-                }
-                else if (obstacle.obstacleType == Obstacle.ObstacleType.IceAngle)
-                {
-                    rb.drag = 0;
-                    iceLock = true;
-                }
-
                 if (timeSinceThrow != 0)
                     rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
                 SwitchObstacle(obstacle, speed, reflect);
+            }
+
+            if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
+            {
+                Debug.Log(iceAngleDynamic);
+                //Debug.Break();
+
+                if (iceAngleDynamic <= iceAngle)
+                {
+                    rb.drag = .2f;
+                    iceLock = true;
+                }
+            }
+            else if (obstacle.obstacleType == Obstacle.ObstacleType.IceAngle)
+            {
+                rb.drag = 0;
+                iceLock = true;
             }
         }
     }

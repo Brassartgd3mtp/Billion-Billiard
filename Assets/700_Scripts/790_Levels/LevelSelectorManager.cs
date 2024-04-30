@@ -47,7 +47,6 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void NextPanel(InputAction.CallbackContext context)
     {
-        Debug.Log(panelCanMoveright);
         if (panelCanMoveright)
         {
             PanelIndex++;
@@ -61,16 +60,15 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void PrevPanel(InputAction.CallbackContext context) 
     {
-        Debug.Log(panelCanMoveLeft);
-            if (PanelIndex > 0 && panelCanMoveLeft) 
-            {
-                PanelIndex--;
-                ActualPanel = Panels[PanelIndex];
-                //LeftArrow.enabled = false;
-                //RightArrow.enabled = false;
-                StartCoroutine(MovePanel(1));
-                backgroundImageAnimator.SetTrigger("MakeTransition");
-            }
+        if (PanelIndex > 0 && panelCanMoveLeft) 
+        {
+            PanelIndex--;
+            ActualPanel = Panels[PanelIndex];
+            //LeftArrow.enabled = false;
+            //RightArrow.enabled = false;
+            StartCoroutine(MovePanel(1));
+            backgroundImageAnimator.SetTrigger("MakeTransition");
+        }
     }
 
     public IEnumerator MovePanel(int xValue)
@@ -84,7 +82,6 @@ public class LevelSelectorManager : MonoBehaviour
         while (rectTransform.localPosition !=  targetPos) 
         {
             rectTransform.localPosition = Vector3.MoveTowards(rectTransform.localPosition, targetPos, scrollingSpeed * Time.deltaTime);
-            Debug.Log("là");
             yield return null;    
         }
 
@@ -115,8 +112,6 @@ public class LevelSelectorManager : MonoBehaviour
 
         if (panelManagerNext.SO_Level.LevelData.isLocked)
         {
-            Debug.Log("Locked");
-
             if (SwapControls.state == CurrentState.Gamepad)
                 _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
             else
@@ -156,5 +151,10 @@ public class LevelSelectorManager : MonoBehaviour
     private void UpdateBackgroundImage() // update the background image in the level selector using the variable BackgroundImage of the current SO
     {
         backgroundImage.sprite = SO_Levels[PanelIndex].BackgroundImage;
+    }
+
+    private void OnDisable()
+    {
+        InputHandler.MovePanelSelectorDisable();
     }
 }
