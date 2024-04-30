@@ -36,6 +36,15 @@ public class VictoryScreen : MonoBehaviour
 
     [SerializeField] private Sprite SPR_goldStarSprite;
 
+    [Header("Golden Star GameObjects")]
+
+    [SerializeField] private GameObject GO_GoldenStar1;
+    [SerializeField] private GameObject GO_GoldenStar2;
+    [SerializeField] private GameObject GO_GoldenStar3;
+    [SerializeField] Animator anim1;
+    [SerializeField] Animator anim2;
+    [SerializeField] Animator anim3;
+
     [Header("Texts")]
 
     [SerializeField] private TextMeshProUGUI TXT_score;
@@ -45,6 +54,11 @@ public class VictoryScreen : MonoBehaviour
 
     private void OnEnable()
     {
+        GO_GoldenStar1.SetActive(false);
+        GO_GoldenStar2.SetActive(false);
+        GO_GoldenStar3.SetActive(false);
+
+
         calculationsScript = FindAnyObjectByType<ScoringCalculations>();
         timerScript = FindAnyObjectByType<LevelTimer>();
         timerScript.TimeStarted = false;
@@ -64,6 +78,7 @@ public class VictoryScreen : MonoBehaviour
             if (EventSystem.current.currentSelectedGameObject != firstButton)
                 EventSystem.current.SetSelectedGameObject(firstButton);
         }
+
     }
 
     private void DisplayScore()
@@ -83,23 +98,8 @@ public class VictoryScreen : MonoBehaviour
 
     private void DisplayStars()
     {
-        switch(starRatingScript.numberOfStars)
-        {
-            case 0:
-                break;
-            case 1:
-                IMG_star1.sprite = SPR_goldStarSprite;
-                break;
-            case 2:
-                IMG_star1.sprite = SPR_goldStarSprite;
-                IMG_star2.sprite = SPR_goldStarSprite;
-                break; 
-            case 3:
-                IMG_star1.sprite = SPR_goldStarSprite;
-                IMG_star2.sprite = SPR_goldStarSprite;
-                IMG_star3.sprite = SPR_goldStarSprite;
-                break;
-        }
+
+        StartCoroutine(AnimationsCoroutine());
 
         switch (PlayerPrefs.GetFloat("stars" + SceneManager.GetActiveScene().buildIndex))
         {
@@ -120,6 +120,35 @@ public class VictoryScreen : MonoBehaviour
         }
     }
 
+    private IEnumerator AnimationsCoroutine()
+    {
+        switch (starRatingScript.numberOfStars)
+        {
+            case 0:
+                break;
+            case 1:
+                GO_GoldenStar1.SetActive(true);
+                anim1.SetBool("hasStar", true);
+                break;
+            case 2:
+                GO_GoldenStar1.SetActive(true);
+                anim1.SetBool("hasStar", true);
+                yield return new WaitForSeconds(1.5f);
+                GO_GoldenStar2.SetActive(true);
+                anim2.SetBool("hasStar", true);
+                break;
+            case 3:
+                GO_GoldenStar1.SetActive(true);
+                anim1.SetBool("hasStar", true);
+                yield return new WaitForSeconds(1.5f);
+                GO_GoldenStar2.SetActive(true);
+                anim2.SetBool("hasStar", true);
+                yield return new WaitForSeconds(1.5f);
+                GO_GoldenStar3.SetActive(true);
+                anim3.SetBool("hasStar", true);
+                break;
+        }
+    }
     // Update is called once per frame
     //void Update()
     //{
