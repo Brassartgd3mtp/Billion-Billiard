@@ -28,6 +28,9 @@ public class LevelSelectorManager : MonoBehaviour
 
     [SerializeField] private bool panelCanMoveLeft, panelCanMoveright;
 
+    public GameObject XboxGamepad;
+    public GameObject BackButton;
+
 
     [Header("Background")]
  
@@ -43,6 +46,20 @@ public class LevelSelectorManager : MonoBehaviour
         InputHandler.MovePanelSelectorEnable(this);
         ActualPanel = Panels[PanelIndex];
         StartCoroutine(MovePanel(-PanelIndex));
+    }
+
+    private void Update()
+    {
+        if (SwapControls.state == CurrentState.Gamepad)
+        {
+            XboxGamepad.gameObject.SetActive(true);
+            BackButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            XboxGamepad.gameObject.SetActive(false);
+            BackButton.gameObject.SetActive(true);
+        }
     }
 
     public void NextPanel(InputAction.CallbackContext context)
