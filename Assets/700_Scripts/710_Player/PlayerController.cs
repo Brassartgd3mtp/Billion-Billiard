@@ -253,7 +253,7 @@ public class PlayerController : MonoBehaviour
 
                 if (iceAngleDynamic <= iceAngle)
                 {
-                    rb.drag = 0;
+                    rb.drag = .2f;
                     iceLock = true;
                 }
             }
