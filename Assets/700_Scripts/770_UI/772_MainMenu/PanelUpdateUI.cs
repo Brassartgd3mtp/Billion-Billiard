@@ -62,9 +62,9 @@ public class PanelUpdateUI : MonoBehaviour
                     }
 
                 IMG_pbMedal.sprite = medalImages[PlayerPrefs.GetInt("MedalValue" + buildIndex)];
-            }
 
-            return;           
+                return;
+            }                    
         }
     }
 }
