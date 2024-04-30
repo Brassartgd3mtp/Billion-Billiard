@@ -20,22 +20,17 @@ public class ScoringCalculations : MonoBehaviour
         playerStatsScript = FindAnyObjectByType<PlayerStats>();
     }
 
-    public float CalculateTotalScore()
+    public float CalculateTotalScore() // calculate the maximum score possible
     {
-
-        float scoreIngot = levelScoreScript.TotalIngotScore;
-        float scoreTimer = levelTimerScript.GoldScore;
-        float total = scoreIngot*levelScoreScript.PercentageNecessaryForMaxScore/100 + scoreTimer;
-
-        return total;
+        return levelScoreScript.TotalIngotScore // the maximum score possible to have with ingots
+            * levelScoreScript.PercentageNecessaryForMaxScore / 100
+             + levelTimerScript.GoldScore; // the score you get with a gold medal
     }
 
-public float CalculatePlayerScore()
+public float CalculatePlayerScore() // walculate the score the player just got
     {
-
-        float scoreMoney = playerStatsScript.moneyCount;
-        float scoreTimer = levelTimerScript.FinalTimerScore;
-        PlayerScore = scoreMoney + scoreTimer;
+        PlayerScore = playerStatsScript.moneyCount // the money the player has at the end of the level
+                    + levelTimerScript.FinalTimerScore; // the score the player got with their time
 
         return PlayerScore;
     }

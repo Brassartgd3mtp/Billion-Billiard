@@ -16,7 +16,7 @@ public class PanelUpdateUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI timerText;
 
-    [Header("Images")]
+    [Header("Star Images")]
 
     [SerializeField] private Image img_star1;
     [SerializeField] private Image img_star2;
@@ -24,26 +24,29 @@ public class PanelUpdateUI : MonoBehaviour
 
     [SerializeField] private Sprite spr_star;
 
-    [Header("Images")]
+    [Header("Medal Images")]
 
     [SerializeField] private Image IMG_pbMedal;
     [SerializeField] private List<Sprite> medalImages = new List<Sprite>();
 
     private void Awake()
     {
+        //This function uses the buildindex to display the scores in the right panel
+
         levelSelectorScript = FindAnyObjectByType<LevelSelectorManager>();
-        for (int i = 0; i < levelSelectorScript.Panels.Count; i++)
+
+        for (int i = 0; i < levelSelectorScript.Panels.Count; i++) //we check for all the panels
         {
-            if(levelSelectorScript.Panels[i] == this.gameObject)
+            if(levelSelectorScript.Panels[i] == this.gameObject) // we check if we have found this panel
             {
-                int buildIndex = i + 2;
+                int buildIndex = i + 2; // We add +2 to the number from the list because of Main menu + level selector, that are preceding the levels in the build order
 
                 PlayerPrefs.GetFloat("PBinSeconds" + buildIndex);
                 
                 scoreText.text = PlayerPrefs.GetFloat("hiscore" + buildIndex).ToString();
                 timerText.text = PlayerPrefs.GetString("PB" + buildIndex);
 
-                switch (PlayerPrefs.GetFloat("stars" + buildIndex))
+                switch (PlayerPrefs.GetFloat("stars" + buildIndex)) // we display as much gold star as the best star rating stored in our datas
                     {      
                     case 0:
                         break;
@@ -61,7 +64,7 @@ public class PanelUpdateUI : MonoBehaviour
                         break;
                     }
 
-                IMG_pbMedal.sprite = medalImages[PlayerPrefs.GetInt("MedalValue" + buildIndex)];
+                IMG_pbMedal.sprite = medalImages[PlayerPrefs.GetInt("MedalValue" + buildIndex)]; //then we display the medal corresponding to the best score stored
 
                 return;
             }                    

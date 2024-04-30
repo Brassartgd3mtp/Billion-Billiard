@@ -40,7 +40,7 @@ public class LevelTimer : MonoBehaviour
 
     void Update()
     {
-        if (TimeStarted == true)
+        if (TimeStarted)
         {
             TimerInSeconds += Time.deltaTime;
             CalculateTime();
@@ -50,13 +50,13 @@ public class LevelTimer : MonoBehaviour
             CheckForMedal();
         }
 
-        if (TimerInSeconds < 0)
+        if (TimerInSeconds < 0) //just in case the timer is negative for some reason
         {
             TimerInSeconds = 0;
         }
     }
 
-    private void CalculateTime()
+    private void CalculateTime() //do the maths to display the timer is the right format
     {
         Minutes = Mathf.Floor(TimerInSeconds / 60);
         Seconds = TimerInSeconds % 60;
@@ -64,17 +64,12 @@ public class LevelTimer : MonoBehaviour
         TXT_Timer.text = string.Format("{0:00}:{1:00}", Minutes, Seconds);
     }
 
-    public float GetTimer()
-    {
-        return TimerInSeconds;
-    }
-
-    private void CheckForMedal()
+    private void CheckForMedal() // check which medal the player is currently running for
     {
         if (TimerInSeconds < goldMedalThresholdInSeconds)
         {
             FinalTimerScore = GoldScore;
-            MedalValue = 3;
+            MedalValue = 3; //MedalValue is used to know which medal to display is other scripts
         }
         else if (TimerInSeconds < silverMedalThresholdInSeconds)
         {
