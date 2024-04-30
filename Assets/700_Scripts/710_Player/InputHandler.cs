@@ -154,6 +154,12 @@ public class InputHandler : MonoBehaviour
         Actions.Cheat.ReloadScene.performed -= rlScene.Reload;
     }
 
+    public static void MovePanelSelectorDisable()
+    {
+        Actions.MainMenu.ScrollLeft.performed -= lsManager.PrevPanel;
+        Actions.MainMenu.ScrollRight.performed -= lsManager.NextPanel;
+    }
+
     public static void NoClipDisable()
     {
         Actions.Cheat.NoClip.performed -= nClip.NoClipMode;
@@ -219,6 +225,11 @@ public class InputHandler : MonoBehaviour
     public static void UISkipEnable()
     {
         UISkipEnable(skip);
+    }
+
+    public static void MovePanelSelectorEnable()
+    {
+        MovePanelSelectorEnable(lsManager);
     }
     #endregion
 }
