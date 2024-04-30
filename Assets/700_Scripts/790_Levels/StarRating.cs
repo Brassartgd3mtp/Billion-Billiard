@@ -9,12 +9,6 @@ public class StarRating : MonoBehaviour
     private ScoringCalculations calculationsScript;
     private GlobalData globalDataScript;
 
-    [Header("Objects")]
-
-    [SerializeField] private GameObject firstStar;
-    [SerializeField] private GameObject secondStar;
-    [SerializeField] private GameObject thirdStar;
-
     [Header("Score Per Star")]
 
     [SerializeField] private float scoreForStarTwo;
@@ -31,28 +25,27 @@ public class StarRating : MonoBehaviour
         globalDataScript = GetComponent<GlobalData>();
     }
 
-    public void CalculateStarRating()
+    public void CalculateStarRating() //here we calculate how much stars the player scored in this run
     {
-        calculationsScript.PlayerScore = calculationsScript.CalculatePlayerScore();
+        calculationsScript.PlayerScore = calculationsScript.CalculatePlayerScore(); //we calculate the player score
 
-        if (HasWon)
+        if (HasWon) //Passes to true when the victory screen is displayed
         {
+            //we check if the current score is higher than the prerequisite to get two, then three stars
             if (calculationsScript.PlayerScore > scoreForStarTwo)
             {
                 numberOfStars++;
-                // logique pour afficher etoile deux
             }
             if (calculationsScript.PlayerScore > scoreForStarThree)
             {
                 numberOfStars++;
-                // logique pour afficher etoile trois
             }
         }
-        else
+        else // in case this script has to be called outside of the victory screen, if a way to lose is implemented
         {
             numberOfStars = 0;
         }
-        globalDataScript.SetScores();
+        globalDataScript.SetScores(); // the function to store all the score data
 
     }
 

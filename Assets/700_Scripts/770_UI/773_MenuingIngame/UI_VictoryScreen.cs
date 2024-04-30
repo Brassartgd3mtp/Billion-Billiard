@@ -13,6 +13,7 @@ public class VictoryScreen : MonoBehaviour
     private StarRating starRatingScript;
     private LevelTimer timerScript;
     private ScoringCalculations calculationsScript;
+    private EndLevelProgressBar progressBarScript;
 
     [Header("Objects")]
 
@@ -58,14 +59,19 @@ public class VictoryScreen : MonoBehaviour
         GO_GoldenStar2.SetActive(false);
         GO_GoldenStar3.SetActive(false);
 
-
+        
         calculationsScript = FindAnyObjectByType<ScoringCalculations>();
         timerScript = FindAnyObjectByType<LevelTimer>();
-        timerScript.TimeStarted = false;
         starRatingScript = FindAnyObjectByType<StarRating>();
-        starRatingScript.HasWon = true;
-        starRatingScript.numberOfStars++;
+        progressBarScript = FindAnyObjectByType<EndLevelProgressBar>();
+
+        timerScript.TimeStarted = false; //stop the timer
+        starRatingScript.HasWon = true; 
+        starRatingScript.numberOfStars++; //to give the player the first star
         starRatingScript.CalculateStarRating();
+
+        progressBarScript.BarCanMove = true; 
+
         
         DisplayScore();
         DisplayMedals();
@@ -83,7 +89,6 @@ public class VictoryScreen : MonoBehaviour
 
     private void DisplayScore()
     {
-        Debug.Log(PlayerPrefs.GetString("PB" + SceneManager.GetActiveScene().buildIndex));
         TXT_score.text = "Score : " + calculationsScript.PlayerScore.ToString();
         TXT_timer.text = "Temps : " + string.Format("{0:00}:{1:00}", timerScript.Minutes, timerScript.Seconds);
         TXT_highscore.text = "Highscore : " + PlayerPrefs.GetFloat("hiscore" + SceneManager.GetActiveScene().buildIndex).ToString();
@@ -98,9 +103,10 @@ public class VictoryScreen : MonoBehaviour
 
     private void DisplayStars()
     {
+        
+        StartCoroutine(AnimationsCoroutine()); // display the stars in the current score
 
-        StartCoroutine(AnimationsCoroutine());
-
+        //display the star from the highscore
         switch (PlayerPrefs.GetFloat("stars" + SceneManager.GetActiveScene().buildIndex))
         {
             case 0:
@@ -120,7 +126,7 @@ public class VictoryScreen : MonoBehaviour
         }
     }
 
-    private IEnumerator AnimationsCoroutine()
+    private IEnumerator AnimationsCoroutine() //display the star and use waitforseconds to play the animations one by one
     {
         switch (starRatingScript.numberOfStars)
         {
@@ -134,6 +140,7 @@ public class VictoryScreen : MonoBehaviour
                 GO_GoldenStar1.SetActive(true);
                 anim1.SetBool("hasStar", true);
                 yield return new WaitForSeconds(1.5f);
+
                 GO_GoldenStar2.SetActive(true);
                 anim2.SetBool("hasStar", true);
                 break;
@@ -141,9 +148,11 @@ public class VictoryScreen : MonoBehaviour
                 GO_GoldenStar1.SetActive(true);
                 anim1.SetBool("hasStar", true);
                 yield return new WaitForSeconds(1.5f);
+
                 GO_GoldenStar2.SetActive(true);
                 anim2.SetBool("hasStar", true);
                 yield return new WaitForSeconds(1.5f);
+
                 GO_GoldenStar3.SetActive(true);
                 anim3.SetBool("hasStar", true);
                 break;
