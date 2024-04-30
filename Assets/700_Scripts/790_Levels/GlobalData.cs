@@ -19,10 +19,6 @@ public class GlobalData : MonoBehaviour
     }
     public void SetScores()
     {
-        Debug.Log(starRatingScript.numberOfStars);
-        Debug.Log(calculationsScript.PlayerScore);
-        Debug.Log(timerScript.TimerInSeconds);
-        Debug.Log(PlayerPrefs.GetFloat("hiscore" + SceneManager.GetActiveScene()));
         if (starRatingScript.numberOfStars > PlayerPrefs.GetFloat("stars" + SceneManager.GetActiveScene().buildIndex))
         {
             PlayerPrefs.SetFloat("stars" + SceneManager.GetActiveScene().buildIndex, starRatingScript.numberOfStars);
@@ -31,12 +27,15 @@ public class GlobalData : MonoBehaviour
         {
             PlayerPrefs.SetFloat("hiscore" + SceneManager.GetActiveScene().buildIndex, calculationsScript.PlayerScore);
         }
-        if (timerScript.TimerInSeconds < PlayerPrefs.GetFloat("PBinSeconds" + SceneManager.GetActiveScene().buildIndex))
+        if (PlayerPrefs.GetString("PB" + SceneManager.GetActiveScene().buildIndex) == null || timerScript.TimerInSeconds < PlayerPrefs.GetFloat("PBinSeconds" + SceneManager.GetActiveScene().buildIndex))
         {
             PlayerPrefs.SetFloat("PBinSeconds" + SceneManager.GetActiveScene().buildIndex, timerScript.TimerInSeconds);
             PlayerPrefs.SetString("PB" + SceneManager.GetActiveScene().buildIndex, string.Format("{0:00}:{1:00}", timerScript.Minutes, timerScript.Seconds));
         }
-
+        if(timerScript.MedalValue > PlayerPrefs.GetInt("MedalValue" + SceneManager.GetActiveScene().buildIndex))
+        {
+            PlayerPrefs.SetInt("MedalValue" + SceneManager.GetActiveScene().buildIndex, timerScript.MedalValue);
+        }
     }
 
 }

@@ -34,6 +34,10 @@ public class LevelTimer : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI TXT_Timer;
 
+    [Header("Value")]
+
+    public int MedalValue;
+
     void Update()
     {
         if (TimeStarted == true)
@@ -67,19 +71,26 @@ public class LevelTimer : MonoBehaviour
 
     private void CheckForMedal()
     {
-        if(TimerInSeconds < goldMedalThresholdInSeconds)
+        if (TimerInSeconds < goldMedalThresholdInSeconds)
         {
             FinalTimerScore = GoldScore;
+            MedalValue = 3;
         }
-        else if(TimerInSeconds < silverMedalThresholdInSeconds) 
-        { 
-            FinalTimerScore = silverScore; 
+        else if (TimerInSeconds < silverMedalThresholdInSeconds)
+        {
+            FinalTimerScore = silverScore;
+            MedalValue = 2;
         }
-        else if(TimerInSeconds < bronzeMedalThresholdInSeconds)
+        else if (TimerInSeconds < bronzeMedalThresholdInSeconds)
         {
             FinalTimerScore = bronzeScore;
+            MedalValue = 1;
         }
-        else FinalTimerScore = 0;
+        else
+        {
+            FinalTimerScore = 0;
+            MedalValue = 0;
+        }
     }
 
 }
