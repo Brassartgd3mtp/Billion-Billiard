@@ -136,7 +136,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
         }
         while (timerSize < timeToScale);
 
-        transform.position = playerController.posBeforeHit;
+        transform.position = PlayerController.posBeforeHit;
         rb.velocity = Vector3.zero;
         trailRenderer.enabled = true;
         trailRenderer.Clear();
