@@ -14,6 +14,7 @@ public class EndLevelProgressBar : MonoBehaviour
 
     private Slider slider;
    [SerializeField] private ParticleSystem progressBarParticleSystem;
+    [SerializeField] private GameObject posSetter;
 
     [Header("SliderBehaviour")]
 
@@ -33,11 +34,13 @@ public class EndLevelProgressBar : MonoBehaviour
         victoryScreenScript = GetComponentInParent<VictoryScreen>();
 
         slider.value = starRatingScript.scoreForStarTwo / calculationsScript.CalculateTotalScore();
-        victoryScreenScript.IMG_star2.transform.position = slider.fillRect.position;
+        victoryScreenScript.IMG_star2.transform.position = posSetter.transform.position;
+
         slider.value = starRatingScript.scoreForStarThree / calculationsScript.CalculateTotalScore();
-        victoryScreenScript.IMG_star3.transform.position = slider.fillRect.position;
+        victoryScreenScript.IMG_star3.transform.position = posSetter.transform.position;
+
         slider.value = slider.minValue;
-        victoryScreenScript.IMG_star1.transform.position = slider.fillRect.position; 
+        victoryScreenScript.IMG_star1.transform.localPosition = slider.fillRect.localPosition; 
     }
 
     private void Start()

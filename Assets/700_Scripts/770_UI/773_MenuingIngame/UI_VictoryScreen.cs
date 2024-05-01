@@ -104,7 +104,6 @@ public class VictoryScreen : MonoBehaviour
 
     private void DisplayStars()
     {
-
         //display the star from the highscore
         switch (PlayerPrefs.GetFloat("stars" + SceneManager.GetActiveScene().buildIndex))
         {
