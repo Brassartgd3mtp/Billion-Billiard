@@ -2193,6 +2193,7 @@ GameObject:
   - component: {fileID: 307686567}
   - component: {fileID: 307686570}
   - component: {fileID: 307686568}
+  - component: {fileID: 307686571}
   m_Layer: 0
   m_Name: LevelBehavior
   m_TagString: Untagged
@@ -2227,6 +2228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1827e93a72b7bb42b76eca967eb821d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelChargeLoader: {fileID: 307686571}
   _eventSystem: {fileID: 220856744}
   LeftArrow: {fileID: 1565987445}
   RightArrow: {fileID: 982429287}
@@ -2268,6 +2270,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playButton: {fileID: 852670792}
+--- !u!114 &307686571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307686566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d374c6557247a674f8a6274a7a83d0c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 237709798}
+  slider: {fileID: 1809857649}
 --- !u!1 &349188828
 GameObject:
   m_ObjectHideFlags: 0
@@ -12764,53 +12780,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2104336156}
   m_CullTransparentMesh: 1
---- !u!1 &2107927657
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2107927659}
-  - component: {fileID: 2107927658}
-  m_Layer: 0
-  m_Name: LevelLoader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2107927658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107927657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d374c6557247a674f8a6274a7a83d0c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadingScreen: {fileID: 237709798}
-  slider: {fileID: 1809857649}
-  progressText: {fileID: 0}
---- !u!4 &2107927659
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107927657}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.06311, y: 24.961609, z: -12.367413}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2112945845
 GameObject:
   m_ObjectHideFlags: 0
@@ -14374,4 +14343,3 @@ SceneRoots:
   - {fileID: 2120328696}
   - {fileID: 1638486788}
   - {fileID: 1380162867}
-  - {fileID: 2107927659}
