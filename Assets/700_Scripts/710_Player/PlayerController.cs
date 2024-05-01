@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     [Space(20)]
     public bool isShooted;
 
-    public Vector3 posBeforeHit;
+    public static Vector3 posBeforeHit;
 
     private TurnBasedPlayer turnBasedPlayer;
 
