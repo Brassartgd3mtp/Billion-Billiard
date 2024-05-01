@@ -15,7 +15,7 @@ public class LevelSelectorManager : MonoBehaviour
     [SerializeField] private GameObject LeftArrow, RightArrow;
     [SerializeField] private Button BTN_Play;
 
-    [SerializeField] private List<GameObject> Panels;
+    [SerializeField] public List<GameObject> Panels;
     [SerializeField] private List<SO_Level> SO_Levels;
     [SerializeField] private GameObject ActualPanel;
     private static int PanelIndex = 0;
