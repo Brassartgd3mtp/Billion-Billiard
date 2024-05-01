@@ -23,7 +23,6 @@ public class ScoringCalculations : MonoBehaviour
     public float CalculateTotalScore() // calculate the maximum score possible
     {
         return levelScoreScript.TotalIngotScore // the maximum score possible to have with ingots
-            * levelScoreScript.PercentageNecessaryForMaxScore / 100
              + levelTimerScript.GoldScore; // the score you get with a gold medal
     }
 

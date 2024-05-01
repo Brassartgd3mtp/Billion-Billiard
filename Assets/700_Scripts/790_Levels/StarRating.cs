@@ -11,8 +11,8 @@ public class StarRating : MonoBehaviour
 
     [Header("Score Per Star")]
 
-    [SerializeField] private float scoreForStarTwo;
-    [SerializeField] private float scoreForStarThree;
+    public float scoreForStarTwo;
+    public float scoreForStarThree;
 
     [Header("Win Condition Logic")]
 

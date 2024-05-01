@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class EndLevelProgressBar : MonoBehaviour
 {
     [Header("References")]
 
     private ScoringCalculations calculationsScript;
+    private StarRating starRatingScript;
+    private VictoryScreen victoryScreenScript;
 
     private Slider slider;
    [SerializeField] private ParticleSystem progressBarParticleSystem;
@@ -17,11 +20,24 @@ public class EndLevelProgressBar : MonoBehaviour
     public bool BarCanMove; //will be set to false to stop when the bar reaches a star and then go back to true to resume the movement
     private float targetProgress;
     private float fillspeed = 0.2f;
+
+    public UnityEvent OnSecondStarValueReached;
+    public UnityEvent OnThirdStarValueReached;
+
     private void Awake()
     {
         slider = GetComponent<Slider>();
 
         calculationsScript = FindAnyObjectByType<ScoringCalculations>();
+        starRatingScript = FindAnyObjectByType<StarRating>();
+        victoryScreenScript = GetComponentInParent<VictoryScreen>();
+
+        slider.value = starRatingScript.scoreForStarTwo / calculationsScript.CalculateTotalScore();
+        victoryScreenScript.IMG_star2.transform.position = slider.fillRect.position;
+        slider.value = starRatingScript.scoreForStarThree / calculationsScript.CalculateTotalScore();
+        victoryScreenScript.IMG_star3.transform.position = slider.fillRect.position;
+        slider.value = slider.minValue;
+        victoryScreenScript.IMG_star1.transform.position = slider.fillRect.position; 
     }
 
     private void Start()
@@ -38,6 +54,16 @@ public class EndLevelProgressBar : MonoBehaviour
 
                 if (!progressBarParticleSystem.isPlaying)
                     progressBarParticleSystem.Play();
+
+                if(!victoryScreenScript.GO_GoldenStar2.activeSelf && slider.value >= starRatingScript.scoreForStarTwo / calculationsScript.CalculateTotalScore())
+                {
+                    OnSecondStarValueReached.Invoke();
+                }
+                if (!victoryScreenScript.GO_GoldenStar3.activeSelf && slider.value >= starRatingScript.scoreForStarThree / calculationsScript.CalculateTotalScore())
+                {
+                    OnThirdStarValueReached.Invoke();
+                }
+
             }
             else progressBarParticleSystem.Stop();
         }
@@ -48,6 +74,8 @@ public class EndLevelProgressBar : MonoBehaviour
     {
         targetProgress = slider.value + newProgress;
     }
+
+    
 
 
 }

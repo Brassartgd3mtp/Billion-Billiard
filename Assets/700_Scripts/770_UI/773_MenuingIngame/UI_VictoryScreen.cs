@@ -27,9 +27,9 @@ public class VictoryScreen : MonoBehaviour
 
     [Header("Star Images")]
 
-    [SerializeField] private Image IMG_star1;
-    [SerializeField] private Image IMG_star2;
-    [SerializeField] private Image IMG_star3;
+    public Image IMG_star1;
+    public Image IMG_star2;
+    public Image IMG_star3;
 
     [SerializeField] private Image IMG_starBest1;
     [SerializeField] private Image IMG_starBest2;
@@ -39,9 +39,9 @@ public class VictoryScreen : MonoBehaviour
 
     [Header("Golden Star GameObjects")]
 
-    [SerializeField] private GameObject GO_GoldenStar1;
-    [SerializeField] private GameObject GO_GoldenStar2;
-    [SerializeField] private GameObject GO_GoldenStar3;
+    public GameObject GO_GoldenStar1;
+    public GameObject GO_GoldenStar2;
+    public GameObject GO_GoldenStar3;
     [SerializeField] Animator anim1;
     [SerializeField] Animator anim2;
     [SerializeField] Animator anim3;
@@ -75,6 +75,7 @@ public class VictoryScreen : MonoBehaviour
         
         DisplayScore();
         DisplayMedals();
+
         DisplayStars();
 
         if (SwapControls.state == CurrentState.Gamepad)
@@ -103,8 +104,6 @@ public class VictoryScreen : MonoBehaviour
 
     private void DisplayStars()
     {
-        
-        StartCoroutine(AnimationsCoroutine()); // display the stars in the current score
 
         //display the star from the highscore
         switch (PlayerPrefs.GetFloat("stars" + SceneManager.GetActiveScene().buildIndex))
@@ -124,39 +123,34 @@ public class VictoryScreen : MonoBehaviour
                 IMG_starBest3.sprite = SPR_goldStarSprite;
                 break;
         }
+
+        progressBarScript.BarCanMove = false;
+        GO_GoldenStar1.SetActive(true);
+        anim1.SetBool("hasStar", true);
+        StartCoroutine(WaitForAnimations());
+
     }
 
-    private IEnumerator AnimationsCoroutine() //display the star and use waitforseconds to play the animations one by one
+    private IEnumerator WaitForAnimations() //display the star and use waitforseconds to play the animations one by one
     {
-        switch (starRatingScript.numberOfStars)
-        {
-            case 0:
-                break;
-            case 1:
-                GO_GoldenStar1.SetActive(true);
-                anim1.SetBool("hasStar", true);
-                break;
-            case 2:
-                GO_GoldenStar1.SetActive(true);
-                anim1.SetBool("hasStar", true);
-                yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f);
+        progressBarScript.BarCanMove = true; 
+    }
 
-                GO_GoldenStar2.SetActive(true);
-                anim2.SetBool("hasStar", true);
-                break;
-            case 3:
-                GO_GoldenStar1.SetActive(true);
-                anim1.SetBool("hasStar", true);
-                yield return new WaitForSeconds(1.5f);
+    public void DisplaySecondStar()
+    {
+        progressBarScript.BarCanMove = false;
+        GO_GoldenStar2.SetActive(true);
+        anim2.SetBool("hasStar", true);
+        StartCoroutine(WaitForAnimations());
+    }
 
-                GO_GoldenStar2.SetActive(true);
-                anim2.SetBool("hasStar", true);
-                yield return new WaitForSeconds(1.5f);
-
-                GO_GoldenStar3.SetActive(true);
-                anim3.SetBool("hasStar", true);
-                break;
-        }
+    public void DisplayThirdStar()
+    {
+        progressBarScript.BarCanMove = false;
+        GO_GoldenStar3.SetActive(true);
+        anim3.SetBool("hasStar", true);
+        StartCoroutine(WaitForAnimations());
     }
     // Update is called once per frame
     //void Update()
