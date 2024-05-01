@@ -6418,6 +6418,7 @@ GameObject:
   - component: {fileID: 5799445245862980983}
   - component: {fileID: 391258238612697891}
   - component: {fileID: 694734565430960958}
+  - component: {fileID: 7717756543650713645}
   m_Layer: 5
   m_Name: VolumeSlider
   m_TagString: Untagged
@@ -6498,10 +6499,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2887982578667945025}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
-        m_MethodName: SetVolume
-        m_Mode: 0
+      - m_Target: {fileID: 7717756543650713645}
+        m_TargetAssemblyTypeName: SetVolume, Assembly-CSharp
+        m_MethodName: SetLevel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6526,6 +6527,20 @@ MonoBehaviour:
     curseur. Glissez vers la droite pour augmenter le volume et vers la gauche pour
     le diminuer."
   buttonTextMeshPro: {fileID: 3798589517249274331}
+--- !u!114 &7717756543650713645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422675219526526121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b9a5542229a2564aa82654b689748b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 70c68e3dd0afe7242a71b9819466f493, type: 2}
+  slider: {fileID: 391258238612697891}
 --- !u!1 &424636683879425971
 GameObject:
   m_ObjectHideFlags: 0
@@ -31786,6 +31801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBarParticleSystem: {fileID: 1689141795110337429}
+  BarCanMove: 0
 --- !u!1 &6307756734387294817
 GameObject:
   m_ObjectHideFlags: 0
@@ -34519,9 +34535,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7cc56df2b6dba340a774624242af8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstStar: {fileID: 0}
-  secondStar: {fileID: 0}
-  thirdStar: {fileID: 0}
   scoreForStarTwo: 200
   scoreForStarThree: 500
   numberOfStars: 0
