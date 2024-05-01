@@ -248,9 +248,6 @@ public class PlayerController : MonoBehaviour
 
             if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
             {
-                Debug.Log(iceAngleDynamic);
-                //Debug.Break();
-
                 if (iceAngleDynamic <= iceAngle)
                 {
                     rb.drag = .2f;
