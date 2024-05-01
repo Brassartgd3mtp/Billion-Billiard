@@ -23,16 +23,18 @@ public class EndLevel : MonoBehaviour
             InputHandler.Actions.MouseKeyboard.Disable();
 
             if (SwapControls.state == CurrentState.Gamepad)
-            {
                 Gamepad.current.ResetHaptics();
-            }
 
             //SceneManager.LoadScene(nextLevel);
             VictoryScreen.gameObject.SetActive(true);
 
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            Time.timeScale = 0f;
+            if (SwapControls.state == CurrentState.MouseKeyboard)
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+            }
+            
+            // Time.timeScale = 0f;
         }
     }
 

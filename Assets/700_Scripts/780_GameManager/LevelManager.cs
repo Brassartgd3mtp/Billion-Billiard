@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     private Scene currentScene;
     public float HIOCooldown = 1.5f;
 
+
     [Header("PARAMETER CIRCLE WIPE")]
 
     public Animator AnimatorCircleWipe;
@@ -18,6 +19,9 @@ public class LevelManager : MonoBehaviour
     public bool isIn = true;
     public float CircleSize = 0;
     private readonly int CircleSizeId = Shader.PropertyToID("_Circle_Size");
+
+    public UI_ShotRemaining uI_ShotRemaining;
+    [SerializeField] private GameObject victoryScreen;
 
     private void Start()
     {
@@ -56,12 +60,14 @@ public class LevelManager : MonoBehaviour
     {
         AnimatorCircleWipe.SetTrigger("In");
         isIn = true;
+        SoundTransitionOpen();
     }
 
     public void AnimateOut()
     {
         AnimatorCircleWipe.SetTrigger("Out");
         isIn = false;
+        SoundTransitionClose();
     }
 
     // Update is called once per frame
@@ -73,26 +79,50 @@ public class LevelManager : MonoBehaviour
             while (true)
             {
                 if (PlayerController.rb.velocity.magnitude <= 0.1f
-                && TurnBasedPlayer.Instance.shotRemaining == 0)
+                && TurnBasedPlayer.Instance.shotRemaining == 0 
+                && !victoryScreen.activeSelf)
                 {
-                    AnimateOut();
-                    yield return new WaitForSeconds(HIOCooldown);
-                    SceneManager.LoadScene(currentScene.buildIndex);
+                    yield return new WaitForSeconds(1f);
+
+                    if (PlayerController.rb.velocity.magnitude <= 0.1f)
+                    {
+                        AnimateOut();
+                        yield return new WaitForSeconds(HIOCooldown);
+                        SceneManager.LoadScene(currentScene.buildIndex);
+                    }
+                    else
+                    {
+                        yield return new WaitForSeconds(.1f);
+                        StartCoroutine(HoleInOne());
+                    }
+
                     yield break;
                 }
                 else
                     yield return null;
             }
         }
-        else
+        else if(!victoryScreen.activeSelf)
         {
             yield return new WaitForSeconds(.1f);
             StartCoroutine(HoleInOne());
             yield break;
         }
     }
+
+private void SoundTransitionOpen()
+{
+    AudioSource audioSource = GetComponent<AudioSource>();
+    AudioManager.Instance.PlaySound(20, audioSource);
 }
 
+private void SoundTransitionClose()
+{
+    AudioSource audioSource = GetComponent<AudioSource>();
+    AudioManager.Instance.PlaySound(21, audioSource);
+}
+
+}
 public enum LevelType
 {
     HoleInOne,

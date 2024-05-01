@@ -11,6 +11,7 @@ public class SO_Level : ScriptableObject
     public string LevelName;
     public string LevelDescription;
     public Sprite Image;
+    public Sprite BackgroundImage;
 
     public LevelData LevelData;
 

@@ -19,17 +19,22 @@ public class PlayerController : MonoBehaviour
 
     [Header("Mouse Values"), Range(0f, 1f)]
     [SerializeField] private float MouseSensitivity;
-    private Vector2 MouseStart;
+    [HideInInspector] public Vector2 MouseStart;
     private Vector2 MouseEnd;
 
     [Header("Gamepad Values"), Range(0f, 2f)]
     [SerializeField] private float gaugeSpeed;
 
+    [Header("Ice Bounce Angle"), Range(0f, 180f)]
+    [SerializeField] float iceAngle = 45f;
+
     [Header("References")]
     public LineRenderer PowerLineRenderer;
+    public LineRenderer PowerLineRendererOutline;
     [SerializeField] private GameObject gaugeObject;
     [SerializeField] private Image gaugeFill;
     [SerializeField] private UI_ShotRemaining shotRemaining;
+    [SerializeField] private TrajectoryPrediction trajectoryPrediction;
 
     private float angle;
     public static Rigidbody rb;
@@ -46,7 +51,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
     AudioSource audioSource;
-    //[SerializeField] private Animator MyAnimator;
+    [SerializeField] private Animator MyAnimator;
 
     float timeSinceThrow = 0;
 
@@ -65,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         smokePoof = GetComponentInChildren<VisualEffect>();
         speedEffect = GetComponentInChildren<ParticleSystem>();
-        //MyAnimator = GetComponentInChildren<Animator>();
+        MyAnimator = GetComponentInChildren<Animator>();
 
         MouseStart = new Vector2(Screen.width / 2, Screen.height / 2);
 
@@ -81,8 +86,12 @@ public class PlayerController : MonoBehaviour
     {
         if (ThrowStrength > 0.2f)
         {
-            SoundShot();    
-            StartCoroutine(Haptic(ThrowStrength / 40, ThrowStrength / 40, .4f));
+            //ScreenShake.instance.Shake(ThrowStrength / StrengthFactor);
+
+            rb.drag = 1;
+
+            SoundShot();
+            StartCoroutine(Haptic(ThrowStrength / StrengthFactor, ThrowStrength / StrengthFactor, .4f));
 
             timeSinceThrow = 0;
             staticThrowStrength = ThrowStrength;
@@ -90,7 +99,8 @@ public class PlayerController : MonoBehaviour
             isShooted = true;
             RespawnPlayer();
 
-            rb.AddForce(transform.forward * ThrowStrength, ForceMode.Impulse);
+            rb.AddForce(trajectoryPrediction.transform.forward * ThrowStrength, ForceMode.Impulse);
+            rb.rotation = trajectoryPrediction.transform.rotation;
 
             smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             smokePoof.SetFloat("SmokeSize", ThrowStrength / StrengthFactor);
@@ -103,7 +113,6 @@ public class PlayerController : MonoBehaviour
             var durationSpeedEffect = speedEffect.main;
             durationSpeedEffect.duration = ThrowStrength / StrengthFactor;
 
-            speedEffectDirection.transform.rotation = Quaternion.Euler(0f, angle, 0f);
             speedEffect.Play();
 
             turnBasedPlayer.ShotCount();
@@ -170,19 +179,42 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = Vector3.zero;
                 }
                 break;
+
+            default:
+                Debug.Log("Collision is either Ice or not recognized.");
+                break;
         }
     }
 
-    //PhysicMaterial pm;
+    /*[HideInInspector]*/ public bool iceLock = false;
+    float iceAngleDynamic;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
         {
             float speed = lastVel.magnitude;
             Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
-            //Quaternion newRot = Quaternion.LookRotation(reflect);
-            //
-            //rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+            Quaternion newRot = Quaternion.LookRotation(reflect);
+
+            if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
+            {
+                Vector3 normale = collision.contacts[0].normal;
+                Vector3 ortho = new Vector3(1, 0, 1);
+
+                Vector3 projection = Vector3.Dot(normale, ortho) * ortho;
+                Vector3 contact2 = normale - projection;
+
+                iceAngleDynamic = Vector3.Angle(transform.forward, contact2);
+                iceAngleDynamic = iceAngleDynamic > 90 ? 180 - iceAngleDynamic : iceAngleDynamic;
+
+                if (iceAngleDynamic > iceAngle && !iceLock)
+                {
+                    StartCoroutine(Haptic(WallValues.IceLFH, WallValues.IceHFH, WallValues.IceTH));
+                    rb.velocity = reflect * Mathf.Max(speed * WallValues.IceBounce, 0f);
+                }
+            }
+
+            rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
             SwitchObstacle(obstacle, speed, reflect);
         }
@@ -195,7 +227,7 @@ public class PlayerController : MonoBehaviour
         {
             float speed;
             Vector3 reflect;
-            //Quaternion newRot;
+            Quaternion newRot;
             Vector3 contactPoint = collision.contacts[0].normal;
 
             if ((rb.velocity.x < .5f || rb.velocity.z < .5f) && timeSinceThrow < .1f && !stayOnce)
@@ -206,12 +238,29 @@ public class PlayerController : MonoBehaviour
 
                 speed = lastVel.magnitude - timeSinceThrow;
                 reflect = Vector3.Reflect(lastVel.normalized, contactPoint);
-                //newRot = Quaternion.LookRotation(reflect);
+                newRot = Quaternion.LookRotation(reflect);
 
-                //if (timeSinceThrow != 0)
-                //    rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+                if (timeSinceThrow != 0)
+                    rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
 
                 SwitchObstacle(obstacle, speed, reflect);
+            }
+
+            if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
+            {
+                Debug.Log(iceAngleDynamic);
+                //Debug.Break();
+
+                if (iceAngleDynamic <= iceAngle)
+                {
+                    rb.drag = .2f;
+                    iceLock = true;
+                }
+            }
+            else if (obstacle.obstacleType == Obstacle.ObstacleType.IceAngle)
+            {
+                rb.drag = 0;
+                iceLock = true;
             }
         }
     }
@@ -220,6 +269,8 @@ public class PlayerController : MonoBehaviour
     {
         stayOnce = false;
         velcroLock = false;
+        iceLock = false;
+        rb.drag = 1;
     }
 
     /// <summary>
@@ -252,7 +303,8 @@ public class PlayerController : MonoBehaviour
             ? Mathf.Atan2(LookingDirection.x, LookingDirection.y) * Mathf.Rad2Deg
             : Mathf.Atan2(-LookingDirection.x, -LookingDirection.y) * Mathf.Rad2Deg;
 
-        rb.rotation = Quaternion.Euler(0f, angle, 0f);
+        if (rb.velocity == Vector3.zero)
+            rb.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 
     /// <summary>
@@ -276,7 +328,6 @@ public class PlayerController : MonoBehaviour
         {
             gaugeObject.SetActive(true);
             isGaugeActive = true;
-            //MyAnimator.SetBool("PreparationShoot", true);
             SoundGauge();
         }
         if (context.canceled)
@@ -285,7 +336,6 @@ public class PlayerController : MonoBehaviour
             isGaugeActive = false;
             gaugeFill.fillAmount = 0;
             audioSource.Stop();
-            //MyAnimator.SetBool("PreparationShoot", false);
 
         }
     }
@@ -304,22 +354,61 @@ public class PlayerController : MonoBehaviour
             gaugeTime = 0;
 
         PowerLineRenderer.SetPosition(1, Vector3.back * ThrowStrength / 8);
+        PowerLineRendererOutline.SetPosition(1, Vector3.back * ThrowStrength / 7.9f);
+
+
+        if (rb.velocity.magnitude < .7f)
+        {
+            MyAnimator.SetBool("Player_Roll", false);
+        }
+        else
+        {
+            MyAnimator.SetBool("Player_Roll", true);
+        }
+        
+        if (ThrowStrength == 0f)
+        {
+            MyAnimator.SetBool("PreparationShoot_1", false);
+            MyAnimator.SetBool("PreparationShoot_2", false);
+        }
+        else
+        {
+            MyAnimator.SetBool("PreparationShoot_1", false);
+            MyAnimator.SetBool("PreparationShoot_2", true);
+            //if (ThrowStrength > 0f && ThrowStrength < 20f)
+            //{
+            //    MyAnimator.SetBool("PreparationShoot_1", true);
+            //    MyAnimator.SetBool("PreparationShoot_2", false);
+            //
+            //
+            //}
+            //else if (ThrowStrength >= 20f)
+            //{
+            //    MyAnimator.SetBool("PreparationShoot_1", false);
+            //    MyAnimator.SetBool("PreparationShoot_2", true);
+            //
+            //}
+        }
     }
 
 
-    private bool dragEnabled = false;
+    [HideInInspector] public bool dragEnabled = false;
     /// <summary>
     /// Quand la souris effectue un drag on rend le curseur invisible et il est restreint de se d�placer dans l'�cran
     /// On appelle la m�thode SetLookDirection avec son vecteur qui va dans la direction oppos�e
     /// <param name="context"></param>
     public void MouseStrenght(InputAction.CallbackContext context)
     {
+        float dynamicMouseSensitivity = (.01f + ThrowStrength) / 5 * MouseSensitivity;
+
+        dynamicMouseSensitivity = Mathf.Min(dynamicMouseSensitivity, MouseSensitivity);
+
         if (dragEnabled)
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
             MouseEnd = context.ReadValue<Vector2>();
-            ThrowStrength = Vector2.Distance(MouseStart, MouseEnd) * MouseSensitivity;
+            ThrowStrength = Vector2.Distance(MouseStart, MouseEnd) * dynamicMouseSensitivity;
             ThrowStrength = Mathf.Clamp(ThrowStrength, 0, StrengthFactor);
 
             // Set a better magnitude for the direction here
@@ -376,7 +465,7 @@ public class PlayerController : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
 
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
 
             dragEnabled = false;
 

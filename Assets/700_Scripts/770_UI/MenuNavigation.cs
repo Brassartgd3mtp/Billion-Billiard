@@ -12,7 +12,7 @@ public class MenuNavigation : MonoBehaviour
 
         if (SwapControls.state == CurrentState.MouseKeyboard)
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
     }
@@ -27,6 +27,11 @@ public class MenuNavigation : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
         }
     }
 }

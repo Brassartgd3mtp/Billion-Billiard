@@ -6,12 +6,14 @@ public class InputHandler : MonoBehaviour
 
     #region References
     static PlayerController player;
-    static PlayerRoomCam freeCam;
+    static TrajectoryPrediction trajPred;
+    static PlayerRoomCam roomCam;
     static ReloadScene rlScene;
     static NoClip nClip;
     static PauseMenu pMenu;
     static SwapControls spControls;
     static UI_Skip skip;
+    static LevelSelectorManager lsManager;
     #endregion
 
     // Start is called before the first frame update
@@ -21,6 +23,7 @@ public class InputHandler : MonoBehaviour
 
         Actions.Cheat.Enable();
         Actions.Swap.Enable();
+        Actions.MainMenu.Enable();
     }
 
     #region Enable
@@ -33,7 +36,6 @@ public class InputHandler : MonoBehaviour
         Actions.Gamepad.ThrowPlayer.canceled += playerController.GamepadStrengthGauge;
         Actions.Gamepad.ThrowPlayer.canceled += playerController.Throw;
         Actions.Gamepad.GamepadStrenght.performed += playerController.GamepadDirection;
-        Actions.Gamepad.GamepadStrenght.canceled += playerController.GamepadDirection;
         Actions.Gamepad.CancelThrow.started += playerController.GamepadCancelThrow;
         #endregion
         #region Mouse/Keyboard
@@ -45,17 +47,25 @@ public class InputHandler : MonoBehaviour
         #endregion
     }
 
-    public static void FreeCamEnable(PlayerRoomCam playerFreeCam)
+    public static void TrajectoryPredictionEnable(TrajectoryPrediction trajectoryPrediction)
     {
-        freeCam = playerFreeCam;
+        trajPred = trajectoryPrediction;
+
+        Actions.MouseKeyboard.MouseStrenght.performed += trajectoryPrediction.MouseDirection;
+        Actions.Gamepad.GamepadStrenght.performed += trajectoryPrediction.GamepadDirection;
+    }
+
+    public static void RoomCamEnable(PlayerRoomCam playerRoomCam)
+    {
+        roomCam = playerRoomCam;
 
         //Actions.Gamepad.FreeCam.performed += playerFreeCam.FreeCam;
         //Actions.Gamepad.FreeCam.canceled += playerFreeCam.FreeCam;
         //Actions.Gamepad.StartFreeCam.started += playerFreeCam.StartFreeCam;
-        Actions.Gamepad.RoomCam.canceled += playerFreeCam.StartFreeCam;
+        Actions.Gamepad.RoomCam.canceled += playerRoomCam.StartFreeCam;
         //Actions.MouseKeyboard.FreeCam.performed += playerFreeCam.FreeCam;
         //Actions.MouseKeyboard.StartFreeCam.started += playerFreeCam.StartFreeCam;
-        Actions.MouseKeyboard.RoomCam.canceled += playerFreeCam.StartFreeCam;
+        Actions.MouseKeyboard.RoomCam.canceled += playerRoomCam.StartFreeCam;
     }
 
     public static void ReloadSceneEnable(ReloadScene reloadScene)
@@ -63,6 +73,14 @@ public class InputHandler : MonoBehaviour
         rlScene = reloadScene;
 
         Actions.Cheat.ReloadScene.performed += reloadScene.Reload;
+    }
+
+    public static void MovePanelSelectorEnable(LevelSelectorManager levelSelectorManager)
+    {
+        lsManager = levelSelectorManager;
+
+        Actions.MainMenu.ScrollLeft.performed += levelSelectorManager.PrevPanel;
+        Actions.MainMenu.ScrollRight.performed += levelSelectorManager.NextPanel;
     }
 
     public static void NoClipEnable(NoClip noClip)
@@ -105,7 +123,6 @@ public class InputHandler : MonoBehaviour
         Actions.Gamepad.ThrowPlayer.canceled -= player.GamepadStrengthGauge;
         Actions.Gamepad.ThrowPlayer.canceled -= player.Throw;
         Actions.Gamepad.GamepadStrenght.performed -= player.GamepadDirection;
-        Actions.Gamepad.GamepadStrenght.canceled -= player.GamepadDirection;
         #endregion
         #region Mouse/Keyboard
         Actions.MouseKeyboard.MouseStrenght.performed -= player.MouseStrenght;
@@ -115,20 +132,32 @@ public class InputHandler : MonoBehaviour
         #endregion
     }
 
-    public static void FreeCamDisable()
+    public static void TrajectoryPredictionDisable()
+    {
+        Actions.MouseKeyboard.MouseStrenght.performed -= trajPred.MouseDirection;
+        Actions.Gamepad.GamepadStrenght.performed -= trajPred.GamepadDirection;
+    }
+
+    public static void RoomCamDisable()
     {
         //Actions.Gamepad.FreeCam.performed -= freeCam.FreeCam;
         //Actions.Gamepad.FreeCam.canceled -= freeCam.FreeCam;
         //Actions.Gamepad.StartFreeCam.started -= freeCam.StartFreeCam;
-        Actions.Gamepad.RoomCam.canceled -= freeCam.StartFreeCam;
+        Actions.Gamepad.RoomCam.canceled -= roomCam.StartFreeCam;
         //Actions.MouseKeyboard.FreeCam.performed -= freeCam.FreeCam;
         //Actions.MouseKeyboard.StartFreeCam.started -= freeCam.StartFreeCam;
-        Actions.MouseKeyboard.RoomCam.canceled -= freeCam.StartFreeCam;
+        Actions.MouseKeyboard.RoomCam.canceled -= roomCam.StartFreeCam;
     }
 
     public static void ReloadSceneDisable()
     {
         Actions.Cheat.ReloadScene.performed -= rlScene.Reload;
+    }
+
+    public static void MovePanelSelectorDisable()
+    {
+        Actions.MainMenu.ScrollLeft.performed -= lsManager.PrevPanel;
+        Actions.MainMenu.ScrollRight.performed -= lsManager.NextPanel;
     }
 
     public static void NoClipDisable()
@@ -163,9 +192,14 @@ public class InputHandler : MonoBehaviour
         PlayerControllerEnable(player);
     }
 
-    public static void FreeCamEnable()
+    public static void TrajectoryPredictionEnable()
     {
-        FreeCamEnable(freeCam);
+        TrajectoryPredictionEnable(trajPred);
+    }
+
+    public static void RoomCamEnable()
+    {
+        RoomCamEnable(roomCam);
     }
 
     public static void ReloadSceneEnable()
@@ -191,6 +225,11 @@ public class InputHandler : MonoBehaviour
     public static void UISkipEnable()
     {
         UISkipEnable(skip);
+    }
+
+    public static void MovePanelSelectorEnable()
+    {
+        MovePanelSelectorEnable(lsManager);
     }
     #endregion
 }

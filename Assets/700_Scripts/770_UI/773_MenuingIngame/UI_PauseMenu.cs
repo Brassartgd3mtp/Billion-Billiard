@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject OptionFirstbutton;
     public GameObject PauseFirstbutton;
 
+    [SerializeField] private GameObject victoryPanel;
+
     private bool panelActive = false;
 
     void Start()
@@ -22,6 +24,26 @@ public class PauseMenu : MonoBehaviour
 
         if (EventSystem.current != null)
             EventSystem.current.firstSelectedGameObject = PauseFirstbutton;
+    }
+    private void Update()
+    {
+        if (panelActive)
+        {
+            if (SwapControls.state == CurrentState.Gamepad)
+            {
+                if (EventSystem.current.currentSelectedGameObject == null)
+                {
+                    EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+            }
+            else if (Cursor.lockState == CursorLockMode.Locked || Cursor.lockState == CursorLockMode.Confined)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }   
+        }
     }
 
     public void OnPlayButtonClick()
@@ -39,7 +61,7 @@ public class PauseMenu : MonoBehaviour
         // Ouvre le panneau d'options
         if (optionPanel != null)
         {
-            optionPanel.SetActive(true);
+            optionPanel.gameObject.SetActive(true);
             Debug.Log(optionPanel.activeSelf);
         }
 
@@ -53,8 +75,8 @@ public class PauseMenu : MonoBehaviour
 
     public void OnMainMenuButtonClick()
     {
-        // Recharge la scène "Main Menu"
-        SceneManager.LoadScene(0);
+        // Recharge la scène "Level Selector"
+        SceneManager.LoadScene(1);
         Time.timeScale = 1f;
     }
 
@@ -78,12 +100,17 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseMenuState(InputAction.CallbackContext context)
     {
-        panelActive = !panelActive;
+        if (!victoryPanel.activeSelf)
+        {
+            panelActive = !panelActive;
 
-        if (panelActive)
-            PauseOn();
+            if (panelActive)
+                PauseOn();
+            else
+                PauseOff();
+        }
         else
-            PauseOff();
+            Debug.Log("Can't open Pause menu while being on Victory Screen !");
     }
 
     void PauseOn()
@@ -93,7 +120,8 @@ public class PauseMenu : MonoBehaviour
         InputHandler.Actions.Gamepad.GamepadStrenght.Disable();
         InputHandler.Actions.Gamepad.ThrowPlayer.Disable();
         InputHandler.Actions.MouseKeyboard.MouseStartDrag.Disable();
-
+        InputHandler.Actions.MouseKeyboard.MouseStrenght.Disable();
+        
         InputHandler.Actions.Gamepad.RoomCam.Disable();
         InputHandler.Actions.MouseKeyboard.RoomCam.Disable();
 
@@ -101,11 +129,10 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
 
         InputSystem.ResetHaptics();
-        Time.timeScale = 0f;
-        //Time.fixedDeltaTime = 0f;
+        InputHandler.PlayerControllerDisable();
+        InputHandler.TrajectoryPredictionDisable();
 
-        //EventSystem.current.SetSelectedGameObject(null);
-        //EventSystem.current.SetSelectedGameObject(PauseFirstbutton);
+        Time.timeScale = 0f;
     }
 
     void PauseOff()
@@ -115,16 +142,18 @@ public class PauseMenu : MonoBehaviour
         InputHandler.Actions.Gamepad.GamepadStrenght.Enable();
         InputHandler.Actions.Gamepad.ThrowPlayer.Enable();
         InputHandler.Actions.MouseKeyboard.MouseStartDrag.Enable();
-
+        InputHandler.Actions.MouseKeyboard.MouseStrenght.Enable();
+        
         InputHandler.Actions.Gamepad.RoomCam.Enable();
         InputHandler.Actions.MouseKeyboard.RoomCam.Enable();
 
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // R�tablit le temps � sa valeur normale pour reprendre le jeu
+        InputHandler.PlayerControllerEnable();
+        InputHandler.TrajectoryPredictionEnable();
+
         Time.timeScale = 1f;
-        //Time.fixedDeltaTime = 1f;
     }
 
     private void OnDisable()

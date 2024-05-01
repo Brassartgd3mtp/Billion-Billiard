@@ -280,7 +280,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bd4ab856-b143-45cb-9c44-7be20cb3dbac"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -336,45 +336,12 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""dc736d58-ed1b-4f32-b4bb-06a8a9ff11fd"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Reload Scene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""46b72e63-06b2-4264-920b-354c3e160e83"",
                     ""path"": ""<Keyboard>/n"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""No-Clip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""763a894d-de23-499a-a4ce-a6fb700aa1ff"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""No-Clip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""02ac39ac-505b-4e67-a967-304219bdc89c"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""No-Clip Control"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -440,9 +407,18 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             ""id"": ""4e3b26f7-b632-45cd-be3e-0f0ff854419b"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""ScrollLeft"",
                     ""type"": ""Button"",
                     ""id"": ""70762f9f-2db8-40ae-8467-3ea717f788b3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ScrollRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""e6cb0643-c453-4c96-b69b-8c3e70a90a9c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -453,11 +429,88 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""38eb72fd-132e-4122-aa42-ef8a88d701db"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""ScrollLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d5a800a-0def-4381-80a6-c244949da9a0"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""801c9576-e9c1-47d0-9f0d-fe02f7745011"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99f51042-1bc0-4721-a2cf-81c4dd9a293e"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57f0cbdf-6117-4deb-8c09-575dd3bab351"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb337d8c-78f6-4165-8236-6eed24d7eea2"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""945e3584-c6b3-4e3c-96bd-bdc6f44768e9"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e341fb4-31df-42e2-a034-ca0078a4799f"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -548,7 +601,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         m_Cheat_NoClipControl = m_Cheat.FindAction("No-Clip Control", throwIfNotFound: true);
         // MainMenu
         m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
-        m_MainMenu_Newaction = m_MainMenu.FindAction("New action", throwIfNotFound: true);
+        m_MainMenu_ScrollLeft = m_MainMenu.FindAction("ScrollLeft", throwIfNotFound: true);
+        m_MainMenu_ScrollRight = m_MainMenu.FindAction("ScrollRight", throwIfNotFound: true);
         // Swap
         m_Swap = asset.FindActionMap("Swap", throwIfNotFound: true);
         m_Swap_ToGamepad = m_Swap.FindAction("ToGamepad", throwIfNotFound: true);
@@ -848,12 +902,14 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     // MainMenu
     private readonly InputActionMap m_MainMenu;
     private List<IMainMenuActions> m_MainMenuActionsCallbackInterfaces = new List<IMainMenuActions>();
-    private readonly InputAction m_MainMenu_Newaction;
+    private readonly InputAction m_MainMenu_ScrollLeft;
+    private readonly InputAction m_MainMenu_ScrollRight;
     public struct MainMenuActions
     {
         private @PlayerActionMap m_Wrapper;
         public MainMenuActions(@PlayerActionMap wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_MainMenu_Newaction;
+        public InputAction @ScrollLeft => m_Wrapper.m_MainMenu_ScrollLeft;
+        public InputAction @ScrollRight => m_Wrapper.m_MainMenu_ScrollRight;
         public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -863,16 +919,22 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MainMenuActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MainMenuActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @ScrollLeft.started += instance.OnScrollLeft;
+            @ScrollLeft.performed += instance.OnScrollLeft;
+            @ScrollLeft.canceled += instance.OnScrollLeft;
+            @ScrollRight.started += instance.OnScrollRight;
+            @ScrollRight.performed += instance.OnScrollRight;
+            @ScrollRight.canceled += instance.OnScrollRight;
         }
 
         private void UnregisterCallbacks(IMainMenuActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @ScrollLeft.started -= instance.OnScrollLeft;
+            @ScrollLeft.performed -= instance.OnScrollLeft;
+            @ScrollLeft.canceled -= instance.OnScrollLeft;
+            @ScrollRight.started -= instance.OnScrollRight;
+            @ScrollRight.performed -= instance.OnScrollRight;
+            @ScrollRight.canceled -= instance.OnScrollRight;
         }
 
         public void RemoveCallbacks(IMainMenuActions instance)
@@ -970,7 +1032,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     }
     public interface IMainMenuActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnScrollLeft(InputAction.CallbackContext context);
+        void OnScrollRight(InputAction.CallbackContext context);
     }
     public interface ISwapActions
     {

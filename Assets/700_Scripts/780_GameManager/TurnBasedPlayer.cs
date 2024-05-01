@@ -16,11 +16,24 @@ public class TurnBasedPlayer : MonoBehaviour
     [Header("References")]
     public PlayerController playerController;
     public UI_ShotRemaining UIShotRemaining;
+    public LevelManager levelManager;
 
     public static TurnBasedPlayer Instance;
 
     public void Start()
     {
+        if (levelManager.levelType == LevelType.HoleInOne)
+        {
+            nbrOfShots = 1;
+        }
+        else
+        {
+            nbrOfShots = 3;
+        }
+
+        UIShotRemaining.Initialize(nbrOfShots);
+
+
         ReloadCooldown = PassiveReloadCooldown;
 
         if (Instance == null)
@@ -30,10 +43,9 @@ public class TurnBasedPlayer : MonoBehaviour
 
         TurnBasedSystem.players.Add(gameObject);
 
-        shotRemaining = nbrOfShots;
+        //shotRemaining = nbrOfShots;
         playerController = GetComponent<PlayerController>();
 
-        UIShotRemaining.Initialize(nbrOfShots);
     }
 
     public void Update()

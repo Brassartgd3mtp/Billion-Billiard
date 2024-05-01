@@ -15,6 +15,7 @@ public class VFXScriptableObject : ScriptableObject
     public GameObject prefabParticleNPC;
     public GameObject prefabParticleProps;
     public GameObject prefabParticleBumper;
+    public GameObject prefabParticleIceAngle;
     public GameObject prefabParticleDefault;
     public int soundObstacleId;
 
@@ -27,19 +28,23 @@ public class VFXScriptableObject : ScriptableObject
                 return prefabParticleConcrete;
 
             case ObstacleType.Rubber:
+                soundObstacleId = 25;
                 return prefabParticleRubber;
 
             case ObstacleType.Felt:
-                soundObstacleId = 7;
+                soundObstacleId = 23;
                 return prefabParticleFelt;
 
             case ObstacleType.Ice:
+                soundObstacleId = 24;
                 return prefabParticleIce;
 
             case ObstacleType.Velcro:
+                soundObstacleId = 27;
                 return prefabParticleVelcro;
 
             case ObstacleType.NPC:
+                soundObstacleId = 30;
                 return prefabParticleNPC;
 
             case ObstacleType.Props:
@@ -48,6 +53,10 @@ public class VFXScriptableObject : ScriptableObject
             case ObstacleType.Bumper:
                 soundObstacleId = 9;
                 return prefabParticleBumper;
+
+            case ObstacleType.IceAngle:
+                soundObstacleId = 24;
+                return prefabParticleIceAngle;
 
             default:
                 return prefabParticleDefault;

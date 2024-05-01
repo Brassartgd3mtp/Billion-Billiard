@@ -247,7 +247,7 @@ MonoBehaviour:
   - {fileID: 0}
   DoorAnimator: {fileID: 6880635755829697490}
   SelectedAnimation: VaultDoor_Open1
-  NeedButton: 0
+  NeedButton: 1
 --- !u!1 &7460316819662377138
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 4766689443000099185}
   - component: {fileID: 6397486070368250751}
   - component: {fileID: 1317260728641151912}
+  - component: {fileID: 7321540391765720865}
   m_Layer: 0
   m_Name: "Bank_Vault_Door_B\xEAta"
   m_TagString: Untagged
@@ -282,7 +283,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6182355508541900388}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &2363577925630697882
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -350,7 +351,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -368,6 +369,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleType: 7
+--- !u!65 &7321540391765720865
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460316819662377138}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.695924, y: 4.760994, z: 1.6090361}
+  m_Center: {x: 0.72099924, y: 0.07095492, z: 0.8045179}
 --- !u!1 &8195325708336049230
 GameObject:
   m_ObjectHideFlags: 0
