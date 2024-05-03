@@ -108,9 +108,7 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void CheckIfNextPanelIsLocked()
     {
-        Panels[PanelIndex + 1].TryGetComponent(out PanelManager panelManagerNext);
-
-        if (panelManagerNext.SO_Level.LevelData.isLocked)
+        if(PanelIndex >= Panels.Count - 1) 
         {
             if (SwapControls.state == CurrentState.Gamepad)
                 _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
@@ -120,32 +118,48 @@ public class LevelSelectorManager : MonoBehaviour
             RightArrow.gameObject.SetActive(false);
             //RightArrow.enabled = false;
             _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
-        }
-        else //if (!RightArrow.enabled) //&& !RightArrow.gameObject.activeInHierarchy)
-        {
-            panelCanMoveright = true;
-            RightArrow.gameObject.SetActive(true);
-            //RightArrow.enabled = true;
-        }
-
-        if (ActualPanel == Panels[0])
-        {
-            panelCanMoveright = true;
-            if (SwapControls.state == CurrentState.Gamepad)
-                _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
-            else
-                _eventSystem.SetSelectedGameObject(null);
-
-            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
-            LeftArrow.gameObject.SetActive(false);
-            //LeftArrow.enabled = false;
-        }
-        else if (ActualPanel != Panels[0])
-        {
             panelCanMoveLeft = true;
             LeftArrow.gameObject.SetActive(true);
-            //LeftArrow.enabled = true;
+            return;
         }
+            Panels[PanelIndex + 1].TryGetComponent(out PanelManager panelManagerNext);
+
+                if (panelManagerNext.SO_Level.LevelData.isLocked)
+                {
+                    if (SwapControls.state == CurrentState.Gamepad)
+                        _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+                    else
+                        _eventSystem.SetSelectedGameObject(null);
+
+                    RightArrow.gameObject.SetActive(false);
+                    //RightArrow.enabled = false;
+                    _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+                }
+                else //if (!RightArrow.enabled) //&& !RightArrow.gameObject.activeInHierarchy)
+                {
+                    panelCanMoveright = true;
+                    RightArrow.gameObject.SetActive(true);
+                    //RightArrow.enabled = true;
+                }
+
+                if (ActualPanel == Panels[0])
+                {
+                    panelCanMoveright = true;
+                    if (SwapControls.state == CurrentState.Gamepad)
+                        _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+                    else
+                        _eventSystem.SetSelectedGameObject(null);
+
+                    _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+                    LeftArrow.gameObject.SetActive(false);
+                    //LeftArrow.enabled = false;
+                }
+                else if (ActualPanel != Panels[0])
+                {
+                    panelCanMoveLeft = true;
+                    LeftArrow.gameObject.SetActive(true);
+                    //LeftArrow.enabled = true;
+                }
     }
 
     private void UpdateBackgroundImage() // update the background image in the level selector using the variable BackgroundImage of the current SO
