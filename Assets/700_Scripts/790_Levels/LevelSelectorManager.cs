@@ -28,7 +28,6 @@ public class LevelSelectorManager : MonoBehaviour
 
     [SerializeField] private bool panelCanMoveLeft, panelCanMoveright;
 
-
     [Header("Background")]
  
     [SerializeField] private Image backgroundImage;
@@ -55,6 +54,7 @@ public class LevelSelectorManager : MonoBehaviour
             //RightArrow.enabled = false;
             StartCoroutine(MovePanel(-1));
             backgroundImageAnimator.SetTrigger("MakeTransition");
+            GoRightSound();
         }
     }
 
@@ -68,6 +68,7 @@ public class LevelSelectorManager : MonoBehaviour
             //RightArrow.enabled = false;
             StartCoroutine(MovePanel(1));
             backgroundImageAnimator.SetTrigger("MakeTransition");
+            GoLeftSound();
         }
     }
 
@@ -170,5 +171,17 @@ public class LevelSelectorManager : MonoBehaviour
     private void OnDisable()
     {
         InputHandler.MovePanelSelectorDisable();
+    }
+
+    private void GoLeftSound()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(31, audioSource);
+    }
+
+    private void GoRightSound()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(32, audioSource);
     }
 }
