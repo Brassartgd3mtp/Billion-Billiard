@@ -52,7 +52,7 @@ public class OneWayDoor : MonoBehaviour
         StartCoroutine(UpdateDoorPos(wall, startPos));
         enabled = false;
 
-        PlayerController.posBeforeHit = new Vector3(respawnPos.position.x,PlayerController.posBeforeHit.y, respawnPos.position.z);;
+        PlayerController.posBeforeHit = new Vector3(respawnPos.position.x, PlayerController.posBeforeHit.y, respawnPos.position.z);
 
         SoundDoorClose();
     }

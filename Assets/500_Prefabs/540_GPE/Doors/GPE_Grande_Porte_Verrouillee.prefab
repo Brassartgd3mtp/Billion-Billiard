@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 1004182597772798521}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.69, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -553,7 +553,7 @@ MonoBehaviour:
   wall: {fileID: 6347823053805239244}
   wallCollider: {fileID: 8295465624273930087}
   speed: 4
-  isOneWay: 1
+  isOneWay: 0
   isOpenByDefault: 0
   undergroundEndPos: {x: 0, y: -2, z: 0}
   respawnPos: {fileID: 8618342707211170875}
@@ -576,8 +576,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 2, z: 4}
-  m_Center: {x: 2.25, y: 1, z: 0}
+  m_Size: {x: 0.1, y: 2, z: 4.99}
+  m_Center: {x: 1.75, y: 1, z: 0}
 --- !u!1 &4851918767180763783
 GameObject:
   m_ObjectHideFlags: 0
