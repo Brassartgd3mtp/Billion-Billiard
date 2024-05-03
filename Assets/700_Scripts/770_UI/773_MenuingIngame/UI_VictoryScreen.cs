@@ -52,6 +52,7 @@ public class VictoryScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI TXT_timer;
     [SerializeField] private TextMeshProUGUI TXT_highscore;
     [SerializeField] private TextMeshProUGUI TXT_pb;
+    public TextMeshProUGUI TXT_newHighscore;
 
     private void OnEnable()
     {

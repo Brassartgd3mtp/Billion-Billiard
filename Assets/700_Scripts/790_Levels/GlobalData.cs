@@ -10,6 +10,7 @@ public class GlobalData : MonoBehaviour
     private StarRating starRatingScript;
     private ScoringCalculations calculationsScript;
     private LevelTimer timerScript;
+    [SerializeField] private VictoryScreen victoryScreenScript;
 
     private void Awake()
     {
@@ -23,12 +24,14 @@ public class GlobalData : MonoBehaviour
         if (starRatingScript.numberOfStars > PlayerPrefs.GetFloat("stars" + SceneManager.GetActiveScene().buildIndex))
         {
             PlayerPrefs.SetFloat("stars" + SceneManager.GetActiveScene().buildIndex, starRatingScript.numberOfStars);
+
         }
 
         //score
         if (calculationsScript.PlayerScore > PlayerPrefs.GetFloat("hiscore" + SceneManager.GetActiveScene().buildIndex))
         {
             PlayerPrefs.SetFloat("hiscore" + SceneManager.GetActiveScene().buildIndex, calculationsScript.PlayerScore);
+            victoryScreenScript.TXT_newHighscore.gameObject.SetActive(true);
         }
 
         //timer
