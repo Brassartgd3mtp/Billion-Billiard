@@ -5430,6 +5430,7 @@ GameObject:
   - component: {fileID: 1194952215494977630}
   - component: {fileID: 2885882295411645563}
   - component: {fileID: 2722303910997277114}
+  - component: {fileID: 4765107979092820746}
   m_Layer: 5
   m_Name: Victory
   m_TagString: Untagged
@@ -5449,6 +5450,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 806181005870957441}
   - {fileID: 8139676414630005091}
   - {fileID: 8173567100221220842}
   - {fileID: 156019226431472196}
@@ -5493,7 +5495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9411765}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5522,6 +5524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cfca9bcb6635fa4fa19a3b98cc9f707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeScript: {fileID: 0}
   firstButton: {fileID: 1381128435222161525}
   IMG_timerMedal: {fileID: 426595310437915919}
   IMG_pbMedal: {fileID: 1374253677042972984}
@@ -5548,6 +5551,22 @@ MonoBehaviour:
   TXT_highscore: {fileID: 5253476938002539037}
   TXT_pb: {fileID: 3288693644939835215}
   TXT_newHighscore: {fileID: 1425464572371063165}
+--- !u!114 &4765107979092820746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221884782698930584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a983228f4280b643b3c2f78b603aae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShakeIntensity: 50
+  baseShakeDuration: 1.5
+  shakeIntensity: 2
+  shakeDuration: 1
 --- !u!1 &226192641612114042
 GameObject:
   m_ObjectHideFlags: 0
@@ -10736,7 +10755,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2064603200459814918}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba5b22bc6f4640344ad7e8653fa22eb5, type: 3}
   m_Name: 
@@ -26816,6 +26835,81 @@ Transform:
   - {fileID: 7825869293232976474}
   m_Father: {fileID: 5056546972909848793}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &3932606663896039037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 806181005870957441}
+  - component: {fileID: 5963597767782387745}
+  - component: {fileID: 5317488875192129094}
+  m_Layer: 5
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &806181005870957441
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3932606663896039037}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4860071584380490633}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 2500, y: 1200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5963597767782387745
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3932606663896039037}
+  m_CullTransparentMesh: 1
+--- !u!114 &5317488875192129094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3932606663896039037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7647059}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3973788946419674700
 GameObject:
   m_ObjectHideFlags: 0

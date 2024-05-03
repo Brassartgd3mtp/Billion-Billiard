@@ -14,6 +14,7 @@ public class VictoryScreen : MonoBehaviour
     private LevelTimer timerScript;
     private ScoringCalculations calculationsScript;
     private EndLevelProgressBar progressBarScript;
+    [SerializeField] private Shake shakeScript;
 
     [Header("Objects")]
 
@@ -65,6 +66,7 @@ public class VictoryScreen : MonoBehaviour
         timerScript = FindAnyObjectByType<LevelTimer>();
         starRatingScript = FindAnyObjectByType<StarRating>();
         progressBarScript = FindAnyObjectByType<EndLevelProgressBar>();
+        shakeScript = GetComponent<Shake>();
 
         timerScript.TimeStarted = false; //stop the timer
         starRatingScript.HasWon = true; 
@@ -133,6 +135,7 @@ public class VictoryScreen : MonoBehaviour
 
     private IEnumerator WaitForAnimations() //display the star and use waitforseconds to play the animations one by one
     {
+        shakeScript.StartShake();
         yield return new WaitForSeconds(1.5f);
         progressBarScript.BarCanMove = true; 
     }
