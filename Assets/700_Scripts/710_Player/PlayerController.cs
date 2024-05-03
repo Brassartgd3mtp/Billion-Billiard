@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 using UnityEngine.UI;
 using Unity.VisualScripting.FullSerializer;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -86,7 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         if (ThrowStrength > 0.2f)
         {
-            //ScreenShake.instance.Shake(ThrowStrength / StrengthFactor);
+            ScreenShake.instance.Shake(ThrowStrength / StrengthFactor);
 
             rb.drag = 1;
 
@@ -186,29 +187,44 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*[HideInInspector]*/ public bool iceLock = false;
+    [HideInInspector] public bool iceLock = false;
     float iceAngleDynamic;
+    private bool isColliding = false; 
+    public bool IsColliding 
+    { 
+        get { return isColliding; } 
+        private set
+        {
+            isColliding = value;
+        } 
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
         {
+            IsColliding = true;
+
+            currentCollision = collision.collider;
             float speed = lastVel.magnitude;
             Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
             Quaternion newRot = Quaternion.LookRotation(reflect);
 
             if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
             {
+                //Vector3 ortho = new Vector3(1, 0, 1);
+                //
+                //Vector3 projection = Vector3.Dot(normale, ortho) * ortho;
+                //Vector3 contact2 = normale - projection;
+
                 Vector3 normale = collision.contacts[0].normal;
-                Vector3 ortho = new Vector3(1, 0, 1);
-
-                Vector3 projection = Vector3.Dot(normale, ortho) * ortho;
-                Vector3 contact2 = normale - projection;
-
-                iceAngleDynamic = Vector3.Angle(transform.forward, contact2);
-                iceAngleDynamic = iceAngleDynamic > 90 ? 180 - iceAngleDynamic : iceAngleDynamic;
+                iceAngleDynamic = Vector3.SignedAngle(transform.forward, normale, Vector3.up);
+                iceAngleDynamic = Mathf.Abs(iceAngleDynamic);
+                //iceAngleDynamic = iceAngleDynamic > 90 ? 180 - iceAngleDynamic : iceAngleDynamic;
 
                 if (iceAngleDynamic > iceAngle && !iceLock)
                 {
+                    //Debug.Log(iceAngleDynamic);
+                    //Debug.Break();
                     StartCoroutine(Haptic(WallValues.IceLFH, WallValues.IceHFH, WallValues.IceTH));
                     rb.velocity = reflect * Mathf.Max(speed * WallValues.IceBounce, 0f);
                 }
@@ -248,7 +264,7 @@ public class PlayerController : MonoBehaviour
 
             if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
             {
-                if (iceAngleDynamic <= iceAngle)
+                if (iceAngleDynamic >= iceAngle)
                 {
                     rb.drag = .2f;
                     iceLock = true;
@@ -262,11 +278,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private Collider currentCollision = null; 
     private void OnCollisionExit(Collision collision)
     {
         stayOnce = false;
         velcroLock = false;
         iceLock = false;
+
+        if (currentCollision == collision.collider)
+        {
+            IsColliding = false;
+            currentCollision = null;
+        }
+
         rb.drag = 1;
     }
 
