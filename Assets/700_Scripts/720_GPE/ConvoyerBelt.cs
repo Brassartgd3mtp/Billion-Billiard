@@ -12,6 +12,8 @@ public class ConvoyerBelt : MonoBehaviour
     private MaterialPropertyBlock materialPropertyBlock;
     private float rotateTexture;
     private Vector3 forceDirection;
+    public Color ConvoyerColor = Color.white;
+    public Color ArrowColor = Color.white;
 
     private void Start()
     {
@@ -35,14 +37,16 @@ public class ConvoyerBelt : MonoBehaviour
 
         rotateTexture = Vector2.SignedAngle(Vector2.right, Direction);
         forceDirection = new Vector3(Direction.x, 0, Direction.y).normalized;
-        
+
         materialPropertyBlock = new MaterialPropertyBlock();
         meshRenderer.GetPropertyBlock(materialPropertyBlock);
-        
+
         materialPropertyBlock.SetFloat("_Rotate", rotateTexture);
         materialPropertyBlock.SetVector("_Tiling", Tiling);
         materialPropertyBlock.SetVector("_Speed", Vector2.right * speedTexture);
-        
+        materialPropertyBlock.SetColor("_MeshColor", ConvoyerColor);
+        materialPropertyBlock.SetColor("_BaseColor", ArrowColor);
+
         meshRenderer.SetPropertyBlock(materialPropertyBlock);
     }
 

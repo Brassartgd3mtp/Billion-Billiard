@@ -133,6 +133,8 @@ public class PauseMenu : MonoBehaviour
         InputHandler.TrajectoryPredictionDisable();
 
         Time.timeScale = 0f;
+
+        MenuOpenSound();
     }
 
     void PauseOff()
@@ -154,10 +156,23 @@ public class PauseMenu : MonoBehaviour
         InputHandler.TrajectoryPredictionEnable();
 
         Time.timeScale = 1f;
+
+        MenuCloseSound();
     }
 
     private void OnDisable()
     {
         InputHandler.PauseMenuDisable();
+    }
+
+    private void MenuOpenSound()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(33, audioSource);
+    }
+    private void MenuCloseSound()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(34, audioSource);
     }
 }
