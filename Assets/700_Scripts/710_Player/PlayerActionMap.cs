@@ -304,6 +304,15 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Reload LS"",
+                    ""type"": ""Button"",
+                    ""id"": ""f4deb57d-1e72-44b9-b64b-527a9d617c06"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""No-Clip"",
                     ""type"": ""Button"",
                     ""id"": ""9ed9e3d5-dbb1-4d59-9ba5-9b55a1220681"",
@@ -399,6 +408,17 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""action"": ""No-Clip Control"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""171eb5f9-41a5-438a-bd17-710c0d860cc7"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload LS"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -597,6 +617,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         // Cheat
         m_Cheat = asset.FindActionMap("Cheat", throwIfNotFound: true);
         m_Cheat_ReloadScene = m_Cheat.FindAction("Reload Scene", throwIfNotFound: true);
+        m_Cheat_ReloadLS = m_Cheat.FindAction("Reload LS", throwIfNotFound: true);
         m_Cheat_NoClip = m_Cheat.FindAction("No-Clip", throwIfNotFound: true);
         m_Cheat_NoClipControl = m_Cheat.FindAction("No-Clip Control", throwIfNotFound: true);
         // MainMenu
@@ -841,6 +862,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Cheat;
     private List<ICheatActions> m_CheatActionsCallbackInterfaces = new List<ICheatActions>();
     private readonly InputAction m_Cheat_ReloadScene;
+    private readonly InputAction m_Cheat_ReloadLS;
     private readonly InputAction m_Cheat_NoClip;
     private readonly InputAction m_Cheat_NoClipControl;
     public struct CheatActions
@@ -848,6 +870,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         private @PlayerActionMap m_Wrapper;
         public CheatActions(@PlayerActionMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @ReloadScene => m_Wrapper.m_Cheat_ReloadScene;
+        public InputAction @ReloadLS => m_Wrapper.m_Cheat_ReloadLS;
         public InputAction @NoClip => m_Wrapper.m_Cheat_NoClip;
         public InputAction @NoClipControl => m_Wrapper.m_Cheat_NoClipControl;
         public InputActionMap Get() { return m_Wrapper.m_Cheat; }
@@ -862,6 +885,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @ReloadScene.started += instance.OnReloadScene;
             @ReloadScene.performed += instance.OnReloadScene;
             @ReloadScene.canceled += instance.OnReloadScene;
+            @ReloadLS.started += instance.OnReloadLS;
+            @ReloadLS.performed += instance.OnReloadLS;
+            @ReloadLS.canceled += instance.OnReloadLS;
             @NoClip.started += instance.OnNoClip;
             @NoClip.performed += instance.OnNoClip;
             @NoClip.canceled += instance.OnNoClip;
@@ -875,6 +901,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @ReloadScene.started -= instance.OnReloadScene;
             @ReloadScene.performed -= instance.OnReloadScene;
             @ReloadScene.canceled -= instance.OnReloadScene;
+            @ReloadLS.started -= instance.OnReloadLS;
+            @ReloadLS.performed -= instance.OnReloadLS;
+            @ReloadLS.canceled -= instance.OnReloadLS;
             @NoClip.started -= instance.OnNoClip;
             @NoClip.performed -= instance.OnNoClip;
             @NoClip.canceled -= instance.OnNoClip;
@@ -1027,6 +1056,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     public interface ICheatActions
     {
         void OnReloadScene(InputAction.CallbackContext context);
+        void OnReloadLS(InputAction.CallbackContext context);
         void OnNoClip(InputAction.CallbackContext context);
         void OnNoClipControl(InputAction.CallbackContext context);
     }
