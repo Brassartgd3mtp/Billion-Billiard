@@ -55,12 +55,15 @@ public class VictoryScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI TXT_pb;
     public TextMeshProUGUI TXT_newHighscore;
 
+    int currentScene;
+
     private void OnEnable()
     {
+        currentScene = SceneManager.GetActiveScene().buildIndex;
+
         GO_GoldenStar1.SetActive(false);
         GO_GoldenStar2.SetActive(false);
         GO_GoldenStar3.SetActive(false);
-
         
         calculationsScript = FindAnyObjectByType<ScoringCalculations>();
         timerScript = FindAnyObjectByType<LevelTimer>();
@@ -68,13 +71,10 @@ public class VictoryScreen : MonoBehaviour
         progressBarScript = FindAnyObjectByType<EndLevelProgressBar>();
         shakeScript = GetComponent<Shake>();
 
-        timerScript.TimeStarted = false; //stop the timer
-        starRatingScript.HasWon = true; 
-        starRatingScript.numberOfStars++; //to give the player the first star
-        starRatingScript.CalculateStarRating();
+        timerScript.TimeStarted = false;
+        //starRatingScript.NumberOfStars();
 
-        progressBarScript.BarCanMove = true; 
-
+        progressBarScript.BarCanMove = true;
         
         DisplayScore();
         DisplayMedals();
@@ -89,29 +89,30 @@ public class VictoryScreen : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(firstButton);
         }
 
+        GlobalData.SaveScores();
     }
 
     private void DisplayScore()
     {
-        TXT_score.text = "Score : " + calculationsScript.PlayerScore.ToString();
+        TXT_score.text = "Score : " + calculationsScript.PlayerScore().ToString();
         TXT_timer.text = "Temps : " + string.Format("{0:00}:{1:00}", timerScript.Minutes, timerScript.Seconds);
-        TXT_highscore.text = "Highscore : " + PlayerPrefs.GetFloat("hiscore" + SceneManager.GetActiveScene().buildIndex).ToString();
-        TXT_pb.text = "Best time : " + PlayerPrefs.GetString("PB" + SceneManager.GetActiveScene().buildIndex);
+        TXT_highscore.text = "Highscore : " + GlobalData.Highscore[currentScene].ToString();
+        TXT_pb.text = "Best time : " + GlobalData.PB[currentScene];
     }
 
     private void DisplayMedals()
     {
-        IMG_timerMedal.sprite = medalImages[timerScript.MedalValue];
-        IMG_pbMedal.sprite = medalImages[PlayerPrefs.GetInt("MedalValue" + SceneManager.GetActiveScene().buildIndex)];
+        IMG_timerMedal.sprite = medalImages[timerScript.MedalValue()];
+        IMG_pbMedal.sprite = medalImages[GlobalData.MedalValues[currentScene]];
     }
 
     private void DisplayStars()
     {
+        StartCoroutine(AnimationsCoroutine()); // display the stars in the current score
+
         //display the star from the highscore
-        switch (PlayerPrefs.GetFloat("stars" + SceneManager.GetActiveScene().buildIndex))
+        switch (GlobalData.Stars[currentScene])
         {
-            case 0:
-                break;
             case 1:
                 IMG_starBest1.sprite = SPR_goldStarSprite;
                 break;
@@ -135,10 +136,16 @@ public class VictoryScreen : MonoBehaviour
 
     private IEnumerator WaitForAnimations() //display the star and use waitforseconds to play the animations one by one
     {
-        shakeScript.StartShake();
-        yield return new WaitForSeconds(1.5f);
-        progressBarScript.BarCanMove = true; 
-    }
+        switch (starRatingScript.NumberOfStars())
+        {
+            case 1:
+                GO_GoldenStar1.SetActive(true);
+                anim1.SetBool("hasStar", true);
+                break;
+            case 2:
+                GO_GoldenStar1.SetActive(true);
+                anim1.SetBool("hasStar", true);
+                yield return new WaitForSeconds(1.5f);
 
     public void DisplaySecondStar()
     {
