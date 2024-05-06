@@ -62,7 +62,7 @@ public class VictoryScreen : MonoBehaviour
         GO_GoldenStar1.SetActive(false);
         GO_GoldenStar2.SetActive(false);
         GO_GoldenStar3.SetActive(false);
-        
+
         calculationsScript = FindAnyObjectByType<ScoringCalculations>();
         timerScript = FindAnyObjectByType<LevelTimer>();
         starRatingScript = FindAnyObjectByType<StarRating>();
@@ -72,7 +72,7 @@ public class VictoryScreen : MonoBehaviour
         //starRatingScript.NumberOfStars();
 
         progressBarScript.BarCanMove = true;
-        
+
         DisplayScore();
         DisplayMedals();
         DisplayStars();
