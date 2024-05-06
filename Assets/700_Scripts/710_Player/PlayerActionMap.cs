@@ -594,6 +594,98 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Credits"",
+            ""id"": ""edab992a-7817-4f44-8ba9-0b62ccd2381e"",
+            ""actions"": [
+                {
+                    ""name"": ""AccelerateCredits"",
+                    ""type"": ""Button"",
+                    ""id"": ""44539216-9bfe-404d-9a4d-9c419eab5ed7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ExitCredits"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0d298dd-7abe-44c6-aaa7-8605d1c10a44"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c4b86596-e0b2-4b37-abc7-5f2d1bc86b34"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AccelerateCredits"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a79d99a3-e9db-4525-9900-8821d2ea37d5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AccelerateCredits"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ead48a8-562c-4ee1-bb8b-11867b1620de"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AccelerateCredits"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4849ae01-76a1-4d29-a285-d9170288f6da"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ExitCredits"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0e58214-b0b0-43f8-aa33-a1ae0ffb6398"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ExitCredits"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f68ad8a4-0dd8-42d7-b367-705762dc2388"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ExitCredits"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -628,6 +720,10 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         m_Swap = asset.FindActionMap("Swap", throwIfNotFound: true);
         m_Swap_ToGamepad = m_Swap.FindAction("ToGamepad", throwIfNotFound: true);
         m_Swap_ToMouseKeyboard = m_Swap.FindAction("ToMouseKeyboard", throwIfNotFound: true);
+        // Credits
+        m_Credits = asset.FindActionMap("Credits", throwIfNotFound: true);
+        m_Credits_AccelerateCredits = m_Credits.FindAction("AccelerateCredits", throwIfNotFound: true);
+        m_Credits_ExitCredits = m_Credits.FindAction("ExitCredits", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1035,6 +1131,60 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         }
     }
     public SwapActions @Swap => new SwapActions(this);
+
+    // Credits
+    private readonly InputActionMap m_Credits;
+    private List<ICreditsActions> m_CreditsActionsCallbackInterfaces = new List<ICreditsActions>();
+    private readonly InputAction m_Credits_AccelerateCredits;
+    private readonly InputAction m_Credits_ExitCredits;
+    public struct CreditsActions
+    {
+        private @PlayerActionMap m_Wrapper;
+        public CreditsActions(@PlayerActionMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @AccelerateCredits => m_Wrapper.m_Credits_AccelerateCredits;
+        public InputAction @ExitCredits => m_Wrapper.m_Credits_ExitCredits;
+        public InputActionMap Get() { return m_Wrapper.m_Credits; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CreditsActions set) { return set.Get(); }
+        public void AddCallbacks(ICreditsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CreditsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CreditsActionsCallbackInterfaces.Add(instance);
+            @AccelerateCredits.started += instance.OnAccelerateCredits;
+            @AccelerateCredits.performed += instance.OnAccelerateCredits;
+            @AccelerateCredits.canceled += instance.OnAccelerateCredits;
+            @ExitCredits.started += instance.OnExitCredits;
+            @ExitCredits.performed += instance.OnExitCredits;
+            @ExitCredits.canceled += instance.OnExitCredits;
+        }
+
+        private void UnregisterCallbacks(ICreditsActions instance)
+        {
+            @AccelerateCredits.started -= instance.OnAccelerateCredits;
+            @AccelerateCredits.performed -= instance.OnAccelerateCredits;
+            @AccelerateCredits.canceled -= instance.OnAccelerateCredits;
+            @ExitCredits.started -= instance.OnExitCredits;
+            @ExitCredits.performed -= instance.OnExitCredits;
+            @ExitCredits.canceled -= instance.OnExitCredits;
+        }
+
+        public void RemoveCallbacks(ICreditsActions instance)
+        {
+            if (m_Wrapper.m_CreditsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICreditsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CreditsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CreditsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CreditsActions @Credits => new CreditsActions(this);
     public interface IGamepadActions
     {
         void OnGamepadStrenght(InputAction.CallbackContext context);
@@ -1069,5 +1219,10 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     {
         void OnToGamepad(InputAction.CallbackContext context);
         void OnToMouseKeyboard(InputAction.CallbackContext context);
+    }
+    public interface ICreditsActions
+    {
+        void OnAccelerateCredits(InputAction.CallbackContext context);
+        void OnExitCredits(InputAction.CallbackContext context);
     }
 }

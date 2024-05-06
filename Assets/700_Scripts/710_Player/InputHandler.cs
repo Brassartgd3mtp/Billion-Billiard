@@ -15,6 +15,7 @@ public class InputHandler : MonoBehaviour
     static SwapControls spControls;
     static UI_Skip skip;
     static LevelSelectorManager lsManager;
+    static Credits_AnimationAccelerator cr;
     #endregion
 
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class InputHandler : MonoBehaviour
         Actions.Cheat.Enable();
         Actions.Swap.Enable();
         Actions.MainMenu.Enable();
+        Actions.Credits.Enable();
     }
 
     #region Enable
@@ -122,6 +124,15 @@ public class InputHandler : MonoBehaviour
         Actions.MouseKeyboard.MouseStartDrag.canceled += uiskip.SkipCanva;
         Actions.Gamepad.ThrowPlayer.started += uiskip.SkipCanva;
     }
+
+    public static void CreditsEnable(Credits_AnimationAccelerator credits)
+    {
+        cr = credits;
+
+        Actions.Credits.AccelerateCredits.performed += credits.Accelerate;
+        Actions.Credits.AccelerateCredits.canceled += credits.Accelerate;
+        Actions.Credits.ExitCredits.performed += credits.Exit;
+    }
     #endregion
     #region Disable
     public static void PlayerControllerDisable()
@@ -197,6 +208,13 @@ public class InputHandler : MonoBehaviour
         Actions.MouseKeyboard.MouseStartDrag.canceled -= skip.SkipCanva;
         Actions.Gamepad.ThrowPlayer.started -= skip.SkipCanva;
     }
+
+    public static void CreditsDisable()
+    {
+        Actions.Credits.AccelerateCredits.performed -= cr.Accelerate;
+        Actions.Credits.AccelerateCredits.canceled -= cr.Accelerate;
+        Actions.Credits.ExitCredits.performed -= cr.Exit;
+    }
     #endregion
 
     #region EnableOverload
@@ -248,6 +266,13 @@ public class InputHandler : MonoBehaviour
     public static void MovePanelSelectorEnable()
     {
         MovePanelSelectorEnable(lsManager);
+    }
+
+    public static void CreditsEnable()
+    {
+        Actions.Credits.AccelerateCredits.performed += cr.Accelerate;
+        Actions.Credits.AccelerateCredits.canceled += cr.Accelerate;
+        Actions.Credits.ExitCredits.performed += cr.Exit;
     }
     #endregion
 }
