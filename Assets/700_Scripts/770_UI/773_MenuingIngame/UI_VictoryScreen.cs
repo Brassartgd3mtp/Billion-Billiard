@@ -14,7 +14,6 @@ public class VictoryScreen : MonoBehaviour
     private LevelTimer timerScript;
     private ScoringCalculations calculationsScript;
     private EndLevelProgressBar progressBarScript;
-    [SerializeField] private Shake shakeScript;
 
     [Header("Objects")]
 
@@ -28,9 +27,9 @@ public class VictoryScreen : MonoBehaviour
 
     [Header("Star Images")]
 
-    public Image IMG_star1;
-    public Image IMG_star2;
-    public Image IMG_star3;
+    [SerializeField] private Image IMG_star1;
+    [SerializeField] private Image IMG_star2;
+    [SerializeField] private Image IMG_star3;
 
     [SerializeField] private Image IMG_starBest1;
     [SerializeField] private Image IMG_starBest2;
@@ -40,9 +39,9 @@ public class VictoryScreen : MonoBehaviour
 
     [Header("Golden Star GameObjects")]
 
-    public GameObject GO_GoldenStar1;
-    public GameObject GO_GoldenStar2;
-    public GameObject GO_GoldenStar3;
+    [SerializeField] private GameObject GO_GoldenStar1;
+    [SerializeField] private GameObject GO_GoldenStar2;
+    [SerializeField] private GameObject GO_GoldenStar3;
     [SerializeField] Animator anim1;
     [SerializeField] Animator anim2;
     [SerializeField] Animator anim3;
@@ -53,7 +52,6 @@ public class VictoryScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI TXT_timer;
     [SerializeField] private TextMeshProUGUI TXT_highscore;
     [SerializeField] private TextMeshProUGUI TXT_pb;
-    public TextMeshProUGUI TXT_newHighscore;
 
     int currentScene;
 
@@ -64,21 +62,19 @@ public class VictoryScreen : MonoBehaviour
         GO_GoldenStar1.SetActive(false);
         GO_GoldenStar2.SetActive(false);
         GO_GoldenStar3.SetActive(false);
-        
+
         calculationsScript = FindAnyObjectByType<ScoringCalculations>();
         timerScript = FindAnyObjectByType<LevelTimer>();
         starRatingScript = FindAnyObjectByType<StarRating>();
         progressBarScript = FindAnyObjectByType<EndLevelProgressBar>();
-        shakeScript = GetComponent<Shake>();
 
         timerScript.TimeStarted = false;
         //starRatingScript.NumberOfStars();
 
         progressBarScript.BarCanMove = true;
-        
+
         DisplayScore();
         DisplayMedals();
-
         DisplayStars();
 
         if (SwapControls.state == CurrentState.Gamepad)
@@ -126,15 +122,9 @@ public class VictoryScreen : MonoBehaviour
                 IMG_starBest3.sprite = SPR_goldStarSprite;
                 break;
         }
-
-        progressBarScript.BarCanMove = false;
-        GO_GoldenStar1.SetActive(true);
-        anim1.SetBool("hasStar", true);
-        StartCoroutine(WaitForAnimations());
-
     }
 
-    private IEnumerator WaitForAnimations() //display the star and use waitforseconds to play the animations one by one
+    private IEnumerator AnimationsCoroutine() //display the star and use waitforseconds to play the animations one by one
     {
         switch (starRatingScript.NumberOfStars())
         {
@@ -147,20 +137,22 @@ public class VictoryScreen : MonoBehaviour
                 anim1.SetBool("hasStar", true);
                 yield return new WaitForSeconds(1.5f);
 
-    public void DisplaySecondStar()
-    {
-        progressBarScript.BarCanMove = false;
-        GO_GoldenStar2.SetActive(true);
-        anim2.SetBool("hasStar", true);
-        StartCoroutine(WaitForAnimations());
-    }
+                GO_GoldenStar2.SetActive(true);
+                anim2.SetBool("hasStar", true);
+                break;
+            case 3:
+                GO_GoldenStar1.SetActive(true);
+                anim1.SetBool("hasStar", true);
+                yield return new WaitForSeconds(1.5f);
 
-    public void DisplayThirdStar()
-    {
-        progressBarScript.BarCanMove = false;
-        GO_GoldenStar3.SetActive(true);
-        anim3.SetBool("hasStar", true);
-        StartCoroutine(WaitForAnimations());
+                GO_GoldenStar2.SetActive(true);
+                anim2.SetBool("hasStar", true);
+                yield return new WaitForSeconds(1.5f);
+
+                GO_GoldenStar3.SetActive(true);
+                anim3.SetBool("hasStar", true);
+                break;
+        }
     }
     // Update is called once per frame
     //void Update()
