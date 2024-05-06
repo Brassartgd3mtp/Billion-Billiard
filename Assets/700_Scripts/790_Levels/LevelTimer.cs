@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,26 +18,19 @@ public class LevelTimer : MonoBehaviour
 
     [Header("Medals Timers")]
 
-    [SerializeField] private float goldMedalThresholdInSeconds;
-    [SerializeField] private float silverMedalThresholdInSeconds;
-    [SerializeField] private float bronzeMedalThresholdInSeconds;
+    [SerializeField] private int bronzeMedalThresholdInSeconds;
+    [SerializeField] private int silverMedalThresholdInSeconds;
+    [SerializeField] private int goldMedalThresholdInSeconds;
 
     [Header("Score per Medals")]
 
-    public float GoldScore;
-    [SerializeField] private float silverScore;
-    [SerializeField] private float bronzeScore;
-
-    [HideInInspector] public float FinalTimerScore;
-    
+    [SerializeField] private int bronzeScore;
+    [SerializeField] private int silverScore;
+    public int GoldScore;
 
     [Header("UI")]
 
     [SerializeField] private TextMeshProUGUI TXT_Timer;
-
-    [Header("Value")]
-
-    public int MedalValue;
 
     void Update()
     {
@@ -44,10 +38,6 @@ public class LevelTimer : MonoBehaviour
         {
             TimerInSeconds += Time.deltaTime;
             CalculateTime();
-        }
-        if(TimerInSeconds <= bronzeMedalThresholdInSeconds + 1)
-        {
-            CheckForMedal();
         }
 
         if (TimerInSeconds < 0) //just in case the timer is negative for some reason
@@ -64,28 +54,67 @@ public class LevelTimer : MonoBehaviour
         TXT_Timer.text = string.Format("{0:00}:{1:00}", Minutes, Seconds);
     }
 
-    private void CheckForMedal() // check which medal the player is currently running for
+    public int MedalValue()
     {
-        if (TimerInSeconds < goldMedalThresholdInSeconds)
+        Dictionary<int, int> MedalScore = new Dictionary<int, int>()
         {
-            FinalTimerScore = GoldScore;
-            MedalValue = 3; //MedalValue is used to know which medal to display is other scripts
-        }
-        else if (TimerInSeconds < silverMedalThresholdInSeconds)
+            { goldMedalThresholdInSeconds, 3 },
+            { silverMedalThresholdInSeconds, 2 },
+            { bronzeMedalThresholdInSeconds, 1 }
+        };
+
+        foreach (int key in MedalScore.Keys)
         {
-            FinalTimerScore = silverScore;
-            MedalValue = 2;
+            if ((int)TimerInSeconds <= key)
+            {
+                return MedalScore[key];
+            }
         }
-        else if (TimerInSeconds < bronzeMedalThresholdInSeconds)
-        {
-            FinalTimerScore = bronzeScore;
-            MedalValue = 1;
-        }
-        else
-        {
-            FinalTimerScore = 0;
-            MedalValue = 0;
-        }
+
+        return 0;
     }
+
+    public int FinalTimerScore()
+    {
+        Dictionary<int, int> TimerScore = new Dictionary<int, int>()
+        {
+            { goldMedalThresholdInSeconds, GoldScore },
+            { silverMedalThresholdInSeconds, silverScore },
+            { bronzeMedalThresholdInSeconds, bronzeScore }
+        };
+        foreach (int key in TimerScore.Keys)
+        {
+            if ((int)TimerInSeconds <= key)
+            {
+                return TimerScore[key];
+            }
+        }
+
+        return 0;
+    }
+
+    //private void CheckForMedal() // check which medal the player is currently running for
+    //{
+    //    if (TimerInSeconds < goldMedalThresholdInSeconds)
+    //    {
+    //        FinalTimerScore = GoldScore;
+    //        MedalValue = 3; //MedalValue is used to know which medal to display is other scripts
+    //    }
+    //    else if (TimerInSeconds < silverMedalThresholdInSeconds)
+    //    {
+    //        FinalTimerScore = silverScore;
+    //        MedalValue = 2;
+    //    }
+    //    else if (TimerInSeconds < bronzeMedalThresholdInSeconds)
+    //    {
+    //        FinalTimerScore = bronzeScore;
+    //        MedalValue = 1;
+    //    }
+    //    else
+    //    {
+    //        FinalTimerScore = 0;
+    //        MedalValue = 0;
+    //    }
+    //}
 
 }
