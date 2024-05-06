@@ -997,6 +997,37 @@ MonoBehaviour:
   IconPadlockUnlock: {fileID: 2588426184308096875}
   widthValue: 1.3
   heightValue: 2
+--- !u!1 &4780411198867643167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4552107154147658140}
+  m_Layer: 0
+  m_Name: TransformRespawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4552107154147658140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4780411198867643167}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7557333174781918956}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5270907417681077816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,6 +1064,7 @@ Transform:
   - {fileID: 1284960862658215702}
   - {fileID: 6115029831356808705}
   - {fileID: 2202596422708178214}
+  - {fileID: 4552107154147658140}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1254961250824230703
@@ -1088,6 +1120,8 @@ MonoBehaviour:
   speed: 1
   isOneWay: 1
   isOpenByDefault: 1
+  undergroundEndPos: {x: 0, y: -1.5, z: 0}
+  respawnPos: {fileID: 4552107154147658140}
 --- !u!1 &8416413432432687106
 GameObject:
   m_ObjectHideFlags: 0

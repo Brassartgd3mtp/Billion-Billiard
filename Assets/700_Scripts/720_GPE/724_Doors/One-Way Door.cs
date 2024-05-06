@@ -16,6 +16,8 @@ public class OneWayDoor : MonoBehaviour
     private bool isOpen;
     Vector3 startPos;
 
+    public Transform respawnPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +51,8 @@ public class OneWayDoor : MonoBehaviour
         isOpen = false;
         StartCoroutine(UpdateDoorPos(wall, startPos));
         enabled = false;
+
+        PlayerController.posBeforeHit = new Vector3(respawnPos.position.x, PlayerController.posBeforeHit.y, respawnPos.position.z);
 
         SoundDoorClose();
     }

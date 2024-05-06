@@ -9,6 +9,7 @@ public class InputHandler : MonoBehaviour
     static TrajectoryPrediction trajPred;
     static PlayerRoomCam roomCam;
     static ReloadScene rlScene;
+    static ReloadLevelSelector rlSelec;
     static NoClip nClip;
     static PauseMenu pMenu;
     static SwapControls spControls;
@@ -73,6 +74,13 @@ public class InputHandler : MonoBehaviour
         rlScene = reloadScene;
 
         Actions.Cheat.ReloadScene.performed += reloadScene.Reload;
+    }
+
+    public static void ReloadLSEnable(ReloadLevelSelector reloadLS)
+    {
+        rlSelec = reloadLS;
+
+        Actions.Cheat.ReloadLS.performed += reloadLS.Reload;
     }
 
     public static void MovePanelSelectorEnable(LevelSelectorManager levelSelectorManager)
@@ -154,6 +162,11 @@ public class InputHandler : MonoBehaviour
         Actions.Cheat.ReloadScene.performed -= rlScene.Reload;
     }
 
+    public static void ReloadLSDisable()
+    {
+        Actions.Cheat.ReloadLS.performed -= rlSelec.Reload;
+    }
+
     public static void MovePanelSelectorDisable()
     {
         Actions.MainMenu.ScrollLeft.performed -= lsManager.PrevPanel;
@@ -205,6 +218,11 @@ public class InputHandler : MonoBehaviour
     public static void ReloadSceneEnable()
     {
         ReloadSceneEnable(rlScene);
+    }
+
+    public static void ReloadLSEnable()
+    {
+        ReloadLSEnable(rlSelec);
     }
 
     public static void NoClipEnable()

@@ -32,11 +32,11 @@ public class StarRating : MonoBehaviour
         if (HasWon) //Passes to true when the victory screen is displayed
         {
             //we check if the current score is higher than the prerequisite to get two, then three stars
-            if (calculationsScript.PlayerScore > scoreForStarTwo)
+            if (calculationsScript.PlayerScore >= scoreForStarTwo)
             {
                 numberOfStars++;
             }
-            if (calculationsScript.PlayerScore > scoreForStarThree)
+            if (calculationsScript.PlayerScore >= scoreForStarThree)
             {
                 numberOfStars++;
             }

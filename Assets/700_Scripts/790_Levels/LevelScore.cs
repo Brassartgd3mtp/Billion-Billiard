@@ -23,7 +23,8 @@ public class LevelScore : MonoBehaviour
     private int bigGoldScore;
     private int platiniumScore;
 
-    [HideInInspector] public int TotalIngotScore;
+    public float PercentageNecessaryForMaxScore;
+    public int TotalIngotScore;
 
 
     private void Awake()
