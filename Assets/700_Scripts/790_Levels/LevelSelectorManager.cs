@@ -18,6 +18,10 @@ public class LevelSelectorManager : MonoBehaviour
     [SerializeField] public List<GameObject> Panels;
     [SerializeField] private List<SO_Level> SO_Levels;
     [SerializeField] private GameObject ActualPanel;
+
+    [SerializeField] private Vector3 ContentRectTransform;
+    [SerializeField] private Vector3 savedContentRectTransform;
+
     private static int PanelIndex = 0;
 
     [SerializeField] private CinemachineVirtualCamera VirtualCamera;
@@ -41,7 +45,14 @@ public class LevelSelectorManager : MonoBehaviour
     {
         InputHandler.MovePanelSelectorEnable(this);
         ActualPanel = Panels[PanelIndex];
-        StartCoroutine(MovePanel(-PanelIndex));
+        CheckIfNextPanelIsLocked();
+
+        RectTransform rectTransform = Content.GetComponent<RectTransform>();
+        if (LevelSelectorData.rectTransformData != Vector3.zero)
+        {
+            rectTransform.position = LevelSelectorData.rectTransformData;        
+        }
+        //StartCoroutine(MovePanel(-PanelIndex));
     }
 
     public void NextPanel(InputAction.CallbackContext context)
@@ -85,7 +96,7 @@ public class LevelSelectorManager : MonoBehaviour
             rectTransform.localPosition = Vector3.MoveTowards(rectTransform.localPosition, targetPos, scrollingSpeed * Time.deltaTime);
             yield return null;    
         }
-
+        
         //LeftArrow.enabled = true;
         //RightArrow.enabled = true;
 
@@ -98,6 +109,11 @@ public class LevelSelectorManager : MonoBehaviour
     {
         if (ActualPanel.TryGetComponent(out PanelManager panelManager))
         {
+            RectTransform rectTransform = Content.GetComponent<RectTransform>();
+            Vector3 actualPos = rectTransform.transform.localPosition;
+
+            LevelSelectorData.rectTransformData = rectTransform.position;
+
             panelManager.SO_Level.LoadLevel();
         }
     }
