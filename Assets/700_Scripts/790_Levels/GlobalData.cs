@@ -5,11 +5,79 @@ using UnityEngine.SceneManagement;
 
 public class GlobalData : MonoBehaviour
 {
-    [Header("References")]
+    #region References
+    private static StarRating starRatingScript;
+    private static ScoringCalculations calculationsScript;
+    private static LevelTimer timerScript;
+    #endregion
 
-    private StarRating starRatingScript;
-    private ScoringCalculations calculationsScript;
-    private LevelTimer timerScript;
+    #region StoreData
+    public static Dictionary<int, float> Stars = new Dictionary<int, float>()
+    {
+        {2, 0},
+        {3, 0},
+        {4, 0},
+        {5, 0},
+        {6, 0},
+        {7, 0},
+        {8, 0},
+        {9, 0},
+        {10, 0},
+        {11, 0},
+    };
+    public static Dictionary<int, float> Highscore = new Dictionary<int, float>()
+    {
+        {2, 0},
+        {3, 0},
+        {4, 0},
+        {5, 0},
+        {6, 0},
+        {7, 0},
+        {8, 0},
+        {9, 0},
+        {10, 0},
+        {11, 0},
+    };
+    public static Dictionary<int, float> PBInSeconds = new Dictionary<int, float>()
+    {
+        {2, 0},
+        {3, 0},
+        {4, 0},
+        {5, 0},
+        {6, 0},
+        {7, 0},
+        {8, 0},
+        {9, 0},
+        {10, 0},
+        {11, 0},
+    };
+    public static Dictionary<int, string> PB = new Dictionary<int, string>()
+    {
+        {2, string.Empty},
+        {3, string.Empty},
+        {4, string.Empty},
+        {5, string.Empty},
+        {6, string.Empty},
+        {7, string.Empty},
+        {8, string.Empty},
+        {9, string.Empty},
+        {10, string.Empty},
+        {11, string.Empty},
+    };
+    public static Dictionary<int, int> MedalValues = new Dictionary<int, int>()
+    {
+        {2, 0},
+        {3, 0},
+        {4, 0},
+        {5, 0},
+        {6, 0},
+        {7, 0},
+        {8, 0},
+        {9, 0},
+        {10, 0},
+        {11, 0},
+    };
+    #endregion
 
     private void Awake()
     {
@@ -17,31 +85,30 @@ public class GlobalData : MonoBehaviour
         calculationsScript = GetComponent<ScoringCalculations>();
         timerScript = GetComponent<LevelTimer>();
     }
-    public void SetScores() // Here we chec if we are in a situation to get a new highscore, if yes we set the highscore to be the value the player just scored
+
+    public static void SaveScores()
     {
-        //stars
-        if (starRatingScript.numberOfStars > PlayerPrefs.GetFloat("stars" + SceneManager.GetActiveScene().buildIndex))
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+
+        if (starRatingScript.NumberOfStars() > Stars[currentScene] || Stars[currentScene] == 0)
         {
-            PlayerPrefs.SetFloat("stars" + SceneManager.GetActiveScene().buildIndex, starRatingScript.numberOfStars);
+            Stars[currentScene] = starRatingScript.NumberOfStars();
         }
 
-        //score
-        if (calculationsScript.PlayerScore > PlayerPrefs.GetFloat("hiscore" + SceneManager.GetActiveScene().buildIndex))
+        if (calculationsScript.PlayerScore() > Highscore[currentScene] || Highscore[currentScene] == 0)
         {
-            PlayerPrefs.SetFloat("hiscore" + SceneManager.GetActiveScene().buildIndex, calculationsScript.PlayerScore);
+            Highscore[currentScene] = calculationsScript.PlayerScore();
         }
 
-        //timer
-        if (PlayerPrefs.GetFloat("PBinSeconds" + SceneManager.GetActiveScene().buildIndex) ==0 || timerScript.TimerInSeconds <= PlayerPrefs.GetFloat("PBinSeconds" + SceneManager.GetActiveScene().buildIndex))
+        if (PBInSeconds[currentScene] == 0 || timerScript.TimerInSeconds <= PBInSeconds[currentScene])
         {
-            PlayerPrefs.SetFloat("PBinSeconds" + SceneManager.GetActiveScene().buildIndex, timerScript.TimerInSeconds);
-            PlayerPrefs.SetString("PB" + SceneManager.GetActiveScene().buildIndex, string.Format("{0:00}:{1:00}", timerScript.Minutes, timerScript.Seconds));
+            PBInSeconds[currentScene] = timerScript.TimerInSeconds;
+            PB[currentScene] = string.Format("{0:00}:{1:00}", timerScript.Minutes, timerScript.Seconds);
         }
 
-        //medal
-        if(timerScript.MedalValue > PlayerPrefs.GetInt("MedalValue" + SceneManager.GetActiveScene().buildIndex))
+        if (timerScript.MedalValue() > MedalValues[currentScene] || MedalValues[currentScene] == 0)
         {
-            PlayerPrefs.SetInt("MedalValue" + SceneManager.GetActiveScene().buildIndex, timerScript.MedalValue);
+            MedalValues[currentScene] = timerScript.MedalValue();
         }
     }
 

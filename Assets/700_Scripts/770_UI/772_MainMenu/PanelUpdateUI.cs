@@ -31,25 +31,19 @@ public class PanelUpdateUI : MonoBehaviour
 
     private void Awake()
     {
-        //This function uses the buildindex to display the scores in the right panel
-
         levelSelectorScript = FindAnyObjectByType<LevelSelectorManager>();
 
-        for (int i = 0; i < levelSelectorScript.Panels.Count; i++) //we check for all the panels
+        for (int i = 0; i < levelSelectorScript.Panels.Count; i++)
         {
-            if(levelSelectorScript.Panels[i] == this.gameObject) // we check if we have found this panel
+            if (levelSelectorScript.Panels[i] == gameObject)
             {
-                int buildIndex = i + 2; // We add +2 to the number from the list because of Main menu + level selector, that are preceding the levels in the build order
+                int buildIndex = i + 2;
 
-                PlayerPrefs.GetFloat("PBinSeconds" + buildIndex);
-                
-                scoreText.text = PlayerPrefs.GetFloat("hiscore" + buildIndex).ToString();
-                timerText.text = PlayerPrefs.GetString("PB" + buildIndex);
+                scoreText.text = GlobalData.Highscore[buildIndex].ToString();
+                timerText.text = GlobalData.PB[buildIndex];
 
-                switch (PlayerPrefs.GetFloat("stars" + buildIndex)) // we display as much gold star as the best star rating stored in our datas
-                    {      
-                    case 0:
-                        break;
+                switch (GlobalData.Stars[buildIndex])
+                {
                     case 1:
                         img_star1.sprite = spr_star;
                         break;
@@ -62,9 +56,9 @@ public class PanelUpdateUI : MonoBehaviour
                         img_star2.sprite = spr_star;
                         img_star3.sprite = spr_star;
                         break;
-                    }
+                }
 
-                IMG_pbMedal.sprite = medalImages[PlayerPrefs.GetInt("MedalValue" + buildIndex)]; //then we display the medal corresponding to the best score stored
+                IMG_pbMedal.sprite = medalImages[GlobalData.MedalValues[buildIndex]];
 
                 return;
             }                    

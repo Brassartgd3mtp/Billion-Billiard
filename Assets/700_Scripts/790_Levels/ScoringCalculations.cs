@@ -9,10 +9,6 @@ public class ScoringCalculations : MonoBehaviour
     private LevelTimer levelTimerScript;
     private PlayerStats playerStatsScript;
 
-    [Header("Scores")]
-
-    public float PlayerScore;
-
     private void Awake()
     {
         levelTimerScript = GetComponent<LevelTimer>();
@@ -20,18 +16,16 @@ public class ScoringCalculations : MonoBehaviour
         playerStatsScript = FindAnyObjectByType<PlayerStats>();
     }
 
-    public float CalculateTotalScore() // calculate the maximum score possible
+    public float MaximumScore()
     {
-        return levelScoreScript.TotalIngotScore // the maximum score possible to have with ingots
-            * levelScoreScript.PercentageNecessaryForMaxScore / 100
-             + levelTimerScript.GoldScore; // the score you get with a gold medal
+        return levelScoreScript.TotalIngotScore
+            * levelScoreScript.NeededPercentage / 100
+             + levelTimerScript.GoldScore;
     }
 
-public float CalculatePlayerScore() // walculate the score the player just got
+    public int PlayerScore()
     {
-        PlayerScore = playerStatsScript.moneyCount // the money the player has at the end of the level
-                    + levelTimerScript.FinalTimerScore; // the score the player got with their time
-
-        return PlayerScore;
+        return playerStatsScript.moneyCount
+                    + levelTimerScript.FinalTimerScore();
     }
 }

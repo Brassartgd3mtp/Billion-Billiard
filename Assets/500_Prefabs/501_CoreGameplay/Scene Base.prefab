@@ -7778,6 +7778,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyAnimator: {fileID: 4731151006632485478}
+  Pelvis_Int: {fileID: 0}
+  FXVictory01: {fileID: 0}
+  FXVictory02: {fileID: 0}
+  FXVictory03: {fileID: 0}
 --- !u!1 &636514234710062314
 GameObject:
   m_ObjectHideFlags: 0
@@ -21338,6 +21342,7 @@ GameObject:
   - component: {fileID: 5193124043219632455}
   - component: {fileID: 8787918783016908709}
   - component: {fileID: 7284012439956035812}
+  - component: {fileID: 2787305814783355437}
   - component: {fileID: 1845699523772524793}
   m_Layer: 5
   m_Name: ParcoursPresentation
@@ -21406,6 +21411,18 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!225 &2787305814783355437
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546817537276591325}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 1
 --- !u!114 &1845699523772524793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21418,10 +21435,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd64b7556ed46a84e947bf598f99937f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayToSkip: {fileID: 3546817537276591325}
+  DisplayToSkip: {fileID: 2787305814783355437}
   XboxGamepad: {fileID: 2943151806254817038}
   Mouse: {fileID: 4179985653856770591}
   NextObjToShow: {fileID: 0}
+  AsFadeOut: 0
+  AsTimer: 0
 --- !u!1 &3602491073764922103
 GameObject:
   m_ObjectHideFlags: 0
@@ -28457,6 +28476,7 @@ GameObject:
   - component: {fileID: 6719300977643501239}
   - component: {fileID: 3319049000531907354}
   - component: {fileID: 4559950677288910379}
+  - component: {fileID: 3048627988761166209}
   - component: {fileID: 7659501511417217882}
   m_Layer: 5
   m_Name: HoleInOnePresentation
@@ -28525,6 +28545,18 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!225 &3048627988761166209
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4867627455784239931}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 1
 --- !u!114 &7659501511417217882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28537,10 +28569,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd64b7556ed46a84e947bf598f99937f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayToSkip: {fileID: 4867627455784239931}
+  DisplayToSkip: {fileID: 3048627988761166209}
   XboxGamepad: {fileID: 7044170875982060881}
   Mouse: {fileID: 1085121336655091471}
   NextObjToShow: {fileID: 0}
+  AsFadeOut: 0
+  AsTimer: 0
 --- !u!1 &4883489362671669889
 GameObject:
   m_ObjectHideFlags: 0
@@ -36292,6 +36326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 572705303449037027}
+  - component: {fileID: 3972569165306350007}
   - component: {fileID: 9202920131720847563}
   m_Layer: 5
   m_Name: Controller Remind
@@ -36328,6 +36363,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -280.00006, y: -157.50003}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &3972569165306350007
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354902577280820609}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 1
 --- !u!114 &9202920131720847563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36340,10 +36387,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd64b7556ed46a84e947bf598f99937f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayToSkip: {fileID: 7354902577280820609}
+  DisplayToSkip: {fileID: 3972569165306350007}
   XboxGamepad: {fileID: 2003753589053465316}
   Mouse: {fileID: 5704374119539466310}
   NextObjToShow: {fileID: 3546817537276591325}
+  AsFadeOut: 1
+  AsTimer: 1
 --- !u!1 &7407205603221401091
 GameObject:
   m_ObjectHideFlags: 0

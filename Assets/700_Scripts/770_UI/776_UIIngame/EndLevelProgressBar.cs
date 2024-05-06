@@ -10,7 +10,7 @@ public class EndLevelProgressBar : MonoBehaviour
     private ScoringCalculations calculationsScript;
 
     private Slider slider;
-   [SerializeField] private ParticleSystem progressBarParticleSystem;
+    [SerializeField] private ParticleSystem progressBarParticleSystem;
 
     [Header("SliderBehaviour")]
 
@@ -26,11 +26,11 @@ public class EndLevelProgressBar : MonoBehaviour
 
     private void Start()
     {
-        IncrementProgress(calculationsScript.PlayerScore / calculationsScript.CalculateTotalScore());
+        IncrementProgress(calculationsScript.PlayerScore() / calculationsScript.MaximumScore());
     }
     private void Update() // the progression of the progress bar, same logic as a timer
     {
-        if(BarCanMove)
+        if (BarCanMove)
         {
             if (slider.value < targetProgress)
             {
