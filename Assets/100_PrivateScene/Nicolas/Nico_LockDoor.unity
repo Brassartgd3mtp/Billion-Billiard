@@ -528,6 +528,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1753173338}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &21726689 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 311156960371124925, guid: 2689345555564ac49ada2951f02efa68,
+    type: 3}
+  m_PrefabInstance: {fileID: 1745861754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &26839569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13445,6 +13451,7 @@ Transform:
   - {fileID: 1182132504}
   - {fileID: 270983432}
   - {fileID: 1519046571}
+  - {fileID: 21726689}
   m_Father: {fileID: 1477697528}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1281468493
@@ -17543,7 +17550,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1279774066}
     m_Modifications:
     - target: {fileID: 311156960371124925, guid: 2689345555564ac49ada2951f02efa68,
         type: 3}
@@ -17568,17 +17575,17 @@ PrefabInstance:
     - target: {fileID: 311156960371124925, guid: 2689345555564ac49ada2951f02efa68,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 311156960371124925, guid: 2689345555564ac49ada2951f02efa68,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 311156960371124925, guid: 2689345555564ac49ada2951f02efa68,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 311156960371124925, guid: 2689345555564ac49ada2951f02efa68,
         type: 3}
@@ -20124,6 +20131,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7586177187984509221, guid: b0bbebba2393a7342bec8310dc6cb9b5,
         type: 3}
+      propertyPath: isOneWay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7586177187984509221, guid: b0bbebba2393a7342bec8310dc6cb9b5,
+        type: 3}
       propertyPath: isOpenByDefault
       value: 1
       objectReference: {fileID: 0}
@@ -20962,4 +20974,3 @@ SceneRoots:
   - {fileID: 1203442682}
   - {fileID: 1726411874}
   - {fileID: 1477697528}
-  - {fileID: 1745861754}
