@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class AnimationAccelerator : MonoBehaviour
+public class Credits_AnimationAccelerator : MonoBehaviour
 {
     public Animator animator; // Référence à l'Animator de l'objet à animer
 
@@ -16,5 +17,15 @@ public class AnimationAccelerator : MonoBehaviour
             // Remettre la vitesse de l'animation à la normale
             animator.speed = 1f; // Vitesse d'animation normale (1x)
         }
+    }
+    public void MainMenuButton()
+    {
+        // Recharge la scène "Main Menu"
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
+    }
+    public void GoToMainMenu()
+    {
+
     }
 }

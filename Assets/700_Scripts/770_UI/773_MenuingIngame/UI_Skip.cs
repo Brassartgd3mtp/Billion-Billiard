@@ -3,39 +3,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class UI_Skip : MonoBehaviour
 {
-    public GameObject DisplayToSkip;
-
+    public CanvasGroup DisplayToSkip;
     public GameObject XboxGamepad;
     public GameObject Mouse;
     public GameObject NextObjToShow;
 
+    public bool AsFadeOut;
+    public bool AsTimer;
+
+    private float Timer = 2;
+
     // Start is called before the first frame update
     void Start()
     {
-        InputHandler.UISkipEnable(this);
+        if (!AsTimer)
+        {
+            InputHandler.UISkipEnable(this);
+        }
+        else
+        {
+            XboxGamepad.gameObject.SetActive(false);
+            Mouse.gameObject.SetActive(false);
+        }
 
         InputHandler.PlayerControllerDisable();
         InputHandler.TrajectoryPredictionDisable();
         InputHandler.RoomCamDisable();
         InputHandler.PauseMenuDisable();
 
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
     }
     private void Update()
     {
-        if (SwapControls.state == CurrentState.Gamepad)
+        if (AsTimer)
         {
-            XboxGamepad.gameObject.SetActive(true);
-            Mouse.gameObject.SetActive(false);
+            if(Timer <= 0f)
+            {
+                if (SwapControls.state == CurrentState.Gamepad)
+                {
+                    XboxGamepad.gameObject.SetActive(true);
+                    Mouse.gameObject.SetActive(false);
+                }
+                else
+                {
+                    XboxGamepad.gameObject.SetActive(false);
+                    Mouse.gameObject.SetActive(true);
+                }
+                InputHandler.UISkipEnable(this);
+            }
+            else
+            {
+                Timer -= Time.deltaTime;
+            }
         }
-        else
-        {
-            XboxGamepad.gameObject.SetActive(false);
-            Mouse.gameObject.SetActive(true);
-        }
+        
     }
 
     public void SkipCanva(InputAction.CallbackContext context)
@@ -49,11 +74,37 @@ public class UI_Skip : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        if (NextObjToShow != null) 
-            NextObjToShow.SetActive(true);
-
         if (DisplayToSkip != null)
-            DisplayToSkip.SetActive(false);
+            if (AsFadeOut)
+                StartCoroutine(CanvaFadeOut());
+
+            else
+            {
+                DisplayToSkip.alpha = 0;
+            }
+
+        
+
+    }
+
+    IEnumerator CanvaFadeOut()
+    {
+        while(DisplayToSkip.alpha > 0)
+        {
+            DisplayToSkip.alpha -= 0.01f;
+            Debug.Log("Je fais mon possible pour fade out");
+            yield return null;
+        }
+        if (DisplayToSkip.alpha <= 0)
+        {
+            if (NextObjToShow != null)
+            {
+                if (DisplayToSkip.alpha <= 0)
+                {
+                    NextObjToShow.SetActive(true);
+                }
+            }
+        }
     }
 
     private void OnDisable()
