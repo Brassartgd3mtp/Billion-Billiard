@@ -26,7 +26,7 @@ public class EndLevelProgressBar : MonoBehaviour
 
     private void Start()
     {
-        IncrementProgress(calculationsScript.PlayerScore / calculationsScript.CalculateTotalScore());
+        IncrementProgress(calculationsScript.PlayerScore() / calculationsScript.MaximumScore());
     }
     private void Update() // the progression of the progress bar, same logic as a timer
     {
