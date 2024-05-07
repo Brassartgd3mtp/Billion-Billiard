@@ -45,6 +45,7 @@ public class LevelSelectorManager : MonoBehaviour
     {
         InputHandler.MovePanelSelectorEnable(this);
         ActualPanel = Panels[PanelIndex];
+        LevelSelectorData.CurrentLevelIndex = PanelIndex + 2;
         CheckIfNextPanelIsLocked();
 
         RectTransform rectTransform = Content.GetComponent<RectTransform>();
@@ -61,6 +62,7 @@ public class LevelSelectorManager : MonoBehaviour
         {
             PanelIndex++;
             ActualPanel = Panels[PanelIndex];
+            //LevelSelectorData.CurrentLevelIndex = PanelIndex + 2;
             //LeftArrow.enabled = false;
             //RightArrow.enabled = false;
             StartCoroutine(MovePanel(-1));
@@ -75,6 +77,7 @@ public class LevelSelectorManager : MonoBehaviour
         {
             PanelIndex--;
             ActualPanel = Panels[PanelIndex];
+            //LevelSelectorData.CurrentLevelIndex = PanelIndex + 2;
             //LeftArrow.enabled = false;
             //RightArrow.enabled = false;
             StartCoroutine(MovePanel(1));

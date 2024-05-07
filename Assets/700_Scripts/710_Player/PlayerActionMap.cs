@@ -686,6 +686,45 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Cutscenes"",
+            ""id"": ""c4f14ce7-3a12-4917-8f83-6eeeee2d27e2"",
+            ""actions"": [
+                {
+                    ""name"": ""Skip"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ec00c18-5b0b-4bfb-81e3-f26587ca584c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""40ac1a39-9206-4702-bb07-86051d41a336"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e144f7f0-f481-4629-86c7-4568e8dffe49"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -724,6 +763,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         m_Credits = asset.FindActionMap("Credits", throwIfNotFound: true);
         m_Credits_AccelerateCredits = m_Credits.FindAction("AccelerateCredits", throwIfNotFound: true);
         m_Credits_ExitCredits = m_Credits.FindAction("ExitCredits", throwIfNotFound: true);
+        // Cutscenes
+        m_Cutscenes = asset.FindActionMap("Cutscenes", throwIfNotFound: true);
+        m_Cutscenes_Skip = m_Cutscenes.FindAction("Skip", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1185,6 +1227,52 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         }
     }
     public CreditsActions @Credits => new CreditsActions(this);
+
+    // Cutscenes
+    private readonly InputActionMap m_Cutscenes;
+    private List<ICutscenesActions> m_CutscenesActionsCallbackInterfaces = new List<ICutscenesActions>();
+    private readonly InputAction m_Cutscenes_Skip;
+    public struct CutscenesActions
+    {
+        private @PlayerActionMap m_Wrapper;
+        public CutscenesActions(@PlayerActionMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Skip => m_Wrapper.m_Cutscenes_Skip;
+        public InputActionMap Get() { return m_Wrapper.m_Cutscenes; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CutscenesActions set) { return set.Get(); }
+        public void AddCallbacks(ICutscenesActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CutscenesActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CutscenesActionsCallbackInterfaces.Add(instance);
+            @Skip.started += instance.OnSkip;
+            @Skip.performed += instance.OnSkip;
+            @Skip.canceled += instance.OnSkip;
+        }
+
+        private void UnregisterCallbacks(ICutscenesActions instance)
+        {
+            @Skip.started -= instance.OnSkip;
+            @Skip.performed -= instance.OnSkip;
+            @Skip.canceled -= instance.OnSkip;
+        }
+
+        public void RemoveCallbacks(ICutscenesActions instance)
+        {
+            if (m_Wrapper.m_CutscenesActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICutscenesActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CutscenesActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CutscenesActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CutscenesActions @Cutscenes => new CutscenesActions(this);
     public interface IGamepadActions
     {
         void OnGamepadStrenght(InputAction.CallbackContext context);
@@ -1224,5 +1312,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     {
         void OnAccelerateCredits(InputAction.CallbackContext context);
         void OnExitCredits(InputAction.CallbackContext context);
+    }
+    public interface ICutscenesActions
+    {
+        void OnSkip(InputAction.CallbackContext context);
     }
 }

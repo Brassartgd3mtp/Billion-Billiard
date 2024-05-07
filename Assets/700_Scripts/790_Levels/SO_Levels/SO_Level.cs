@@ -16,6 +16,7 @@ public class SO_Level : ScriptableObject
     public LevelData LevelData;
 
     public int LevelID;
+    public int CutsceneIndex;
 
     //public IEnumerator LoadScene(Image _progressBar)
     //{
@@ -31,6 +32,15 @@ public class SO_Level : ScriptableObject
 
     public void LoadLevel()
     {
-        SceneManager.LoadScene(LevelID);
+        if (!CutscenesCurrent.isCutsceneFirstTime[LevelID - 2])
+        {
+            CutscenesCurrent.isCutsceneFirstTime[CutsceneIndex] = true;
+
+            CutscenesCurrent.PackIndex = CutsceneIndex;
+            LevelSelectorData.CurrentLevelIndex = LevelID;
+            SceneManager.LoadScene(12);
+        }
+        else
+            SceneManager.LoadScene(LevelID);
     }
 }

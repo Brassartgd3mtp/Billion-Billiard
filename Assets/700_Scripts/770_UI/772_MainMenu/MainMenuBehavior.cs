@@ -13,7 +13,9 @@ public class MainMenuBehavior : MonoBehaviour
 
     public void PlayButton()
     {
-        SceneManager.LoadScene(1);
+        LevelSelectorData.CurrentLevelIndex = 2;
+        CutscenesCurrent.isCutsceneFirstTime[0] = true;
+        SceneManager.LoadScene(12);
     }
 
     public void QuitButton()
