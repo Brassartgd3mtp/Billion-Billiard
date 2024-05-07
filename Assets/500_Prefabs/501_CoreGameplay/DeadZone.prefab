@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3503392836801923783}
   - component: {fileID: 244952930105325174}
   - component: {fileID: 2679017504247616105}
+  - component: {fileID: 2048585457359847501}
   m_Layer: 0
   m_Name: DeadZone
   m_TagString: Untagged
@@ -52,7 +53,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 200, y: 2, z: 200}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2679017504247616105
 MonoBehaviour:
@@ -66,3 +67,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db181d103f213ad4ab0a821cb9ce4d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &2048585457359847501
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5736685571263408957}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 200, y: 2, z: 200}
+  m_Center: {x: 0, y: 0, z: 0}
