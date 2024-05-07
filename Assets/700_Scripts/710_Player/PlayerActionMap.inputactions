@@ -572,6 +572,98 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Credits",
+            "id": "edab992a-7817-4f44-8ba9-0b62ccd2381e",
+            "actions": [
+                {
+                    "name": "AccelerateCredits",
+                    "type": "Button",
+                    "id": "44539216-9bfe-404d-9a4d-9c419eab5ed7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ExitCredits",
+                    "type": "Button",
+                    "id": "e0d298dd-7abe-44c6-aaa7-8605d1c10a44",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c4b86596-e0b2-4b37-abc7-5f2d1bc86b34",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AccelerateCredits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a79d99a3-e9db-4525-9900-8821d2ea37d5",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AccelerateCredits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ead48a8-562c-4ee1-bb8b-11867b1620de",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AccelerateCredits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4849ae01-76a1-4d29-a285-d9170288f6da",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitCredits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0e58214-b0b0-43f8-aa33-a1ae0ffb6398",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitCredits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f68ad8a4-0dd8-42d7-b367-705762dc2388",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitCredits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
