@@ -21,6 +21,10 @@ public class LevelSelectorManager : MonoBehaviour
     [SerializeField] public List<GameObject> Panels;
     [SerializeField] private List<SO_Level> SO_Levels;
     [SerializeField] private GameObject ActualPanel;
+
+    [SerializeField] private Vector3 ContentRectTransform;
+    [SerializeField] private Vector3 savedContentRectTransform;
+
     private static int PanelIndex = 0;
 
     [SerializeField] private CinemachineVirtualCamera VirtualCamera;
@@ -30,7 +34,6 @@ public class LevelSelectorManager : MonoBehaviour
     [SerializeField] private GameObject Content;
 
     [SerializeField] private bool panelCanMoveLeft, panelCanMoveright;
-
 
     [Header("Background")]
  
@@ -46,7 +49,14 @@ public class LevelSelectorManager : MonoBehaviour
     {
         InputHandler.MovePanelSelectorEnable(this);
         ActualPanel = Panels[PanelIndex];
-        StartCoroutine(MovePanel(-PanelIndex));
+        CheckIfNextPanelIsLocked();
+
+        RectTransform rectTransform = Content.GetComponent<RectTransform>();
+        if (LevelSelectorData.rectTransformData != Vector3.zero)
+        {
+            rectTransform.position = LevelSelectorData.rectTransformData;        
+        }
+        //StartCoroutine(MovePanel(-PanelIndex));
     }
 
     public void NextPanel(InputAction.CallbackContext context)
@@ -59,6 +69,7 @@ public class LevelSelectorManager : MonoBehaviour
             //RightArrow.enabled = false;
             StartCoroutine(MovePanel(-1));
             backgroundImageAnimator.SetTrigger("MakeTransition");
+            GoRightSound();
         }
     }
 
@@ -72,6 +83,7 @@ public class LevelSelectorManager : MonoBehaviour
             //RightArrow.enabled = false;
             StartCoroutine(MovePanel(1));
             backgroundImageAnimator.SetTrigger("MakeTransition");
+            GoLeftSound();
         }
     }
 
@@ -88,7 +100,7 @@ public class LevelSelectorManager : MonoBehaviour
             rectTransform.localPosition = Vector3.MoveTowards(rectTransform.localPosition, targetPos, scrollingSpeed * Time.deltaTime);
             yield return null;    
         }
-
+        
         //LeftArrow.enabled = true;
         //RightArrow.enabled = true;
 
@@ -101,6 +113,11 @@ public class LevelSelectorManager : MonoBehaviour
     {
         if (ActualPanel.TryGetComponent(out PanelManager panelManager))
         {
+            RectTransform rectTransform = Content.GetComponent<RectTransform>();
+            Vector3 actualPos = rectTransform.transform.localPosition;
+
+            LevelSelectorData.rectTransformData = rectTransform.position;
+
             panelManager.SO_Level.LoadLevel();
             LevelChargeLoader.LoadLevel(SO_Levels[PanelIndex].LevelID);
         }
@@ -114,9 +131,7 @@ public class LevelSelectorManager : MonoBehaviour
 
     public void CheckIfNextPanelIsLocked()
     {
-        Panels[PanelIndex + 1].TryGetComponent(out PanelManager panelManagerNext);
-
-        if (panelManagerNext.SO_Level.LevelData.isLocked)
+        if(PanelIndex >= Panels.Count - 1) 
         {
             if (SwapControls.state == CurrentState.Gamepad)
                 _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
@@ -126,32 +141,48 @@ public class LevelSelectorManager : MonoBehaviour
             RightArrow.gameObject.SetActive(false);
             //RightArrow.enabled = false;
             _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
-        }
-        else //if (!RightArrow.enabled) //&& !RightArrow.gameObject.activeInHierarchy)
-        {
-            panelCanMoveright = true;
-            RightArrow.gameObject.SetActive(true);
-            //RightArrow.enabled = true;
-        }
-
-        if (ActualPanel == Panels[0])
-        {
-            panelCanMoveright = true;
-            if (SwapControls.state == CurrentState.Gamepad)
-                _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
-            else
-                _eventSystem.SetSelectedGameObject(null);
-
-            _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
-            LeftArrow.gameObject.SetActive(false);
-            //LeftArrow.enabled = false;
-        }
-        else if (ActualPanel != Panels[0])
-        {
             panelCanMoveLeft = true;
             LeftArrow.gameObject.SetActive(true);
-            //LeftArrow.enabled = true;
+            return;
         }
+            Panels[PanelIndex + 1].TryGetComponent(out PanelManager panelManagerNext);
+
+                if (panelManagerNext.SO_Level.LevelData.isLocked)
+                {
+                    if (SwapControls.state == CurrentState.Gamepad)
+                        _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+                    else
+                        _eventSystem.SetSelectedGameObject(null);
+
+                    RightArrow.gameObject.SetActive(false);
+                    //RightArrow.enabled = false;
+                    _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+                }
+                else //if (!RightArrow.enabled) //&& !RightArrow.gameObject.activeInHierarchy)
+                {
+                    panelCanMoveright = true;
+                    RightArrow.gameObject.SetActive(true);
+                    //RightArrow.enabled = true;
+                }
+
+                if (ActualPanel == Panels[0])
+                {
+                    panelCanMoveright = true;
+                    if (SwapControls.state == CurrentState.Gamepad)
+                        _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+                    else
+                        _eventSystem.SetSelectedGameObject(null);
+
+                    _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
+                    LeftArrow.gameObject.SetActive(false);
+                    //LeftArrow.enabled = false;
+                }
+                else if (ActualPanel != Panels[0])
+                {
+                    panelCanMoveLeft = true;
+                    LeftArrow.gameObject.SetActive(true);
+                    //LeftArrow.enabled = true;
+                }
     }
 
     private void UpdateBackgroundImage() // update the background image in the level selector using the variable BackgroundImage of the current SO
@@ -162,5 +193,17 @@ public class LevelSelectorManager : MonoBehaviour
     private void OnDisable()
     {
         InputHandler.MovePanelSelectorDisable();
+    }
+
+    private void GoLeftSound()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(31, audioSource);
+    }
+
+    private void GoRightSound()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(32, audioSource);
     }
 }

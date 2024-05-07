@@ -10,25 +10,27 @@ public class Employees : MonoBehaviour
     private GameObject interuptor;
     private Rigidbody rb;
 
-    //[SerializeField]private Animator myAnimator;
+    [SerializeField]private Animator myAnimator;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //myAnimator = GetComponentInChildren<Animator>();
+        myAnimator = GetComponentInChildren<Animator>();
     }
 
 
     private void Update()
     {
-        //if (rb.velocity.magnitude > .5f)
-        //{
-        //    myAnimator.SetBool("Employe_Roll", true);
-        //}
-        //else
-        //{
-        //    myAnimator.SetBool("Employe_Roll", false);
-        //}
+        if (rb.velocity.magnitude > .5f)
+        {
+            myAnimator.SetBool("Employe_Roll", true);
+            rb.freezeRotation = false;
+        }
+        else
+        {
+            myAnimator.SetBool("Employe_Roll", false);
+            rb.freezeRotation = true;
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -40,6 +42,7 @@ public class Employees : MonoBehaviour
                 interuptor = collision.gameObject;
                 interrupteur.ContactPNJ = true;
                 StartCoroutine(MoveInInteruptor());
+                myAnimator.SetBool("In_Hole", true);
             }
 
             if (collision.gameObject.TryGetComponent(out HoleForPNJ holeForPNJ))

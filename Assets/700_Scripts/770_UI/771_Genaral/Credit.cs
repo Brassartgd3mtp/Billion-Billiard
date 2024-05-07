@@ -1,20 +1,39 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class AnimationAccelerator : MonoBehaviour
+public class Credits_AnimationAccelerator : MonoBehaviour
 {
     public Animator animator; // Référence à l'Animator de l'objet à animer
 
-    void Update()
+    private void OnEnable()
     {
-        if (Input.GetButtonDown("Fire2")) // "Fire2" correspond à la touche ronde sur la manette par défaut
-        {
-            // Déclencher l'accélération de l'animation
-            animator.speed = 4f; // Vitesse d'animation accélérée (2x)
-        }
-        else if (Input.GetButtonUp("Fire2")) // Si la touche est relâchée
-        {
-            // Remettre la vitesse de l'animation à la normale
-            animator.speed = 1f; // Vitesse d'animation normale (1x)
-        }
+        InputHandler.CreditsEnable(this);
+    }
+
+    public void MainMenuButton()
+    {
+        // Recharge la scène "Main Menu"
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
+    }
+
+    internal void Accelerate(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            animator.speed = 4f;
+        if (context.canceled)
+            animator.speed = 1f;
+    }
+
+    internal void Exit(InputAction.CallbackContext context)
+    {
+        MainMenuButton();
+    }
+
+    private void OnDisable()
+    {
+        InputHandler.CreditsDisable();
     }
 }

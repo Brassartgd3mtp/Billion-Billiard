@@ -27,6 +27,11 @@ public class MainMenuBehavior : MonoBehaviour
         settingsPanel.SetActive(true);
     }
 
+    public void CreditsButton()
+    {
+        SceneManager.LoadScene(11);
+    }
+
     public void QuitPanelSettings()
     {
         settingsPanel.SetActive(false);
