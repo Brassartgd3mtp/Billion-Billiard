@@ -370,6 +370,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3782222983681089979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4210639915118988789}
+  m_Layer: 0
+  m_Name: Respawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4210639915118988789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3782222983681089979}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6174829947145909035}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4231534758695982891
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,6 +890,7 @@ Transform:
   - {fileID: 6907372975769592765}
   - {fileID: 6505817774876425833}
   - {fileID: 5804330764890611421}
+  - {fileID: 4210639915118988789}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3627922738399997583
@@ -894,7 +926,7 @@ MonoBehaviour:
   isOneWay: 0
   isOpenByDefault: 0
   undergroundEndPos: {x: 0, y: -2.3, z: 0}
-  respawnPos: {fileID: 0}
+  respawnPos: {fileID: 4210639915118988789}
 --- !u!65 &5169046672566654917
 BoxCollider:
   m_ObjectHideFlags: 0
