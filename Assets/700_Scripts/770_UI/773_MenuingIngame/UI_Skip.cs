@@ -91,15 +91,14 @@ public class UI_Skip : MonoBehaviour
     {
         while(DisplayToSkip.alpha > 0)
         {
-            DisplayToSkip.alpha -= 0.01f;
-            Debug.Log("Je fais mon possible pour fade out");
+            DisplayToSkip.alpha -= 0.02f;
             yield return null;
         }
         if (DisplayToSkip.alpha <= 0)
         {
             if (NextObjToShow != null)
             {
-                if (DisplayToSkip.alpha <= 0)
+                if (DisplayToSkip.alpha <= 0.4)
                 {
                     NextObjToShow.SetActive(true);
                 }
