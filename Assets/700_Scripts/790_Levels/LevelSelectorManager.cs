@@ -10,6 +10,9 @@ using UnityEngine.InputSystem;
 
 public class LevelSelectorManager : MonoBehaviour
 {
+    public LevelChargeLoader LevelChargeLoader;
+
+
     [SerializeField] private EventSystem _eventSystem;
 
     [SerializeField] private GameObject LeftArrow, RightArrow;
@@ -36,6 +39,7 @@ public class LevelSelectorManager : MonoBehaviour
  
     [SerializeField] private Image backgroundImage;
     [SerializeField] Animator backgroundImageAnimator;
+
 
     public void Awake()
     {
@@ -119,8 +123,10 @@ public class LevelSelectorManager : MonoBehaviour
             LevelSelectorData.rectTransformData = rectTransform.position;
 
             panelManager.SO_Level.LoadLevel();
+            LevelChargeLoader.LoadLevel(SO_Levels[PanelIndex].LevelID);
         }
     }
+ 
 
     public void ReturnMainMenu()
     {
