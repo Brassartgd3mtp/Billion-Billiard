@@ -10,6 +10,8 @@ using UnityEngine.InputSystem;
 
 public class LevelSelectorManager : MonoBehaviour
 {
+    //private LevelChargeLoader LevelChargeLoader;
+
     [SerializeField] private EventSystem _eventSystem;
 
     [SerializeField] private GameObject LeftArrow, RightArrow;
@@ -37,14 +39,17 @@ public class LevelSelectorManager : MonoBehaviour
     [SerializeField] private Image backgroundImage;
     [SerializeField] Animator backgroundImageAnimator;
 
+
     public void Awake()
     {
 
     }
+
     public void Start()
     {
         InputHandler.MovePanelSelectorEnable(this);
         ActualPanel = Panels[PanelIndex];
+        LevelSelectorData.CurrentLevelIndex = PanelIndex + 2;
         CheckIfNextPanelIsLocked();
         UpdateBackgroundImage();
 
@@ -54,6 +59,8 @@ public class LevelSelectorManager : MonoBehaviour
             rectTransform.position = LevelSelectorData.rectTransformData;        
         }
         //StartCoroutine(MovePanel(-PanelIndex));
+
+        //LevelChargeLoader = GetComponent<LevelChargeLoader>();
     }
 
     public void NextPanel(InputAction.CallbackContext context)
@@ -62,6 +69,7 @@ public class LevelSelectorManager : MonoBehaviour
         {
             PanelIndex++;
             ActualPanel = Panels[PanelIndex];
+            //LevelSelectorData.CurrentLevelIndex = PanelIndex + 2;
             //LeftArrow.enabled = false;
             //RightArrow.enabled = false;
             StartCoroutine(MovePanel(-1));
@@ -76,6 +84,7 @@ public class LevelSelectorManager : MonoBehaviour
         {
             PanelIndex--;
             ActualPanel = Panels[PanelIndex];
+            //LevelSelectorData.CurrentLevelIndex = PanelIndex + 2;
             //LeftArrow.enabled = false;
             //RightArrow.enabled = false;
             StartCoroutine(MovePanel(1));
@@ -116,8 +125,10 @@ public class LevelSelectorManager : MonoBehaviour
             LevelSelectorData.rectTransformData = rectTransform.position;
 
             panelManager.SO_Level.LoadLevel();
+            //LevelChargeLoader.LoadLevel(SO_Levels[PanelIndex].LevelID);
         }
     }
+ 
 
     public void ReturnMainMenu()
     {
