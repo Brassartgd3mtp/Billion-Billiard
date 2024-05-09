@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Gamepad Values"), Range(0f, 2f)]
     [SerializeField] private float gaugeSpeed;
+    [SerializeField] private float deadZone;
+    [SerializeField] private float currentJoystickPos;
 
     [Header("Ice Bounce Angle"), Range(0f, 180f)]
     [SerializeField] float iceAngle = 45f;
@@ -94,39 +96,55 @@ public class PlayerController : MonoBehaviour
     {
         if (ThrowStrength > 0.2f)
         {
-            ScreenShake.instance.Shake(ThrowStrength / StrengthFactor);
-
-            rb.drag = 1;
-
-            SoundShot();
-            StartCoroutine(Haptic(ThrowStrength / StrengthFactor, ThrowStrength / StrengthFactor, .4f));
-
-            timeSinceThrow = 0;
-            staticThrowStrength = ThrowStrength;
-
-            isShooted = true;
-            RespawnPlayer();
-
-            rb.AddForce(trajectoryPrediction.transform.forward * ThrowStrength, ForceMode.Impulse);
-            rb.rotation = trajectoryPrediction.transform.rotation;
-
-            smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            smokePoof.SetFloat("SmokeSize", ThrowStrength / StrengthFactor);
-            smokePoof.Play();
-
-            var emissionSpeedEffect = speedEffect.emission;
-            emissionSpeedEffect.rateOverTime = ThrowStrength / StrengthFactor * 200f;
-
-            speedEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            var durationSpeedEffect = speedEffect.main;
-            durationSpeedEffect.duration = ThrowStrength / StrengthFactor;
-
-            speedEffect.Play();
-
-            turnBasedPlayer.ShotCount();
-
-            ThrowStrength = 0;
+            if (SwapControls.state == CurrentState.MouseKeyboard)
+            {
+                DoThrow();
+            }
+            else if (currentJoystickPos > deadZone)
+            {
+                DoThrow();
+            }
+            else
+            {
+                ThrowStrength = 0;
+            }
         }
+    }
+
+    void DoThrow()
+    {
+        ScreenShake.instance.Shake(ThrowStrength / StrengthFactor);
+
+        rb.drag = 1;
+
+        SoundShot();
+        StartCoroutine(Haptic(ThrowStrength / StrengthFactor, ThrowStrength / StrengthFactor, .4f));
+
+        timeSinceThrow = 0;
+        staticThrowStrength = ThrowStrength;
+
+        isShooted = true;
+        RespawnPlayer();
+
+        rb.AddForce(trajectoryPrediction.transform.forward * ThrowStrength, ForceMode.Impulse);
+        rb.rotation = trajectoryPrediction.transform.rotation;
+
+        smokePoof.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        smokePoof.SetFloat("SmokeSize", ThrowStrength / StrengthFactor);
+        smokePoof.Play();
+
+        var emissionSpeedEffect = speedEffect.emission;
+        emissionSpeedEffect.rateOverTime = ThrowStrength / StrengthFactor * 200f;
+
+        speedEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        var durationSpeedEffect = speedEffect.main;
+        durationSpeedEffect.duration = ThrowStrength / StrengthFactor;
+
+        speedEffect.Play();
+
+        turnBasedPlayer.ShotCount();
+
+        ThrowStrength = 0;
     }
 
 
@@ -343,8 +361,12 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            //SetLookDirection(-context.ReadValue<Vector2>());
+            currentJoystickPos = Mathf.Abs(context.ReadValue<Vector2>().x) + Mathf.Abs(context.ReadValue<Vector2>().y);
             SetLookDirection(context.ReadValue<Vector2>());
+        }
+        if (context.canceled)
+        {
+            currentJoystickPos = Mathf.Abs(context.ReadValue<Vector2>().x) + Mathf.Abs(context.ReadValue<Vector2>().y);
         }
     }
 
