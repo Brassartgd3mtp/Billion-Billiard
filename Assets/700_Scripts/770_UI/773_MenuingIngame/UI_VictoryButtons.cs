@@ -30,7 +30,6 @@ public class UI_VictoryButtons : MonoBehaviour
         {
             CutscenesCurrent.PackIndex = index;
             LevelSelectorData.CurrentLevelIndex = 1;
-            CutscenesCurrent.isCutsceneFirstTime[index] = true;
             SceneManager.LoadScene(12);
         }
     }

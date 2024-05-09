@@ -34,8 +34,6 @@ public class SO_Level : ScriptableObject
     {
         if (!CutscenesCurrent.isCutsceneFirstTime[CutsceneIndex])
         {
-            CutscenesCurrent.isCutsceneFirstTime[CutsceneIndex] = true;
-
             CutscenesCurrent.PackIndex = CutsceneIndex;
             LevelSelectorData.CurrentLevelIndex = LevelID;
             SceneManager.LoadScene(12);

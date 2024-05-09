@@ -15,7 +15,7 @@ public class InputHandler : MonoBehaviour
     static SwapControls spControls;
     static UI_Skip uSkip;
     static LevelSelectorManager lsManager;
-    static Credits_AnimationAccelerator cr;
+    static Credits cr;
     static CutsceneSkip cutSkip;
     #endregion
 
@@ -127,7 +127,7 @@ public class InputHandler : MonoBehaviour
         Actions.Gamepad.ThrowPlayer.started += uiskip.SkipCanva;
     }
 
-    public static void CreditsEnable(Credits_AnimationAccelerator credits)
+    public static void CreditsEnable(Credits credits)
     {
         cr = credits;
 

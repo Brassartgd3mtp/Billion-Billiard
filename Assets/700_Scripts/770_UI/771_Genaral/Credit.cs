@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class Credits_AnimationAccelerator : MonoBehaviour
+public class Credits : MonoBehaviour
 {
     public Animator animator; // Référence à l'Animator de l'objet à animer
 

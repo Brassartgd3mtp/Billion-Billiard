@@ -11,7 +11,7 @@ public class CutscenesHandler : MonoBehaviour
     public List<CutscenesList> packs;
     public Image ScreenImage;
     public TextMeshProUGUI TextBox;
-    public string CurrentDialogue;
+    [HideInInspector] public string CurrentDialogue;
 
     // Start is called before the first frame update
     void Start()
@@ -43,11 +43,16 @@ public class CutscenesHandler : MonoBehaviour
 
             yield break;
         }
-        else
+        else if (!CutscenesCurrent.isCutsceneFirstTime[CutscenesCurrent.PackIndex])
         {
             CutscenesCurrent.CutsceneIndex = 0;
             CutscenesCurrent.isCutsceneFirstTime[CutscenesCurrent.PackIndex] = true;
             SceneManager.LoadScene(LevelSelectorData.CurrentLevelIndex);
+        }
+        else
+        {
+            CutscenesCurrent.CutsceneIndex = 0;
+            SceneManager.LoadScene(13);
         }
     }
 }
