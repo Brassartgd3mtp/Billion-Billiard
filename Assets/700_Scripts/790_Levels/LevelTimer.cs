@@ -18,9 +18,9 @@ public class LevelTimer : MonoBehaviour
 
     [Header("Medals Timers")]
 
-    [SerializeField] private int bronzeMedalThresholdInSeconds;
-    [SerializeField] private int silverMedalThresholdInSeconds;
-    [SerializeField] private int goldMedalThresholdInSeconds;
+    public int bronzeMedalThresholdInSeconds;
+    public int silverMedalThresholdInSeconds;
+    public int goldMedalThresholdInSeconds;
 
     [Header("Score per Medals")]
 

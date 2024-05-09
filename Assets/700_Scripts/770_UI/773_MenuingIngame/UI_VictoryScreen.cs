@@ -14,6 +14,7 @@ public class VictoryScreen : MonoBehaviour
     private LevelTimer timerScript;
     private ScoringCalculations calculationsScript;
     private EndLevelProgressBar progressBarScript;
+    private PlayerStats playerStatsScript;
 
     [Header("Objects")]
 
@@ -49,6 +50,8 @@ public class VictoryScreen : MonoBehaviour
     [Header("Texts")]
 
     [SerializeField] private TextMeshProUGUI TXT_score;
+    [SerializeField] private TextMeshProUGUI TXT_scoreIngots;
+    [SerializeField] private TextMeshProUGUI TXT_scoreTime;
     [SerializeField] private TextMeshProUGUI TXT_timer;
     [SerializeField] private TextMeshProUGUI TXT_highscore;
     [SerializeField] private TextMeshProUGUI TXT_pb;
@@ -67,6 +70,7 @@ public class VictoryScreen : MonoBehaviour
         timerScript = FindAnyObjectByType<LevelTimer>();
         starRatingScript = FindAnyObjectByType<StarRating>();
         progressBarScript = FindAnyObjectByType<EndLevelProgressBar>();
+        playerStatsScript = PlayerStats.Instance;
 
         timerScript.TimeStarted = false;
         //starRatingScript.NumberOfStars();
@@ -91,6 +95,8 @@ public class VictoryScreen : MonoBehaviour
     private void DisplayScore()
     {
         TXT_score.text = "Score : " + calculationsScript.PlayerScore().ToString();
+        TXT_scoreIngots.text = "Ingots ( + " + playerStatsScript.moneyCount + " )";
+        TXT_scoreTime.text = "Timer ( + " + timerScript.FinalTimerScore() + " )";
         TXT_timer.text = "Temps : " + string.Format("{0:00}:{1:00}", timerScript.Minutes, timerScript.Seconds);
         TXT_highscore.text = "Highscore : " + GlobalData.Highscore[currentScene].ToString();
         TXT_pb.text = "Best time : " + GlobalData.PB[currentScene];
