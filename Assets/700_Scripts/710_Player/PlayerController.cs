@@ -58,8 +58,15 @@ public class PlayerController : MonoBehaviour
 
     public PlayerParameters playerParameters;
 
+    public static PlayerController Instance;
+
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
         rb = GetComponent<Rigidbody>();
 
         turnBasedPlayer = GetComponent<TurnBasedPlayer>();

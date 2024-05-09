@@ -75,6 +75,7 @@ public class UI_Skip : MonoBehaviour
         Time.timeScale = 1f;
 
         if (DisplayToSkip != null)
+        {
             if (AsFadeOut)
                 StartCoroutine(CanvaFadeOut());
 
@@ -82,9 +83,7 @@ public class UI_Skip : MonoBehaviour
             {
                 DisplayToSkip.alpha = 0;
             }
-
-        
-
+        }
     }
 
     IEnumerator CanvaFadeOut()

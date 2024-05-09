@@ -72,7 +72,7 @@ public class VictoryScreen : MonoBehaviour
         //starRatingScript.NumberOfStars();
 
         progressBarScript.BarCanMove = true;
-
+        
         DisplayScore();
         DisplayMedals();
         DisplayStars();

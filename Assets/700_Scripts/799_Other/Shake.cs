@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Shake : MonoBehaviour
 {
-    public float baseShakeIntensity; // Intensité du tremblement
-    public float baseShakeDuration; // Durée du tremblement
+    [HideInInspector] public float baseShakeIntensity; // Intensité du tremblement
+    [HideInInspector] public float baseShakeDuration; // Durée du tremblement
     public float shakeIntensity;
     public float shakeDuration;
 
