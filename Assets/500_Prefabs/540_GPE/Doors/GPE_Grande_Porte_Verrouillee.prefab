@@ -287,37 +287,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1004182597772798521
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8618342707211170875}
-  m_Layer: 0
-  m_Name: TransformRespawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8618342707211170875
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1004182597772798521}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6174829947145909035}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1365285385841730979
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +370,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3782222983681089979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4210639915118988789}
+  m_Layer: 0
+  m_Name: Respawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4210639915118988789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3782222983681089979}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6174829947145909035}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4231534758695982891
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 1042242661252916627}
   - component: {fileID: 4223507050255723562}
   - component: {fileID: 4919679283042505560}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Grandes_portes_verrouillees_Porte_droite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -890,7 +890,7 @@ Transform:
   - {fileID: 6907372975769592765}
   - {fileID: 6505817774876425833}
   - {fileID: 5804330764890611421}
-  - {fileID: 8618342707211170875}
+  - {fileID: 4210639915118988789}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3627922738399997583
@@ -926,7 +926,7 @@ MonoBehaviour:
   isOneWay: 0
   isOpenByDefault: 0
   undergroundEndPos: {x: 0, y: -2.3, z: 0}
-  respawnPos: {fileID: 8618342707211170875}
+  respawnPos: {fileID: 4210639915118988789}
 --- !u!65 &5169046672566654917
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -959,7 +959,7 @@ GameObject:
   - component: {fileID: 761244637662725505}
   - component: {fileID: 2296958113343757866}
   - component: {fileID: 8108947932338402419}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Grandes_portes_verrouillees_Portes_gauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1042,7 +1042,7 @@ GameObject:
   - component: {fileID: 4671073669316868785}
   - component: {fileID: 6664283886056189562}
   - component: {fileID: 8781724129624589417}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Grandes_portes_verrouillees_Porte_droite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1291,7 +1291,7 @@ GameObject:
   - component: {fileID: 1376094833765436893}
   - component: {fileID: 1540326938987840081}
   - component: {fileID: 8173839088491617421}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Grandes_portes_verrouillees_Portes_gauche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1541,7 +1541,7 @@ GameObject:
   - component: {fileID: 7293665112862751194}
   - component: {fileID: 7774292866165700220}
   - component: {fileID: 6559902661686261887}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grandes_portes_verrouillees_Piliers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1730,7 +1730,7 @@ GameObject:
   - component: {fileID: 8705929301721303594}
   - component: {fileID: 7800454173502401856}
   - component: {fileID: 8616059694831034982}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grandes_portes_verrouillees_Piliers.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

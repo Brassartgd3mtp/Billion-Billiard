@@ -40,6 +40,11 @@ public class MainMenuBehavior : MonoBehaviour
         SceneManager.LoadScene(11);
     }
 
+    public void CutscenesButton()
+    {
+        SceneManager.LoadScene(12);
+    }
+
     public void QuitPanelSettings()
     {
         settingsPanel.SetActive(false);

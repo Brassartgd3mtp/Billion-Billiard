@@ -19,8 +19,8 @@ public class LevelSelectorManager : MonoBehaviour
     [SerializeField] private List<SO_Level> SO_Levels;
     [SerializeField] private GameObject ActualPanel;
 
-    [SerializeField] private Vector3 ContentRectTransform;
-    [SerializeField] private Vector3 savedContentRectTransform;
+    //[SerializeField] private Vector3 ContentRectTransform;
+    //[SerializeField] private Vector3 savedContentRectTransform;
 
     private static int PanelIndex = 0;
 
@@ -47,6 +47,7 @@ public class LevelSelectorManager : MonoBehaviour
         ActualPanel = Panels[PanelIndex];
         LevelSelectorData.CurrentLevelIndex = PanelIndex + 2;
         CheckIfNextPanelIsLocked();
+        UpdateBackgroundImage();
 
         RectTransform rectTransform = Content.GetComponent<RectTransform>();
         if (LevelSelectorData.rectTransformData != Vector3.zero)
@@ -184,7 +185,8 @@ public class LevelSelectorManager : MonoBehaviour
 
     private void UpdateBackgroundImage() // update the background image in the level selector using the variable BackgroundImage of the current SO
     {
-        backgroundImage.sprite = SO_Levels[PanelIndex].BackgroundImage;
+        ActualPanel.TryGetComponent(out PanelManager panelManager);
+        backgroundImage.sprite = panelManager.SO_Level.BackgroundImage;
     }
 
     private void OnDisable()
