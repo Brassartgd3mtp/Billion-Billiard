@@ -17,7 +17,6 @@ public class MainMenuBehavior : MonoBehaviour
         {
             LevelSelectorData.CurrentLevelIndex = 2;
             CutscenesCurrent.PackIndex = 0;
-            CutscenesCurrent.isCutsceneFirstTime[0] = true;
             SceneManager.LoadScene(12);
         }
         else
@@ -42,7 +41,7 @@ public class MainMenuBehavior : MonoBehaviour
 
     public void CutscenesButton()
     {
-        SceneManager.LoadScene(12);
+        SceneManager.LoadScene(13);
     }
 
     public void QuitPanelSettings()
