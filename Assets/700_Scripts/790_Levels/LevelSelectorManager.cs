@@ -10,8 +10,7 @@ using UnityEngine.InputSystem;
 
 public class LevelSelectorManager : MonoBehaviour
 {
-    public LevelChargeLoader LevelChargeLoader;
-
+    //private LevelChargeLoader LevelChargeLoader;
 
     [SerializeField] private EventSystem _eventSystem;
 
@@ -45,6 +44,7 @@ public class LevelSelectorManager : MonoBehaviour
     {
 
     }
+
     public void Start()
     {
         InputHandler.MovePanelSelectorEnable(this);
@@ -59,6 +59,8 @@ public class LevelSelectorManager : MonoBehaviour
             rectTransform.position = LevelSelectorData.rectTransformData;        
         }
         //StartCoroutine(MovePanel(-PanelIndex));
+
+        //LevelChargeLoader = GetComponent<LevelChargeLoader>();
     }
 
     public void NextPanel(InputAction.CallbackContext context)
@@ -123,7 +125,7 @@ public class LevelSelectorManager : MonoBehaviour
             LevelSelectorData.rectTransformData = rectTransform.position;
 
             panelManager.SO_Level.LoadLevel();
-            LevelChargeLoader.LoadLevel(SO_Levels[PanelIndex].LevelID);
+            //LevelChargeLoader.LoadLevel(SO_Levels[PanelIndex].LevelID);
         }
     }
  
