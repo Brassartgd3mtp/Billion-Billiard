@@ -41,6 +41,7 @@ public class InputHandler : MonoBehaviour
         Actions.Gamepad.ThrowPlayer.canceled += playerController.GamepadStrengthGauge;
         Actions.Gamepad.ThrowPlayer.canceled += playerController.Throw;
         Actions.Gamepad.GamepadStrenght.performed += playerController.GamepadDirection;
+        Actions.Gamepad.GamepadStrenght.canceled += playerController.GamepadDirection;
         Actions.Gamepad.CancelThrow.started += playerController.GamepadCancelThrow;
         #endregion
         #region Mouse/Keyboard
@@ -151,6 +152,8 @@ public class InputHandler : MonoBehaviour
         Actions.Gamepad.ThrowPlayer.canceled -= player.GamepadStrengthGauge;
         Actions.Gamepad.ThrowPlayer.canceled -= player.Throw;
         Actions.Gamepad.GamepadStrenght.performed -= player.GamepadDirection;
+        Actions.Gamepad.GamepadStrenght.canceled -= player.GamepadDirection;
+        Actions.Gamepad.CancelThrow.started -= player.GamepadCancelThrow;
         #endregion
         #region Mouse/Keyboard
         Actions.MouseKeyboard.MouseStrenght.performed -= player.MouseStrenght;
