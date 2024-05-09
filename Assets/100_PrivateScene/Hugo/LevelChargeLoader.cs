@@ -5,18 +5,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelChargeLoader : MonoBehaviour
-
 {
-
-
     public GameObject loadingScreen;
     public Slider slider;
-    public Text progressText;
 
     public void LoadLevel(int sceneIndex)
     {
         StartCoroutine(LoadAsync(sceneIndex));
-
     }
 
     IEnumerator LoadAsync(int sceneIndex)
@@ -33,9 +28,6 @@ public class LevelChargeLoader : MonoBehaviour
 
             slider.value = progress;
             //Pour faire evoluer le slider
-
-            progressText.text = progress * 100 + "%";
-            //Systeme de pourcentage avec le text
 
             yield return null;
         }

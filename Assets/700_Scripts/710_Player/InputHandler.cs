@@ -13,9 +13,10 @@ public class InputHandler : MonoBehaviour
     static NoClip nClip;
     static PauseMenu pMenu;
     static SwapControls spControls;
-    static UI_Skip skip;
+    static UI_Skip uSkip;
     static LevelSelectorManager lsManager;
     static Credits_AnimationAccelerator cr;
+    static CutsceneSkip cutSkip;
     #endregion
 
     // Start is called before the first frame update
@@ -27,6 +28,7 @@ public class InputHandler : MonoBehaviour
         Actions.Swap.Enable();
         Actions.MainMenu.Enable();
         Actions.Credits.Enable();
+        Actions.Cutscenes.Enable();
     }
 
     #region Enable
@@ -120,7 +122,7 @@ public class InputHandler : MonoBehaviour
 
     public static void UISkipEnable(UI_Skip uiskip)
     {
-        skip = uiskip;
+        uSkip = uiskip;
         Actions.MouseKeyboard.MouseStartDrag.canceled += uiskip.SkipCanva;
         Actions.Gamepad.ThrowPlayer.started += uiskip.SkipCanva;
     }
@@ -132,6 +134,13 @@ public class InputHandler : MonoBehaviour
         Actions.Credits.AccelerateCredits.performed += credits.Accelerate;
         Actions.Credits.AccelerateCredits.canceled += credits.Accelerate;
         Actions.Credits.ExitCredits.performed += credits.Exit;
+    }
+
+    public static void CutscenesEnable(CutsceneSkip cutsceneSkip)
+    {
+        cutSkip = cutsceneSkip;
+
+        Actions.Cutscenes.Skip.performed += cutsceneSkip.Skip;
     }
     #endregion
     #region Disable
@@ -205,8 +214,8 @@ public class InputHandler : MonoBehaviour
 
     public static void UISkipDisable()
     {
-        Actions.MouseKeyboard.MouseStartDrag.canceled -= skip.SkipCanva;
-        Actions.Gamepad.ThrowPlayer.started -= skip.SkipCanva;
+        Actions.MouseKeyboard.MouseStartDrag.canceled -= uSkip.SkipCanva;
+        Actions.Gamepad.ThrowPlayer.started -= uSkip.SkipCanva;
     }
 
     public static void CreditsDisable()
@@ -214,6 +223,11 @@ public class InputHandler : MonoBehaviour
         Actions.Credits.AccelerateCredits.performed -= cr.Accelerate;
         Actions.Credits.AccelerateCredits.canceled -= cr.Accelerate;
         Actions.Credits.ExitCredits.performed -= cr.Exit;
+    }
+
+    public static void CutscenesDisable()
+    {
+        Actions.Cutscenes.Skip.performed -= cutSkip.Skip;
     }
     #endregion
 
@@ -260,7 +274,7 @@ public class InputHandler : MonoBehaviour
 
     public static void UISkipEnable()
     {
-        UISkipEnable(skip);
+        UISkipEnable(uSkip);
     }
 
     public static void MovePanelSelectorEnable()
@@ -270,9 +284,12 @@ public class InputHandler : MonoBehaviour
 
     public static void CreditsEnable()
     {
-        Actions.Credits.AccelerateCredits.performed += cr.Accelerate;
-        Actions.Credits.AccelerateCredits.canceled += cr.Accelerate;
-        Actions.Credits.ExitCredits.performed += cr.Exit;
+        CreditsEnable(cr);
+    }
+
+    public static void CutscenesEnable()
+    {
+        CutscenesEnable(cutSkip);
     }
     #endregion
 }
