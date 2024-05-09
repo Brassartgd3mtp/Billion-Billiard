@@ -11,7 +11,7 @@ public class CutscenesHandler : MonoBehaviour
     public List<CutscenesList> packs;
     public Image ScreenImage;
     public TextMeshProUGUI TextBox;
-    [HideInInspector] public bool CurrentlyLoadingCutscene;
+    public string CurrentDialogue;
 
     // Start is called before the first frame update
     void Start()
@@ -24,9 +24,9 @@ public class CutscenesHandler : MonoBehaviour
     {
         if (CutscenesCurrent.CutsceneIndex < packs[pack].cutscenes.Count)
         {
-            CurrentlyLoadingCutscene = true;
-
             TextBox.text = string.Empty;
+
+            CurrentDialogue = packs[pack].diaglogues[cutscene];
 
             ScreenImage.sprite = packs[pack].cutscenes[cutscene];
 
@@ -34,17 +34,19 @@ public class CutscenesHandler : MonoBehaviour
 
             for (int i = 0; i < chars.Length; i++)
             {
+                if (TextBox.text == CurrentDialogue)
+                    break;
+
                 TextBox.text += chars[i];
                 yield return new WaitForSeconds(.05f);
             }
-
-            CurrentlyLoadingCutscene = false;
 
             yield break;
         }
         else
         {
             CutscenesCurrent.CutsceneIndex = 0;
+            CutscenesCurrent.isCutsceneFirstTime[CutscenesCurrent.PackIndex] = true;
             SceneManager.LoadScene(LevelSelectorData.CurrentLevelIndex);
         }
     }

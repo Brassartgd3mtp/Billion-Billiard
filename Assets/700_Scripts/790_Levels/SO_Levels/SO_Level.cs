@@ -32,7 +32,7 @@ public class SO_Level : ScriptableObject
 
     public void LoadLevel()
     {
-        if (!CutscenesCurrent.isCutsceneFirstTime[LevelID - 2])
+        if (!CutscenesCurrent.isCutsceneFirstTime[CutsceneIndex])
         {
             CutscenesCurrent.isCutsceneFirstTime[CutsceneIndex] = true;
 

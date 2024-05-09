@@ -16,11 +16,13 @@ public class CutsceneSkip : MonoBehaviour
 
     internal void Skip(InputAction.CallbackContext context)
     {
-        if (!cutscenesHandler.CurrentlyLoadingCutscene)
+        if (cutscenesHandler.TextBox.text == cutscenesHandler.CurrentDialogue)
         {
             CutscenesCurrent.CutsceneIndex += 1;
             StartCoroutine(cutscenesHandler.LoadCutscene(CutscenesCurrent.PackIndex, CutscenesCurrent.CutsceneIndex));
         }
+        else
+            cutscenesHandler.TextBox.text = cutscenesHandler.CurrentDialogue;
     }
 
     private void OnDisable()
