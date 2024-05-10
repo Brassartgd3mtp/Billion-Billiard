@@ -5731,6 +5731,7 @@ MonoBehaviour:
   TXT_timer: {fileID: 768583569052817214}
   TXT_highscore: {fileID: 5253476938002539037}
   TXT_pb: {fileID: 3288693644939835215}
+  TXT_newHighscore: {fileID: 0}
 --- !u!114 &4765107979092820746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15316,6 +15317,8 @@ MonoBehaviour:
   MouseSensitivity: 0.3
   MouseStart: {x: 0, y: 0}
   gaugeSpeed: 0.5
+  deadZone: 0.6
+  currentJoystickPos: 0
   iceAngle: 120
   PowerLineRenderer: {fileID: 505784171502366625}
   PowerLineRendererOutline: {fileID: 1590752468904817456}
@@ -32438,7 +32441,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBarParticleSystem: {fileID: 1689141795110337429}
+  posSetter: {fileID: 7701068032310084530}
   BarCanMove: 0
+  OnSecondStarValueReached:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2722303910997277114}
+        m_TargetAssemblyTypeName: VictoryScreen, Assembly-CSharp
+        m_MethodName: DisplaySecondStar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnThirdStarValueReached:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2722303910997277114}
+        m_TargetAssemblyTypeName: VictoryScreen, Assembly-CSharp
+        m_MethodName: DisplayThirdStar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6307756734387294817
 GameObject:
   m_ObjectHideFlags: 0
@@ -36736,7 +36770,7 @@ Transform:
   m_GameObject: {fileID: 7407205603221401091}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.5, y: 20.493502, z: 0.5000025}
+  m_LocalPosition: {x: 0, y: 20.700003, z: 0.0000023841858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
