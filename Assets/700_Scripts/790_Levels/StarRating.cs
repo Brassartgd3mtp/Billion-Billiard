@@ -11,8 +11,8 @@ public class StarRating : MonoBehaviour
 
     [Header("Score Per Star")]
 
-    [SerializeField] private int scoreForStarTwo;
-    [SerializeField] private int scoreForStarThree;
+    public int scoreForStarTwo;
+    public int scoreForStarThree;
 
     private void Awake()
     {
