@@ -42,8 +42,12 @@ public class UI_Timer : MonoBehaviour
     {
         if (levelTimerScript.TimeStarted)
         {
-            timeSlider.value = 1 - (levelTimerScript.TimerInSeconds / EndningTimeValue) ;
-            GetFillColor();
+            if(timeSlider.value > 0)
+            {
+                timeSlider.value = 1 - (levelTimerScript.TimerInSeconds / EndningTimeValue);
+                GetFillColor();
+            }
+
         }
     }
 
@@ -68,7 +72,7 @@ public class UI_Timer : MonoBehaviour
                 fillImage.color = new Color(0.75f, 0.3f, 0.2f);
                 break; 
             case 2:
-                fillImage.color = new Color(0.6f, 0.6f, 0.75f);
+                fillImage.color = new Color(0.7f, 0.7f, 0.9f);
                 break;
             case 3:
                 fillImage.color = new Color(0.8f, 0.6f, 0.1f);
