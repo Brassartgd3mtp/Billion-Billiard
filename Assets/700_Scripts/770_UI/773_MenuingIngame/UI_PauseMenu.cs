@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject panel;
+    public GameObject panelSettings;
+
     public GameObject optionPanel;
     public GameObject OptionFirstbutton;
     public GameObject PauseFirstbutton;
@@ -94,6 +96,7 @@ public class PauseMenu : MonoBehaviour
 
     public void OnQuitButtonClick()
     {
+        
         // Ferme le jeu
         Application.Quit();
     }
@@ -107,6 +110,7 @@ public class PauseMenu : MonoBehaviour
             if (panelActive)
                 PauseOn();
             else
+                
                 PauseOff();
         }
         else

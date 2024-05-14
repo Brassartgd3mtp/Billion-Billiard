@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class OptionMenuController : MonoBehaviour
+public class UI_Option_Panel : MonoBehaviour
 {
     public GameObject optionPanel;
     public GameObject PauseFirstbutton;
