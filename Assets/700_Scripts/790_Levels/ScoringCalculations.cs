@@ -19,7 +19,6 @@ public class ScoringCalculations : MonoBehaviour
     public float MaximumScore()
     {
         return levelScoreScript.TotalIngotScore
-            * levelScoreScript.NeededPercentage / 100
              + levelTimerScript.GoldScore;
     }
 

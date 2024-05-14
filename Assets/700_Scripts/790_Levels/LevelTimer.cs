@@ -13,14 +13,16 @@ public class LevelTimer : MonoBehaviour
 
     public float TimerInSeconds;
     public bool TimeStarted = true;
-    public float Minutes;
-    public float Seconds;
+    public int Minutes;
+    public int Seconds;
 
     [Header("Medals Timers")]
+
 
     public int bronzeMedalThresholdInSeconds;
     public int silverMedalThresholdInSeconds;
     public int goldMedalThresholdInSeconds;
+    public List<int> TimersThresholdsInSeconds;
 
     [Header("Score per Medals")]
 
@@ -31,6 +33,13 @@ public class LevelTimer : MonoBehaviour
     [Header("UI")]
 
     [SerializeField] private TextMeshProUGUI TXT_Timer;
+
+    private void Awake()
+    {
+        TimersThresholdsInSeconds.Add(bronzeMedalThresholdInSeconds);
+        TimersThresholdsInSeconds.Add(silverMedalThresholdInSeconds);
+        TimersThresholdsInSeconds.Add(goldMedalThresholdInSeconds);
+    }
 
     void Update()
     {
@@ -48,8 +57,14 @@ public class LevelTimer : MonoBehaviour
 
     private void CalculateTime() //do the maths to display the timer is the right format
     {
-        Minutes = Mathf.Floor(TimerInSeconds / 60);
-        Seconds = TimerInSeconds % 60;
+        Minutes = (int) Mathf.Floor(TimerInSeconds / 60);
+        Seconds = (int) TimerInSeconds % 60;
+
+        if(Seconds == 60)
+        {
+            Minutes++;
+            Seconds = 0;
+        }
 
         TXT_Timer.text = string.Format("{0:00}:{1:00}", Minutes, Seconds);
     }
