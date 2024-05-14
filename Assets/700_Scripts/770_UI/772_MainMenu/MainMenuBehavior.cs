@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -10,6 +11,14 @@ public class MainMenuBehavior : MonoBehaviour
 
     public GameObject mainPanel;
     public GameObject settingsPanel;
+    public EventSystem eventSystem;
+    public GameObject sliderVolume;
+    public GameObject StartButton;
+
+    public void Awake()
+    {
+        Screen.fullScreen = true;
+    }
 
     public void PlayButton()
     {
@@ -32,6 +41,7 @@ public class MainMenuBehavior : MonoBehaviour
     {
         mainPanel.SetActive(false);
         settingsPanel.SetActive(true);
+        eventSystem.SetSelectedGameObject(sliderVolume.gameObject);
     }
 
     public void CreditsButton()
@@ -48,5 +58,6 @@ public class MainMenuBehavior : MonoBehaviour
     {
         settingsPanel.SetActive(false);
         mainPanel.SetActive(true);
+        eventSystem.SetSelectedGameObject(StartButton.gameObject);
     }
 }
