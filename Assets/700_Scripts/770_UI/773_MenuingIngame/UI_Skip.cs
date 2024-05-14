@@ -82,6 +82,10 @@ public class UI_Skip : MonoBehaviour
             else
             {
                 DisplayToSkip.alpha = 0;
+                if (NextObjToShow != null)
+                {
+                    NextObjToShow.SetActive(true);
+                }
             }
         }
     }
