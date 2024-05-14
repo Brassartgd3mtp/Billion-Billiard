@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI; 
@@ -10,13 +11,14 @@ public class SettingsMenu : MonoBehaviour
     public AudioMixer AudioMixer;
     Resolution[] resolutions;
 
+    public Toggle toggleFullscreen;
+
+
     // public Dropdown resolutionDropdown;
 
     private void Start()
     {
         resolutions = Screen.resolutions;
-
-        SetFullScreen(PlayerOptionsRuntimeSave.FullscreenMode);
 
         //resolutionDropdown.ClearOptions();
 
@@ -44,7 +46,6 @@ public class SettingsMenu : MonoBehaviour
         //resolutionDropdown.RefreshShownValue();
     }
 
-
     public void SetResolution (int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
@@ -55,10 +56,10 @@ public class SettingsMenu : MonoBehaviour
     {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
-    
-    public void SetFullScreen(bool isFullScreen)
+
+    public void SetFullScreen()
     {
-        Screen.fullScreen = isFullScreen;
+        Screen.fullScreen = !Screen.fullScreen;
     }
 
 }
