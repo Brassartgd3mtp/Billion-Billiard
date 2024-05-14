@@ -768,7 +768,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 839874474}
+    m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 514547873}
     m_SelectOnLeft: {fileID: 514547873}
     m_SelectOnRight: {fileID: 0}
@@ -904,7 +904,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 510411798}
-    m_SelectOnDown: {fileID: 839874474}
+    m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1601,13 +1601,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2079614032}
-  - {fileID: 1439823317}
   m_Father: {fileID: 1529931751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 86.12744, y: -85.42755}
-  m_SizeDelta: {x: -288.316, y: -307.139}
+  m_AnchoredPosition: {x: 105.5, y: 0}
+  m_SizeDelta: {x: -873.797, y: -420.127}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &839874474
 MonoBehaviour:
@@ -1659,7 +1658,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1529931752}
         m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
         m_MethodName: SetFullScreen
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2801,12 +2800,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 839874473}
+  m_Father: {fileID: 1529931751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -55.67694, y: 17.963089}
-  m_SizeDelta: {x: -135.89995, y: 9.029989}
+  m_AnchoredPosition: {x: -160.56299, y: 0.0014953613}
+  m_SizeDelta: {x: -696.412, y: -420.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1439823318
 MonoBehaviour:
@@ -3091,6 +3090,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1439823317}
   - {fileID: 514547872}
   - {fileID: 839874473}
   - {fileID: 510411797}
@@ -3114,6 +3114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AudioMixer: {fileID: 24100000, guid: 70c68e3dd0afe7242a71b9819466f493, type: 2}
+  toggleFullscreen: {fileID: 0}
 --- !u!114 &1529931753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5189,7 +5190,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 33.906006, y: -29}
+  m_AnchoredPosition: {x: 33.906006, y: -28.99997}
   m_SizeDelta: {x: 53.783, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2079614033

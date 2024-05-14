@@ -15,6 +15,11 @@ public class MainMenuBehavior : MonoBehaviour
     public GameObject sliderVolume;
     public GameObject StartButton;
 
+    public void Awake()
+    {
+        Screen.fullScreen = true;
+    }
+
     public void PlayButton()
     {
         if (!CutscenesCurrent.isCutsceneFirstTime[0])
