@@ -11,7 +11,7 @@ public class UI_Timer : MonoBehaviour
     [SerializeField] private LevelTimer levelTimerScript;
     [SerializeField] private Shake shakeScript;
 
-    [Header("Images")]
+    [Header("Medals")]
 
     [SerializeField] private Image IMG_currentMedal;
     [SerializeField] private Image IMG_nextMedal;
@@ -23,7 +23,7 @@ public class UI_Timer : MonoBehaviour
 
     [SerializeField] private Slider timeSlider;
     public float EndningTimeValue;
-    [SerializeField] private Image fillImage;
+    [SerializeField] private Image IMG_fillImage;
 
     [Header("Texts")]
 
@@ -45,7 +45,7 @@ public class UI_Timer : MonoBehaviour
         previousmedalvalue = medalvalue;
         UpdateMedalImage();
         GetFillColor();
-        TXT_nextThreshold.text = GetNextTimerThreshold(medalvalue);
+        TXT_nextThreshold.text = GetNextTimerThreshold();
     }
 
     // Update is called once per frame
@@ -58,23 +58,28 @@ public class UI_Timer : MonoBehaviour
             if (timeSlider.value > 0)
             {
                 timeSlider.value = 1 - (levelTimerScript.TimerInSeconds / EndningTimeValue);
-
-                if(medalvalue != previousmedalvalue)
+                if(!isBlinking)
                 {
                     GetFillColor();
+                }
+
+                if (medalvalue != previousmedalvalue)
+                {
                     UpdateMedalImage();
                     if (levelTimerScript.TimerInSeconds < levelTimerScript.bronzeMedalThresholdInSeconds)
                     {
-                        TXT_nextThreshold.text = GetNextTimerThreshold(medalvalue);
+                        TXT_nextThreshold.text = GetNextTimerThreshold();
                     }
                     else TXT_nextThreshold.text = "-- : --";
                 }
             }
-            if(CheckIfThresholdIsNear(medalvalue))
+            if(CheckIfThresholdIsNear())
             {
                 if(!isBlinking)
                 {
-                    StartCoroutine(StartBlinking(fillImage.color));
+                    StartCoroutine(StartBlinking(IMG_currentMedal, IMG_currentMedal.sprite, IMG_nextMedal.sprite));
+                    StartCoroutine(StartBlinking(levelTimerScript.TXT_Timer, Color.white, Color.red));
+               //   StartCoroutine(StartBlinking(IMG_fillImage, IMG_fillImage.color, Color.red));
                 }
                 shakeScript.StartShake();
             }
@@ -95,18 +100,18 @@ public class UI_Timer : MonoBehaviour
         switch(medalvalue)
         {
             case 1: //bronze
-                    fillImage.color = new Color(0.75f, 0.3f, 0.2f);
+                    IMG_fillImage.color = new Color(0.75f, 0.3f, 0.2f);
                 break; 
             case 2: //silver
-                    fillImage.color = new Color(0.7f, 0.7f, 0.9f);
+                    IMG_fillImage.color = new Color(0.7f, 0.7f, 0.9f);
                 break;
             case 3: //gold
-                    fillImage.color = new Color(0.8f, 0.6f, 0.1f);
+                    IMG_fillImage.color = new Color(0.8f, 0.6f, 0.1f);
                 break;
         }
     }
 
-    string GetNextTimerThreshold(int medalvalue)
+    string GetNextTimerThreshold()
     {
 
         int time  = 0;
@@ -139,7 +144,7 @@ public class UI_Timer : MonoBehaviour
 
     }
 
-    bool CheckIfThresholdIsNear(int medalvalue)
+    bool CheckIfThresholdIsNear()
     {
         float _blinkSpeed;
 
@@ -148,10 +153,10 @@ public class UI_Timer : MonoBehaviour
             case 3:
                 if (levelTimerScript.goldMedalThresholdInSeconds - levelTimerScript.TimerInSeconds <= 5 && levelTimerScript.silverMedalThresholdInSeconds - levelTimerScript.TimerInSeconds > 0)
                 {
-                    _blinkSpeed = (levelTimerScript.goldMedalThresholdInSeconds - levelTimerScript.TimerInSeconds) / 10;
-                    if (_blinkSpeed < 0.1)
+                    _blinkSpeed = (levelTimerScript.goldMedalThresholdInSeconds - levelTimerScript.TimerInSeconds) / 5;
+                    if (_blinkSpeed < 0.2)
                     {
-                        _blinkSpeed = 0.1f;
+                        _blinkSpeed = 0.2f;
                     }
                     blinkSpeed = _blinkSpeed;
                     return true;
@@ -159,58 +164,92 @@ public class UI_Timer : MonoBehaviour
 
                 else
                 {
-                    blinkSpeed = 0.1f;
+                    blinkSpeed = 0.2f;
                     return false;
                 } 
 
             case 2:
                 if (levelTimerScript.silverMedalThresholdInSeconds - levelTimerScript.TimerInSeconds <= 5 && levelTimerScript.silverMedalThresholdInSeconds - levelTimerScript.TimerInSeconds > 0)
                 {
-                    _blinkSpeed = (levelTimerScript.silverMedalThresholdInSeconds - levelTimerScript.TimerInSeconds)/10;
-                    if (_blinkSpeed < 0.1)
+                    _blinkSpeed = (levelTimerScript.silverMedalThresholdInSeconds - levelTimerScript.TimerInSeconds)/5;
+                    if (_blinkSpeed < 0.2)
                     {
-                        _blinkSpeed = 0.1f;
+                        _blinkSpeed = 0.2f;
                     }
                     blinkSpeed = _blinkSpeed;
                     return true;
                 }
                 else
                 {
-                    blinkSpeed = 0.1f;
+                    blinkSpeed = 0.2f;
                     return false;
                 }
             case 1:
                 if (levelTimerScript.bronzeMedalThresholdInSeconds - levelTimerScript.TimerInSeconds <= 5 && levelTimerScript.silverMedalThresholdInSeconds - levelTimerScript.TimerInSeconds > 0)
                 {
-                    _blinkSpeed = (levelTimerScript.bronzeMedalThresholdInSeconds - levelTimerScript.TimerInSeconds)/10;
-                    if (_blinkSpeed < 0.1)
+                    _blinkSpeed = (levelTimerScript.bronzeMedalThresholdInSeconds - levelTimerScript.TimerInSeconds)/5;
+                    if (_blinkSpeed < 0.2)
                     {
-                        _blinkSpeed = 0.1f;
+                        _blinkSpeed = 0.2f;
                     }
                     blinkSpeed = _blinkSpeed;
                     return true;
                 }
                 else
                 {
-                    blinkSpeed = 0.1f;
+                    blinkSpeed = 0.2f;
                     return false;
                 }
         }
     return false;
     }
-    private IEnumerator StartBlinking(Color currentColor)
+    private IEnumerator StartBlinking(Image imagetocblink, Color currentColor, Color blinkColor)
     {
         isBlinking = true;
-        fillImage.color = Color.white;
+        imagetocblink.color = blinkColor;
         if (blinkSpeed != float.NaN)
         {
             yield return new WaitForSeconds(blinkSpeed);
         }
-        fillImage.color = currentColor;
+        imagetocblink.color = currentColor;
         if(blinkSpeed != float.NaN)
         {
             yield return new WaitForSeconds(blinkSpeed);
         }
+        isBlinking = false;
+    }
+
+    private IEnumerator StartBlinking(TextMeshProUGUI texttoblink, Color currentColor, Color blinkColor)
+    {
+        isBlinking = true;
+        texttoblink.color = blinkColor;
+        if (blinkSpeed != float.NaN)
+        {
+            yield return new WaitForSeconds(blinkSpeed);
+        }
+        texttoblink.color = currentColor;
+        if (blinkSpeed != float.NaN)
+        {
+            yield return new WaitForSeconds(blinkSpeed);
+        }
+        isBlinking = false;
+    }
+
+    private IEnumerator StartBlinking(Image image,Sprite baseImage, Sprite newImage)
+    {
+        isBlinking = true;
+        image.sprite = newImage;
+        if (blinkSpeed != float.NaN)
+        {
+            yield return new WaitForSeconds(blinkSpeed);
+        }
+        image.sprite = baseImage;
+        if (blinkSpeed != float.NaN)
+        {
+            yield return new WaitForSeconds(blinkSpeed);
+        }
+        image.sprite = newImage;
+        UpdateMedalImage();
         isBlinking = false;
     }
 

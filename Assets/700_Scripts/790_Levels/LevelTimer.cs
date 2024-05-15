@@ -32,7 +32,7 @@ public class LevelTimer : MonoBehaviour
 
     [Header("UI")]
 
-    [SerializeField] private TextMeshProUGUI TXT_Timer;
+    public TextMeshProUGUI TXT_Timer;
 
     private void Awake()
     {
