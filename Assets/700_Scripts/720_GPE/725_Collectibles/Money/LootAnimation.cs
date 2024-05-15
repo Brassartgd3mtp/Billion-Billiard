@@ -38,7 +38,8 @@ public class LootAnimation : MonoBehaviour
     {
         col.enabled = false;
         transform.localScale = new Vector3(scaleValue,scaleValue,scaleValue);
-        StartCoroutine(MoveAbovePlayer());
+        //StartCoroutine(MoveAbovePlayer());
+        Destroy(gameObject);
         isLooted = true;
     }
 
