@@ -41,6 +41,7 @@ Transform:
   - {fileID: 8273388261476731194}
   - {fileID: 3596576903168453131}
   - {fileID: 1730079796218933689}
+  - {fileID: 7519113264147296514}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &103268351403135142
@@ -21998,6 +21999,9 @@ MonoBehaviour:
   addValue: {fileID: 4579781294335629596}
   LootIngot: {fileID: 8771972552311404798, guid: 26790b9e862ee474aa695afdc9f05bb3,
     type: 3}
+  UI_ValueWorld: {fileID: 5335085989270982075, guid: 86f95a67e15d64947b7678fb4b1f3ddd,
+    type: 3}
+  canvaToSpawn: {fileID: 0}
 --- !u!114 &3705272347710780647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35204,6 +35208,107 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5073992351429694696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7519113264147296514}
+  - component: {fileID: 7681932600445525520}
+  - component: {fileID: 9005563580477324192}
+  - component: {fileID: 6881735536373985084}
+  m_Layer: 5
+  m_Name: CanvasWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7519113264147296514
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5073992351429694696}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 806607038850017939}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!223 &7681932600445525520
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5073992351429694696}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &9005563580477324192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5073992351429694696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 1
+--- !u!114 &6881735536373985084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5073992351429694696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &5075287583670207229
 GameObject:
   m_ObjectHideFlags: 0
@@ -39098,6 +39203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9146661620627821779}
   - component: {fileID: 806174283633723971}
+  - component: {fileID: 6465002516469436576}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -39142,7 +39248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTimerScript: {fileID: 2098600946818039568}
-  shakeScript: {fileID: 1276884016686626852}
+  shakeScript: {fileID: 6465002516469436576}
   IMG_currentMedal: {fileID: 1869971154302160220}
   IMG_nextMedal: {fileID: 1675858156611700623}
   medalSprites:
@@ -39152,9 +39258,25 @@ MonoBehaviour:
   - {fileID: 21300000, guid: dc33c40552523c74799285fc794c788a, type: 3}
   timeSlider: {fileID: 4848821442019082362}
   EndningTimeValue: 0
-  IMG_fillImage: {fileID: 1743047575803781305}
+  fillImage: {fileID: 1743047575803781305}
   TXT_nextThreshold: {fileID: 6620860529493609547}
   blinkSpeed: 0
+--- !u!114 &6465002516469436576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6705361929533592463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a983228f4280b643b3c2f78b603aae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShakeIntensity: 0
+  baseShakeDuration: 0
+  shakeIntensity: 0.1
+  shakeDuration: 0.2
 --- !u!1 &6760030954382415301
 GameObject:
   m_ObjectHideFlags: 0
@@ -40336,7 +40458,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4970584977231438198}
   - component: {fileID: 4848821442019082362}
-  - component: {fileID: 1276884016686626852}
   m_Layer: 5
   m_Name: timeSlider
   m_TagString: Untagged
@@ -40416,22 +40537,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1276884016686626852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7009558103203847748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a983228f4280b643b3c2f78b603aae9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseShakeIntensity: 0
-  baseShakeDuration: 0
-  shakeIntensity: 0.4
-  shakeDuration: 0.2
 --- !u!1 &7026471715204436671
 GameObject:
   m_ObjectHideFlags: 0
