@@ -28,9 +28,13 @@ public class PlayerCollisionBehavior : MonoBehaviour
     public AddValueUI addValue;
 
     public ParticleSystem LootIngot;
+    public GameObject UI_ValueWorld;
+    public GameObject canvaToSpawn;
 
     public void Awake()
     {
+        canvaToSpawn = GameObject.Find("CanvasWorld");
+
         if (Instance == null)
         {
             Instance = this;
@@ -91,6 +95,11 @@ public class PlayerCollisionBehavior : MonoBehaviour
             AddMoney(moneyStats.value); //Actually add th emoney
             addValue.updateUI(moneyStats.value);
             addValue.SoundMoney(moneyStats.pitchValue);
+
+            Vector3 ui_WorldSpawn = new Vector3(other.transform.position.x + Random.Range(-0.5f,0.5f), other.transform.position.y + Random.Range(-0.5f, 0.5f), other.transform.position.z + Random.Range(-0.5f, 0.5f));
+            GameObject ui_World = Instantiate(UI_ValueWorld, ui_WorldSpawn, Quaternion.identity, canvaToSpawn.transform);
+            ui_World.TryGetComponent(out UI_WorldMoney uI_WorldMoney);
+            uI_WorldMoney.UpdateMoney(moneyStats.value);
             uI_Stats.UpdateStats(); // Update the money in the UI
             other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
             lootAnimation.StartAnimation();
