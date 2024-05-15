@@ -36041,8 +36041,8 @@ GameObject:
   - component: {fileID: 5422875829642188883}
   - component: {fileID: 8711399971563290129}
   - component: {fileID: 5009073350891182095}
-  - component: {fileID: 3885336863304572368}
   - component: {fileID: 7659084674154957640}
+  - component: {fileID: 4096328679609022498}
   m_Layer: 5
   m_Name: LevelManager
   m_TagString: Untagged
@@ -36121,27 +36121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 4
   m_AspectRatio: 1
---- !u!95 &3885336863304572368
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5381176271268603464}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 156f8b8811e6d264b9ce49a6fe4c4b61, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7659084674154957640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36156,12 +36135,109 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelType: 1
   HIOCooldown: 1.5
-  AnimatorCircleWipe: {fileID: 0}
-  ImageCircleWipe: {fileID: 0}
-  isIn: 1
-  CircleSize: 0
   uI_ShotRemaining: {fileID: 6581989036116268638}
   victoryScreen: {fileID: 221884782698930584}
+  ImageCircleWipe: {fileID: 0}
+  transitionDuration: 1
+  targetValue: 0
+  WipeClose: 0
+--- !u!82 &4096328679609022498
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381176271268603464}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 70c68e3dd0afe7242a71b9819466f493,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5384039600741960555
 GameObject:
   m_ObjectHideFlags: 0
@@ -39203,7 +39279,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9146661620627821779}
   - component: {fileID: 806174283633723971}
-  - component: {fileID: 6465002516469436576}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -39248,7 +39323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTimerScript: {fileID: 2098600946818039568}
-  shakeScript: {fileID: 6465002516469436576}
+  shakeScript: {fileID: 2427230555778824040}
   IMG_currentMedal: {fileID: 1869971154302160220}
   IMG_nextMedal: {fileID: 1675858156611700623}
   medalSprites:
@@ -39258,25 +39333,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: dc33c40552523c74799285fc794c788a, type: 3}
   timeSlider: {fileID: 4848821442019082362}
   EndningTimeValue: 0
-  fillImage: {fileID: 1743047575803781305}
+  IMG_fillImage: {fileID: 1743047575803781305}
   TXT_nextThreshold: {fileID: 6620860529493609547}
   blinkSpeed: 0
---- !u!114 &6465002516469436576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6705361929533592463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a983228f4280b643b3c2f78b603aae9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseShakeIntensity: 0
-  baseShakeDuration: 0
-  shakeIntensity: 0.1
-  shakeDuration: 0.2
 --- !u!1 &6760030954382415301
 GameObject:
   m_ObjectHideFlags: 0
@@ -40458,6 +40517,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4970584977231438198}
   - component: {fileID: 4848821442019082362}
+  - component: {fileID: 2427230555778824040}
   m_Layer: 5
   m_Name: timeSlider
   m_TagString: Untagged
@@ -40537,6 +40597,22 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2427230555778824040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7009558103203847748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a983228f4280b643b3c2f78b603aae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShakeIntensity: 0
+  baseShakeDuration: 0
+  shakeIntensity: 0.4
+  shakeDuration: 0.2
 --- !u!1 &7026471715204436671
 GameObject:
   m_ObjectHideFlags: 0

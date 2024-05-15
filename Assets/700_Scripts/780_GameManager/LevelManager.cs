@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,17 +12,21 @@ public class LevelManager : MonoBehaviour
     private Scene currentScene;
     public float HIOCooldown = 1.5f;
 
+    public UI_ShotRemaining uI_ShotRemaining;
+    [SerializeField] private GameObject victoryScreen;
 
     [Header("PARAMETER CIRCLE WIPE")]
 
-    public Animator AnimatorCircleWipe;
     public Image ImageCircleWipe;
-    public bool isIn = true;
-    public float CircleSize = 0;
-    private readonly int CircleSizeId = Shader.PropertyToID("_Circle_Size");
+    public float transitionDuration = 1.0f;
+    public float targetValue = 1.0f;
+    public bool WipeClose = false;
+    //public Animator AnimatorCircleWipe;
+    //public bool isIn = true;
+    //public float CircleSize = 0;
+    //private readonly int CircleSizeId = Shader.PropertyToID("_Circle_Size");
 
-    public UI_ShotRemaining uI_ShotRemaining;
-    [SerializeField] private GameObject victoryScreen;
+
 
     private void Start()
     {
@@ -38,37 +43,59 @@ public class LevelManager : MonoBehaviour
             StartCoroutine(HoleInOne());
         }
 
-        AnimatorCircleWipe = gameObject.GetComponent<Animator>();
+        //AnimatorCircleWipe = gameObject.GetComponent<Animator>();
         ImageCircleWipe = gameObject.GetComponent<Image>();
+
+        ImageCircleWipe.material = new Material(ImageCircleWipe.material);
+        ImageCircleWipe.material.SetFloat("_Circle_Size", targetValue);
     }
 
     void Update()
     {
-        ImageCircleWipe.materialForRendering.SetFloat(CircleSizeId, CircleSize);
+        if (WipeClose == true && ImageCircleWipe.material.GetFloat("_Circle_Size") == 1)
+        {
+            StartCoroutine(CircleSizeProgress());
+            SoundTransitionClose();
+        }
+        else if (WipeClose == false && ImageCircleWipe.material.GetFloat("_Circle_Size") == 0)
+        {
+            StartCoroutine(CircleSizeProgress());
+            SoundTransitionOpen();
+        }
 
-        //    if (levelType == LevelType.HoleInOne)
-        //    {
-        //        if (PlayerController.rb.velocity.magnitude <= 0
-        //        && TurnBasedPlayer.Instance.shotRemaining == 0)
-        //        {
-        //            SceneManager.LoadScene(currentScene.buildIndex);
-        //        }
-        //    }
+        //ImageCircleWipe.materialForRendering.SetFloat(CircleSizeId, CircleSize);
     }
 
-    public void AnimateIn()
+    private IEnumerator CircleSizeProgress()
     {
-        AnimatorCircleWipe.SetTrigger("In");
-        isIn = true;
-        SoundTransitionOpen();
+        float startValue = ImageCircleWipe.material.GetFloat("_Circle_Size");
+        float endValue = (startValue == 1.0f) ? 0.0f : 1.0f;
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < transitionDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newValue = Mathf.Lerp(startValue, endValue, elapsedTime / transitionDuration);
+            ImageCircleWipe.material.SetFloat("_Circle_Size", newValue);
+            yield return null;
+        }
+
+        ImageCircleWipe.material.SetFloat("_Circle_Size", endValue);
     }
 
-    public void AnimateOut()
-    {
-        AnimatorCircleWipe.SetTrigger("Out");
-        isIn = false;
-        SoundTransitionClose();
-    }
+    //public void AnimateIn()
+    //{
+    //    AnimatorCircleWipe.SetTrigger("In");
+    //    isIn = true;
+    //    SoundTransitionOpen();
+    //}
+
+   //public void AnimateOut()
+   //{
+   //    AnimatorCircleWipe.SetTrigger("Out");
+   //    isIn = false;
+   //    SoundTransitionClose();
+   //}
 
     // Update is called once per frame
 
@@ -79,14 +106,15 @@ public class LevelManager : MonoBehaviour
             while (true)
             {
                 if (PlayerController.rb.velocity.magnitude <= 0.1f
-                && TurnBasedPlayer.Instance.shotRemaining == 0 
+                && TurnBasedPlayer.Instance.shotRemaining == 0
                 && !victoryScreen.activeSelf)
                 {
                     yield return new WaitForSeconds(1f);
 
                     if (PlayerController.rb.velocity.magnitude <= 0.1f)
                     {
-                        AnimateOut();
+                        //AnimateOut();
+                        WipeClose = true;
                         yield return new WaitForSeconds(HIOCooldown);
                         SceneManager.LoadScene(currentScene.buildIndex);
                     }
@@ -102,7 +130,7 @@ public class LevelManager : MonoBehaviour
                     yield return null;
             }
         }
-        else if(!victoryScreen.activeSelf)
+        else if (!victoryScreen.activeSelf)
         {
             yield return new WaitForSeconds(.1f);
             StartCoroutine(HoleInOne());
@@ -110,18 +138,17 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-private void SoundTransitionOpen()
-{
-    AudioSource audioSource = GetComponent<AudioSource>();
-    AudioManager.Instance.PlaySound(20, audioSource);
-}
+    private void SoundTransitionOpen()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(20, audioSource);
+    }
 
-private void SoundTransitionClose()
-{
-    AudioSource audioSource = GetComponent<AudioSource>();
-    AudioManager.Instance.PlaySound(21, audioSource);
-}
-
+    private void SoundTransitionClose()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(21, audioSource);
+    }
 }
 public enum LevelType
 {
