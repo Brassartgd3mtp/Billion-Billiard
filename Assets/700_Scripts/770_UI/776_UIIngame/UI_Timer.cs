@@ -24,8 +24,7 @@ public class UI_Timer : MonoBehaviour
 
     [Header("Texts")]
 
-    [SerializeField] private TextMeshProUGUI beginningTime;
-    [SerializeField] private TextMeshProUGUI endingTime;
+    [SerializeField] private TextMeshProUGUI TXT_nextThreshold;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +45,7 @@ public class UI_Timer : MonoBehaviour
             {
                 timeSlider.value = 1 - (levelTimerScript.TimerInSeconds / EndningTimeValue);
                 GetFillColor();
+                TXT_nextThreshold.text = GetNextTimerThreshold();
             }
 
         }
@@ -68,15 +68,49 @@ public class UI_Timer : MonoBehaviour
     {
         switch(levelTimerScript.MedalValue())
         {
-            case 1:
+            case 1: //bronze
                 fillImage.color = new Color(0.75f, 0.3f, 0.2f);
                 break; 
-            case 2:
+            case 2: //silver
                 fillImage.color = new Color(0.7f, 0.7f, 0.9f);
                 break;
-            case 3:
+            case 3: //gold
                 fillImage.color = new Color(0.8f, 0.6f, 0.1f);
                 break;
         }
     }
+
+    string GetNextTimerThreshold()
+    {
+
+        int time  = 0;
+        int minutes;
+        int seconds;
+
+        switch (levelTimerScript.MedalValue())
+        {
+            case 3:
+                time = levelTimerScript.goldMedalThresholdInSeconds;
+                break;
+            case 2:
+                time = levelTimerScript.silverMedalThresholdInSeconds;
+                break;
+            case 1:
+                time = levelTimerScript.bronzeMedalThresholdInSeconds;
+                break;
+        }
+
+        minutes = (int)Mathf.Floor(time / 60);
+        seconds = (int)time % 60;
+
+        if (seconds == 60)
+        {
+            minutes++;
+            seconds = 0;
+        }
+
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
+
+    }
+
 }
