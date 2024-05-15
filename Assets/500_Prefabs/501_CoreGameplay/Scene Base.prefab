@@ -21996,6 +21996,8 @@ MonoBehaviour:
   playerController: {fileID: 2429653923857696437}
   UI_ValueAdded: {fileID: 0}
   addValue: {fileID: 4579781294335629596}
+  LootIngot: {fileID: 8771972552311404798, guid: 26790b9e862ee474aa695afdc9f05bb3,
+    type: 3}
 --- !u!114 &3705272347710780647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39096,6 +39098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9146661620627821779}
   - component: {fileID: 806174283633723971}
+  - component: {fileID: 6465002516469436576}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -39140,6 +39143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTimerScript: {fileID: 2098600946818039568}
+  shakeScript: {fileID: 6465002516469436576}
   IMG_currentMedal: {fileID: 1869971154302160220}
   IMG_nextMedal: {fileID: 1675858156611700623}
   medalSprites:
@@ -39151,6 +39155,22 @@ MonoBehaviour:
   EndningTimeValue: 0
   fillImage: {fileID: 1743047575803781305}
   TXT_nextThreshold: {fileID: 6620860529493609547}
+--- !u!114 &6465002516469436576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6705361929533592463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a983228f4280b643b3c2f78b603aae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShakeIntensity: 0
+  baseShakeDuration: 0
+  shakeIntensity: 0.1
+  shakeDuration: 0.2
 --- !u!1 &6760030954382415301
 GameObject:
   m_ObjectHideFlags: 0
