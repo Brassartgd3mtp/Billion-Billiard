@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3198eaf3121b9e4790d3a8f1324e5df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   value: 1
   pitchValue: 1
 --- !u!114 &7601475560624616742
@@ -305,7 +306,10 @@ VisualEffect:
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 150
+        m_Name: Rate
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
