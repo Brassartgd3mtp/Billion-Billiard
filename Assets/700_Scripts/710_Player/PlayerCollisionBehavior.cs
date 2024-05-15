@@ -27,6 +27,7 @@ public class PlayerCollisionBehavior : MonoBehaviour
 
     public AddValueUI addValue;
 
+    public ParticleSystem LootIngot;
     public GameObject UI_ValueWorld;
     public GameObject canvaToSpawn;
 
@@ -102,6 +103,8 @@ public class PlayerCollisionBehavior : MonoBehaviour
             uI_Stats.UpdateStats(); // Update the money in the UI
             other.gameObject.TryGetComponent(out LootAnimation lootAnimation);
             lootAnimation.StartAnimation();
+            Instantiate(LootIngot, transform.position, Quaternion.identity);
+
             //UI_ValueAdded.gameObject.SetActive(false);
         }
 

@@ -5,7 +5,6 @@ using UnityEngine.Serialization;
 
 public class LevelScore : MonoBehaviour
 {
-    [FormerlySerializedAs("PercentageNecessaryForMaxScore")] public float NeededPercentage;
     public int TotalIngotScore = 0;
 
     private void Awake()
