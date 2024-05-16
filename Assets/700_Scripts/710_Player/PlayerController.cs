@@ -49,18 +49,18 @@ public class PlayerController : MonoBehaviour
 
     private TurnBasedPlayer turnBasedPlayer;
 
-    [Header("VFX Parameter")]
+    [Header("FX Parameter")]
     [SerializeField] private ParticleSystem speedEffect;
+    [SerializeField] private ParticleSystem speedLineEffect;
     [SerializeField] private GameObject speedEffectDirection;
     [SerializeField] private VisualEffect smokePoof;
     AudioSource audioSource;
-    [SerializeField] private Animator MyAnimator;
 
-    float timeSinceThrow = 0;
-
+    [Header("Other")]
     public PlayerParameters playerParameters;
-
+    [SerializeField] private Animator MyAnimator;
     public static PlayerController Instance;
+    float timeSinceThrow = 0;
 
     private void Awake()
     {
@@ -137,6 +137,7 @@ public class PlayerController : MonoBehaviour
         emissionSpeedEffect.rateOverTime = ThrowStrength / StrengthFactor * 200f;
 
         speedEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
         var durationSpeedEffect = speedEffect.main;
         durationSpeedEffect.duration = ThrowStrength / StrengthFactor;
 
@@ -214,14 +215,14 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public bool iceLock = false;
     float iceAngleDynamic;
-    private bool isColliding = false; 
-    public bool IsColliding 
-    { 
-        get { return isColliding; } 
+    private bool isColliding = false;
+    public bool IsColliding
+    {
+        get { return isColliding; }
         private set
         {
             isColliding = value;
-        } 
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -303,7 +304,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private Collider currentCollision = null; 
+    private Collider currentCollision = null;
     private void OnCollisionExit(Collision collision)
     {
         stayOnce = false;
@@ -415,7 +416,7 @@ public class PlayerController : MonoBehaviour
         {
             MyAnimator.SetBool("Player_Roll", true);
         }
-        
+
         if (ThrowStrength == 0f)
         {
             MyAnimator.SetBool("PreparationShoot_1", false);
@@ -425,19 +426,26 @@ public class PlayerController : MonoBehaviour
         {
             MyAnimator.SetBool("PreparationShoot_1", false);
             MyAnimator.SetBool("PreparationShoot_2", true);
-            //if (ThrowStrength > 0f && ThrowStrength < 20f)
-            //{
-            //    MyAnimator.SetBool("PreparationShoot_1", true);
-            //    MyAnimator.SetBool("PreparationShoot_2", false);
-            //
-            //
-            //}
-            //else if (ThrowStrength >= 20f)
-            //{
-            //    MyAnimator.SetBool("PreparationShoot_1", false);
-            //    MyAnimator.SetBool("PreparationShoot_2", true);
-            //
-            //}
+        }
+
+        if (playerParameters.speed > 20)
+        {
+            var emissionSpeedLineEffect = speedLineEffect.emission;
+            emissionSpeedLineEffect.rateOverTime = playerParameters.speed * 4f;
+
+            if (!speedLineEffect.isPlaying)
+            {
+                speedLineEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+                var durationSpeedLineEffect = speedLineEffect.main;
+                durationSpeedLineEffect.duration = playerParameters.speed;
+
+                speedLineEffect.Play();
+            }
+        }
+        else if (playerParameters.speed <= 15 && speedLineEffect.isPlaying)
+        {
+            speedLineEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
     }
 
