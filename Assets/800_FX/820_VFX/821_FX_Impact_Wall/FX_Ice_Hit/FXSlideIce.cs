@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FXSlideIce : MonoBehaviour
@@ -10,10 +11,13 @@ public class FXSlideIce : MonoBehaviour
     private float timer;
     private bool isStickToWall;
 
+    AudioSource audioSource;
+
     private void Start()
     {
         timer = 2;
         myRigidbody = GetComponent<Rigidbody>();
+        audioSource = transform.Find("FX_Slide_Ice").GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -22,6 +26,7 @@ public class FXSlideIce : MonoBehaviour
             if (IceSlideParticle.isPlaying)
             {
                 IceSlideParticle.Stop();
+                audioSource.Stop();
             }
         }
 
@@ -32,6 +37,7 @@ public class FXSlideIce : MonoBehaviour
         } else if (!isStickToWall && timer <= 0)
         {
             IceSlideParticle.Stop();
+            audioSource.Stop();
             timer = 2f;
         }
 
@@ -49,6 +55,7 @@ public class FXSlideIce : MonoBehaviour
                 {
                     isStickToWall = true;
                     IceSlideParticle.Play();
+                    IceSlideSound();
                     timer = 2f;
                 }
                 else if (IceSlideParticle.isPlaying && timer > 0)
@@ -68,6 +75,12 @@ public class FXSlideIce : MonoBehaviour
         {
             //IceSlideParticle.Stop();
             isStickToWall = false;
+            audioSource.Stop();
         }
+    }
+
+    private void IceSlideSound()
+    {
+        AudioManager.Instance.PlaySoundLoop(35, audioSource);
     }
 }
