@@ -23,6 +23,7 @@ public class UI_Timer : MonoBehaviour
 
     [SerializeField] private Slider timeSlider;
     public float EndningTimeValue;
+    private float previousEndingTime;
     [SerializeField] private Image IMG_fillImage;
 
     [Header("Texts")]
@@ -37,7 +38,8 @@ public class UI_Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EndningTimeValue = levelTimerScript.bronzeMedalThresholdInSeconds;
+        previousEndingTime = 0;
+        EndningTimeValue = levelTimerScript.goldMedalThresholdInSeconds;
 
         timeSlider.value = timeSlider.maxValue;
 
@@ -57,7 +59,7 @@ public class UI_Timer : MonoBehaviour
 
             if (timeSlider.value >= 0)
             {
-                timeSlider.value = 1 - (levelTimerScript.TimerInSeconds / EndningTimeValue);
+                timeSlider.value = 1 - ((levelTimerScript.TimerInSeconds - previousEndingTime) / (EndningTimeValue - previousEndingTime));
                 if(!isBlinking)
                 {
                     GetFillColor();
@@ -65,6 +67,7 @@ public class UI_Timer : MonoBehaviour
 
                 if (medalvalue != previousmedalvalue)
                 {
+                    GetNewMaxValue();
                     UpdateMedalImage();
                     if (levelTimerScript.TimerInSeconds < levelTimerScript.bronzeMedalThresholdInSeconds)
                     {
@@ -146,6 +149,28 @@ public class UI_Timer : MonoBehaviour
 
         return string.Format("{0:00}:{1:00}", minutes, seconds);
 
+    }
+    
+    void GetNewMaxValue()
+    {
+        switch(medalvalue)
+        {
+            case 3:
+                EndningTimeValue = levelTimerScript.goldMedalThresholdInSeconds;
+                timeSlider.value = 1;
+                previousEndingTime = 0;
+                break;
+            case 2:
+                previousEndingTime = EndningTimeValue;
+                EndningTimeValue = levelTimerScript.silverMedalThresholdInSeconds;
+                timeSlider.value = 1;
+                break;
+            case 1:
+                previousEndingTime = EndningTimeValue;
+                EndningTimeValue = levelTimerScript.bronzeMedalThresholdInSeconds;
+                timeSlider.value = 1;
+                break;
+        }
     }
 
     bool CheckIfThresholdIsNear()
