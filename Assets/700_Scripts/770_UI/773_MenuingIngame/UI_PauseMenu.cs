@@ -88,10 +88,7 @@ public class PauseMenu : MonoBehaviour
             panel.SetActive(false);
         // Recharge la scène actuelle
         Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
-        //Rétablit le temps du jeu
-        Time.timeScale = 1f; 
-       
+        SceneManager.LoadScene(scene.buildIndex);
     }
 
     public void OnQuitButtonClick()
@@ -103,7 +100,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseMenuState(InputAction.CallbackContext context)
     {
-        if (!victoryPanel.activeSelf)
+        if (!victoryPanel.activeSelf && !optionPanel.activeSelf)
         {
             panelActive = !panelActive;
 
@@ -113,8 +110,6 @@ public class PauseMenu : MonoBehaviour
                 
                 PauseOff();
         }
-        else
-            Debug.Log("Can't open Pause menu while being on Victory Screen !");
     }
 
     void PauseOn()
@@ -162,6 +157,12 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
 
         MenuCloseSound();
+    }
+
+    public void PauseOff(InputAction.CallbackContext context)
+    {
+        if (panelActive && !victoryPanel.activeSelf && !optionPanel.activeSelf)
+            PauseOff();
     }
 
     private void OnDisable()
