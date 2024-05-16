@@ -81,7 +81,7 @@ public class UI_Timer : MonoBehaviour
                 if(!isBlinking)
                 {
                     StartCoroutine(StartBlinking(IMG_currentMedal, IMG_currentMedal.sprite, IMG_nextMedal.sprite));
-                    StartCoroutine(StartBlinking(levelTimerScript.TXT_Timer, Color.white, Color.red));
+                    StartCoroutine(StartBlinking(levelTimerScript.TXT_Timer, Color.white,new Color(0.85f, 0.2f,0.2f)));
                //   StartCoroutine(StartBlinking(IMG_fillImage, IMG_fillImage.color, Color.red));
                 }
                 shakeScript.StartShake();
