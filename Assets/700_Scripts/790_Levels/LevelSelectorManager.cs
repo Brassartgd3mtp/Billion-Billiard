@@ -63,6 +63,20 @@ public class LevelSelectorManager : MonoBehaviour
         //LevelChargeLoader = GetComponent<LevelChargeLoader>();
     }
 
+    public void NextPanel()
+    {
+        if (panelCanMoveright)
+        {
+            PanelIndex++;
+            ActualPanel = Panels[PanelIndex];
+            //LevelSelectorData.CurrentLevelIndex = PanelIndex + 2;
+            //LeftArrow.enabled = false;
+            //RightArrow.enabled = false;
+            StartCoroutine(MovePanel(-1));
+            backgroundImageAnimator.SetTrigger("MakeTransition");
+            GoRightSound();
+        }
+    }
     public void NextPanel(InputAction.CallbackContext context)
     {
         if (panelCanMoveright)
@@ -78,6 +92,20 @@ public class LevelSelectorManager : MonoBehaviour
         }
     }
 
+    public void PrevPanel()
+    {
+        if (PanelIndex > 0 && panelCanMoveLeft)
+        {
+            PanelIndex--;
+            ActualPanel = Panels[PanelIndex];
+            //LevelSelectorData.CurrentLevelIndex = PanelIndex + 2;
+            //LeftArrow.enabled = false;
+            //RightArrow.enabled = false;
+            StartCoroutine(MovePanel(1));
+            backgroundImageAnimator.SetTrigger("MakeTransition");
+            GoLeftSound();
+        }
+    }
     public void PrevPanel(InputAction.CallbackContext context) 
     {
         if (PanelIndex > 0 && panelCanMoveLeft) 
@@ -112,6 +140,10 @@ public class LevelSelectorManager : MonoBehaviour
 
         UpdateBackgroundImage();
         CheckIfNextPanelIsLocked();
+        if (SwapControls.state == CurrentState.MouseKeyboard)
+        {
+            _eventSystem.SetSelectedGameObject(null);
+        }
         yield break;
     }
 
@@ -177,7 +209,7 @@ public class LevelSelectorManager : MonoBehaviour
                     if (SwapControls.state == CurrentState.Gamepad)
                         _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
                     else
-                        _eventSystem.SetSelectedGameObject(null);
+                        _eventSystem.SetSelectedGameObject(null); 
 
                     _eventSystem.SetSelectedGameObject(BTN_Play.gameObject);
                     LeftArrow.gameObject.SetActive(false);
