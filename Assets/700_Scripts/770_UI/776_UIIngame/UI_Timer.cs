@@ -55,7 +55,7 @@ public class UI_Timer : MonoBehaviour
         {
             medalvalue = levelTimerScript.MedalValue();
 
-            if (timeSlider.value > 0)
+            if (timeSlider.value >= 0)
             {
                 timeSlider.value = 1 - (levelTimerScript.TimerInSeconds / EndningTimeValue);
                 if(!isBlinking)
@@ -108,6 +108,10 @@ public class UI_Timer : MonoBehaviour
             case 3: //gold
                     IMG_fillImage.color = new Color(0.8f, 0.6f, 0.1f);
                 break;
+            case 0:
+                IMG_fillImage.color = new Color(0f, 0f, 0f, 0f);
+                break;
+
         }
     }
 
@@ -151,7 +155,7 @@ public class UI_Timer : MonoBehaviour
         switch(medalvalue) 
         {
             case 3:
-                if (levelTimerScript.goldMedalThresholdInSeconds - levelTimerScript.TimerInSeconds <= 5 && levelTimerScript.silverMedalThresholdInSeconds - levelTimerScript.TimerInSeconds > 0)
+                if (levelTimerScript.goldMedalThresholdInSeconds - levelTimerScript.TimerInSeconds <= 5 && levelTimerScript.goldMedalThresholdInSeconds - levelTimerScript.TimerInSeconds > 0)
                 {
                     _blinkSpeed = (levelTimerScript.goldMedalThresholdInSeconds - levelTimerScript.TimerInSeconds) / 5;
                     if (_blinkSpeed < 0.2)
@@ -185,7 +189,7 @@ public class UI_Timer : MonoBehaviour
                     return false;
                 }
             case 1:
-                if (levelTimerScript.bronzeMedalThresholdInSeconds - levelTimerScript.TimerInSeconds <= 5 && levelTimerScript.silverMedalThresholdInSeconds - levelTimerScript.TimerInSeconds > 0)
+                if (levelTimerScript.bronzeMedalThresholdInSeconds - levelTimerScript.TimerInSeconds <= 5 && levelTimerScript.bronzeMedalThresholdInSeconds - levelTimerScript.TimerInSeconds > 0)
                 {
                     _blinkSpeed = (levelTimerScript.bronzeMedalThresholdInSeconds - levelTimerScript.TimerInSeconds)/5;
                     if (_blinkSpeed < 0.2)
