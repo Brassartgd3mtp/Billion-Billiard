@@ -41,8 +41,6 @@ public class FXSlideIce : MonoBehaviour
             audioSource.Stop();
             timer = 2f;
         }
-
-        Debug.Log(IceSlideParticle.isPlaying);
     }
 
     private void OnCollisionEnter(Collision collision)
