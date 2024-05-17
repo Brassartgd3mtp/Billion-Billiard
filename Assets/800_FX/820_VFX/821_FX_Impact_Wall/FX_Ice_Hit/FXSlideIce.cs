@@ -34,14 +34,13 @@ public class FXSlideIce : MonoBehaviour
         {
             timer -= Time.deltaTime;
 
-        } else if (!isStickToWall && timer <= 0)
+        }
+        else if (!isStickToWall && timer <= 0)
         {
             IceSlideParticle.Stop();
             audioSource.Stop();
             timer = 2f;
         }
-
-        Debug.Log(IceSlideParticle.isPlaying);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -67,15 +66,15 @@ public class FXSlideIce : MonoBehaviour
 
         }
     }
-    
+
 
     private void OnCollisionExit(Collision collision)
     {
         if (IceSlideParticle.isPlaying)
         {
             //IceSlideParticle.Stop();
+            //audioSource.Stop();
             isStickToWall = false;
-            audioSource.Stop();
         }
     }
 
@@ -84,3 +83,4 @@ public class FXSlideIce : MonoBehaviour
         AudioManager.Instance.PlaySoundLoop(35, audioSource);
     }
 }
+

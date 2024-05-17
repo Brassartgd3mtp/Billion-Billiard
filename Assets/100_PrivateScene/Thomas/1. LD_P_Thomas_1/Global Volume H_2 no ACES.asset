@@ -15,10 +15,10 @@ MonoBehaviour:
   active: 1
   lift:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.017411118}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.00030247762}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.12562813}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.17695405}
   gain:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: 0}
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   master:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
       <length>k__BackingField: 2
       m_Loop: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 1
+          inSlope: 0
           outSlope: 1
           tangentMode: 0
           weightedMode: 0
@@ -80,7 +80,7 @@ MonoBehaviour:
           time: 1
           value: 1
           inSlope: 1
-          outSlope: 1
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -101,17 +101,17 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 1
+          inSlope: 0
           outSlope: 1
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.97644925
+          time: 1
           value: 1
-          inSlope: 1.1977364
-          outSlope: 1.1977364
+          inSlope: 1
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   green:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
       <length>k__BackingField: 2
       m_Loop: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 1
+          inSlope: 0
           outSlope: 1
           tangentMode: 0
           weightedMode: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
           time: 1
           value: 1
           inSlope: 1
-          outSlope: 1
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 1
+          inSlope: 0
           outSlope: 1
           tangentMode: 0
           weightedMode: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
           time: 1
           value: 1
           inSlope: 1
-          outSlope: 1
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -184,22 +184,13 @@ MonoBehaviour:
   hueVsHue:
     m_OverrideState: 1
     m_Value:
-      <length>k__BackingField: 1
+      <length>k__BackingField: 0
       m_Loop: 1
       m_ZeroValue: 0.5
       m_Range: 1
       m_Curve:
         serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0.42753622
-          value: 0.5056604
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
+        m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -217,7 +208,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   satVsSat:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
       <length>k__BackingField: 0
       m_Loop: 0
@@ -240,8 +231,8 @@ MonoBehaviour:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.5307971
-          value: 0.66415095
+          time: 0.73414636
+          value: 0.6
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -359,10 +350,10 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.044291753}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.19826946}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.074723646}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.09636274}
   highlights:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: 0.12958966}
@@ -470,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
   m_Name: FilmGrain
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   type:
     m_OverrideState: 0
     m_Value: 0
