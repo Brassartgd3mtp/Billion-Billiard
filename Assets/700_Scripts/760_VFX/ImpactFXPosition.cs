@@ -7,10 +7,12 @@ using UnityEngine.VFX;
 public class ImpactFXPosition : MonoBehaviour
 {
     public VFXScriptableObject vFXScriptableObject;
-    public float velocityThreshold = 5f;
-    public int countBurst = 50;
+
     private Rigidbody rb;
     private int soundId;
+    public float maxVelocity = 80f;
+    public float scaleValueMin = 0.5f;
+    public float scaleValueMax = 1.3f;
 
     private void Start()
     {
@@ -28,8 +30,6 @@ public class ImpactFXPosition : MonoBehaviour
         // Calcule la rotation à partir de la normale
         Quaternion rotationFromNormal = Quaternion.LookRotation(collisionNormal);
 
-        float impactVelocity = collision.relativeVelocity.magnitude;
-
         GameObject particlePrefab;
 
         if (collision.transform.TryGetComponent(out Obstacle _obstacle))
@@ -40,47 +40,18 @@ public class ImpactFXPosition : MonoBehaviour
             //soundId = vFXScriptableObject.soundObstacleId;
             //SoundCollision();
 
+            ParticleSystem impactVFX = particlePrefab.GetComponent<ParticleSystem>();
+            GameObject particleInstance = Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
+
+            float impactVelocity = collision.relativeVelocity.magnitude;
+            float scaleValue = Remap(impactVelocity, 0, maxVelocity, scaleValueMin, scaleValueMax);
+
+            particleInstance.transform.localScale = new Vector3(scaleValue, 1f, scaleValue);
+
         }
         else particlePrefab = vFXScriptableObject.prefabParticleDefault;
-
-
-        if (impactVelocity > velocityThreshold)
-        {
-        
-            ParticleSystem impactVFX = particlePrefab.GetComponent<ParticleSystem>();
-        
-            //var burstVFX = impactVFX.emission;
-            //
-            //burstVFX.SetBursts(
-            //    new ParticleSystem.Burst[]
-            //    {
-            //    new ParticleSystem.Burst(0.0f, countBurst, 1, 0.025f)
-            //    });
-        
-            //Debug.Log(countBurst);
-        
-            Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
-        }
-        else if (impactVelocity < velocityThreshold)
-        {
-            ParticleSystem impactVFX = particlePrefab.GetComponent<ParticleSystem>();
-        
-            //var burstVFX = impactVFX.emission;
-            //
-            //burstVFX.SetBursts(
-            //    new ParticleSystem.Burst[]
-            //    {
-            //        new ParticleSystem.Burst(0.0f, countBurst/5, 1, 0.025f)
-            //    });
-        
-            //Debug.Log(countBurst / 5);
-        
-            Instantiate(particlePrefab, collisionPosition, rotationFromNormal);
-        }
-
-        // Détruit la particule après un certain temps
-        //Destroy(particleInstance, particleInstance.GetComponent<ParticleSystem>().main.duration);
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -114,4 +85,10 @@ public class ImpactFXPosition : MonoBehaviour
         AudioManager.Instance.PlaySound(soundId, audioSource);
     }
 
+
+    //Fonction de remapping pour avoir une valeur de scale entre 1 et 2 pour le particle instancié
+    float Remap(float value, float from1, float to1, float from2, float to2)
+    {
+        return from2 + (value - from1) * (to2 - from2) / (to1 - from1);
+    }
 }

@@ -62,6 +62,8 @@ public class VictoryScreen : MonoBehaviour
 
     private void OnEnable()
     {
+
+
         currentScene = SceneManager.GetActiveScene().buildIndex;
 
         GO_GoldenStar1.SetActive(false);
@@ -93,6 +95,11 @@ public class VictoryScreen : MonoBehaviour
         }
 
         GlobalData.SaveScores();
+    }
+
+    public void Update()
+    {
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void DisplayScore()
