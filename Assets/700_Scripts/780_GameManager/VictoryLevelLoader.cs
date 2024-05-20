@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class VictoryLevelLoader : MonoBehaviour
 {
+    [SerializeField] LevelChargeLoader levelChargeLoader;
+
     public void LoadScene(int sceneIndex)
     {
-        SceneManager.LoadScene(sceneIndex);
+        levelChargeLoader.LoadLevel(sceneIndex);
         Time.timeScale = 1.0f;
     }
 
@@ -25,6 +27,4 @@ public class VictoryLevelLoader : MonoBehaviour
         int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;
         SceneManager.LoadScene(nextSceneIndex);
     }
-
 }
-

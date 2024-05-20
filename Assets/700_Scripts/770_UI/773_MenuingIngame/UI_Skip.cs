@@ -20,11 +20,9 @@ public class UI_Skip : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!AsTimer)
-        {
-            InputHandler.UISkipEnable(this);
-        }
-        else
+        InputHandler.UISkipEnable(this);
+
+        if (AsTimer)
         {
             XboxGamepad.gameObject.SetActive(false);
             Mouse.gameObject.SetActive(false);
@@ -41,7 +39,7 @@ public class UI_Skip : MonoBehaviour
     {
         if (AsTimer)
         {
-            if(Timer <= 0f)
+            if (Timer <= 0f)
             {
                 if (SwapControls.state == CurrentState.Gamepad)
                 {
@@ -53,14 +51,12 @@ public class UI_Skip : MonoBehaviour
                     XboxGamepad.gameObject.SetActive(false);
                     Mouse.gameObject.SetActive(true);
                 }
-                InputHandler.UISkipEnable(this);
             }
             else
             {
                 Timer -= Time.deltaTime;
             }
         }
-        
     }
 
     public void SkipCanva(InputAction.CallbackContext context)

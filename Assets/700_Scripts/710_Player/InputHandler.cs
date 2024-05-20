@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class InputHandler : MonoBehaviour
@@ -12,6 +13,7 @@ public class InputHandler : MonoBehaviour
     static ReloadLevelSelector rlSelec;
     static NoClip nClip;
     static PauseMenu pMenu;
+    static UI_Option_Panel oMenu;
     static SwapControls spControls;
     static UI_Skip uSkip;
     static LevelSelectorManager lsManager;
@@ -110,7 +112,16 @@ public class InputHandler : MonoBehaviour
         pMenu = pauseMenu;
 
         Actions.Gamepad.PauseMenu.started += pauseMenu.PauseMenuState;
+        Actions.Gamepad.PauseMenuSecondaryExit.started += pauseMenu.PauseOff;
         Actions.MouseKeyboard.PauseMenu.started += pauseMenu.PauseMenuState;
+    }
+
+    public static void SettingsMenuEnable(UI_Option_Panel optionMenu)
+    {
+        oMenu = optionMenu;
+
+        Actions.Gamepad.OptionMenu.canceled += optionMenu.OnCloseButtonClick;
+        Actions.MouseKeyboard.OptionMenu.canceled += optionMenu.OnCloseButtonClick;
     }
 
     public static void SwapEnable(SwapControls swapControls)
@@ -206,7 +217,14 @@ public class InputHandler : MonoBehaviour
     public static void PauseMenuDisable()
     {
         Actions.Gamepad.PauseMenu.started -= pMenu.PauseMenuState;
+        Actions.Gamepad.PauseMenuSecondaryExit.started -= pMenu.PauseOff;
         Actions.MouseKeyboard.PauseMenu.started -= pMenu.PauseMenuState;
+    }
+
+    public static void SettingsMenuDisable()
+    {
+        Actions.Gamepad.OptionMenu.canceled -= oMenu.OnCloseButtonClick;
+        Actions.MouseKeyboard.OptionMenu.canceled -= oMenu.OnCloseButtonClick;
     }
 
     public static void SwapDisable()
@@ -268,6 +286,11 @@ public class InputHandler : MonoBehaviour
     public static void PauseMenuEnable()
     {
         PauseMenuEnable(pMenu);
+    }
+
+    public static void SettingsMenuEnable()
+    {
+        SettingsMenuEnable(oMenu);
     }
 
     public static void SwapEnable()
