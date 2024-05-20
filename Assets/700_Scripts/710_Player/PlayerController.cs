@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private float staticThrowStrength;
 
     [Header("Mouse Values"), Range(0f, 1f)]
-    [SerializeField] private float MouseSensitivity;
+    [SerializeField] public float MouseSensitivity;
     [HideInInspector] public Vector2 MouseStart;
     private Vector2 MouseEnd;
 
