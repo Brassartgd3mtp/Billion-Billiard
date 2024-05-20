@@ -73,7 +73,10 @@ public class FXSlideIce : MonoBehaviour
         if (IceSlideParticle.isPlaying)
         {
             //IceSlideParticle.Stop();
-            //audioSource.Stop();
+            if (timer < 1f)
+            {
+            audioSource.Stop();
+            }
             isStickToWall = false;
         }
     }
