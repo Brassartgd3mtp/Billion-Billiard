@@ -73,6 +73,24 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""PauseMenuSecondaryExit"",
+                    ""type"": ""Button"",
+                    ""id"": ""b63cf38a-0c29-4f8d-808a-ff5c7ecd5905"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OptionMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""0bab5c1f-99a5-499b-bfe3-f86c838fb530"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""RoomCam"",
                     ""type"": ""Button"",
                     ""id"": ""a2c79c0b-55ae-4b1d-923c-f1bbe61ce3d3"",
@@ -148,6 +166,28 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""action"": ""CancelThrow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6327acc-08b6-41a5-ac06-fbbd4bf93637"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OptionMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""52f76a4d-e637-4659-ab55-5f5cc8f81f9e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenuSecondaryExit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -204,6 +244,15 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""name"": ""PauseMenu"",
                     ""type"": ""Button"",
                     ""id"": ""f74c3042-1184-4252-a3c5-79fb1d468777"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OptionMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""4335343f-66e7-4bbd-a314-762294c53946"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -285,6 +334,17 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f6fc094-ce5f-4989-bdac-f922ee14aa8e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OptionMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -736,6 +796,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         m_Gamepad_CancelThrow = m_Gamepad.FindAction("CancelThrow", throwIfNotFound: true);
         m_Gamepad_FreeCam = m_Gamepad.FindAction("FreeCam", throwIfNotFound: true);
         m_Gamepad_PauseMenu = m_Gamepad.FindAction("PauseMenu", throwIfNotFound: true);
+        m_Gamepad_PauseMenuSecondaryExit = m_Gamepad.FindAction("PauseMenuSecondaryExit", throwIfNotFound: true);
+        m_Gamepad_OptionMenu = m_Gamepad.FindAction("OptionMenu", throwIfNotFound: true);
         m_Gamepad_RoomCam = m_Gamepad.FindAction("RoomCam", throwIfNotFound: true);
         // Mouse/Keyboard
         m_MouseKeyboard = asset.FindActionMap("Mouse/Keyboard", throwIfNotFound: true);
@@ -745,6 +807,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         m_MouseKeyboard_MouseCancelThrow = m_MouseKeyboard.FindAction("MouseCancelThrow", throwIfNotFound: true);
         m_MouseKeyboard_FreeCam = m_MouseKeyboard.FindAction("FreeCam", throwIfNotFound: true);
         m_MouseKeyboard_PauseMenu = m_MouseKeyboard.FindAction("PauseMenu", throwIfNotFound: true);
+        m_MouseKeyboard_OptionMenu = m_MouseKeyboard.FindAction("OptionMenu", throwIfNotFound: true);
         // Cheat
         m_Cheat = asset.FindActionMap("Cheat", throwIfNotFound: true);
         m_Cheat_ReloadScene = m_Cheat.FindAction("Reload Scene", throwIfNotFound: true);
@@ -832,6 +895,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gamepad_CancelThrow;
     private readonly InputAction m_Gamepad_FreeCam;
     private readonly InputAction m_Gamepad_PauseMenu;
+    private readonly InputAction m_Gamepad_PauseMenuSecondaryExit;
+    private readonly InputAction m_Gamepad_OptionMenu;
     private readonly InputAction m_Gamepad_RoomCam;
     public struct GamepadActions
     {
@@ -842,6 +907,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         public InputAction @CancelThrow => m_Wrapper.m_Gamepad_CancelThrow;
         public InputAction @FreeCam => m_Wrapper.m_Gamepad_FreeCam;
         public InputAction @PauseMenu => m_Wrapper.m_Gamepad_PauseMenu;
+        public InputAction @PauseMenuSecondaryExit => m_Wrapper.m_Gamepad_PauseMenuSecondaryExit;
+        public InputAction @OptionMenu => m_Wrapper.m_Gamepad_OptionMenu;
         public InputAction @RoomCam => m_Wrapper.m_Gamepad_RoomCam;
         public InputActionMap Get() { return m_Wrapper.m_Gamepad; }
         public void Enable() { Get().Enable(); }
@@ -867,6 +934,12 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @PauseMenu.started += instance.OnPauseMenu;
             @PauseMenu.performed += instance.OnPauseMenu;
             @PauseMenu.canceled += instance.OnPauseMenu;
+            @PauseMenuSecondaryExit.started += instance.OnPauseMenuSecondaryExit;
+            @PauseMenuSecondaryExit.performed += instance.OnPauseMenuSecondaryExit;
+            @PauseMenuSecondaryExit.canceled += instance.OnPauseMenuSecondaryExit;
+            @OptionMenu.started += instance.OnOptionMenu;
+            @OptionMenu.performed += instance.OnOptionMenu;
+            @OptionMenu.canceled += instance.OnOptionMenu;
             @RoomCam.started += instance.OnRoomCam;
             @RoomCam.performed += instance.OnRoomCam;
             @RoomCam.canceled += instance.OnRoomCam;
@@ -889,6 +962,12 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @PauseMenu.started -= instance.OnPauseMenu;
             @PauseMenu.performed -= instance.OnPauseMenu;
             @PauseMenu.canceled -= instance.OnPauseMenu;
+            @PauseMenuSecondaryExit.started -= instance.OnPauseMenuSecondaryExit;
+            @PauseMenuSecondaryExit.performed -= instance.OnPauseMenuSecondaryExit;
+            @PauseMenuSecondaryExit.canceled -= instance.OnPauseMenuSecondaryExit;
+            @OptionMenu.started -= instance.OnOptionMenu;
+            @OptionMenu.performed -= instance.OnOptionMenu;
+            @OptionMenu.canceled -= instance.OnOptionMenu;
             @RoomCam.started -= instance.OnRoomCam;
             @RoomCam.performed -= instance.OnRoomCam;
             @RoomCam.canceled -= instance.OnRoomCam;
@@ -919,6 +998,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_MouseKeyboard_MouseCancelThrow;
     private readonly InputAction m_MouseKeyboard_FreeCam;
     private readonly InputAction m_MouseKeyboard_PauseMenu;
+    private readonly InputAction m_MouseKeyboard_OptionMenu;
     public struct MouseKeyboardActions
     {
         private @PlayerActionMap m_Wrapper;
@@ -929,6 +1009,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         public InputAction @MouseCancelThrow => m_Wrapper.m_MouseKeyboard_MouseCancelThrow;
         public InputAction @FreeCam => m_Wrapper.m_MouseKeyboard_FreeCam;
         public InputAction @PauseMenu => m_Wrapper.m_MouseKeyboard_PauseMenu;
+        public InputAction @OptionMenu => m_Wrapper.m_MouseKeyboard_OptionMenu;
         public InputActionMap Get() { return m_Wrapper.m_MouseKeyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -956,6 +1037,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @PauseMenu.started += instance.OnPauseMenu;
             @PauseMenu.performed += instance.OnPauseMenu;
             @PauseMenu.canceled += instance.OnPauseMenu;
+            @OptionMenu.started += instance.OnOptionMenu;
+            @OptionMenu.performed += instance.OnOptionMenu;
+            @OptionMenu.canceled += instance.OnOptionMenu;
         }
 
         private void UnregisterCallbacks(IMouseKeyboardActions instance)
@@ -978,6 +1062,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @PauseMenu.started -= instance.OnPauseMenu;
             @PauseMenu.performed -= instance.OnPauseMenu;
             @PauseMenu.canceled -= instance.OnPauseMenu;
+            @OptionMenu.started -= instance.OnOptionMenu;
+            @OptionMenu.performed -= instance.OnOptionMenu;
+            @OptionMenu.canceled -= instance.OnOptionMenu;
         }
 
         public void RemoveCallbacks(IMouseKeyboardActions instance)
@@ -1280,6 +1367,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         void OnCancelThrow(InputAction.CallbackContext context);
         void OnFreeCam(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
+        void OnPauseMenuSecondaryExit(InputAction.CallbackContext context);
+        void OnOptionMenu(InputAction.CallbackContext context);
         void OnRoomCam(InputAction.CallbackContext context);
     }
     public interface IMouseKeyboardActions
@@ -1290,6 +1379,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         void OnMouseCancelThrow(InputAction.CallbackContext context);
         void OnFreeCam(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
+        void OnOptionMenu(InputAction.CallbackContext context);
     }
     public interface ICheatActions
     {

@@ -8,10 +8,23 @@ public class LevelChargeLoader : MonoBehaviour
 {
     public GameObject loadingScreen;
     public Slider slider;
+    [SerializeField] LevelSelectorManager lvSelecManager;
 
     public void LoadLevel(int sceneIndex)
     {
-        StartCoroutine(LoadAsync(sceneIndex));
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            if (!CutscenesCurrent.isCutsceneFirstTime[lvSelecManager.SO_Levels[lvSelecManager.PanelIndex].CutsceneIndex])
+            {
+                CutscenesCurrent.PackIndex = lvSelecManager.SO_Levels[lvSelecManager.PanelIndex].CutsceneIndex;
+                LevelSelectorData.CurrentLevelIndex = lvSelecManager.SO_Levels[lvSelecManager.PanelIndex].LevelID;
+                SceneManager.LoadScene(12);
+            }
+            else
+                StartCoroutine(LoadAsync(sceneIndex));
+        }
+        else
+            StartCoroutine(LoadAsync(1));
     }
 
     IEnumerator LoadAsync(int sceneIndex)

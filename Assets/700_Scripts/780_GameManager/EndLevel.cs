@@ -6,13 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class EndLevel : MonoBehaviour
 {
-    public int nextLevel;
     public GameObject VictoryScreen;
-
-    public void Start()
-    {
-        nextLevel = 1;
-    }
 
     private void OnTriggerEnter(Collider other)
     {
