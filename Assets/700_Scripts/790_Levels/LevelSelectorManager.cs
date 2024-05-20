@@ -156,8 +156,8 @@ public class LevelSelectorManager : MonoBehaviour
 
             LevelSelectorData.rectTransformData = rectTransform.position;
 
-            panelManager.SO_Level.LoadLevel();
-            //LevelChargeLoader.LoadLevel(SO_Levels[PanelIndex].LevelID);
+            //panelManager.SO_Level.LoadLevel();
+            levelChargeLoader.LoadLevel(SO_Levels[PanelIndex].LevelID);
         }
     }
  
