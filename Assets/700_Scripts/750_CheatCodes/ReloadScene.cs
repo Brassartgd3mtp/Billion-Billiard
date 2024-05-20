@@ -16,7 +16,7 @@ public class ReloadScene : MonoBehaviour
 
     public void Reload(InputAction.CallbackContext context)
     {
-        SceneManager.LoadScene(activeScene.name);
+        SceneManager.LoadScene(activeScene.buildIndex);
     }
 
     private void OnDisable()
