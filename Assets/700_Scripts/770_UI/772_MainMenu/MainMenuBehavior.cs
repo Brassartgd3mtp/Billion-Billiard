@@ -15,13 +15,31 @@ public class MainMenuBehavior : MonoBehaviour
     public GameObject sliderVolume;
     public GameObject StartButton;
 
+
+    [Header("PARAMETER ANIMATION PLAY TRANSITION")]
+    public Animator MyAnimator;
+    public string NameAnimation;
+    public float WaitTime = 2f;
+    public ParticleSystem ParticleSystemConfetti;
+
     public void Awake()
     {
         Screen.fullScreen = true;
+        MyAnimator.GetComponent<Animation>();
     }
 
     public void PlayButton()
     {
+        StartCoroutine(TransitionPlayButton());
+    }
+
+    IEnumerator TransitionPlayButton()
+    {
+        ParticleSystemConfetti.Play();
+        MyAnimator.Play(NameAnimation);
+
+        yield return new WaitForSeconds(WaitTime);
+
         if (!CutscenesCurrent.isCutsceneFirstTime[0])
         {
             LevelSelectorData.CurrentLevelIndex = 2;
@@ -30,6 +48,10 @@ public class MainMenuBehavior : MonoBehaviour
         }
         else
             SceneManager.LoadScene(1);
+
+
+        yield return null;
+
     }
 
     public void QuitButton()

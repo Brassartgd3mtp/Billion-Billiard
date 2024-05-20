@@ -3,38 +3,36 @@ using UnityEngine.UI;
 
 public class MouseSensitivityController : MonoBehaviour
 {
+    [SerializeField] PlayerController playerController;
     public Slider sensitivitySlider;
-    public float minSensitivity = 1f;
-    public float maxSensitivity = 10f;
-    public float defaultSensitivity = 5f;
+    public float minSensitivity = .1f;
+    public float maxSensitivity = 1f;
 
     private void Start()
     {
-        // Initialize slider with default sensitivity
-        sensitivitySlider.value = defaultSensitivity;
+        sensitivitySlider.value = PlayerOptionsRuntimeSave.MouseSensitivity * 10;
     }
 
-    public void SetMouseSensitivity(float sensitivity)
+    public void SetMouseSensitivity()
     {
-        // Clamp sensitivity within min and max bounds
-        float clampedSensitivity = Mathf.Clamp(sensitivity, minSensitivity, maxSensitivity);
+        PlayerOptionsRuntimeSave.MouseSensitivity = sensitivitySlider.value / 10;
 
-        // Set the mouse sensitivity directly
-        MouseLook.SetSensitivity(clampedSensitivity);
+        if (playerController != null)
+            playerController.MouseSensitivity = PlayerOptionsRuntimeSave.MouseSensitivity;
     }
 }
 
-public static class MouseLook
-{
-    private static float sensitivity = 5f; // Default sensitivity
-
-    public static void SetSensitivity(float newSensitivity)
-    {
-        sensitivity = newSensitivity;
-    }
-
-    public static float GetSensitivity()
-    {
-        return sensitivity;
-    }
-}
+//public static class MouseLook
+//{
+//    private static float sensitivity = 5f; // Default sensitivity
+//
+//    public static void SetSensitivity(float newSensitivity)
+//    {
+//        sensitivity = newSensitivity;
+//    }
+//
+//    public static float GetSensitivity()
+//    {
+//        return sensitivity;
+//    }
+//}
