@@ -8,11 +8,10 @@ using UnityEngine.UI;
 
 public class LevelTimer : MonoBehaviour
 {
-
     [Header("Time logic")]
 
     public float TimerInSeconds;
-    public bool TimeStarted = true;
+    public bool TimeStarted = false;
     public int Minutes;
     public int Seconds;
 
@@ -60,7 +59,7 @@ public class LevelTimer : MonoBehaviour
         Minutes = (int) Mathf.Floor(TimerInSeconds / 60);
         Seconds = (int) TimerInSeconds % 60;
 
-        if(Seconds == 60)
+        if (Seconds == 60)
         {
             Minutes++;
             Seconds = 0;
