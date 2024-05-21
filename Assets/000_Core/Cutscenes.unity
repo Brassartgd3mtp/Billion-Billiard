@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -601,8 +601,9 @@ GameObject:
   - component: {fileID: 1700010452}
   - component: {fileID: 1700010451}
   - component: {fileID: 1700010450}
-  - component: {fileID: 1700010449}
   - component: {fileID: 1700010454}
+  - component: {fileID: 1700010449}
+  - component: {fileID: 1700010455}
   m_Layer: 5
   m_Name: Cutscenes Handler
   m_TagString: Untagged
@@ -712,6 +713,7 @@ MonoBehaviour:
   ScreenImage: {fileID: 1817625758}
   TextBox: {fileID: 1903098276}
   CurrentDialogue: 
+  levelChargeLoader: {fileID: 1700010455}
 --- !u!114 &1700010450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,6 +811,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f813fe302189e41bf2375c7f9effa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1700010455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700010448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d374c6557247a674f8a6274a7a83d0c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 0}
+  slider: {fileID: 0}
+  loadedScene:
+    m_Handle: 0
+  lvSelecManager: {fileID: 0}
 --- !u!1 &1817625757
 GameObject:
   m_ObjectHideFlags: 0
