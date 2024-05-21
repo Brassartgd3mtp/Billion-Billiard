@@ -31,13 +31,11 @@ public class EndLevelProgressBar : MonoBehaviour
         starRatingScript = FindAnyObjectByType<StarRating>();
         victoryScreenScript = GetComponentInParent<VictoryScreen>();
 
-        posSetter = GameObject.Find("posSetter");
 
-        StartCoroutine(DisplayStars());
     }
     private void Start()
     {
-
+        StartCoroutine(DisplayStars());
     }
     private void Update() // the progression of the progress bar, same logic as a timer
     {
