@@ -17,10 +17,6 @@ public class VictoryScreen : MonoBehaviour
     private PlayerStats playerStatsScript;
     private Shake shakeScript;
 
-    [Header("Objects")]
-
-    [SerializeField] private GameObject firstButton;
-
     [Header("Medal Images")]
 
     [SerializeField] private Image IMG_timerMedal;
@@ -85,14 +81,6 @@ public class VictoryScreen : MonoBehaviour
         DisplayScore();
         DisplayMedals();
         DisplayStars();
-
-        if (SwapControls.state == CurrentState.Gamepad)
-        {
-            Debug.Log(EventSystem.current.currentSelectedGameObject);
-
-            if (EventSystem.current.currentSelectedGameObject != firstButton)
-                EventSystem.current.SetSelectedGameObject(firstButton);
-        }
 
         GlobalData.SaveScores();
     }
