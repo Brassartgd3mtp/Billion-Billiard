@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Image gaugeFill;
     [SerializeField] private UI_ShotRemaining shotRemaining;
     [SerializeField] private TrajectoryPrediction trajectoryPrediction;
+    [SerializeField] private LevelTimer levelTimer;
 
     private float angle;
     public static Rigidbody rb;
@@ -99,22 +100,19 @@ public class PlayerController : MonoBehaviour
         if (ThrowStrength > 0.2f)
         {
             if (SwapControls.state == CurrentState.MouseKeyboard)
-            {
                 DoThrow();
-            }
             else if (currentJoystickPos > deadZone)
-            {
                 DoThrow();
-            }
             else
-            {
                 ThrowStrength = 0;
-            }
         }
     }
 
     void DoThrow()
     {
+        if (!levelTimer.TimeStarted)
+            levelTimer.TimeStarted = true;
+
         ScreenShake.instance.Shake(ThrowStrength / StrengthFactor);
 
         rb.drag = 1;
