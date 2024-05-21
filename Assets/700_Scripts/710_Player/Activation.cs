@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Activation : MonoBehaviour
@@ -9,14 +10,16 @@ public class Activation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (Activate)
+        if (other.gameObject.layer == 3)
         {
-            ObjectToActivate.gameObject.SetActive(true);
+            if (Activate)
+            {
+                ObjectToActivate.gameObject.SetActive(true);
+            }
+            else
+            {
+                ObjectToActivate.gameObject.SetActive(false);
+            }
         }
-        else
-        {
-            ObjectToActivate.gameObject.SetActive(false);
-        }
-        
     }
 }
