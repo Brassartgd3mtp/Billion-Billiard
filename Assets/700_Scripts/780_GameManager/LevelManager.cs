@@ -55,12 +55,12 @@ public class LevelManager : MonoBehaviour
         if (WipeClose == true && ImageCircleWipe.material.GetFloat("_Circle_Size") == 1)
         {
             StartCoroutine(CircleSizeProgress());
-            SoundTransitionClose();
+            //SoundTransitionClose();
         }
         else if (WipeClose == false && ImageCircleWipe.material.GetFloat("_Circle_Size") == 0)
         {
             StartCoroutine(CircleSizeProgress());
-            SoundTransitionOpen();
+            //SoundTransitionOpen();
         }
 
         //ImageCircleWipe.materialForRendering.SetFloat(CircleSizeId, CircleSize);
@@ -97,7 +97,7 @@ public class LevelManager : MonoBehaviour
    //    SoundTransitionClose();
    //}
 
-    // Update is called once per frame
+
 
     IEnumerator HoleInOne()
     {

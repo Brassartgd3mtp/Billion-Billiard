@@ -45,7 +45,7 @@ public class LevelSelectorManager : MonoBehaviour
     {
         InputHandler.MovePanelSelectorEnable(this);
 
-        if (LevelSelectorData.CurrentLevelIndex == 0)
+        if (LevelSelectorData.CurrentLevelIndex <= 1)
             LevelSelectorData.CurrentLevelIndex = PanelIndex + 2;
         else
             PanelIndex = LevelSelectorData.CurrentLevelIndex - 2;
