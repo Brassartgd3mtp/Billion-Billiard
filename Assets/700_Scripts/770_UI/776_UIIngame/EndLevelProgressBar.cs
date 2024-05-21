@@ -12,7 +12,6 @@ public class EndLevelProgressBar : MonoBehaviour
     private VictoryScreen victoryScreenScript;
 
     private Slider slider;
-    [SerializeField] private ParticleSystem progressBarParticleSystem;
     [SerializeField] private GameObject posSetter;
 
     [Header("SliderBehaviour")]
@@ -32,18 +31,13 @@ public class EndLevelProgressBar : MonoBehaviour
         starRatingScript = FindAnyObjectByType<StarRating>();
         victoryScreenScript = GetComponentInParent<VictoryScreen>();
 
-        slider.value = starRatingScript.scoreForStarTwo / calculationsScript.MaximumScore();
-        victoryScreenScript.IMG_star2.transform.position = posSetter.transform.position;
+        posSetter = GameObject.Find("posSetter");
 
-        slider.value = starRatingScript.scoreForStarThree / calculationsScript.MaximumScore();
-        victoryScreenScript.IMG_star3.transform.position = posSetter.transform.position;
-
-        slider.value = slider.minValue;
-        victoryScreenScript.IMG_star1.transform.localPosition = slider.fillRect.localPosition;
+        StartCoroutine(DisplayStars());
     }
     private void Start()
     {
-        IncrementProgress(calculationsScript.PlayerScore() / calculationsScript.MaximumScore());
+
     }
     private void Update() // the progression of the progress bar, same logic as a timer
     {
@@ -68,4 +62,21 @@ public class EndLevelProgressBar : MonoBehaviour
     {
         targetProgress = slider.value + newProgress;
     }
+
+    private IEnumerator DisplayStars()
+    {
+        slider.value = starRatingScript.scoreForStarTwo / calculationsScript.MaximumScore();
+        victoryScreenScript.IMG_star2.transform.position = posSetter.transform.position;
+
+        slider.value = starRatingScript.scoreForStarThree / calculationsScript.MaximumScore();
+        victoryScreenScript.IMG_star3.transform.position = posSetter.transform.position;
+
+        slider.value = slider.minValue;
+        victoryScreenScript.IMG_star1.transform.localPosition = slider.fillRect.localPosition;
+
+        IncrementProgress(calculationsScript.PlayerScore() / calculationsScript.MaximumScore());
+
+        yield return 0;
+    }
+
 }
