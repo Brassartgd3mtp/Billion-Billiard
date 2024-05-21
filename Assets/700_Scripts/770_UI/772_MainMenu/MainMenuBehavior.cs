@@ -21,6 +21,8 @@ public class MainMenuBehavior : MonoBehaviour
     public string NameAnimation;
     public float WaitTime = 2f;
     public ParticleSystem ParticleSystemConfetti;
+    public SpriteRenderer ScreenChange;
+    public float transitionDuration;
 
     public void Awake()
     {
@@ -28,15 +30,33 @@ public class MainMenuBehavior : MonoBehaviour
         MyAnimator.GetComponent<Animation>();
     }
 
+    private void Start()
+    {
+        ScreenChange.material = new Material(ScreenChange.material);
+        ScreenChange.material.SetFloat("_CutoffHeight", -5.5f);
+    }
+
     public void PlayButton()
     {
         StartCoroutine(TransitionPlayButton());
     }
 
-    IEnumerator TransitionPlayButton()
+    private IEnumerator TransitionPlayButton()
     {
         ParticleSystemConfetti.Play();
         MyAnimator.Play(NameAnimation);
+
+        //float startValue = ScreenChange.material.GetFloat("_CutoffHeight");
+        //float endValue = (startValue == 5.5f) ? -5.5f : 5.5f;
+        //float elapsedTime = 0.0f;
+        //
+        //while (elapsedTime < transitionDuration)
+        //{
+        //    elapsedTime += Time.deltaTime;
+        //    float newValue = Mathf.Lerp(startValue, endValue, elapsedTime / transitionDuration);
+        //    ScreenChange.material.SetFloat("_CutoffHeight", newValue);
+        //    yield return null;
+        //}
 
         yield return new WaitForSeconds(WaitTime);
 
@@ -52,6 +72,21 @@ public class MainMenuBehavior : MonoBehaviour
 
         yield return null;
 
+    }
+
+    private IEnumerator AnimationScreenFadeIn()
+    {
+        float startValue = ScreenChange.material.GetFloat("_CutoffHeight");
+        float endValue = (startValue == 5.5f) ? -5.5f : 5.5f;
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < transitionDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newValue = Mathf.Lerp(startValue, endValue, elapsedTime / transitionDuration);
+            ScreenChange.material.SetFloat("_CutoffHeight", newValue);
+            yield return null;
+        }
     }
 
     public void QuitButton()

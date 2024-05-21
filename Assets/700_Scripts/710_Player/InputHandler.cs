@@ -19,6 +19,7 @@ public class InputHandler : MonoBehaviour
     static LevelSelectorManager lsManager;
     static Credits cr;
     static CutsceneSkip cutSkip;
+    static TitleScreen tScreen;
     #endregion
 
     // Start is called before the first frame update
@@ -154,6 +155,13 @@ public class InputHandler : MonoBehaviour
 
         Actions.Cutscenes.Skip.performed += cutsceneSkip.Skip;
     }
+
+    public static void TitleScreeSkipEnable(TitleScreen titleScreen)
+    {
+        tScreen = titleScreen;
+
+        Actions.MainMenu.TitleScreenSkip.canceled += titleScreen.Skip;
+    }
     #endregion
     #region Disable
     public static void PlayerControllerDisable()
@@ -250,6 +258,11 @@ public class InputHandler : MonoBehaviour
     {
         Actions.Cutscenes.Skip.performed -= cutSkip.Skip;
     }
+
+    public static void TitleScreeSkipDisable()
+    {
+        Actions.MainMenu.TitleScreenSkip.canceled -= tScreen.Skip;
+    }
     #endregion
 
     #region EnableOverload
@@ -316,6 +329,11 @@ public class InputHandler : MonoBehaviour
     public static void CutscenesEnable()
     {
         CutscenesEnable(cutSkip);
+    }
+
+    public static void TitleScreeSkipEnable()
+    {
+        TitleScreeSkipEnable(tScreen);
     }
     #endregion
 }

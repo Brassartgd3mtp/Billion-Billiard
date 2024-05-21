@@ -503,6 +503,15 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TitleScreenSkip"",
+                    ""type"": ""Button"",
+                    ""id"": ""e12faff1-ec99-452c-a811-ca5f8f1a6c1f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -591,6 +600,61 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ScrollRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""612551d3-d081-43d3-87af-eff2ced2d765"",
+                    ""path"": ""<Gamepad>/*"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TitleScreenSkip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed12dc03-c65f-4b0d-81f0-4a85678cd2d7"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TitleScreenSkip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a407a2e-62bb-4224-a435-dac1f2b19686"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TitleScreenSkip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""406df061-e981-4cc1-97de-55111c2acad3"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TitleScreenSkip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ccdbf9c6-c9c1-4098-85ae-884ccebf148e"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TitleScreenSkip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -818,6 +882,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
         m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
         m_MainMenu_ScrollLeft = m_MainMenu.FindAction("ScrollLeft", throwIfNotFound: true);
         m_MainMenu_ScrollRight = m_MainMenu.FindAction("ScrollRight", throwIfNotFound: true);
+        m_MainMenu_TitleScreenSkip = m_MainMenu.FindAction("TitleScreenSkip", throwIfNotFound: true);
         // Swap
         m_Swap = asset.FindActionMap("Swap", throwIfNotFound: true);
         m_Swap_ToGamepad = m_Swap.FindAction("ToGamepad", throwIfNotFound: true);
@@ -1158,12 +1223,14 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     private List<IMainMenuActions> m_MainMenuActionsCallbackInterfaces = new List<IMainMenuActions>();
     private readonly InputAction m_MainMenu_ScrollLeft;
     private readonly InputAction m_MainMenu_ScrollRight;
+    private readonly InputAction m_MainMenu_TitleScreenSkip;
     public struct MainMenuActions
     {
         private @PlayerActionMap m_Wrapper;
         public MainMenuActions(@PlayerActionMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @ScrollLeft => m_Wrapper.m_MainMenu_ScrollLeft;
         public InputAction @ScrollRight => m_Wrapper.m_MainMenu_ScrollRight;
+        public InputAction @TitleScreenSkip => m_Wrapper.m_MainMenu_TitleScreenSkip;
         public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1179,6 +1246,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @ScrollRight.started += instance.OnScrollRight;
             @ScrollRight.performed += instance.OnScrollRight;
             @ScrollRight.canceled += instance.OnScrollRight;
+            @TitleScreenSkip.started += instance.OnTitleScreenSkip;
+            @TitleScreenSkip.performed += instance.OnTitleScreenSkip;
+            @TitleScreenSkip.canceled += instance.OnTitleScreenSkip;
         }
 
         private void UnregisterCallbacks(IMainMenuActions instance)
@@ -1189,6 +1259,9 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
             @ScrollRight.started -= instance.OnScrollRight;
             @ScrollRight.performed -= instance.OnScrollRight;
             @ScrollRight.canceled -= instance.OnScrollRight;
+            @TitleScreenSkip.started -= instance.OnTitleScreenSkip;
+            @TitleScreenSkip.performed -= instance.OnTitleScreenSkip;
+            @TitleScreenSkip.canceled -= instance.OnTitleScreenSkip;
         }
 
         public void RemoveCallbacks(IMainMenuActions instance)
@@ -1392,6 +1465,7 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
     {
         void OnScrollLeft(InputAction.CallbackContext context);
         void OnScrollRight(InputAction.CallbackContext context);
+        void OnTitleScreenSkip(InputAction.CallbackContext context);
     }
     public interface ISwapActions
     {
