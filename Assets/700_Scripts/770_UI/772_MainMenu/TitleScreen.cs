@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
@@ -24,6 +25,8 @@ public class TitleScreen : MonoBehaviour
 
     void Start()
     {
+        InputHandler.TitleScreeSkipEnable(this);
+
         mainMenuPanel.SetActive(false);
 
         ImageCircleWipe = gameObject.GetComponentInChildren<Image>();
@@ -36,13 +39,10 @@ public class TitleScreen : MonoBehaviour
             StartBlinking();
     }
 
-    void Update()
+    public void Skip(InputAction.CallbackContext context)
     {
-        if (Input.anyKeyDown)
-        {
-            mainMenuPanel.SetActive(true);
-            StartCoroutine(TitleScreenWipe());
-        }
+        mainMenuPanel.SetActive(true);
+        StartCoroutine(TitleScreenWipe());
     }
 
     public void StartBlinking()
@@ -93,5 +93,10 @@ public class TitleScreen : MonoBehaviour
         ImageCircleWipe.material.SetFloat("_Circle_Size", endValue);
 
         titleScreenPanel.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        InputHandler.TitleScreeSkipDisable();
     }
 }
