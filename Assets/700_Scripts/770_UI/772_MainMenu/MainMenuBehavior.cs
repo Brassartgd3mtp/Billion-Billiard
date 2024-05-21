@@ -46,18 +46,6 @@ public class MainMenuBehavior : MonoBehaviour
         ParticleSystemConfetti.Play();
         MyAnimator.Play(NameAnimation);
 
-        //float startValue = ScreenChange.material.GetFloat("_CutoffHeight");
-        //float endValue = (startValue == 5.5f) ? -5.5f : 5.5f;
-        //float elapsedTime = 0.0f;
-        //
-        //while (elapsedTime < transitionDuration)
-        //{
-        //    elapsedTime += Time.deltaTime;
-        //    float newValue = Mathf.Lerp(startValue, endValue, elapsedTime / transitionDuration);
-        //    ScreenChange.material.SetFloat("_CutoffHeight", newValue);
-        //    yield return null;
-        //}
-
         yield return new WaitForSeconds(WaitTime);
 
         if (!CutscenesCurrent.isCutsceneFirstTime[0])
@@ -68,7 +56,6 @@ public class MainMenuBehavior : MonoBehaviour
         }
         else
             SceneManager.LoadScene(1);
-
 
         yield return null;
 
