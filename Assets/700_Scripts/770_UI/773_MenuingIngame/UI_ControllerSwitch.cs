@@ -8,13 +8,12 @@ public class UI_ControllerSwitch : MonoBehaviour
     public GameObject mouseImage;
     public float DisplayTimer = 1;
 
-    CanvasGroup canvaGroup;
+    [SerializeField] CanvasGroup canvaGroup;
 
     void Start()
     {
         controllerImage.gameObject.SetActive(false);
         mouseImage.gameObject.SetActive(false);
-        canvaGroup = GetComponent<CanvasGroup>();
     }
 
     public void GamepadIcon()
