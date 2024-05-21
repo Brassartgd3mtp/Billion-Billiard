@@ -83,22 +83,6 @@ public class LevelManager : MonoBehaviour
         ImageCircleWipe.material.SetFloat("_Circle_Size", endValue);
     }
 
-    //public void AnimateIn()
-    //{
-    //    AnimatorCircleWipe.SetTrigger("In");
-    //    isIn = true;
-    //    SoundTransitionOpen();
-    //}
-
-   //public void AnimateOut()
-   //{
-   //    AnimatorCircleWipe.SetTrigger("Out");
-   //    isIn = false;
-   //    SoundTransitionClose();
-   //}
-
-
-
     IEnumerator HoleInOne()
     {
         if (PlayerController.rb.velocity.magnitude > 0)
