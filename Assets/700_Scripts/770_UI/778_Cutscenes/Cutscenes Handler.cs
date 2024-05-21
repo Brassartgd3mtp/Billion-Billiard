@@ -12,12 +12,15 @@ public class CutscenesHandler : MonoBehaviour
     public Image ScreenImage;
     public TextMeshProUGUI TextBox;
     [HideInInspector] public string CurrentDialogue;
+    [SerializeField] LevelChargeLoader levelChargeLoader;
 
     // Start is called before the first frame update
     void Start()
     {
         TextBox.text = string.Empty;
         StartCoroutine(LoadCutscene(CutscenesCurrent.PackIndex, 0));
+
+        levelChargeLoader.LoadLevelCutscene(LevelSelectorData.CurrentLevelIndex);
     }
 
     public IEnumerator LoadCutscene(int pack, int cutscene)
@@ -47,7 +50,8 @@ public class CutscenesHandler : MonoBehaviour
         {
             CutscenesCurrent.CutsceneIndex = 0;
             CutscenesCurrent.isCutsceneFirstTime[CutscenesCurrent.PackIndex] = true;
-            SceneManager.LoadScene(LevelSelectorData.CurrentLevelIndex);
+
+            levelChargeLoader.operation.allowSceneActivation = true;
         }
         else
         {
