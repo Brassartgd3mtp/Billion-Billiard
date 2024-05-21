@@ -8,6 +8,7 @@ public class LevelChargeLoader : MonoBehaviour
 {
     public GameObject loadingScreen;
     public Slider slider;
+    public AsyncOperation operation;
     [SerializeField] LevelSelectorManager lvSelecManager;
 
     public void LoadLevel(int sceneIndex)
@@ -27,9 +28,14 @@ public class LevelChargeLoader : MonoBehaviour
             StartCoroutine(LoadAsync(1));
     }
 
+    public void LoadLevelCutscene(int sceneIndex)
+    {
+        StartCoroutine(LoadAsyncCutscene(sceneIndex));
+    }
+
     IEnumerator LoadAsync(int sceneIndex)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+        operation = SceneManager.LoadSceneAsync(sceneIndex);
         //Le chargement Async permet de charger la scene en arriere plan, il faut ensuite refere le numero de l'index de la scene sur le bouton
 
         loadingScreen.SetActive(true);
@@ -42,6 +48,19 @@ public class LevelChargeLoader : MonoBehaviour
             slider.value = progress;
             //Pour faire evoluer le slider
 
+            yield return null;
+        }
+    }
+
+    IEnumerator LoadAsyncCutscene(int sceneIndex)
+    {
+        operation = SceneManager.LoadSceneAsync(sceneIndex);
+        //Le chargement Async permet de charger la scene en arriere plan, il faut ensuite refere le numero de l'index de la scene sur le bouton
+
+        operation.allowSceneActivation = false;
+
+        while (!operation.isDone)
+        {
             yield return null;
         }
     }
