@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator MyAnimator;
     public static PlayerController Instance;
     float timeSinceThrow = 0;
+    Vector3 staticForward;
 
     private void Awake()
     {
@@ -122,6 +123,7 @@ public class PlayerController : MonoBehaviour
 
         timeSinceThrow = 0;
         staticThrowStrength = ThrowStrength;
+        staticForward = transform.forward;
 
         isShooted = true;
         RespawnPlayer();
@@ -206,10 +208,6 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = Vector3.zero;
                 }
                 break;
-
-            default:
-                Debug.Log("Collision is either Ice or not recognized.");
-                break;
         }
     }
 
@@ -226,9 +224,12 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
+        if (collision.gameObject.TryGetComponent(out Obstacle obstacle) && timeSinceThrow > .2f)
         {
             IsColliding = true;
+
+            if (timeSinceThrow < .2f)
+                lastVel = staticForward * staticThrowStrength / rb.mass;
 
             currentCollision = collision.collider;
             float speed = lastVel.magnitude;
@@ -237,20 +238,12 @@ public class PlayerController : MonoBehaviour
 
             if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
             {
-                //Vector3 ortho = new Vector3(1, 0, 1);
-                //
-                //Vector3 projection = Vector3.Dot(normale, ortho) * ortho;
-                //Vector3 contact2 = normale - projection;
-
                 Vector3 normale = collision.contacts[0].normal;
                 iceAngleDynamic = Vector3.SignedAngle(transform.forward, normale, Vector3.up);
                 iceAngleDynamic = Mathf.Abs(iceAngleDynamic);
-                //iceAngleDynamic = iceAngleDynamic > 90 ? 180 - iceAngleDynamic : iceAngleDynamic;
 
                 if (iceAngleDynamic > iceAngle && !iceLock)
                 {
-                    //Debug.Log(iceAngleDynamic);
-                    //Debug.Break();
                     StartCoroutine(Haptic(WallValues.IceLFH, WallValues.IceHFH, WallValues.IceTH));
                     rb.velocity = reflect * Mathf.Max(speed * WallValues.IceBounce, 0f);
                 }
@@ -267,26 +260,26 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
         {
-            float speed;
-            Vector3 reflect;
-            Quaternion newRot;
-            Vector3 contactPoint = collision.contacts[0].normal;
-
-            if ((rb.velocity.x < .5f || rb.velocity.z < .5f) && timeSinceThrow < .1f && !stayOnce)
-            {
-                stayOnce = true;
-
-                lastVel = transform.forward * staticThrowStrength / rb.mass;
-
-                speed = lastVel.magnitude - timeSinceThrow;
-                reflect = Vector3.Reflect(lastVel.normalized, contactPoint);
-                newRot = Quaternion.LookRotation(reflect);
-
-                if (timeSinceThrow != 0)
-                    rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
-
-                SwitchObstacle(obstacle, speed, reflect);
-            }
+            //float speed;
+            //Vector3 reflect;
+            //Quaternion newRot;
+            //Vector3 contactPoint = collision.contacts[0].normal;
+            //
+            //if (timeSinceThrow < .2f && !stayOnce)
+            //{
+            //    stayOnce = true;
+            //
+            //    lastVel = staticForward * staticThrowStrength / rb.mass;
+            //
+            //    speed = lastVel.magnitude - timeSinceThrow;
+            //    reflect = Vector3.Reflect(lastVel.normalized, contactPoint);
+            //    newRot = Quaternion.LookRotation(reflect);
+            //
+            //    if (timeSinceThrow != 0)
+            //        rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+            //
+            //    SwitchObstacle(obstacle, speed, reflect);
+            //}
 
             if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
             {
@@ -318,6 +311,7 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.drag = 1;
+        staticForward = transform.forward;
     }
 
     /// <summary>
