@@ -60,16 +60,12 @@ public class VictoryScreen : MonoBehaviour
 
     int currentScene;
 
-    private void Update()
-    {
-        Debug.Log(Cursor.lockState);
-    }
-
     private void OnEnable()
     {
         InputSystem.ResetHaptics();
         InputHandler.PlayerControllerDisable();
         InputHandler.TrajectoryPredictionDisable();
+        InputHandler.PauseMenuDisable();
 
         if (SwapControls.state == CurrentState.Gamepad)
         {
