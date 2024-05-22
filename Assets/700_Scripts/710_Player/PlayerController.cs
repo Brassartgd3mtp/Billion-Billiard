@@ -224,12 +224,9 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Obstacle obstacle)/* && timeSinceThrow > .2f*/)
+        if (collision.gameObject.TryGetComponent(out Obstacle obstacle) && timeSinceThrow > .2f)
         {
             IsColliding = true;
-
-            //if (timeSinceThrow < .2f)
-            //    lastVel = staticForward * staticThrowStrength / rb.mass;
 
             currentCollision = collision.collider;
             float speed = lastVel.magnitude;
@@ -265,7 +262,7 @@ public class PlayerController : MonoBehaviour
             Quaternion newRot;
             Vector3 contactPoint = collision.contacts[0].normal;
             
-            if (rb.velocity.magnitude < .5f && timeSinceThrow < .2f && !stayOnce)
+            if (timeSinceThrow < .2f && !stayOnce)
             {
                 stayOnce = true;
             
