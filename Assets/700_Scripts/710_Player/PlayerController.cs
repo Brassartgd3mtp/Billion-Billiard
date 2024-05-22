@@ -228,9 +228,6 @@ public class PlayerController : MonoBehaviour
         {
             IsColliding = true;
 
-            if (timeSinceThrow < .2f)
-                lastVel = staticForward * staticThrowStrength / rb.mass;
-
             currentCollision = collision.collider;
             float speed = lastVel.magnitude;
             Vector3 reflect = Vector3.Reflect(lastVel.normalized, collision.contacts[0].normal);
@@ -260,26 +257,26 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
         {
-            //float speed;
-            //Vector3 reflect;
-            //Quaternion newRot;
-            //Vector3 contactPoint = collision.contacts[0].normal;
-            //
-            //if (timeSinceThrow < .2f && !stayOnce)
-            //{
-            //    stayOnce = true;
-            //
-            //    lastVel = staticForward * staticThrowStrength / rb.mass;
-            //
-            //    speed = lastVel.magnitude - timeSinceThrow;
-            //    reflect = Vector3.Reflect(lastVel.normalized, contactPoint);
-            //    newRot = Quaternion.LookRotation(reflect);
-            //
-            //    if (timeSinceThrow != 0)
-            //        rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
-            //
-            //    SwitchObstacle(obstacle, speed, reflect);
-            //}
+            float speed;
+            Vector3 reflect;
+            Quaternion newRot;
+            Vector3 contactPoint = collision.contacts[0].normal;
+            
+            if (timeSinceThrow < .2f && !stayOnce)
+            {
+                stayOnce = true;
+            
+                lastVel = staticForward * staticThrowStrength / rb.mass;
+            
+                speed = lastVel.magnitude - timeSinceThrow;
+                reflect = Vector3.Reflect(lastVel.normalized, contactPoint);
+                newRot = Quaternion.LookRotation(reflect);
+            
+                if (timeSinceThrow != 0)
+                    rb.rotation = Quaternion.Euler(0f, newRot.eulerAngles.y, 0f);
+            
+                SwitchObstacle(obstacle, speed, reflect);
+            }
 
             if (obstacle.obstacleType == Obstacle.ObstacleType.Ice)
             {

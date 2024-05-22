@@ -11,6 +11,7 @@ public class CutsceneSkip : MonoBehaviour
     private void Start()
     {
         cutscenesHandler = GetComponent<CutscenesHandler>();
+        InputHandler.Actions.Cutscenes.Enable();
         InputHandler.CutscenesEnable(this);
     }
 
@@ -28,5 +29,6 @@ public class CutsceneSkip : MonoBehaviour
     private void OnDisable()
     {
         InputHandler.CutscenesDisable();
+        InputHandler.Actions.Cutscenes.Disable();
     }
 }

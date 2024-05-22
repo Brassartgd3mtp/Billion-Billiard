@@ -61,7 +61,6 @@ public class Employees : MonoBehaviour
 
     private IEnumerator MoveInInteruptor() 
     {
-        Debug.Log("move");
         float elapsedTime = 0;
         float waitTime = 1f;
         startPos = transform.position;
