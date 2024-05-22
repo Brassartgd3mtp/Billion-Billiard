@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class VictoryScreen : MonoBehaviour
 {
+    [SerializeField] GameObject firstButton;
+
     [Header("References")]
 
     private StarRating starRatingScript;
@@ -16,6 +19,7 @@ public class VictoryScreen : MonoBehaviour
     private EndLevelProgressBar progressBarScript;
     private PlayerStats playerStatsScript;
     private Shake shakeScript;
+    [SerializeField] UI_VictoryButtons victoryButtons;
 
     [Header("Medal Images")]
 
@@ -58,7 +62,21 @@ public class VictoryScreen : MonoBehaviour
 
     private void OnEnable()
     {
+        InputSystem.ResetHaptics();
+        InputHandler.PlayerControllerDisable();
+        InputHandler.TrajectoryPredictionDisable();
+        InputHandler.PauseMenuDisable();
 
+        if (SwapControls.state == CurrentState.Gamepad)
+        {
+            if (victoryButtons == null)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(firstButton);
+            }
+        }
+        else
+            Cursor.lockState = CursorLockMode.None;
 
         currentScene = SceneManager.GetActiveScene().buildIndex;
 
@@ -83,11 +101,6 @@ public class VictoryScreen : MonoBehaviour
         DisplayStars();
 
         GlobalData.SaveScores();
-    }
-
-    public void Update()
-    {
-        Cursor.lockState = CursorLockMode.None;
     }
 
     private void DisplayScore()
@@ -154,18 +167,4 @@ public class VictoryScreen : MonoBehaviour
         anim3.SetBool("hasStar", true);
         StartCoroutine(WaitForAnimations());
     }
-
-        // Update is called once per frame
-        //void Update()
-        //{
-        //    if (SwapControls.state == CurrentState.MouseKeyboard)
-        //    {
-        //        Debug.Log(EventSystem.current.currentSelectedGameObject);
-        //    }
-        //    else
-        //    {
-        //        Cursor.lockState = CursorLockMode.Confined;
-        //        Cursor.visible = true;
-        //    }
-        //}
-    }
+}
