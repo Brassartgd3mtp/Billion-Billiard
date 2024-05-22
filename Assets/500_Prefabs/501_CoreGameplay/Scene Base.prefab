@@ -5302,7 +5302,6 @@ GameObject:
   - component: {fileID: 2722303910997277114}
   - component: {fileID: 4765107979092820746}
   - component: {fileID: 5899465933573527412}
-  - component: {fileID: 4698690328988250210}
   m_Layer: 5
   m_Name: Victory
   m_TagString: Untagged
@@ -5456,23 +5455,6 @@ MonoBehaviour:
   loadingScreen: {fileID: 8938745220064623807}
   slider: {fileID: 8364987950323261039}
   lvSelecManager: {fileID: 0}
---- !u!114 &4698690328988250210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221884782698930584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d77f1c1c5241004a9db8a21c180a42c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttons:
-  - {fileID: 1381128435222161525}
-  - {fileID: 6853900278619567641}
-  - {fileID: 0}
-  index: 7
 --- !u!1 &226192641612114042
 GameObject:
   m_ObjectHideFlags: 0
@@ -46620,7 +46602,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4698690328988250210}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UI_VictoryButtons, Assembly-CSharp
         m_MethodName: LoadCutscene
         m_Mode: 1
