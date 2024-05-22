@@ -9,6 +9,7 @@ public class Credits : MonoBehaviour
 
     private void OnEnable()
     {
+        InputHandler.Actions.Credits.Enable();
         InputHandler.CreditsEnable(this);
     }
 
@@ -35,5 +36,6 @@ public class Credits : MonoBehaviour
     private void OnDisable()
     {
         InputHandler.CreditsDisable();
+        InputHandler.Actions.Credits.Disable();
     }
 }

@@ -778,8 +778,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4849ae01-76a1-4d29-a285-d9170288f6da"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""id"": ""d0e58214-b0b0-43f8-aa33-a1ae0ffb6398"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -789,8 +789,8 @@ public partial class @PlayerActionMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d0e58214-b0b0-43f8-aa33-a1ae0ffb6398"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""id"": ""4849ae01-76a1-4d29-a285-d9170288f6da"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

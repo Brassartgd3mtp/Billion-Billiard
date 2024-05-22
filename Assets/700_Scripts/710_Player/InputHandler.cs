@@ -30,8 +30,6 @@ public class InputHandler : MonoBehaviour
         Actions.Cheat.Enable();
         Actions.Swap.Enable();
         Actions.MainMenu.Enable();
-        Actions.Credits.Enable();
-        Actions.Cutscenes.Enable();
     }
 
     #region Enable
