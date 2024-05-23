@@ -143,6 +143,7 @@ public class VictoryScreen : MonoBehaviour
         progressBarScript.BarCanMove = false;
         GO_GoldenStar1.SetActive(true);
         anim1.SetBool("hasStar", true);
+        StarSound();
         StartCoroutine(WaitForAnimations());
     }
 
@@ -158,6 +159,7 @@ public class VictoryScreen : MonoBehaviour
         progressBarScript.BarCanMove = false;
         GO_GoldenStar2.SetActive(true);
         anim2.SetBool("hasStar", true);
+        StarSound();
         StartCoroutine(WaitForAnimations());
     }
     public void DisplayThirdStar()
@@ -165,6 +167,13 @@ public class VictoryScreen : MonoBehaviour
         progressBarScript.BarCanMove = false;
         GO_GoldenStar3.SetActive(true);
         anim3.SetBool("hasStar", true);
+        StarSound();
         StartCoroutine(WaitForAnimations());
+    }
+
+    private void StarSound()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioManager.Instance.PlaySound(36, audioSource);
     }
 }
