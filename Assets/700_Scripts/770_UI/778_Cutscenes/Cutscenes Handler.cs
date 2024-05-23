@@ -20,7 +20,27 @@ public class CutscenesHandler : MonoBehaviour
         TextBox.text = string.Empty;
         StartCoroutine(LoadCutscene(CutscenesCurrent.PackIndex, 0));
 
-        levelChargeLoader.LoadLevelCutscene(LevelSelectorData.CurrentLevelIndex);
+        switch (LevelSelectorData.CurrentLevelIndex)
+        {
+            case 11:
+                levelChargeLoader.LoadLevelCutscene(1);
+                LevelSelectorData.CurrentLevelIndex = 2;
+                break;
+
+            case 12:
+                if (CutscenesCurrent.PackIndex == 7)
+                {
+                    levelChargeLoader.LoadLevelCutscene(1);
+                    LevelSelectorData.CurrentLevelIndex = 10;
+                }
+                else
+                    levelChargeLoader.LoadLevelCutscene(LevelSelectorData.CurrentLevelIndex);
+                break;
+
+            default:
+                levelChargeLoader.LoadLevelCutscene(LevelSelectorData.CurrentLevelIndex);
+                break;
+        }
     }
 
     public IEnumerator LoadCutscene(int pack, int cutscene)

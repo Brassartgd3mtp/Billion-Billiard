@@ -174,8 +174,9 @@ public class InputHandler : MonoBehaviour
         #endregion
         #region Mouse/Keyboard
         Actions.MouseKeyboard.MouseStrenght.performed -= player.MouseStrenght;
+        Actions.MouseKeyboard.MouseStartDrag.started -= player.MouseStartDrag;
         Actions.MouseKeyboard.MouseStartDrag.performed -= player.MouseStartDrag;
-        Actions.MouseKeyboard.MouseStartDrag.canceled -= player.MouseStartDrag;
+        Actions.MouseKeyboard.MouseStartDrag.canceled -= player.MouseThrow;
         Actions.MouseKeyboard.MouseCancelThrow.performed -= player.MouseCancelThrow;
         #endregion
     }
