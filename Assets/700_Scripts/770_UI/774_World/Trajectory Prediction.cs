@@ -31,18 +31,21 @@ public class TrajectoryPrediction : MonoBehaviour
                 float hitDist = maxDist - hit.distance;
             
                 lineRenderer.SetPosition(1, transform.InverseTransformPoint(hitPoint));
-            
-                lineRenderer.positionCount = 3;
-
-                Vector3 bounceForward = Vector3.Reflect(transform.forward, hitNormnoY);
-
-                if (Physics.SphereCast(hitPoint, sphereRadius, bounceForward, out bounceHit, hitDist, wallLayer))
+                
+                if (hit.collider.gameObject.layer == 7)
                 {
-                    Vector3 bouncePoint = new Vector3(bounceHit.point.x, .3f, bounceHit.point.z);
-                    lineRenderer.SetPosition(2, transform.InverseTransformPoint(bouncePoint));
+                    lineRenderer.positionCount = 3;
+
+                    Vector3 bounceForward = Vector3.Reflect(transform.forward, hitNormnoY);
+
+                    if (Physics.SphereCast(hitPoint, sphereRadius, bounceForward, out bounceHit, hitDist, wallLayer) && bounceHit.collider.gameObject.layer == 7)
+                    {
+                        Vector3 bouncePoint = new Vector3(bounceHit.point.x, .3f, bounceHit.point.z);
+                        lineRenderer.SetPosition(2, transform.InverseTransformPoint(bouncePoint));
+                    }
+                    else
+                        lineRenderer.SetPosition(2, transform.InverseTransformPoint(hitPoint + bounceForward * hitDist));
                 }
-                else
-                    lineRenderer.SetPosition(2, transform.InverseTransformPoint(hitPoint + bounceForward * hitDist));
             }
             else
             {
