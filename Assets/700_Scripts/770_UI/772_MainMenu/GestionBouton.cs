@@ -51,9 +51,7 @@ public class GestionBouton : MonoBehaviour
 
     public void Quitter()
     {
-        // Appelé lorsque le bouton pour quitter est appuyé
-        Invoke("QuitterJeu", 2f);
-        Debug.Log("Quitter");
+        Application.Quit();
     }
 
     void OuvrirPanel(GameObject panel)
@@ -72,11 +70,5 @@ public class GestionBouton : MonoBehaviour
     {
         // Désactive le panel spécifié
         panel.SetActive(false);
-    }
-
-    void QuitterJeu()
-    {
-        // Quitte le jeu (fonctionne uniquement dans un build, pas dans l'éditeur Unity)
-        Application.Quit();
     }
 }
