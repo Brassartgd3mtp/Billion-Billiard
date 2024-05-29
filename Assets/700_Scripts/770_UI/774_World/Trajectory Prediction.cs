@@ -46,6 +46,8 @@ public class TrajectoryPrediction : MonoBehaviour
                     else
                         lineRenderer.SetPosition(2, transform.InverseTransformPoint(hitPoint + bounceForward * hitDist));
                 }
+                else
+                    lineRenderer.positionCount = 2;
             }
             else
             {
