@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class Globals
 {
-    public static bool HasClickedOnCard = false;
+    public static bool HasClickedOnCard = true;
 }
